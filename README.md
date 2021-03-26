@@ -1,8 +1,2 @@
 # JasonSKK
-Hi!  
-  
-  
-  
-  
-## Gaussian Sonificator Visualisator  
-
+Hi!
