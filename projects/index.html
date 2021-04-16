@@ -90,6 +90,15 @@
           margin-left: 40px;
       }
 
+
+      code {
+          font-family: Consolas,"courier new";
+          color: orange;
+          background-color: black;
+          padding: 2px;
+          font-size: 105%;
+      }
+
     </style>
   </head>
   <body>
@@ -157,15 +166,59 @@
 </audio>
 
 <br>
-
-
-<p style="margin-bottom:3cm;"></p>
-<p> <a id="SC">SC code hyper jump</a> </p>
-<pre><code>
-    example code block
-</code></pre>
-
 <br>
+
+      <p>You are going to need:</p>
+      <p>TouchOSC</p>
+      <p>SuperCollider</p>
+      <p>openFrameworks</p>
+
+
+
+      <p style="margin-bottom:3cm;"></p>
+      <h1>Setup</h1>
+      <p style='text-align: left; text-indent: 50px'>
+        Firstly, load up the layout on the touch-osc app (Android). Transfer the .touchosc file to your Android smartphone and start TouchOSC application. Go to Layout => Add from file (add Gaussian-Sonification-Visualisator.touchosc). Set up the host address & port (computer's IP address \& 571020 default incoming OSC messages port from SuperCollider)
+        <br>
+        <br>
+        You can get it from my GitHub repo.
+      </p>
+
+      <p style='text-align: left'><b><a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.touchosc" target="_blank">Get Touch-osc layout (GitHub)</a></b></p>
+
+
+      Run SC code
+            <br>
+            and OPEN FRAMEWORKS
+            <br>
+
+
+
+      <p style="margin-bottom:3cm;"></p>
+<h3> <a id="SC">SC code</a> </h3>
+
+
+
+
+  +++++++HERE COMES THE CODE++++++
+            <br>
+
+
+
+      <p style='text-align: left; text-indent: 50px'>
+        The following code block was used to set up the gaussian distribution in SuperCollider. The ".gauss" method has two (2) arguments, gaussian receiver and standard deviation. These parameters are defined as environment variables which are updated with each OSC message they receive from the Android smartphone interface. The gaussian distribution (.gauss) produces both positive and negative values. If a negative values comes up is immediately  multiplied with -1.</p>
+
+      <p style='text-align: left'>
+<span style="display:inline-block; width: 500px;">
+  <code>~gss = gauss(~receiver, ~stdevi).round(0.00001);
+    if (~gss.isNegative, {~gss = ~gss * (-1)});
+    ~gss.postln;
+</code>
+</span>
+</p>
+      <br>
+
+
 
 </center>
 </body>
