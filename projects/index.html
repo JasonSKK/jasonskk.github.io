@@ -99,6 +99,34 @@
           font-size: 105%;
       }
 
+      /*Shell*/
+      code span.commentshell {
+          color: #737373;
+          font-style: normal;
+      }
+
+      /*SuperCollider*/
+      code span.comment {
+          color: #c83917;
+          font-style: normal;
+      }
+
+      code span.netaddr {
+          color: #709d15;
+      }
+
+      code span.string {
+          color: #cc6699;
+      }
+
+      code span.method {
+          color: #ffffff;
+      }
+
+      code span.numbers {
+          color: #ffffff;
+      }
+
     </style>
   </head>
   <body>
@@ -186,12 +214,43 @@
 
       <p style='text-align: left'><b><a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.touchosc" target="_blank">Get Touch-osc layout (GitHub)</a></b></p>
 
+      <br>
+      <br>
 
-      Run SC code
+      <p style='text-align: left; text-indent: 0px'>
+        Now in SuperCollider, make sure that the IP address is identical with your computer's IP. To check your IP from the shell, just type the following (macOS 10.13.6):</p>
+
+      <p style='text-align: left; text-decoration: underline;'>Shell</p>
+      <p style='text-align: left'>
+        <span style="display:inline-block; width:500px;">
+          <code style="color:red; background-color:black;">
+            ipconfig getifaddr en0
+            <br>
+            <span class="commentshell">`#for older MacBook Pros use en1` \</span>
+          </code>
+        </span>
+      </p>
+
+      <br>
+
+      <p style='text-align: left; text-decoration: underline;'>SuperCollider</p>
+      <p style='text-align: left'>
+        <span style="display:inline-block; width: 500px;">
+          <code>
+            ~n <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
+            <span class="comment">//192.168.43.220</span>
+            <br>
+            ~nsend <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
+          </code>
+        </span>
+      </p>
+
+
+        Run SC code
             <br>
             and OPEN FRAMEWORKS
             <br>
-
+      <h1>Code Description</h1>
 
 
       <p style="margin-bottom:3cm;"></p>
@@ -210,9 +269,9 @@
 
       <p style='text-align: left'>
 <span style="display:inline-block; width: 500px;">
-  <code>~gss = gauss(~receiver, ~stdevi).round(0.00001);
-    if (~gss.isNegative, {~gss = ~gss * (-1)});
-    ~gss.postln;
+  <code>~gss <span class="numbers">=</span> gauss(~receiver, ~stdevi)<span class="method">.round</span>(<span class="numbers">0.00001</span>);
+     <span style='color: yellow'>if</span> (~gss<span class="numbers">.isNegative</span>, {~gss <span class="numbers">=</span> ~gss <span class="numbers">*</span> (<span class="numbers">-1</span>)});
+    ~gss<span class="method">.postln</span>;
 </code>
 </span>
 </p>
