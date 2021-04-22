@@ -282,8 +282,9 @@
           The following code block was used to set up the gaussian distribution in SuperCollider. The ".gauss" method has two (2) arguments, gaussian receiver and standard deviation. These parameters are defined as environment variables which are updated with each OSC message they receive from the Android smartphone interface. The gaussian distribution (.gauss) produces both positive and negative values. If a negative values comes up is immediately  multiplied with -1.</p>
 
         <p style='text-align: left'>
-          <span style="display:inline-block; width: 500px;">
+          <span style="display:inline-block; width: 700px;">
             <code>~gss <span class="numbers">=</span> gauss(~receiver, ~stdevi)<span class="method">.round</span>(<span class="numbers">0.00001</span>);
+              <br>
               <span style='color: yellow'>if</span> (~gss<span class="numbers">.isNegative</span>, {~gss <span class="numbers">=</span> ~gss <span class="numbers">*</span> (<span class="numbers">-1</span>)});
               ~gss<span class="method">.postln</span>;
             </code>
