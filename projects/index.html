@@ -6,125 +6,129 @@
       /*for LINKS*/
       /* unvisited link */
       a:link {
-          color: red;
+      color: red;
       }
       /* visited link */
       a:visited {
-          color: lightblue;
+      color: lightblue;
       }
       /* mouse over link */
       a:hover {
-          color: red;
+      color: red;
       }
       /* selected link */
       a:active {
-          color: blue;
-      }
-
-      /*for INDENT space*/
-      div.a {
-          text-indent: 20px;
+      color: blue;
       }
 
       body {
-          background-image: url("media/bg3.png");
-          background-color: rgb(20, 0, 0);
-          color: white;
-          /*  background-image: url("https://github.com/JasonSKK/JasonSKK.github.io/blob/main/interface.jpg");*/
+      background-image: url("media/bg3.png");
+      background-color: rgb(20, 0, 0);
+      color: white;
+      /*  background-image: url("https://github.com/JasonSKK/JasonSKK.github.io/blob/main/interface.jpg");*/
 
       }
 
       /*HEADERS*/
       h1 {
-          font-size: 50px;
-          text-shadow: 2px 2px 5px gray;
-          text-align: center;
+      font-size: 50px;
+      text-shadow: 2px 2px 5px gray;
+      text-align: center;
       }
 
       /*h2 {
-          font-size: 45px;
-          color: rgb(100, 20, 20);
-          text-decoration: underline;
+      font-size: 45px;
+      color: rgb(100, 20, 20);
+      text-decoration: underline;
       }*/
 
       h2 {
-          font-size: 45px;
-          color: rgb(190, 20, 20);
-          text-decoration: underline;
+      font-size: 45px;
+      color: rgb(190, 20, 20);
+      text-decoration: underline;
       }
 
       h3 {
-          font-size: 20px;
-          color: rgb(255, 255, 255);
-          text-decoration: underline;
+      font-size: 20px;
+      color: rgb(255, 255, 255);
+      text-decoration: underline;
       }
 
       h4 {
-          font-size: 22px;
-          color: rgb(255, 255, 255);
+      font-size: 22px;
+      color: rgb(255, 255, 255);
       }
 
       h5 {
-          font-size: 18px;
-          color: rgb(255, 255, 255);
+      font-size: 18px;
+      color: rgb(255, 255, 255);
       }
 
 
       /*for normal text*/
       p {
-          font-size: 16px;
+      font-size: 16px;
       }
 
       /*for INDENT space*/
       div.b {
-          background-color: rgb(120, 120, 120);
-          width: 900px;
-          height: 160px;
-          border: 7px ridge white;
-          padding: 10px;
-          margin: 5px;
+      background-color: rgba(0, 0, 0, 0.0);
+      width: 900px;
+      height: 180px;
+      border: 7px ridge white;
+      padding: 10px;
+      margin: 5px;
       }
 
       tab {
-          display: inline-block;
-          margin-left: 40px;
+      display: inline-block;
+      margin-left: 40px;
       }
 
 
       code {
-          font-family: Consolas,"courier new";
-          color: orange;
-          background-color: black;
-          padding: 2px;
-          font-size: 105%;
+      font-family: Consolas,"courier new";
+      color: orange;
+      background-color: black;
+      padding: 2px;
+      font-size: 105%;
       }
 
       /*Shell*/
       code span.commentshell {
-          color: #737373;
-          font-style: normal;
+      color: #737373;
+      font-style: normal;
       }
 
       /*SuperCollider*/
       code span.comment {
-          color: #c83917;
-          font-style: normal;
+      color: #c83917;
+      font-style: normal;
       }
 
       code span.netaddr {
-          color: #709d15;
+      color: #709d15;
       }
 
       code span.string {
-          color: #cc6699;
+      color: #cc6699;
       }
 
       code span.method {
-          color: #ffffff;
+      color: #ffffff;
       }
 
       code span.numbers {
-          color: #ffffff;
+      color: #ffffff;
+      }
+
+      .box {
+      float: left;
+      text-align: left;
+      width: 777px;
+      border: 1px;
+      padding: 1px;
+      letter-spacing: 3px;
       }
 
     </style>
@@ -132,13 +136,12 @@
   <body>
     <center>
 
-      <h2>Gaussian Sonificator - Visualisator</h2>
+      <h2 style='color: white;
+  text-shadow: 3px 4px darkred;'>~ Gaussian Sonificator - Visualisator ~</h2>
 
       <div class="b">
-        <div class="a">
-          <p>This page presents the interactive audio-visual application system “Gaussian Sonificator - Visualisator” both in the general context of practical use and in that of the technical details and information about the tools & methods required for the development of an interactive audio - visual application system. The research and finally the implementation of the aforementioned idea is a manifestation of the relationship between art and technology and the strong tendency that exists in recent years regarding interaction, especially in audiovisual systems. The methods related to the process of developing and adapting the programming tools that have been selected are then presented, as well as additional information related to the justification for the selection of the specific tools. Additionally, the source code will be presented and explained.  Finally, the synthetic - artistic expectations of the creator are presented as well as some comments on the final result and its usability.</p>
+          <p style='text-indent: 20px'>This page presents the interactive audio-visual application system “Gaussian Sonificator - Visualisator” both in the general context of practical use and in that of the technical details and information about the tools & methods required for the development of an interactive audio - visual application system. The research and finally the implementation of the aforementioned idea is a manifestation of the relationship between art and technology and the strong tendency that exists in recent years regarding interaction, especially in audiovisual systems. The methods related to the process of developing and adapting the programming tools that have been selected are then presented, as well as additional information related to the justification for the selection of the specific tools. Additionally, the source code will be presented and explained.  Finally, the synthetic - artistic expectations of the creator are presented as well as some comments on the final result and its usability.</p>
         </div>
-      </div>
 
 
       <p style="margin-bottom:3cm;"></p>
@@ -158,43 +161,43 @@
       <br>
       <h3>
         ☆ openFrameworks
-        </h3>
+      </h3>
       <p><b><a href="https://openframeworks.cc" target="_blank">openFrameworks website</a></b></p>
-<br>
-<br>
-<h3>G.V.S. features:</h3>
-<h5>
-  1. A graphical user interface for an iOS or Android mobile phone (via TouchOSC)
-</h5>
-<div style = "position:relative; left:0px; top:20px;">
-  <img src = "media/interface.jpg" alt="interface" width = "200">
-</div>
+      <br>
+      <br>
+      <h3>G.V.S. features:</h3>
+      <h5>
+        1. A graphical user interface for an iOS or Android mobile phone (via TouchOSC)
+      </h5>
+      <div style = "position:relative; left:0px; top:20px;">
+        <img src = "media/interface.jpg" alt="interface" width = "200">
+      </div>
 
-<br>
-<br>
-<br>
-<h5>
-  2. COOL generative graphix! B)
-</h5>
-<div style = "position:relative; left:0px; top:20px;">
-  <img src = "media/cool-stuff.png"
-       alt="cool-stuff" width = "400">
-</div>
+      <br>
+      <br>
+      <br>
+      <h5>
+        2. COOL generative graphix! B)
+      </h5>
+      <div style = "position:relative; left:0px; top:20px;">
+        <img src = "media/cool-stuff.png"
+             alt="cool-stuff" width = "400">
+      </div>
 
-<br>
-<br>
-<br>
-<h5>
-  3. COOL generative sound ♫
-</h5>
+      <br>
+      <br>
+      <br>
+      <h5>
+        3. COOL generative sound ♫
+      </h5>
 
-<audio controls>
-  <source src="media/gaussian.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+      <audio controls>
+        <source src="media/gaussian.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
 
-<br>
-<br>
+      <br>
+      <br>
 
       <p>You are going to need:</p>
       <p>TouchOSC</p>
@@ -204,81 +207,103 @@
 
 
       <p style="margin-bottom:3cm;"></p>
-      <h1>Setup</h1>
-      <p style='text-align: left; text-indent: 50px'>
-        Firstly, load up the layout on the touch-osc app (Android). Transfer the .touchosc file to your Android smartphone and start TouchOSC application. Go to Layout => Add from file (add Gaussian-Sonification-Visualisator.touchosc). Set up the host address & port (computer's IP address \& 571020 default incoming OSC messages port from SuperCollider)
+      <h1 style='text-align: left; text-indent: 100px'>Setup</h1>
+      <div class="box">
+        <p style='text-align: left; text-indent: 50px;'>
+          Firstly, load up the layout on the touch-osc app (Android). Copy the .touchosc file to your Android smartphone and start the TouchOSC application. Go to Layout => Add from file (add Gaussian-Sonification-Visualisator.touchosc). Set up the host address & port (computer's IP address & 571020 default incoming OSC messages port from SuperCollider)
+          <br>
+          <br>
+          You can get it from my GitHub repo.
+        </p>
+
+<br>
+
+        <p style='text-align: left; margin-top:-0.2cm;'><b><a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.touchosc" target="_blank">Get Touch-osc layout (GitHub)</a></b></p>
+
+
+        <p style='text-align: left; text-indent: 0px'>
+          Now in SuperCollider, make sure that the IP address is identical with your computer's IP. To check your IP from the shell, just type the following (macOS 10.13.6):</p>
+
+        <p style='text-align: left; text-decoration: underline;'>Shell</p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width:500px;">
+            <code style="color:red; background-color:black;">
+              ipconfig getifaddr en0
+              <br>
+              <span class="commentshell">`#for older MacBook Pros use en1` \</span>
+            </code>
+          </span>
+        </p>
+
         <br>
+
+        <p style='text-align: left; text-decoration: underline;'>SuperCollider</p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              ~n <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
+              <span class="comment">//192.168.43.220</span>
+              <br>
+              ~nsend <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
+            </code>
+          </span>
+        </p>
+
         <br>
-        You can get it from my GitHub repo.
-      </p>
+        <p style='text-align: left; text-indent: 0px'>After the appropriate changes evaluate the scd file.</p>
+        <br>
+        <p style='text-align: left; text-indent: 0px'>Then, create a new project using the projectGenerator app in openFrameworks and add "ofxOsc" in the addons section. <br>Navigate to the project directory and replace the "src" directory with the one from the GitHub repo (subdirectory inside OF directory)
+          <br>
+          Type the following code in the shell to compile.
+        </p>
 
-      <p style='text-align: left'><b><a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.touchosc" target="_blank">Get Touch-osc layout (GitHub)</a></b></p>
+        <p style='text-align: left; text-decoration: underline;'>Shell</p>
+        <p style='text-align: left'>
+          <span style='display:inline-block; width:500px;'>
+            <code style='color:red; background-color:black;'>
+              make -f Makefile
+              #then
+              make RunRelease
+            </code>
+          </span>
+        </p>
 
-      <br>
-      <br>
+        <p style='text-align: left; font-size: 24px; text-shadow: 2px 2px red;'>ENJOY</p>
+      </div>
 
-      <p style='text-align: left; text-indent: 0px'>
-        Now in SuperCollider, make sure that the IP address is identical with your computer's IP. To check your IP from the shell, just type the following (macOS 10.13.6):</p>
-
-      <p style='text-align: left; text-decoration: underline;'>Shell</p>
-      <p style='text-align: left'>
-        <span style="display:inline-block; width:500px;">
-          <code style="color:red; background-color:black;">
-            ipconfig getifaddr en0
-            <br>
-            <span class="commentshell">`#for older MacBook Pros use en1` \</span>
-          </code>
-        </span>
-      </p>
-
-      <br>
-
-      <p style='text-align: left; text-decoration: underline;'>SuperCollider</p>
-      <p style='text-align: left'>
-        <span style="display:inline-block; width: 500px;">
-          <code>
-            ~n <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
-            <span class="comment">//192.168.43.220</span>
-            <br>
-            ~nsend <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
-          </code>
-        </span>
-      </p>
+      <div class="box" style='float: right; text-align: right; width: 700px; margin-right:3px; margin-top:1cm'>
+        <h1 style='margin-top:10cm;'>Code Description</h1>
 
 
-        Run SC code
-            <br>
-            and OPEN FRAMEWORKS
-            <br>
-      <h1>Code Description</h1>
-
-
-      <p style="margin-bottom:3cm;"></p>
-<h3> <a id="SC">SC code</a> </h3>
+        <p style="margin-bottom:1.5cm;"></p>
+        <h3> <a id="SC">SC code</a> </h3>
 
 
 
 
-  +++++++HERE COMES THE CODE++++++
-            <br>
+        +++++++HERE COMES THE CODE++++++
+        <br>
 
 
 
-      <p style='text-align: left; text-indent: 50px'>
-        The following code block was used to set up the gaussian distribution in SuperCollider. The ".gauss" method has two (2) arguments, gaussian receiver and standard deviation. These parameters are defined as environment variables which are updated with each OSC message they receive from the Android smartphone interface. The gaussian distribution (.gauss) produces both positive and negative values. If a negative values comes up is immediately  multiplied with -1.</p>
+        <p style='text-align: left; text-indent: 50px'>
+          The following code block was used to set up the gaussian distribution in SuperCollider. The ".gauss" method has two (2) arguments, gaussian receiver and standard deviation. These parameters are defined as environment variables which are updated with each OSC message they receive from the Android smartphone interface. The gaussian distribution (.gauss) produces both positive and negative values. If a negative values comes up is immediately  multiplied with -1.</p>
 
-      <p style='text-align: left'>
-<span style="display:inline-block; width: 500px;">
-  <code>~gss <span class="numbers">=</span> gauss(~receiver, ~stdevi)<span class="method">.round</span>(<span class="numbers">0.00001</span>);
-     <span style='color: yellow'>if</span> (~gss<span class="numbers">.isNegative</span>, {~gss <span class="numbers">=</span> ~gss <span class="numbers">*</span> (<span class="numbers">-1</span>)});
-    ~gss<span class="method">.postln</span>;
-</code>
-</span>
-</p>
-      <br>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>~gss <span class="numbers">=</span> gauss(~receiver, ~stdevi)<span class="method">.round</span>(<span class="numbers">0.00001</span>);
+              <span style='color: yellow'>if</span> (~gss<span class="numbers">.isNegative</span>, {~gss <span class="numbers">=</span> ~gss <span class="numbers">*</span> (<span class="numbers">-1</span>)});
+              ~gss<span class="method">.postln</span>;
+            </code>
+          </span>
+        </p>
+        <br>
 
 
 
-</center>
-</body>
+      </div>
+
+
+    </center>
+  </body>
 </html>
