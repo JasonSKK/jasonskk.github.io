@@ -6,34 +6,34 @@
       /*for LINKS*/
       /* unvisited link */
       a:link {
-      color: red;
+          color: red;
       }
       /* visited link */
       a:visited {
-      color: lightblue;
+          color: lightblue;
       }
       /* mouse over link */
       a:hover {
-      color: red;
+          color: red;
       }
       /* selected link */
       a:active {
-      color: blue;
+          color: blue;
       }
 
       body {
-      background-image: url("media/bg3.png");
-      background-color: rgb(20, 0, 0);
-      color: white;
-      /*  background-image: url("https://github.com/JasonSKK/JasonSKK.github.io/blob/main/interface.jpg");*/
+          background-image: url("media/bg3.png");
+          background-color: rgb(20, 0, 0);
+          color: white;
+          /*  background-image: url("https://github.com/JasonSKK/JasonSKK.github.io/blob/main/interface.jpg");*/
 
       }
 
       /*HEADERS*/
       h1 {
-      font-size: 50px;
-      text-shadow: 2px 2px 5px gray;
-      text-align: center;
+          font-size: 50px;
+          text-shadow: 2px 2px 5px gray;
+          text-align: center;
       }
 
       /*h2 {
@@ -43,92 +43,92 @@
       }*/
 
       h2 {
-      font-size: 45px;
-      color: rgb(190, 20, 20);
-      text-decoration: underline;
+          font-size: 45px;
+          color: rgb(190, 20, 20);
+          text-decoration: underline;
       }
 
       h3 {
-      font-size: 20px;
-      color: rgb(255, 255, 255);
-      text-decoration: underline;
+          font-size: 20px;
+          color: rgb(255, 255, 255);
+          text-decoration: underline;
       }
 
       h4 {
-      font-size: 22px;
-      color: rgb(255, 255, 255);
+          font-size: 22px;
+          color: rgb(255, 255, 255);
       }
 
       h5 {
-      font-size: 18px;
-      color: rgb(255, 255, 255);
+          font-size: 18px;
+          color: rgb(255, 255, 255);
       }
 
 
       /*for normal text*/
       p {
-      font-size: 16px;
+          font-size: 16px;
       }
 
       /*for INDENT space*/
       div.b {
-      background-color: rgba(0, 0, 0, 0.0);
-      width: 900px;
-      height: 180px;
-      border: 7px ridge white;
-      padding: 10px;
-      margin: 5px;
+          background-color: rgba(0, 0, 0, 0.0);
+          width: 900px;
+          height: 180px;
+          border: 7px ridge white;
+          padding: 10px;
+          margin: 5px;
       }
 
       tab {
-      display: inline-block;
-      margin-left: 40px;
+          display: inline-block;
+          margin-left: 40px;
       }
 
 
       code {
-      font-family: Consolas,"courier new";
-      color: orange;
-      background-color: black;
-      padding: 2px;
-      font-size: 105%;
+          font-family: Consolas,"courier new";
+          color: orange;
+          background-color: black;
+          padding: 2px;
+          font-size: 105%;
       }
 
       /*Shell*/
       code span.commentshell {
-      color: #737373;
-      font-style: normal;
+          color: #737373;
+          font-style: normal;
       }
 
       /*SuperCollider*/
       code span.comment {
-      color: #c83917;
-      font-style: normal;
+          color: #c83917;
+          font-style: normal;
       }
 
-      code span.netaddr {
-      color: #709d15;
+      code span.class {
+          color: #709d15;
       }
 
       code span.string {
-      color: #cc6699;
+          color: #cc6699;
       }
 
       code span.method {
-      color: #ffffff;
+          color: #ffffff;
       }
 
       code span.numbers {
-      color: #ffffff;
+          color: #ffffff;
       }
 
       .box {
-      float: left;
-      text-align: left;
-      width: 777px;
-      border: 1px;
-      padding: 1px;
-      letter-spacing: 3px;
+          float: left;
+          text-align: left;
+          width: 777px;
+          border: 1px;
+          padding: 1px;
+          letter-spacing: 3px;
       }
 
     </style>
@@ -199,33 +199,33 @@
 
       <br>
       <br>
+      <br>
+      <br>
+      <br>
+      <br>
 
-      <p>You are going to need:</p>
-      <p>TouchOSC</p>
-      <p>SuperCollider</p>
-      <p>openFrameworks</p>
 
-
+      <hr>
 
       <p style="margin-bottom:3cm;"></p>
       <h1 style='text-align: left; text-indent: 100px'>Setup</h1>
       <div class="box">
-        <p style='text-align: left; text-indent: 50px;'>
-          Firstly, load up the layout on the touch-osc app (Android). Copy the .touchosc file to your Android smartphone and start the TouchOSC application. Go to Layout => Add from file (add Gaussian-Sonification-Visualisator.touchosc). Set up the host address & port (computer's IP address & 571020 default incoming OSC messages port from SuperCollider)
+        <p style='text-align: justify; text-indent: 50px;'>
+          Firstly, load up the layout on the touch-osc app (Android). Copy the .touchosc file to your Android smartphone and start the TouchOSC application. Go to Layout => Add from file (add Gaussian-Sonification-Visualisator.touchosc). Set up the host address & port (computer's IP address & 57120 default incoming OSC messages port from SuperCollider)
           <br>
           <br>
           You can get it from my GitHub repo.
         </p>
 
-        <br>
+
 
         <p style='text-align: left; margin-top:-0.2cm;'><b><a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.touchosc" target="_blank">Get Touch-osc layout (GitHub)</a></b></p>
 
-
-        <p style='text-align: left; text-indent: 0px'>
+        <br>
+        <p style='text-align: justify; text-indent: 50px'>
           Now in SuperCollider, make sure that the IP address is identical with your computer's IP. To check your IP from the shell, just type the following (macOS 10.13.6):</p>
 
-        <p style='text-align: left; text-decoration: underline;'>Shell</p>
+        <p style='text-align: justify; text-decoration: underline;'>Shell</p>
         <p style='text-align: left'>
           <span style="display:inline-block; width:500px;">
             <code style="color:red; background-color:black;">
@@ -238,22 +238,24 @@
 
         <br>
 
-        <p style='text-align: left; text-decoration: underline;'>SuperCollider</p>
+        <p style='text-align: justify; text-decoration: underline;'>SuperCollider</p>
         <p style='text-align: left'>
           <span style="display:inline-block; width: 500px;">
             <code>
-              ~n <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
-              <span class="comment">//192.168.43.220</span>
+              <span class="comment">//TouchOSC-SuperCollider</span>
+              ~n <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
+              <span class="comment">//SuperCollider - openFrameworks</span>
               <br>
-              ~nsend <span class="numbers">=</span> <span class="netaddr">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
+              ~nsend <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
             </code>
           </span>
         </p>
 
         <br>
-        <p style='text-align: left; text-indent: 0px'>After the appropriate changes evaluate the scd file.</p>
+        <p style='text-align: justify; text-indent: 0px'>After the appropriate changes evaluate the scd file.</p>
         <br>
-        <p style='text-align: left; text-indent: 0px'>Then, create a new project using the projectGenerator app in openFrameworks and add "ofxOsc" in the addons section. <br>Navigate to the project directory and replace the "src" directory with the one from the GitHub repo (subdirectory inside OF directory)
+        <p style='text-align: justify; text-indent: 50px'>Then, create a new project using the projectGenerator app in openFrameworks and add "ofxOsc" in the addons section. Navigate to the project directory and replace the "src" directory with the one from the GitHub repo (subdirectory inside OF directory)
+          <br>
           <br>
           Type the following code in the shell to compile.
         </p>
@@ -263,7 +265,9 @@
           <span style='display:inline-block; width:500px;'>
             <code style='color:red; background-color:black;'>
               make -f Makefile
+              <br>
               #then
+              <br>
               make RunRelease
             </code>
           </span>
@@ -279,7 +283,7 @@
         <p style="margin-bottom:1.5cm;"></p>
         <h3 style="text-align: center" id="SC">SuperCollider code </h3>
 
-        <p style='text-align: right; text-indent: 50px; margin-right:1em'>
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
           The following code block was used to set up the gaussian distribution in SuperCollider. The ".gauss" method has two (2) arguments, gaussian receiver and standard deviation. These parameters are defined as environment variables which are updated with each OSC message they receive from the Android smartphone interface. The gaussian distribution (.gauss) produces both positive and negative values. If a negative values comes up is immediately  multiplied with -1.</p>
 
         <p style='text-align: left'>
@@ -292,10 +296,48 @@
           </span>
         </p>
         <br>
+        <br>
+
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          Now, the OSC protocol should be set. Both in SuperCollider and openFrameworks (<a href="#OF">openFrameworks C++ code</a>). On the SuperCollider side (server) regarding the smartphone - SuperCollider communication the NetAddr class was used. SuperCollider receives incoming messages from the 57120 port by default. "hostname" argument => device's IP address.
+        </p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="comment">//TouchOSC-SuperCollider</span>
+              ~n <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
+              <span class="comment">//SuperCollider - openFrameworks`</span>
+              <br>
+              ~nsend <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
+            </code>
+          </span>
+        </p>
+
+        <p style='text-align: justify; text-indent: 0px; margin-right:1em'>OSC communication was tested using a simple OSCdef.</p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="comment">//Gaussian Function Receiver</span>
 
 
-        <h3 style="text-align: center" id="OF">openFramewoks C++ code </h3>
+              <span class="class">OSCdef</span>(<span style="color: #1999ff;">\receiver</span>, {
+              <br>
+              <span class="numbers">|msg, time, addr, port|</span>
+              <br>
+              <span class"numbers">msg</span><span class="method">.postln</span>;
+              <br>
+              },<span style="color: #1999ff">'/gauss/receiver'</span>);
+            </code>
+          </span>
+        </p>
 
+        <p style='text-align: justify; text-indent: 0px; margin-right:1em'>
+          The whole application, regarding sound, is based on a continuous Routine (fork) which stops only if the <span style="color: red">OFF</span> button is pressed from the interface.
+        </p>
+
+
+        <h3 style="text-align: center" id="OF">openFrameworks C++ code </h3>
 
 
 
@@ -304,3 +346,4 @@
     </center>
   </body>
 </html>
+under-construction
