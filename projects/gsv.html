@@ -122,6 +122,11 @@
           color: #ffffff;
       }
 
+      code span.char {
+          color: #1999ff;
+      }
+
+
       .box {
           float: left;
           text-align: left;
@@ -318,32 +323,133 @@
         <p style='text-align: left'>
           <span style="display:inline-block; width: 500px;">
             <code>
-              <span class="comment">//Gaussian Function Receiver</span>
-
-
-              <span class="class">OSCdef</span>(<span style="color: #1999ff;">\receiver</span>, {
+              <span class="comment">//Test Gaussian Function Receiver</span>
+              <span class="class">OSCdef</span>(<span class="char">\receiver</span>, {
               <br>
               <span class="numbers">|msg, time, addr, port|</span>
               <br>
-              <span class"numbers">msg</span><span class="method">.postln</span>;
+              <span class="numbers">msg</span><span class="method">.postln</span>;
               <br>
-              },<span style="color: #1999ff">'/gauss/receiver'</span>);
+              },<span class="char">'/gauss/receiver'</span>);
+            </code>
+          </span>
+        </p>
+        <br>
+        <br>
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          The whole application, regarding sound, is based on a continuous Routine (fork) which stops only if the <span style="color: red">OFF</span> button is pressed from the interface. More in the <a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.scd">source code</a>.</p>
+        <br>
+        <br>
+
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          There are two OSCdefs for the expression of the red sliders in SuperCollider. These two OSCdefs: <br>
+          1. Receive new values from the "receiver" & "standard deviation" sliders
+          <br>
+          2. Update the corresponding environment variables with the new values
+          <br>
+          <br>
+          There is also a third OSCdef which determines the new value generation time (in seconds).
+        </p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="comment">//Gaussian Function Receiver</span>
+              <br>
+              <span class="class">OSCdef</span>(
+              <span  class="char">\receiver</span>, {
+              <br>
+              <span class="numbers">|msg, time, addr, port|</span>
+              <br>
+	      <span style="color: yellow">if</span>(
+              <br>
+              ~onoff <span class="numbers">== 1</span>, {
+              <br>
+	      ~receiver <span class="numbers">=</span> msg[<span class="numbers">1</span>]<span class="numbers">.round</span>(<span class="numbers">0.00001</span>)<span class="method">.linlin</span>(<span class="numbers">0.0, 1.0, 0.0, 100</span>);
+              <br>
+	      ["Receiver:", ~receiver]<span class="method">.postln</span>;
+              <br>
+              });
+              <br>
+              },<span class="char">'/gauss/receiver'</span>);
             </code>
           </span>
         </p>
 
-        <p style='text-align: justify; text-indent: 0px; margin-right:1em'>
-          The whole application, regarding sound, is based on a continuous Routine (fork) which stops only if the <span style="color: red">OFF</span> button is pressed from the interface.
-        </p>
+        <br>
 
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          Additionally, there are four OSCdefs that each one responds to the  <span style="color: red">ON/OFF</span> messages sent from  <span style="color: red">Synth 1, 2, 3, 4</span> buttons. Practically, they are turning the SynthDef's volume up or down by registering the "0.0" value to the amplitude argument of each SynthDef for  <span style="color: red">"OFF"</span> mode and a non zero value for  <span style="color: red">"ON"</span> mode.
+          <br>
+          <br>
+          The following code expresses the aforementioned function. It is actually the code responding to the messages from the  <span style="color: red">Synth 1</span> button. A Pdef was also been used (amplitude & duration variations).
+        </p>
+<p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+
+
+
+              <span class="comment">//Synths-ON-OFF</span>
+              <br>
+              <span class="comment">//Synth1</span>
+              <br>
+              <span class="class">OSCdef</span>(<span class="char">\s1onoff</span>, {
+              <br>
+              <span class="numbers">|msg, time, addr, port|</span>
+              <br>
+	      ~s1onoff <span class="numbers">=</span> msg[<span class="numbers">1</span>];
+              <br>
+	      <span style="color: yellow">if</span>(
+              <br>
+              <span class="comment">Main ON-OFF</span>
+              <br>
+              ~onoff <span class="numbers">== 1</span>,{
+              <br>
+	      <span style="color: yellow">if</span>(
+              <br>
+              <span class="comment">if Synth 1 => ON</span>
+              <br>
+              ~s1onoff <span class="numbers">== 1</span>, {
+              <br>
+              <span class="class">Pdef</span>(<span class="char">\noisedeff</span>)<span class="method">.set</span>(
+              <br>
+              <span class="char">\amp</span>, <span class="class">Pwhite</span>(<span class="numbers">0.33</span>, <span class="numbers">0.66</span>));
+              <br>
+              <span class="class">Synth</span>(<span class="string">"noisedef"</span>,[<span class="char">\amp</span>,<span class="numbers"> 0.5</span>])<span class="method">.set</span>;
+              <br>
+	      <span class="string">"Synth 1 ON"</span><span class="method">.postln</span>;
+              <br>
+	      });
+              <br>
+	      <span style="color: yellow">if</span>(
+              <br>
+              <span class="comment">if Synth 1 => OFF</span>
+              <br>
+              ~s1onoff <span class="numbers">== 0</span>, {
+              <br>
+              <span class="class">Pdef</span>(<span class="char">\noisedeff</span>)<span class="method">.set</span>(<span class="char">\amp</span>, <span class="numbers">0.0</span>);
+              <br>
+              <span class="class">Synth</span>(<span class="string">"noisedef"</span>, [<span class="char">\amp</span>, <span class="numbers">0.0</span>])<span class="numbers">.set</span>;
+              <br>
+	      <span class="string">"Synth 1 OFF"</span><span class="method">.postln</span>;
+              <br>
+	      });
+              <br>
+              });
+              <br>
+              }, <span class="char">'/gauss/synth1'</span>);
+            </code>
+          </span>
+          </p>
 
         <h3 style="text-align: center" id="OF">openFrameworks C++ code </h3>
 
-
+        <hr>
+        <vr>
 
       </div>
 
     </center>
   </body>
 </html>
-under-construction
