@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gaussian Sonificator Visualisator</title>
+    <style>
+      /*for LINKS*/
+      /* unvisited link */
+      a:link {
+          color: red;
+      }
+      /* visited link */
+      a:visited {
+          color: lightblue;
+      }
+      /* mouse over link */
+      a:hover {
+          color: red;
+      }
+      /* selected link */
+      a:active {
+          color: blue;
+      }
+
+      body {
+          background-image: url("media/bg3.png");
+          background-color: rgb(20, 0, 0);
+          color: white;
+          /*  background-image: url("https://github.com/JasonSKK/JasonSKK.github.io/blob/main/interface.jpg");*/
+
+      }
+
+      /*HEADERS*/
+      h1 {
+          font-size: 50px;
+          text-shadow: 2px 2px 5px gray;
+          text-align: center;
+      }
+
+      /*h2 {
+      font-size: 45px;
+      color: rgb(100, 20, 20);
+      text-decoration: underline;
+      }*/
+
+      h2 {
+          font-size: 45px;
+          color: rgb(190, 20, 20);
+          text-decoration: underline;
+      }
+
+      h3 {
+          font-size: 20px;
+          color: rgb(255, 255, 255);
+          text-decoration: underline;
+      }
+
+      h4 {
+          font-size: 22px;
+          color: rgb(255, 255, 255);
+      }
+
+      h5 {
+          font-size: 18px;
+          color: rgb(255, 255, 255);
+      }
+
+
+      /*for normal text*/
+      p {
+          font-size: 16px;
+      }
+
+      /*for INDENT space*/
+      div.b {
+          background-color: rgba(0, 0, 0, 0.0);
+          width: 900px;
+          height: 180px;
+          border: 7px ridge white;
+          padding: 10px;
+          margin: 5px;
+      }
+
+      tab {
+          display: inline-block;
+          margin-left: 40px;
+      }
+
+
+      code {
+          font-family: Consolas,"courier new";
+          color: orange;
+          background-color: black;
+          padding: 2px;
+          font-size: 105%;
+      }
+
+      /*Shell*/
+      code span.commentshell {
+          color: #737373;
+          font-style: normal;
+      }
+
+      /*SuperCollider*/
+      code span.comment {
+          color: #c83917;
+          font-style: normal;
+      }
+
+      code span.class {
+          color: #709d15;
+      }
+
+      code span.string {
+          color: #cc6699;
+      }
+
+      code span.method {
+          color: #ffffff;
+      }
+
+      code span.numbers {
+          color: #ffffff;
+      }
+
+      .box {
+          float: left;
+          text-align: left;
+          width: 777px;
+          border: 1px;
+          padding: 1px;
+          letter-spacing: 3px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <center>
+
+      <h2 style='color: white;
+                 text-shadow: 3px 4px darkred;'>~ Gaussian Sonificator - Visualisator ~</h2>
+
+      <div class="b">
+        <p style='text-indent: 20px'>This page presents the interactive audio-visual application system “Gaussian Sonificator - Visualisator” both in the general context of practical use and in that of the technical details and information about the tools & methods required for the development of an interactive audio - visual application system. The research and finally the implementation of the aforementioned idea is a manifestation of the relationship between art and technology and the strong tendency that exists in recent years regarding interaction, especially in audiovisual systems. The methods related to the process of developing and adapting the programming tools that have been selected are then presented, as well as additional information related to the justification for the selection of the specific tools. Additionally, the source code will be presented and explained.  Finally, the synthetic - artistic expectations of the creator are presented as well as some comments on the final result and its usability.</p>
+      </div>
+
+
+      <p style="margin-bottom:3cm;"></p>
+
+      <h4>Gaussian Sonificator - Visualisator (G.V.S.) uses:</h4>
+      <h3>
+        ☆ SuperCollider
+      </h3>
+      <p><b><a href="https://supercollider.github.io" target="_blank">SuperCollider website</a></b></p>
+      <p><a href="#SC">Take me to the code</a></p>
+
+      <br>
+      <h3>
+        ☆ TouchOSC
+      </h3>
+      <p><b><a href="https://hexler.net/touchosc" target="_blank">Hexler website</a></b></p>
+      <br>
+      <h3>
+        ☆ openFrameworks
+      </h3>
+      <p><b><a href="https://openframeworks.cc" target="_blank">openFrameworks website</a></b></p>
+      <p><a href="#OF">Take me to the code</a></p>
+      <br>
+      <br>
+      <h3>G.V.S. features:</h3>
+      <h5>
+        1. A graphical user interface for an iOS or Android mobile phone (via TouchOSC)
+      </h5>
+      <div style = "position:relative; left:0px; top:20px;">
+        <img src = "media/interface.jpg" alt="interface" width = "200">
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <h5>
+        2. COOL generative graphix! B)
+      </h5>
+      <div style = "position:relative; left:0px; top:20px;">
+        <img src = "media/cool-stuff.png"
+             alt="cool-stuff" width = "400">
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <h5>
+        3. COOL generative sound ♫
+      </h5>
+
+      <audio controls>
+        <source src="media/gaussian.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+      <hr>
+
+      <p style="margin-bottom:3cm;"></p>
+      <h1 style='text-align: left; text-indent: 100px'>Setup</h1>
+      <div class="box">
+        <p style='text-align: justify; text-indent: 50px;'>
+          Firstly, load up the layout on the touch-osc app (Android). Copy the .touchosc file to your Android smartphone and start the TouchOSC application. Go to Layout => Add from file (add Gaussian-Sonification-Visualisator.touchosc). Set up the host address & port (computer's IP address & 57120 default incoming OSC messages port from SuperCollider)
+          <br>
+          <br>
+          You can get it from my GitHub repo.
+        </p>
+
+
+
+        <p style='text-align: left; margin-top:-0.2cm;'><b><a href="https://github.com/JasonSKK/Gaussian-Sonificator-Visualisator/blob/master/Gaussian-Sonificator-Visualisator.touchosc" target="_blank">Get Touch-osc layout (GitHub)</a></b></p>
+
+        <br>
+        <p style='text-align: justify; text-indent: 50px'>
+          Now in SuperCollider, make sure that the IP address is identical with your computer's IP. To check your IP from the shell, just type the following (macOS 10.13.6):</p>
+
+        <p style='text-align: justify; text-decoration: underline;'>Shell</p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width:500px;">
+            <code style="color:red; background-color:black;">
+              ipconfig getifaddr en0
+              <br>
+              <span class="commentshell">`#for older MacBook Pros use en1` \</span>
+            </code>
+          </span>
+        </p>
+
+        <br>
+
+        <p style='text-align: justify; text-decoration: underline;'>SuperCollider</p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="comment">//TouchOSC-SuperCollider</span>
+              ~n <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
+              <span class="comment">//SuperCollider - openFrameworks</span>
+              <br>
+              ~nsend <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
+            </code>
+          </span>
+        </p>
+
+        <br>
+        <p style='text-align: justify; text-indent: 0px'>After the appropriate changes evaluate the scd file.</p>
+        <br>
+        <p style='text-align: justify; text-indent: 50px'>Then, create a new project using the projectGenerator app in openFrameworks and add "ofxOsc" in the addons section. Navigate to the project directory and replace the "src" directory with the one from the GitHub repo (subdirectory inside OF directory)
+          <br>
+          <br>
+          Type the following code in the shell to compile.
+        </p>
+
+        <p style='text-align: left; text-decoration: underline;'>Shell</p>
+        <p style='text-align: left'>
+          <span style='display:inline-block; width:500px;'>
+            <code style='color:red; background-color:black;'>
+              make -f Makefile
+              <br>
+              #then
+              <br>
+              make RunRelease
+            </code>
+          </span>
+        </p>
+
+        <p style='text-align: left; font-size: 24px; text-shadow: 2px 2px red;'>ENJOY</p>
+      </div>
+
+      <div class="box" style='float: right; width: 700px; margin-top:1cm'>
+        <h1 style='margin-top:10cm;'>Developing process</h1>
+
+
+        <p style="margin-bottom:1.5cm;"></p>
+        <h3 style="text-align: center" id="SC">SuperCollider code </h3>
+
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          The following code block was used to set up the gaussian distribution in SuperCollider. The ".gauss" method has two (2) arguments, gaussian receiver and standard deviation. These parameters are defined as environment variables which are updated with each OSC message they receive from the Android smartphone interface. The gaussian distribution (.gauss) produces both positive and negative values. If a negative values comes up is immediately  multiplied with -1.</p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 700px;">
+            <code>~gss <span class="numbers">=</span> gauss(~receiver, ~stdevi)<span class="method">.round</span>(<span class="numbers">0.00001</span>);
+              <br>
+              <span style='color: yellow'>if</span> (~gss<span class="numbers">.isNegative</span>, {~gss <span class="numbers">=</span> ~gss <span class="numbers">*</span> (<span class="numbers">-1</span>)});
+              ~gss<span class="method">.postln</span>;
+            </code>
+          </span>
+        </p>
+        <br>
+        <br>
+
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          Now, the OSC protocol should be set. Both in SuperCollider and openFrameworks (<a href="#OF">openFrameworks C++ code</a>). On the SuperCollider side (server) regarding the smartphone - SuperCollider communication the NetAddr class was used. SuperCollider receives incoming messages from the 57120 port by default. "hostname" argument => device's IP address.
+        </p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="comment">//TouchOSC-SuperCollider</span>
+              ~n <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
+              <span class="comment">//SuperCollider - openFrameworks`</span>
+              <br>
+              ~nsend <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">12345</span>);
+            </code>
+          </span>
+        </p>
+
+        <p style='text-align: justify; text-indent: 0px; margin-right:1em'>OSC communication was tested using a simple OSCdef.</p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="comment">//Gaussian Function Receiver</span>
+
+
+              <span class="class">OSCdef</span>(<span style="color: #1999ff;">\receiver</span>, {
+              <br>
+              <span class="numbers">|msg, time, addr, port|</span>
+              <br>
+              <span class"numbers">msg</span><span class="method">.postln</span>;
+              <br>
+              },<span style="color: #1999ff">'/gauss/receiver'</span>);
+            </code>
+          </span>
+        </p>
+
+        <p style='text-align: justify; text-indent: 0px; margin-right:1em'>
+          The whole application, regarding sound, is based on a continuous Routine (fork) which stops only if the <span style="color: red">OFF</span> button is pressed from the interface.
+        </p>
+
+
+        <h3 style="text-align: center" id="OF">openFrameworks C++ code </h3>
+
+
+
+      </div>
+
+    </center>
+  </body>
+</html>
