@@ -136,6 +136,21 @@
           letter-spacing: 3px;
       }
 
+
+      /*openFrameworks*/
+      code span.var {
+          color: cyan;
+      }
+
+      code span.sharpcpp {
+          color: purple;
+      }
+
+      code span.function {
+          color: yellow;
+      }
+
+
     </style>
   </head>
   <body>
@@ -304,13 +319,14 @@
         <br>
 
         <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
-          Now, the OSC protocol should be set. Both in SuperCollider and openFrameworks (<a href="#OF">openFrameworks C++ code</a>). On the SuperCollider side (server) regarding the smartphone - SuperCollider communication the NetAddr class was used. SuperCollider receives incoming messages from the 57120 port by default. "hostname" argument => device's IP address.
+          Now, the OSC protocol should be set. Both in SuperCollider and openFrameworks (<a href="#OF">openFrameworks C++ code</a>). On the SuperCollider side (OSC-server) regarding the smartphone - SuperCollider communication the NetAddr class was used. SuperCollider receives incoming messages from the 57120 port by default. NetAddr class "hostname" argument => device's IP address.
         </p>
 
         <p style='text-align: left'>
           <span style="display:inline-block; width: 500px;">
             <code>
               <span class="comment">//TouchOSC-SuperCollider</span>
+              <br>
               ~n <span class="numbers">=</span> <span class="class">NetAddr</span>(<span class="string">"192.168.1.6"</span>, <span class="numbers">57120</span>);
               <span class="comment">//SuperCollider - openFrameworks`</span>
               <br>
@@ -348,7 +364,7 @@
           2. Update the corresponding environment variables with the new values
           <br>
           <br>
-          There is also a third OSCdef which determines the new value generation time (in seconds).
+          There is also a third OSCdef which determines the generation time (in seconds) of a new value.
         </p>
 
         <p style='text-align: left'>
@@ -384,12 +400,9 @@
           <br>
           The following code expresses the aforementioned function. It is actually the code responding to the messages from the  <span style="color: red">Synth 1</span> button. A Pdef was also been used (amplitude & duration variations).
         </p>
-<p style='text-align: left'>
+        <p style='text-align: left'>
           <span style="display:inline-block; width: 500px;">
             <code>
-
-
-
               <span class="comment">//Synths-ON-OFF</span>
               <br>
               <span class="comment">//Synth1</span>
@@ -441,15 +454,295 @@
               }, <span class="char">'/gauss/synth1'</span>);
             </code>
           </span>
-          </p>
+        </p>
 
-        <h3 style="text-align: center" id="OF">openFrameworks C++ code </h3>
+        <br>
+        <br>
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          Conditional "ifs" were used extensively so that depending on a specific value range (example: (value &gt; 130) && (value &lt; 160)) multiple Synths are played with configured arguments like freq, amp, modulation frequency ... by the new value (mapping).
+        </p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span style="color: yellow">if</span>((~gss <span class="numbers"> &gt;= 10</span>) && (~gss <span class="numbers">&lt; 30</span>), {
+              <br>
+	      <span class="string">"&gt;10 && &lt;30"</span><span class="method">.postln</span>;
+              <br>
+	      <span class="comment">//noisedef</span>
+              <br>
+	      ~freqnoisedef <span class="numbers">=</span> ~scale[<span class="numbers">1</span>]<span class="numbers">/8</span>;
+              <br>
+	      ~lpfnoisedef <span class="numbers">=</span> <span class="numbers">1000</span>;
+              <br>
+	      <span style='color: yellow'>if</span>(~s1onoff <span class="numbers">== 1</span>, {
+              <br>
+	      <span class="class">Synth</span>(<span class="string">"noisedef"</span>, [<span class="char">\freq</span>, ~freqnoisedef, <span class="char">\lpf</span>, ~lpfnoisedef])<span class="method">.set</span>;
+              <br>
+	      });
+              <br>
+	      <span class="comment">//low</span>
+              <br>
+	      <span style="color: yellow">if</span>(~s2onoff <span class="numbers">== 1</span>, {
+              <br>
+	      <span class="class">Synth</span>(<span class="string">"low"</span>, [<span class="char">\freq</span>, [~scale[<span class="numbers">1</span>]<span class="numbers">/2</span>, ~scale[<span class="numbers">7</span>]<span class="numbers">/2</span>]<span class="method">.choose</span>,
+              <br>
+	      <span class="char">\pan</span>, [<span class="numbers">-0.1</span>, <span class="numbers">0.1</span>]<span class="method">.choose</span>,
+              <br>
+	      <span class="char">\modf</span>, <span class="numbers">4</span>,
+              <br>
+	      ]);
+              <br>
+	      });
+              <br>
+	      <span class="comment">//noisy</span>
+              <br>
+	      <span style='color: yellow'>if</span>(~s3onoff <span class="numbers">== 1</span>, {
+              <br>
+	      <span class="class">Synth</span>(<span class="string">"noisy"</span>, [<span class="char">\freq</span>, [~scale[<span class="numbers">0</span>], ~scale[<span class="numbers">4</span>], ~scale[<span class="numbers">7</span>]<span class="numbers">/2</span>]<span class="method">.choose</span>,
+              <br>
+	      <span class="char">\amp</span>, <span class="method">rrand</span>(<span class="numbers">0.3</span>, <span class="numbers">0.466</span>) <span class="numbers">*</span> [<span class="numbers">1</span>, <span class="numbers">0</span>, <span class="numbers">0</span>]<span class="method">.choose</span>, <span class="char">\pan</span>, <span class="numbers">0.7</span>]);
+              <br>
+	      });
+              <br>
+	      <span class="comment">//clicking</span>
+              <br>
+	      <span style='color: yellow'>if</span>(~s4onoff <span class="numbers">== 1</span>, {
+              <br>
+	      <span style='color: yellow'>if</span>(<span class="numbers">1.0</span><span class="method">.rand</span> <span class="numbers">> 0.85</span>, {
+              <br>
+	      <span class="class">Synth</span>(<span class="string">"clicking"</span>, [<span class="char">\freq</span>, <span class="numbers">1</span>, <span class="char">\amp</span>, <span class="numbers">0.5</span>]);
+              <br>
+	      }, {<span class="class">Synth</span>(<span class="string">"clicking"</span>, [<span class="char">\freq</span>, <span class="numbers">1</span>, <span class="char">\amp</span>, <span class="numbers">0.0</span>]);});
+              <br>
+	      });
+              <br>
+	      });
+              <br>
+            </code>
+          </span>
+        </p>
+        <br>
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          Finally, the values generated by the gaussian function should be sent to openFrameworks using the ~nsend address (port 12345). The following line of code is placed in the routine.
+        </p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 666px;">
+            <code>
+              ~nsend<span class="method">.sendMsg</span>(<span class="char">'/gauss-value'</span>,  ~gss<span class="method">.round</span>(<span class="numbers">1</span>));
+            </code>
+          </span>
+        </p>
+        <br>
+        <br>
+        <br>
+
 
         <hr>
-        <vr>
+        <h3 style="text-align: center" id="OF">openFrameworks C++ code </h3>
+        <p style='text-align: justify; text-indent: 50px; margin-right:1em'>
+          In connection with the visual part, it would be appropriate to mention that there was a influence from L. Lepton's (2020) rectangle loop example.
+          <br>
+          Available here: <a href="https://www.youtube.com/watch?v=1eKr0KZBmjY" target="_blank">openFrameworks tutorial series - episode 073 - rectangle loop 02</a>
+          <br>
+          <br>
+          <br>
+          First of all, the OSC server should be set on the openFrameworks side. SuperCollider is actually an OSC server and client at the same time (TouchOSC - SuperCollider | SuperCollider - openFrameworks).
+          <br>
+          <br>
+        </p>
+        <p style="text-align: justify; text-indent: 0px; margin-right:1em; text-decoration: underline;">In the ofApp.h file:</p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span class="sharpcpp">#pragma</span> <span class="numbers">once</span>
+              <br>
+              <br>
+              <span class="sharpcpp">#include</span> <span class="string">"ofMain.h"</span>
+              <br>
+              <span class="sharpcpp">#include</span> <span class="string">"ofxOsc.h"</span>
+              <br>
+              <br>
+              <span class="sharpcpp">#define</span> <span class="var">PORT</span> <span class="numbers">12345</span> <br><span class="comment">//Port defined in SuperCollider</span>
+              <br>
+              <br>
+              ...
+              <br>
+              <br>
+              ...
+              <br>
+              <span style="color: RGB(0, 150, 120)">ofxOscReceiver</span> <span class="var">osc</span><span class="numbers">;</span>
+              <br>
+              <span style="color: RGB(0, 150, 120)">float</span> <span class="var">oscx</span><span class="numbers"> = 0.0;</span>
+              <br>
+            </code>
+          </span>
+        </p>
+        <br>
+        <p style='text-align: justify; text-indent: 0px; margin-right:1em; text-decoration: underline'>
+          In the ofApp.cpp file:
+        </p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span style="color: lightgreen">void</span> <span style="color: #0066ff">ofApp</span><span class="numbers">::</span><span class="function">setup</span><span class="numbers">(){</span>
+              <br>
+              <span class="numbers">osc.setup(PORT);</span>
+              <br>
+              <br>
+              ...
+              <br>
+              <br>
+              ...
+              <br>
+              <br>
+              <br>
+              void <span style="color: #0066ff">ofApp</span><span class="numbers">::</span><span class="function">update</span><span class="numbers">(){</span>
+              <br>
+              <span style="color: lightgreen">while</span><span class="numbers">(osc.hasWaitingMessages()) {</span>
+              <br>
+              <span class="function">ofxOscMessage</span> <span class="var">m</span><span class="numbers">;</span>
+              <br>
+              <span class="numbers">osc.getNextMessage(&m);</span>
+              <br>
+              <br>
+              <span style="color: lightgreen">if</span><span class="numbers">(m.getAddress() == </span><span class="string">"/gauss-value"</span><span class="numbers">) {
+                <br>
+                oscx = m.getArgAsFloat(0);
+                <br>
+                counter++;
+                <br>
+                }
+                <br>
+                }
+                <br>
+                }
+              </span>
+              <br>
+            </code>
+          </span>
+        </p>
+        <br>
+        <br>
+        <p style="text-align: justify; text-indent: 50px; margin-right:1em;">
+          Then a "for" loop is created in the draw() function. Inside the for loop a colour function is defined. In this case the colour will continuously change (using a sine, noise & Random) according to the new gaussian function value (received from SuperCollider). The ofRotateDeg function is used for rotation. The ofScale function follows so that "levels" are created among shapes in each subsequent cycle of the "for" loop (where a new shape is created). Then the ofDrawCone function follows so that a cone shape can be drawn. The xcor, yxor, initialval, blue and red variables are derived from the received gauss value. More information will be reported later.
+        </p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 666px;">
+            <code>
+              <span style="color: lightgreen">for</span> <span class="numbers">(</span><span style="color: RGB(0, 150, 120)">int</span> <span class="numbers">i = 0; i &lt; 100; i++) {
+                <br>
+                ofSetColor(red * sin(
+                <br>
+                cos(initialval * 0.01) * i * 0.02) + (
+                <br>
+                sin(i * 0.01)),
+                <br>
+                ofNoise(initialval * 2) * ofRandom(5.0, 10.0),
+                <br>
+                sin(i * 0.01) * blue - (blue/2 * 0.5));
+                <br>
+                <br>
+                ofRotateDeg(ofGetElapsedTimef() + (initialval * 0.1)); </span><span class="comment">//* -1 for backwards</span><span class="numbers">
+                    <br>
+                    <br>
+                    ofScale(0.88);
+
+                    <br>
+                    <br>
+                    ofDrawCone(ofClamp(xcor, 50.0, 200.0),
+                    <br>
+                    ofClamp(ycor, 50.0, 200.0),
+                    <br>
+                    200, 200);
+                    <br>
+                    }
+                  </span>
+            </code>
+            </span>
+        </p>
+
+        <br>
+        <p style="text-align: justify; text-indent: 50px; margin-right:1em;">
+          In order that the colour & spatial variables are going to change continuously another "for" loop was created. Every time that a new value is received these variables are updated, however this is not done instantly. The values registered to the variables are increased or decreased "step by step" until they reach the received OSC message's value. The loop will perform the function and the "if" conditional allows the algorithm to recognise if the OSC value that is going to be set is less than or greater than the previous received value. This allows the colour variables and the spacial ones to always change starting from the value they had before the new OSC message.
+        </p>
+        <br>
+        <p style="text-align: justify; text-indent: 0px; margin-right:1em; text-decoration: underline">
+          Regarding colour & rotation variables:
+        </p>
+
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span style="color: lightgreen">for</span><span class="numbers">(</span><span style="color: RGB(0, 150, 120)">int</span><span class="numbers"> i = 0; i &lt; 900; i++){</span>
+                                 <br>
+                                 <span style="color: lightgreen">if</span><span class="numbers">(initialval < oscx){
+                                                 <br>
+                                                 initialval = initialval + 0.00125;
+                                                 <br>
+                                                 blue = initialval * 4 - 0.00225;
+                                                 <br>
+                                                 red = initialval * 2 + 0.00225;
+                                                 <br>
+                                                 sleep(0.01);
+                                                 <br>
+                                                 };
+                                                 </span>
+                                                 <br>
+                                                 <br>
+                                                 ...
+                                                 </code>
+          </span>
+        </p>
+
+
+        <p style="text-align: justify; text-indent: 50px; margin-right:1em; text-decoration: underline">
+        <br>
+        <br>
+        Regarding spatial variables:
+        </p>
+        <p style='text-align: left'>
+          <span style="display:inline-block; width: 500px;">
+            <code>
+              <span style="color: lightgreen">if</span><span class="numbers">(xcor < oscx && counter % 2 == 0){</span>
+                        <br>
+                        <span style="color: lightgreen">if</span><span class="numbers">(xcor &gt;= oscx - 100){
+                <br>
+                step = step/10;
+                <br>
+                };
+                <br>
+                xcor = xcor + step;
+                <br>
+                sleep(0.1);
+                <br>
+                };
+                <br>
+                <br>
+                </span>
+                <span style="color: lightgreen">if</span><span class="numbers">(xcor > oscx && counter % 2 == 0){</span>
+                                     <br>
+                                     <span style="color: lightgreen">if</span><span class="numbers">(xcor <= oscx + 100){
+                                                <br>
+                                                step = step/10;
+                                                <br>
+                                                };
+                                                <br>
+                                                xcor = xcor - step;
+                                                <br>
+                                                sleep(0.1);
+                                                <br>
+                                                };
+                                                </span>
+                                                <br>
+                                                </code>
+            </span>
+        </p>
+
+
 
       </div>
-
     </center>
   </body>
 </html>
