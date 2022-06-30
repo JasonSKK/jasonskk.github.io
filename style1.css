@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(230, 230, 230);
+    color: black;
+    font-family:Georgia;
+}
+
+a:link {
+    color: darkcyan;
+}
+
+a:hover {
+    color: darkcyan;
+}
+
+a:active {
+    color: darkcyan;
+}
+
+div.box {
+    background-color: rgb(220, 220, 220);
+    width: 900px;
+    height: 430px;
+    border: 1px ridge;
+    padding: 35px;
+    margin: 5px;
+    text-align: justify;
+    text-indent: 50px;
+    margin-right:4em;
+    position: relative;
+    bottom: -20px;
+    font-size: 17px;
+}
+
+div.space {
+    padding-top: 160px;
+    padding-right: 30px;
+    padding-bottom: 160px;
+    padding-left: 80px;
+}
+
+img.float_text_left {
+    float: left;
+    clear: none;
+    margin: 15px;
+}
+span.float_text_right p {
+    width: 65%;
+    height: auto;
+    float: left;
+}
