@@ -60,7 +60,7 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Works
-+ [[https://github.com/JasonSKK/construction-site-sonvis][Construction site SonVis]]
++ [[https://github.com/JasonSKK/construction-site-sonvis][Construction site data SonVis]]
 #+attr_html: :width 500px;
 #+ATTR_HTML: :style float:left;
 [[./const_sonvis.png]]
