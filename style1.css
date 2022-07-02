@@ -19,7 +19,7 @@ a:active {
 div.box {
     background-color: rgb(220, 220, 220);
     width: 900px;
-    height: 430px;
+    height: 445px;
     border: 1px ridge;
     padding: 35px;
     margin: 5px;
@@ -29,6 +29,7 @@ div.box {
     position: relative;
     bottom: -20px;
     font-size: 17px;
+    line-height: 1.5
 }
 
 div.space {
