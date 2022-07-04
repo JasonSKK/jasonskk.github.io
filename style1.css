@@ -2,6 +2,8 @@ body {
     background-color: rgb(230, 230, 230);
     color: black;
     font-family:Georgia;
+    margin:0px 150px 150px 150px;
+    line-height: 1.5;
 }
 
 a:link {
@@ -29,7 +31,7 @@ div.box {
     position: relative;
     bottom: -20px;
     font-size: 17px;
-    line-height: 1.5
+    line-height: 1.5;
 }
 
 div.space {

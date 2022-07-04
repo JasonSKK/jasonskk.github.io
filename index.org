@@ -23,6 +23,7 @@
 # box div, bio
 #+BEGIN_EXPORT html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<hr>
 <div class="box">
 <img src="./pub-me.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="position:relative; width:300px;">
 <br>
@@ -40,9 +41,7 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Publications
-
 + Svoronos - Kanavas, Iason, Agiomyrgianakis, Vasilis, & Rönnberg, Niklas. (2022, May 17). /An exploratory use of audiovisual displays on oceanographic data./ AVI 2022 Workshop on Audio-Visual Analytics (WAVA22), Frascati, Rome, Italy. https://doi.org/10.5281/zenodo.6555839
-
 + Agiomyrgianakis, Vasilis, Svoronos - Kanavas, Iason, Zannos, Iannis, & Diapoulis, Georgios. (2022, February 6). /Synerg(e)ia: A Networked Collaborative Live coding environment./ International Conference on Live Coding (ICLC), Valdivia, Chile.  https://doi.org/10.5281/zenodo.5984900
 
 #+BEGIN_EXPORT html
