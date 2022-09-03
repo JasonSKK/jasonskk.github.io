@@ -58,7 +58,7 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Scholarships & Grants
-+ Scholarship for Excellent Academic Performance in support of Postgraduate Studies July 2022 -- Funding: Synenosis, Greece
++ Scholarship for Excellent Academic Performance in support of Postgraduate Research July 2022 -- Funding: Synenosis, Greece
 + Tuition Fee Waiver Scholarship for Postgraduate Research July 2022 -- Funding: University of Huddersfield - School of Computing and Engineering
 + Conference Participation & Attendance Grant - Advanced Visual Interfaces 2022 June 2022 -- Funding: Linköping University, Division for Media and Information Technology
 #+BEGIN_EXPORT html
