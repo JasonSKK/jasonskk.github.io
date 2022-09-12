@@ -41,8 +41,8 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Publications
-# + Marian Weger, Iason Svoronos-Kanavas & Robert Höldrich. /Schrödinger's box: an artifact to study the limits of plausibility in auditory augmentations./ Audio Mostly Conference - A Conference on Interaction with Sound 2022, St. Pölten, Austria.
-# + Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. /The Augmented Floor - Assessing Auditory Augmentation./ Audio Mostly Conference - A Conference on Interaction with Sound 2022, St. Pölten, Austria.
++ Marian Weger, Iason Svoronos-Kanavas, and Robert Höldrich. 2022. /Schrödinger’s box: an artifact to study the limits of plausibility in auditory augmentations/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561222
++ Katharina Groß-Vogt, Iason Svoronos Kanavas, Marian Weger and Clemens Amon. 2022. /The Augmented Floor - Assessing Auditory Augmentation/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561219
 + Svoronos - Kanavas, Iason, Agiomyrgianakis, Vasilis, & Rönnberg, Niklas. (2022, May 17). /An exploratory use of audiovisual displays on oceanographic data./ AVI 2022 Workshop on Audio-Visual Analytics (WAVA22), Frascati, Rome, Italy. https://doi.org/10.5281/zenodo.6555839
 + Agiomyrgianakis, Vasilis, Svoronos - Kanavas, Iason, Zannos, Iannis, & Diapoulis, Georgios. (2022, February 6). /Synerg(e)ia: A Networked Collaborative Live coding environment./ International Conference on Live Coding (ICLC), Valdivia, Chile.  https://doi.org/10.5281/zenodo.5984900
 
@@ -68,8 +68,15 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Works
-# + Schrödinger's box.  Marian Weger, Iason Svoronos-Kanavas & Robert Höldrich.  Audio Mostly Conference 2022.
-# + The Augmented Floor - Assessing Auditory Augmentation. Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Conference 2022.
+# Coment out below for box
+# + Installation - contribution to the project: Schrödinger's box.  Marian Weger, Iason Svoronos-Kanavas & Robert Höldrich.  Audio Mostly Conference 2022.
+#+attr_html: :width 200px;
+#+ATTR_HTML: :style float:left;
+# [[./box.jpg]]
++ [[https://github.com/JasonSKK/augmented-floor][The Augmented Floor - Assessing Auditory Augmentation]] Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Conference 2022.
+#+BEGIN_EXPORT html
+<iframe src="https://drive.google.com/file/d/1Vz9A5WU1ra03mz23RRL_nSvlmBPZV6Bd/preview" width="320" height="240" allow="autoplay"></iframe>
+#+END_EXPORT
 + [[https://github.com/JasonSKK/construction-site-sonvis][Construction site data SonVis]]
 #+attr_html: :width 500px;
 #+ATTR_HTML: :style float:left;
