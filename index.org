@@ -68,11 +68,13 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Works
-# Coment out below for box
-# + Installation - contribution to the project: Schrödinger's box.  Marian Weger, Iason Svoronos-Kanavas & Robert Höldrich.  Audio Mostly Conference 2022.
++ Installation - contribution to the project: Schrödinger's box.  Marian Weger, Iason Svoronos-Kanavas & Robert Höldrich.  Audio Mostly Conference 2022.
 #+attr_html: :width 200px;
 #+ATTR_HTML: :style float:left;
-# [[./box.jpg]]
+[[./box.jpg]]
+#+BEGIN_EXPORT html
+<div class="space"></div>
+#+END_EXPORT
 + [[https://github.com/JasonSKK/augmented-floor][The Augmented Floor - Assessing Auditory Augmentation]] Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Conference 2022.
 #+BEGIN_EXPORT html
 <iframe src="https://drive.google.com/file/d/1Vz9A5WU1ra03mz23RRL_nSvlmBPZV6Bd/preview" width="320" height="240" allow="autoplay"></iframe>
