@@ -50,10 +50,11 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Employment
++ Public Address manual work (audio & lighting) for music concerts, e.g. Street Mode festival Thessaloniki, Greece, September 2022.
 + Student volunteer at Audio Mostly 2022, A Conference on Interaction with Sound, 6-9 September 2022, St Pölten, Austria.
 + Internship student at Linköping University, Division for Media and Information Technology, Norrköping, Sweden: Sonification for communication.  March - July 2022.
 + Internship student at the Institute of Electronic Music and Acoustics, University of Music and Performing Arts, Graz Austria: Sonification research.  September - February 2022.
-+ Seasonal manual work
++ Seasonal manual work Jun. 2019 – Sep 2019, December 2020, Jul. 2020 – Oct. 2020, Greece.
 #+BEGIN_EXPORT html
 <hr>
 #+END_EXPORT
