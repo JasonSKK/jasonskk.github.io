@@ -97,7 +97,7 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 #+END_EXPORT
 
 #+BEGIN_EXPORT html
- <div class="box" style='float: right; width: 700px; height: 500px; margin-top:-13cm; margin-right:0cm; padding-top:0px; background-color: transparent; border: 5px solid transparent; text-indent: 10px;'>
+ <div class="box" style='float: right; width: 700px; height: 500px; margin-top:-13cm; margin-right:-2cm; padding-top:0px; background-color: transparent; border: 5px solid transparent; text-indent: 10px;'>
 #+END_EXPORT
 
 + [[https://github.com/JasonSKK/augmented-floor][The Augmented Floor - Assessing Auditory Augmentation]]
@@ -124,7 +124,7 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 #+END_EXPORT
 
 #+BEGIN_EXPORT html
- <div class="box" style='float: right; width: 700px; height: 375px; margin-top:-2.75cm; margin-right:0cm; padding-top:0px; background-color: transparent; border: 5px solid transparent;'>
+ <div class="box" style='float: right; width: 700px; height: 375px; margin-top:-2.75cm; margin-right:-2cm; padding-top:0px; background-color: transparent; border: 5px solid transparent;'>
 #+END_EXPORT
 
 + [[https://github.com/JasonSKK/sonifying-and-visualising-sea-wave-datasets][An exploratory use of audiovisual displays on oceanographic data]]
