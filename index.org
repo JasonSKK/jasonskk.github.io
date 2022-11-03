@@ -29,7 +29,7 @@
 <img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="position:relative; width:300px;">
 </a>
 <br>
-Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Department of Sound and Musical Instruments Technology) at the Ionian University in Greece. His work focuses specifically on the use of sonification and visualisation in combination on time-oriented data, the potential of introducing aesthetic elements into audio visual displays to convey data information through audio-visual "experiences" and experimental practices for remote collaboration in musical live coding environments. He worked as an internship student at the Institute of Electronic Music and Acoustics (IEM) at the University of Music and Performing Arts in Graz and the Division for Media and Information Technology, Department for Science and Technology at Linköping University in Sweden. He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
+Iason Svoronos - Kanavas is a graduate Bachelor student in sound technology (Department of Sound and Musical Instruments Technology) at the Ionian University in Greece. His work focuses specifically on the use of sonification and visualisation in combination on time-oriented data, the potential of introducing aesthetic elements into audio visual displays to convey data information through audio-visual "experiences" and experimental practices for remote collaboration in musical live coding environments. He worked as an internship student at the Institute of Electronic Music and Acoustics (IEM) at the University of Music and Performing Arts in Graz and the Division for Media and Information Technology, Department for Science and Technology at Linköping University in Sweden. He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
 <br>
 <br>
 &nbsp;
@@ -46,10 +46,10 @@ Iason Svoronos - Kanavas is a senior Bachelor student in sound technology (Depar
 <hr>
 #+END_EXPORT
 * Publications
-+ Marian Weger, Iason Svoronos-Kanavas, and Robert Höldrich. 2022. /Schrödinger’s box: an artifact to study the limits of plausibility in auditory augmentations/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561222
-+ Katharina Groß-Vogt, Iason Svoronos Kanavas, Marian Weger and Clemens Amon. 2022. /The Augmented Floor - Assessing Auditory Augmentation/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561219
-+ Svoronos - Kanavas, Iason, Agiomyrgianakis, Vasilis, & Rönnberg, Niklas. (2022, May 17). /An exploratory use of audiovisual displays on oceanographic data./ AVI 2022 Workshop on Audio-Visual Analytics (WAVA22), Frascati, Rome, Italy. https://doi.org/10.5281/zenodo.6555839
-+ Agiomyrgianakis, Vasilis, Svoronos - Kanavas, Iason, Zannos, Iannis, & Diapoulis, Georgios. (2022, February 6). /Synerg(e)ia: A Networked Collaborative Live coding environment./ International Conference on Live Coding (ICLC), Valdivia, Chile.  https://doi.org/10.5281/zenodo.5984900
+1. Marian Weger, Iason Svoronos-Kanavas, and Robert Höldrich. 2022. /Schrödinger’s box: an artifact to study the limits of plausibility in auditory augmentations/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561222
+2. Katharina Groß-Vogt, Iason Svoronos Kanavas, Marian Weger and Clemens Amon. 2022. /The Augmented Floor - Assessing Auditory Augmentation/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561219
+3. Svoronos - Kanavas, Iason, Agiomyrgianakis, Vasilis, & Rönnberg, Niklas. (2022, May 17). /An exploratory use of audiovisual displays on oceanographic data./ AVI 2022 Workshop on Audio-Visual Analytics (WAVA22), Frascati, Rome, Italy. https://doi.org/10.5281/zenodo.6555839
+4. Agiomyrgianakis, Vasilis, Svoronos - Kanavas, Iason, Zannos, Iannis, & Diapoulis, Georgios. (2022, February 6). /Synerg(e)ia: A Networked Collaborative Live coding environment./ International Conference on Live Coding (ICLC), Valdivia, Chile.  https://doi.org/10.5281/zenodo.5984900
 
 #+BEGIN_EXPORT html
 <hr>
