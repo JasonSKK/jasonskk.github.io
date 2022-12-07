@@ -102,8 +102,10 @@ Iason Svoronos - Kanavas is a graduate Bachelor student in sound technology (Dep
 #+END_EXPORT
 
 #+BEGIN_EXPORT html
- <div class="box" style='float: right; width: 700px; height: 500px; margin-top:-13cm; margin-right:-2cm; padding-top:0px; background-color: transparent; border: 5px solid transparent; text-indent: 10px;'>
+ <div class="box" style='float: right; width: 700px; height: 500px; margin-top:-14.5cm; margin-right:0cm; padding-top:0px; background-color: transparent; border: 5px solid transparent; text-indent: 10px;'>
+<div class="pane" style='float: margin-right:-4cm'>
 #+END_EXPORT
+
 
 + [[https://github.com/JasonSKK/augmented-floor][The Augmented Floor - Assessing Auditory Augmentation]]
 
@@ -114,6 +116,7 @@ Iason Svoronos - Kanavas is a graduate Bachelor student in sound technology (Dep
 
 #+BEGIN_EXPORT html
  </div>
+</div>
 <div class="space" style='padding-top: 20px'>
 </div>
 #+END_EXPORT
@@ -129,7 +132,8 @@ Iason Svoronos - Kanavas is a graduate Bachelor student in sound technology (Dep
 #+END_EXPORT
 
 #+BEGIN_EXPORT html
- <div class="box" style='float: right; width: 700px; height: 375px; margin-top:-2.75cm; margin-right:-2cm; padding-top:0px; background-color: transparent; border: 5px solid transparent; text-indent: 10px;'>
+ <div class="box" style='float: right; width: 700px; height: 375px; margin-top:-4cm; margin-right:0cm; padding-top:0px; background-color: transparent; border: 5px solid transparent; text-indent: 10px;'>
+<div class="pane">
 #+END_EXPORT
 
 + [[https://github.com/JasonSKK/sonifying-and-visualising-sea-wave-datasets][An exploratory use of audiovisual displays on oceanographic data]]
@@ -140,6 +144,7 @@ Iason Svoronos - Kanavas is a graduate Bachelor student in sound technology (Dep
 <a target="_blank" href="ocean.png">
   <img src="ocean.png" alt="ocean" style="width:500px">
 </a>
+</div>
 </div>
 #+END_EXPORT
 #+BEGIN_EXPORT html

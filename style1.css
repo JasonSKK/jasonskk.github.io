@@ -47,6 +47,16 @@ div.space {
     padding-left: 80px;
 }
 
+div.pane {
+    width: 800px;
+    height: 445px;
+    margin: 5px;
+    padding: 35px;
+    position: relative;
+    bottom: -20px;
+}
+
+
 img.float_text_left {
     float: left;
     clear: none;
@@ -80,4 +90,10 @@ span.float_text_right p {
     content: "";
     clear: both;
     display: table;
+}
+
+@media (max-width: 1500px) {
+    .pane {
+        display: none;
+    }
 }
