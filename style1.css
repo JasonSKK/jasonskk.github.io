@@ -57,6 +57,11 @@ div.pane {
     bottom: -20px;
 }
 
+div.text {
+    min-width: 100%;
+    max-width: 150%;
+    word-wrap: break-word;
+}
 
 img.float_text_left {
     float: left;
@@ -68,9 +73,8 @@ img {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
-    width: 100%;
-    min-width : 40%;
-    max-width : 300%;
+    min-width : 20%;
+    max-width : 200%;
 }
 
 img:hover {
@@ -85,7 +89,7 @@ span.float_text_right p {
 
 .column {
     float: left;
-    width: 18.33%;
+    width: 28.33%;
     padding: 0px;
 }
 
