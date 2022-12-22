@@ -27,7 +27,7 @@ a:active {
 div.box {
     background-color: rgb(220, 220, 220);
     width: 62%;
-    height: 445px;
+    height: 40%;
     border: 1px ridge;
     padding: 35px;
     margin: 5px;
@@ -38,6 +38,7 @@ div.box {
     bottom: -20px;
     font-size: 17px;
     line-height: 1.5;
+
 }
 
 div.space {
@@ -67,7 +68,9 @@ img {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
-    width: 150px;
+    width: 100%;
+    min-width : 40%;
+    max-width : 300%;
 }
 
 img:hover {
