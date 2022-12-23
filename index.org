@@ -141,7 +141,7 @@ Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Confer
 <div>
 &#x2022; <a href="https://github.com/Vasileios/Synergia-Collaborative-Live-coding">Synerg(e)ia</a>.
 </div>
-<a target="_blank" href="const_sonvis.png">
+<a target="_blank" href="synergeia.png">
   <img src="synergeia.png" alt="synergeia" style="width:100%">
 </a>
 </div>
