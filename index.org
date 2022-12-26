@@ -100,7 +100,9 @@ Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Confer
 
 <div class="row">
   <div class="column" style="padding-right: 5%;">
-<iframe src="https://drive.google.com/file/d/1Vz9A5WU1ra03mz23RRL_nSvlmBPZV6Bd/preview" width="150%" height="400" allow="autoplay"></iframe>
+<div class="conbox">
+<iframe class="iframe-resize" src="https://drive.google.com/file/d/1Vz9A5WU1ra03mz23RRL_nSvlmBPZV6Bd/preview"></iframe>
+</div>
   </div>
 </div>
 <br>
