@@ -87,7 +87,7 @@ Iason Svoronos - Kanavas is a Master by Research student in Computer Science at 
 
   <div class="column">
   <a target="_blank" href="box.jpg">
-    <img src="box.jpg" alt="box">
+    <img src="box.jpg" alt="box" style="width:170%; max-width: 200%;">
     </a>
   </div>
 </div>
