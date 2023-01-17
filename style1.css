@@ -29,15 +29,16 @@ div.box {
     width: 62%;
     height: 40%;
     border: 1px ridge;
-    padding: 35px;
+    padding: 1%;
     margin: 5px;
     text-align: justify;
     text-indent: 50px;
     margin-right:4em;
     position: relative;
-    bottom: -20px;
     font-size: 17px;
     line-height: 1.5;
+    min-width : 1%;
+    max-width : 50%;
 
 }
 
@@ -73,8 +74,8 @@ img {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
-    min-width : 20%;
-    max-width : 200%;
+    min-width : 1%;
+    max-width : 80%;
 }
 
 img:hover {

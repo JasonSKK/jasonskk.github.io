@@ -26,10 +26,10 @@
 <hr>
 <div class="box">
 <a target="_blank" href="heidelberg.jpg">
-<img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="position:relative; width:40%;">
+<img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="position:relative; width:30%;">
 </a>
 <br>
-Iason Svoronos - Kanavas is a graduate Bachelor student in sound technology (Department of Sound and Musical Instruments Technology) at the Ionian University in Greece. His work focuses specifically on the use of sonification and visualisation in combination, the potential of introducing aesthetic elements into audio visual displays to convey data information through audio-visual "experiences" and experimental practices for remote collaboration in musical live coding environments. He worked as an internship student at the Institute of Electronic Music and Acoustics (IEM) at the University of Music and Performing Arts in Graz and the Division for Media and Information Technology, Department for Science and Technology at Linköping University in Sweden. He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
+Iason Svoronos - Kanavas is a Master by Research student in Computer Science at the Applied Psychoacoustics Lab (APL), School of Computing & Engineering, University of Huddersfield, UK. His work focuses specifically on the use of sonification and visualisation in combination on time-oriented data, the potential of introducing aesthetic elements into audio visual displays to convey data information through audio-visual "experiences" and experimental practices for remote collaboration in musical live coding environments. He worked as an internship student at the Institute of Electronic Music and Acoustics (IEM) at the University of Music and Performing Arts in Graz and the division for Media and Information Technology, Department for Science and Technology at Linköping University. He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
 <br>
 <br>
 &nbsp;
