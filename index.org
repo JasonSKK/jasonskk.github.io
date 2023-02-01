@@ -26,10 +26,18 @@
 <hr>
 <div class="box">
 <a target="_blank" href="heidelberg.jpg">
-<img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="position:relative; width:30%;">
+<img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="width:31%;">
 </a>
 <br>
-Iason Svoronos - Kanavas is a Master by Research student in Computer Science at the Applied Psychoacoustics Lab (APL), School of Computing & Engineering, University of Huddersfield, UK. His work focuses specifically on the use of sonification and visualisation in combination on time-oriented data, the potential of introducing aesthetic elements into audio visual displays to convey data information through audio-visual "experiences" and experimental practices for remote collaboration in musical live coding environments. He worked as an internship student at the Institute of Electronic Music and Acoustics (IEM) at the University of Music and Performing Arts in Graz and the division for Media and Information Technology, Department for Science and Technology at Linköping University. He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
+Iason Svoronos - Kanavas is currently pursuing a Master by Research degree in Computer Science at the School of Computing & Engineering, University of Huddersfield, UK.  He has a background in audio engineering (BA, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.
+
+His research endeavours are centred on combining sonification with various forms of visual information, such as visualisation, for the purpose of enhancing the representation and comprehension of data.  His focus is on exploring potential applications of this multisensory approach in various fields.
+
+His current research project Soni-Cross, supervised by <a href = "https://pure.hud.ac.uk/en/persons/hyunkook-lee">Dr. Hyunkook Lee</a> and conducted in the Applied Psychoacoustics Lab (APL), aims to explore and evaluate the effect of applying sonification on quiet (electric) vehicles.  The objective is to enhance the ability of pedestrians to perceive and interpret auditory cues in their surroundings in order to accurately assess speed, location, and proximity of the vehicle using sonification.
+
+<! COMMENTED OUT: In his previous works he experimented with the possibility of incorporating aesthetic elements into audio-visual displays for the purpose of conveying data information through audio-visual "experiences". He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
+-->
+
 <br>
 <br>
 &nbsp;
@@ -56,7 +64,7 @@ Iason Svoronos - Kanavas is a Master by Research student in Computer Science at 
 + Student volunteer at Audio Mostly 2022, A Conference on Interaction with Sound, 6-9 September 2022, St Pölten, Austria.
 + Internship student at Linköping University, Division for Media and Information Technology, Norrköping, Sweden: Sonification for communication.  March - July 2022.
 + Internship student at the Institute of Electronic Music and Acoustics, University of Music and Performing Arts, Graz Austria: Sonification research.  September - February 2022.
-+ Seasonal manual work Jun. 2019 – Sep 2019, December 2020, Jul. 2020 – Oct. 2020, Greece.
+# + Seasonal manual work Jun. 2019 – Sep 2019, December 2020, Jul. 2020 – Oct. 2020, Greece.
 #+BEGIN_EXPORT html
 <hr>
 #+END_EXPORT
@@ -139,7 +147,6 @@ Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Confer
 #+BEGIN_EXPORT html
 <div class="row">
 <div class="column" style="padding-right: 5%;">
-
 <div>
 &#x2022; <a href="https://github.com/Vasileios/Synergia-Collaborative-Live-coding">Synerg(e)ia</a>.
 </div>
@@ -147,7 +154,6 @@ Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Confer
   <img src="synergeia.png" alt="synergeia" style="width:100%">
 </a>
 </div>
-
 <!-- new software
 <div>
 &#x2022; <a href="https://github.com/JasonSKK/sonifying-and-visualising-sea-wave-datasets">An exploratory use of audiovisual displays on oceanographic data</a>.
@@ -159,12 +165,18 @@ Katharina Groß-Vogt, Iason Svoronos Kanavas & Marian Weger. Audio Mostly Confer
 </div>
 </div>
 <br>
-
 #+END_EXPORT
-
 + [[https://github.com/JasonSKK/emacs-prelude-personal][Personal configuration on Emacs Prelude]]
 + [[https://github.com/JasonSKK/notmuch-lieer-sync][notmuch-lieer-sync]]
 + [[https://github.com/JasonSKK/emacs-termux-call][emacs-termux-call]]
+#+BEGIN_EXPORT html
+<hr>
+#+END_EXPORT
+* Community Involvement
++ Member (2021 -- Now): [[https://audio-visual-analytics.github.io/][Audio-Visual-Analytics Community (AVAC)]]
++ Member (2021 -- Now): [[https://vasileios.github.io/toplap-live-coding-gr/][TOPLAP ATH (GR)]]
++ Member (2021 -- Now): MOSAIC research group for new sound interaction practices and interfaces (GR)
+
 #+BEGIN_EXPORT html
 <hr>
 #+END_EXPORT
