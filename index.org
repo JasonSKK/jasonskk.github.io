@@ -29,11 +29,11 @@
 <img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="width:31%;">
 </a>
 <br>
-Iason Svoronos - Kanavas is currently pursuing a Master by Research degree in Computer Science at the School of Computing & Engineering, University of Huddersfield, UK.  He has a background in audio engineering (BA, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.
+Iason Svoronos - Kanavas is currently pursuing a Master by Research degree in Computer Science at the School of Computing & Engineering, University of Huddersfield, UK.  He has a background in audio engineering (Bachelor, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.
 
 His research endeavours are centred on combining sonification with various forms of visual information, such as visualisation, for the purpose of enhancing the representation and comprehension of data.  His focus is on exploring potential applications of this multisensory approach in various fields.
 
-His current research project Soni-Cross, supervised by <a href = "https://pure.hud.ac.uk/en/persons/hyunkook-lee">Dr. Hyunkook Lee</a> and conducted in the Applied Psychoacoustics Lab (APL), aims to explore and evaluate the effect of applying sonification on quiet (electric) vehicles.  The objective is to enhance the ability of pedestrians to perceive and interpret auditory cues in their surroundings in order to accurately assess speed, location, and proximity of the vehicle using sonification.
+His current research project Soni-Cross, supervised by <a href = "https://pure.hud.ac.uk/en/persons/hyunkook-lee">Dr. Hyunkook Lee</a> and conducted in the Applied Psychoacoustics Laboratory (APL), aims to explore and evaluate the effect of applying sonification on quiet (electric) vehicles.  The objective is to enhance the ability of pedestrians to perceive and interpret auditory cues in their surroundings in order to accurately assess speed, location, and proximity of the vehicle using sonification.
 
 <! COMMENTED OUT: In his previous works he experimented with the possibility of incorporating aesthetic elements into audio-visual displays for the purpose of conveying data information through audio-visual "experiences". He is member of the Audio-Visual-Analytics Community (AVAC), as well as the local live coding group of TOPLAP ATH (GR) and Mosaic research group for new sound interaction practices and interfaces.
 -->
