@@ -68,7 +68,8 @@ His current research project Soni-Cross, supervised by <a href = "https://pure.h
 #+BEGIN_EXPORT html
 <hr>
 #+END_EXPORT
-* Scholarships & Grants
+* Scholarships, Grants and Awards
++ Awards of Excellence in Higher Education Graduates for acad. year 2021-2022, May 2023, State Scholarships Foundation (IKY), Greece
 + Scholarship for Excellent Academic Performance in support of Postgraduate Research July 2022 -- Funding: Synenosis, Greece
 + Tuition Fee Waiver Scholarship for Postgraduate Research July 2022 -- Funding: University of Huddersfield - School of Computing and Engineering
 + Conference Participation & Attendance Grant - Advanced Visual Interfaces 2022 June 2022 -- Funding: Linköping University, Division for Media and Information Technology
