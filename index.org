@@ -26,7 +26,7 @@
 <hr>
 <div class="box">
 <a target="_blank" href="heidelberg.jpg">
-<img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="width:31%;">
+<img src="./heidelberg.jpg" class="img-responsive shadow float_text_left" alt="jasonskk" style="max-width: 30%; height: auto;">
 </a>
 <br>
 Iason Svoronos - Kanavas is currently pursuing a Master by Research degree in Computer Science at the School of Computing & Engineering, University of Huddersfield, UK.  He has a background in audio engineering (Bachelor, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.

@@ -26,8 +26,6 @@ a:active {
 
 div.box {
     background-color: rgb(220, 220, 220);
-    width: 62%;
-    height: 40%;
     border: 1px ridge;
     padding: 1%;
     margin: 5px;
@@ -38,7 +36,8 @@ div.box {
     font-size: 17px;
     line-height: 1.5;
     min-width : 1%;
-    max-width : 50%;
+    max-width: 40%;
+    height: auto;
 
 }
 
@@ -70,12 +69,16 @@ img.float_text_left {
     margin: 15px;
 }
 
+div.image-container {
+    overflow: hidden;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
 img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    min-width : 1%;
-    max-width : 80%;
+    max-height: 100%;
+    width: auto;
+    display: block; /* Added to remove any potential white space beneath the image */
 }
 
 img:hover {
@@ -100,11 +103,11 @@ span.float_text_right p {
     display: table;
 }
 
-@media (max-width: 1500px) {
+/*@media (max-width: 1500px) {
     .pane {
         display: none;
     }
-}
+}*/
 
 .conbox {
     position: relative;
