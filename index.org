@@ -51,7 +51,7 @@ His current research project Soni-Cross, supervised by <a href = "https://pure.h
 <hr>
 #+END_EXPORT
 * Publications
-1. (Accepted & Submitted) Iason Svoronos-Kanavas, and Dr. Hyunkook Lee 2023.  /SoniCross: Evaluating Annoyance in Sonifications for Electric Vehicles using Audio-Visual simulation/.  In AES International Conference on Spatial and Immersive Audio, Huddersfield, UK, 2023 August 23–25.
+1. Iason Svoronos-Kanavas, and Hyunkook Lee. 2023.  /SoniCross: Evaluating Annoyance in Sonifications for Electric Vehicles using Audio-Visual simulation/.  In AES International Conference on Spatial and Immersive Audio, Huddersfield, UK, 2023 August 23–25. https://www.aes.org/e-lib/browse.cfm?elib=22162
 2. Marian Weger, Iason Svoronos-Kanavas, and Robert Höldrich. 2022. /Schrödinger’s box: an artifact to study the limits of plausibility in auditory augmentations/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561222
 3. Katharina Groß-Vogt, Iason Svoronos Kanavas, Marian Weger and Clemens Amon. 2022. /The Augmented Floor - Assessing Auditory Augmentation/. In AudioMostly 2022 (AM ’22), September 6–9, 2022, St. Pölten, Austria. ACM, New York, NY, USA, 8 pages. https://doi.org/10.1145/3561212.3561219
 4. Svoronos - Kanavas, Iason, Agiomyrgianakis, Vasilis, & Rönnberg, Niklas. (2022, May 17). /An exploratory use of audiovisual displays on oceanographic data./ AVI 2022 Workshop on Audio-Visual Analytics (WAVA22), Frascati, Rome, Italy. https://doi.org/10.5281/zenodo.6555839
