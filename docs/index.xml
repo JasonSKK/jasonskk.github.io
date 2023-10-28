@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iason Svoronos - Kanavas</title>
+    <link>http://jasonskk.github.io/</link>
+    <description>Recent content on Iason Svoronos - Kanavas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language><atom:link href="http://jasonskk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personal Website</title>
+      <link>http://jasonskk.github.io/</link>
+      <pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://jasonskk.github.io/</guid>
+      <description>Bio Iason Svoronos - Kanavas is currently pursuing a Master by Research degree in Computer Science at the School of Computing &amp;amp; Engineering, University of Huddersfield, UK. He has a background in audio engineering (Bachelor, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.
+His research endeavours are centred on combining sonification with various forms of visual information, such as visualisation, for the purpose of enhancing the representation and comprehension of data.</description>
+    </item>
+    
+  </channel>
+</rss>

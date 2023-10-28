@@ -2,9 +2,9 @@ old_media/
 old/
 archetypes/
 config.toml
-content/docs/
+content/
 layouts/
 public/
 resources/
-static/
+data/
 themes/
