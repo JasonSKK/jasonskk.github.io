@@ -1,2 +1,10 @@
 old_media/
 old/
+archetypes/
+config.toml
+content/docs/
+layouts/
+public/
+resources/
+static/
+themes/
