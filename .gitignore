@@ -9,4 +9,7 @@ content/
 .gitignore
 layouts/
 data/
+themes/
+public/
+
 
