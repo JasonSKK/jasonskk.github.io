@@ -1,4 +1,4 @@
-baseURL = 'https://github.com/JasonSKK/JasonSKK.github.io/tree/main/docs/'
+baseURL = 'https://jasonskk.github.io/'
 languageCode = 'en-gb'
 title = 'Iason Svoronos - Kanavas'
 theme = "archie"
