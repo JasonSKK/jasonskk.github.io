@@ -1,0 +1,12 @@
+/* assets/css/custom.css */
+
+/* Make the image circular */
+.profile-image {
+    border-radius: 20%;
+}
+
+/* Resize the image */
+.profile-image img {
+    max-width: 150px; /* Adjust the size as needed */
+    height: auto;
+}
