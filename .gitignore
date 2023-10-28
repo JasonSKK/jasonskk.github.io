@@ -1,2 +1,12 @@
 old_media/
 old/
+.DS_Store
+archetypes/
+resources/
+content/
+.hugo_build.lock
+.gitmodules
+.gitignore
+layouts/
+data/
+
