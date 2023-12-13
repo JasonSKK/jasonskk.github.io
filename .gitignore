@@ -9,5 +9,4 @@ content/
 .gitignore
 layouts/
 data/
-public/
 hugo-build.org
