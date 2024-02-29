@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iason Svoronos - Kanavas</title>
+    <link>https://jasonskk.github.io/</link>
+    <description>Recent content on Iason Svoronos - Kanavas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language><atom:link href="https://jasonskk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personal Website</title>
+      <link>https://jasonskk.github.io/</link>
+      <pubDate>Mon, 12 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://jasonskk.github.io/</guid>
+      <description>Bio Iason Svoronos - Kanavas is a Master of Science by Research student in Computer Science and Informatics at the Applied Psychoacoustics Lab (APL), School of Computing &amp;amp; Engineering, University of Huddersfield, UK. He has a background in audio engineering (BSc, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.
+Under the supervision of Prof. Hyunkook Lee, the research project Soni-Cross, focuses on the design, development, and evaluation of a proposed Acoustic Vehicle Alerting System (AVAS) model.</description>
+    </item>
+    
+  </channel>
+</rss>
