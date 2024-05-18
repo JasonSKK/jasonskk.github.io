@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Exploring Perception in AVAS models using simulation methods - Iason Svoronos - Kanavas</title><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Project" />
+    <meta property="og:image" content=""/>
+    <meta property="og:title" content="Exploring Perception in AVAS models using simulation methods" />
+    <meta property="og:description" content="Project" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://jasonskk.github.io/projects/project/" /><meta property="article:section" content="" />
+    <meta property="article:published_time" content="2024-02-12T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2024-02-12T00:00:00+00:00" />
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Exploring Perception in AVAS models using simulation methods"/>
+    <meta name="twitter:description" content="Project"/>
+
+
+    <link href="https://jasonskk.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://jasonskk.github.io/css/main.dabc80f8eddf4aa89f9c5d4d90a343c8bfeb39a97ae713d57ca86724fa5cc965.css" />
+
+
+
+    <script type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+	 tex2jax: {
+	     inlineMath: [['$','$'], ['\\(','\\)']],
+	     displayMath: [['$$','$$'], ['\[','\]']],
+	     processEscapes: true,
+	     processEnvironments: true,
+	     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	     TeX: { equationNumbers: { autoNumber: "AMS" },
+		    extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	 }
+     });
+    </script>
+
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function() {
+	 renderMathInElement(document.body, {
+	     delimiters: [
+		 {left: "$$", right: "$$", display: true},
+		 {left: "$", right: "$", display: false}
+	     ]
+	 });
+     });
+    </script>
+
+
+
+</head>
+<body>
+    <div class="content"><header>
+        <div class="main" style="display: flex; align-items: center;">
+            <img src="https://jasonskk.github.io/images/scarborough.jpg" alt="Iason Svoronos Kanavas" class="profile-image">
+            <a href="https://jasonskk.github.io/">Iason Svoronos - Kanavas</a>
+        </div>
+        <nav>
+
+
+        </nav>
+    </header>
+
+    <main>
+	<article>
+	    <div class="title">
+		<h1 class="title">Exploring Perception in AVAS models using simulation methods</h1>
+		<div class="meta">Posted on Feb 12, 2024</div>
+	    </div>
+
+
+	    <section class="body">
+		<p>In my MSc project Soni-Cross, I first developed an AVAS sound model based on a physical model of a &lsquo;rolling&rsquo; sphere (software), as it is suggested that &lsquo;rolling sounds&rsquo; can better communicate the perception of Electric Vehicles.  The model was strongly influenced by: Conan, Simon, et al. &ldquo;Rolling sound synthesis: work in progress.&rdquo; 9th International Symposium on Computer Music Modeling and Retrieval (CMMR). 2012.</p>
+                <p><img src="/images/rolling_pm-model.png" alt="Rolling model block diagram" title="Rolling block diagram"></p>
+                <p>I created a state-of-the-art audio-visual simulation framework for AVAS testing. It simulates drive-by scenarios involving Electric Vehicles employing AVAS sound models. The aim of this was to create a realistic environment for collecting user experience data to explore the way participants perceive AVAS sounds. This can support the future optimisation of AVAS models.</p>
+                <p><img src="/images/audiovis-framework.jpg" alt="Audio Visual Simulation Framework" title="AudioVisual Simulation Framework"></p>
+                <p>I also performed a number of real-life measurements for integrating this data for further AVAS optimisation.
+                    Such as Multichannel IR extraction using Eigenmike (32 ch), relative loudness measurements, spatial recording analysis etc.</p>
+                <p><img src="/images/firth-street-ir-setup.png" alt="Eigenmike 32, IR extraction" title="EM32 IR"></p>
+                <p><img src="/images/measurement.jpg" alt="Relative Loudness Measurement at Firth Street" title="Relative Loudness Measurement"></p>
+                <p>Most importantly, this work was dedicated to assessing how different frequencies of the AVAS model influence pedestrian&rsquo;s perception in terms of annoyance. It is important for AVAS sounds to be &lsquo;alarming in a way&rsquo; but on the other hand, it is crucial for manufacturers to have a unique sonic signature. My project tries to bridge this gap and provide straightforward solutions.</p>
+                <p>The foundation of my model is based on the UN R138 regulation standard for AVAS indicating a list of various frequencies (1/3 octave).  In my experiments I tested all possible frequency combinations based on this regulation.</p>
+                <p>I performed objective &lsquo;Sound Quality&rsquo; testing for 5005 sound configurations.  I used an objective model for calculating annoyance scores based on metrics impacting annoyance, such as Sharpness, Roughness, Fluctuation Strength, Tonality, and Loudness for understanding better annoyance in AVAS sounds.</p>
+                <p>Afterwards I also used Machine Learning for categorising the sounds into groups according to their frequency features for further analysis.</p>
+                <p>I performed 3 subjective testing experiments with more than 50 participants using the framework and collecting user experience data. The results look interesting!</p>
+
+	    </section>
+
+	    <div class="post-tags">
+
+	    </div>
+	</article>
+    </main>
+    <footer>
+        <div style="display:flex"></div>
+        <div class="footer-info">
+            2024  <a
+                      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+        </div>
+    </footer>
+
+
+    </div>
+</body>
+</html>
