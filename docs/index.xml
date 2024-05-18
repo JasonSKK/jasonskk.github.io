@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iason Svoronos - Kanavas</title>
+    <link>https://jasonskk.github.io/</link>
+    <description>Recent content on Iason Svoronos - Kanavas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <atom:link href="https://jasonskk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personal Website</title>
+      <link>https://jasonskk.github.io/</link>
+      <pubDate>Mon, 12 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://jasonskk.github.io/</guid>
+      <description>Bio Iason Svoronos-Kanavas is a Software Engineer in Audio @ JOYNEXT, and is set to be awarded a Master of Science by Research in Computer Science and Informatics from the Applied Psychoacoustics Lab (APL), School of Computing &amp;amp; Engineering, University of Huddersfield, UK, with only his thesis review pending. He has a background in sound technology (BSc, Ionian University, GR) and sonification, the process of mapping data onto non-speech sound for the purpose of enhancing perception and understanding.</description>
+    </item>
+  </channel>
+</rss>
