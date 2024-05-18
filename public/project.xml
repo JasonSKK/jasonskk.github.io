@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Iason Svoronos - Kanavas</title>
+    <link>https://jasonskk.github.io/projects/</link>
+    <description>Recent content in Projects on Iason Svoronos - Kanavas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Mon, 12 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jasonskk.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exploring Perception in AVAS models using simulation methods</title>
+      <link>https://jasonskk.github.io/projects/project/</link>
+      <pubDate>Mon, 12 Feb 2024 00:00:00 +0000</pubDate>
+
+      <guid>https://jasonskk.github.io/projects/project/</guid>
+      <description>In my MSc project Soni-Cross, I first developed an AVAS sound model based on a physical model of a &amp;lsquo;rolling&amp;rsquo; sphere (software), as it is suggested that &amp;lsquo;rolling sounds&amp;rsquo; can better communicate the perception of Electric Vehicles. The model was strongly influenced by: Conan, Simon, et al. &amp;ldquo;Rolling sound synthesis: work in progress.&amp;rdquo; 9th International Symposium on Computer Music Modeling and Retrieval (CMMR). 2012.
+I created a state-of-the-art audio-visual simulation framework for AVAS testing.</description>
+    </item>
+
+  </channel>
+</rss>
