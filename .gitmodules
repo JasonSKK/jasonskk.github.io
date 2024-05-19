@@ -4,6 +4,4 @@
 [submodule "themes/archie"]
 	path = themes/archie
 	url = https://github.com/athul/archie/
-[submodule "themes/smigle"]
-	path = themes/smigle
-	url = https://gitlab.com/ian-s-mcb/smigle-hugo-theme.git
+
