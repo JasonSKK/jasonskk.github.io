@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Exploring Perception in AVAS models using simulation methods - Iason</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+         /* General Styles */
+         body {
+             font-family: Georgia, serif;
+             margin: 0;
+             padding: 0;
+             background-color: #f4f4f4;
+             color: #333;
+         }
+
+         header {
+             text-align: center;
+             padding: 20px;
+             background-color: #fff;
+             border-bottom: 1px solid #ccc;
+         }
+
+         main {
+             max-width: 800px; /* Set a maximum width for the content */
+             margin: 20px auto; /* Center the main content */
+             padding: 20px; /* Add some padding */
+             background-color: #fff; /* White background for main content */
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+         }
+
+         p {
+             line-height: 1.6; /* Improve readability */
+             margin-bottom: 1.5em; /* Space between paragraphs */
+         }
+
+         img {
+             max-width: 100%; /* Make images responsive */
+             height: auto; /* Maintain aspect ratio */
+             display: block; /* Prevent inline spacing issues */
+             margin: 0 auto; /* Center the images */
+         }
+
+         /* Modal Styles */
+         .modal {
+             display: none; /* Hidden by default */
+             position: fixed; /* Stay in place */
+             z-index: 1000; /* Sit on top */
+             left: 0;
+             top: 0;
+             width: 100%; /* Full width */
+             height: 100%; /* Full height */
+             overflow: auto; /* Enable scroll if needed */
+             background-color: rgb(0,0,0); /* Fallback color */
+             background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+         }
+
+         .modal-content {
+             margin: auto;
+             display: block;
+             width: 80%; /* Could be more or less, depending on screen size */
+             max-width: 700px; /* Set a maximum width */
+             object-fit: contain;
+         }
+
+         .close {
+             position: absolute;
+             top: 15px;
+             right: 35px;
+             color: #fff;
+             font-size: 40px;
+             font-weight: bold;
+             transition: 0.3s;
+         }
+
+         .close:hover,
+         .close:focus {
+             color: #bbb;
+             text-decoration: none;
+             cursor: pointer;
+         }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Exploring Perception in AVAS Models Using Simulation Methods</h1>
+            <h2>(... or in other words my MSc thesis)</h2>
+            <p>Date: 2024-10-12</p>
+        </header>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+        </nav>
+        <main>
+            <section>
+                <p>I my MSc project Soni-Cross, I first developed an AVAS sound model based on a physical model of a 'rolling' sphere (software), as it is suggested that 'rolling sounds' can better communicate the perception of Electric Vehicles.  The model was strongly influenced by: Conan, Simon, et al. "Rolling sound synthesis: work in progress." 9th International Symposium on Computer Music Modeling and Retrieval (CMMR). 2012.</p>
+
+                <img src="images/rolling_pm-model-background.png" alt="Rolling model block diagram" class="clickable" onclick="openModal(this)">
+                <p>Rolling model block diagram</p>
+
+                <p>I created a state-of-the-art audio-visual simulation framework for AVAS testing. It simulates drive-by scenarios involving Electric Vehicles employing AVAS sound models. The aim of this was to create a realistic environment for collecting user experience data to explore the way participants perceive AVAS sounds. This can support the future optimisation of AVAS models.</p>
+
+                <img src="images/audiovis-framework.jpg" alt="Audio Visual Simulation Framework" class="clickable" onclick="openModal(this)">
+                <p>Audio Visual Simulation Framework</p>
+                <p>I also performed a number of real-life measurements for integrating this data for further AVAS optimisation. Such as Multichannel IR extraction using Eigenmike (32 ch), relative loudness measurements, spatial recording analysis etc.</p>
+
+                <img src="images/firth-street-ir-setup.png" alt="Eigenmike 32, Multichannel IR extraction" class="clickable" onclick="openModal(this)">
+                <p>Eigenmike 32, Multichannel IR extraction</p>
+
+                <img src="images/measurement.jpg" alt="Relative Loudness Measurement at Firth Street" class="clickable" onclick="openModal(this)">
+                <p>Picture by Hyunkook Lee: Relative Loudness Measurement at Firth Street</p>
+
+                <p>Most importantly, this work was dedicated to assessing how different frequencies of the AVAS model influence pedestrian's perception in terms of annoyance. It is important for AVAS sounds to be 'alarming in a way' but on the other hand, it is crucial for manufacturers to have a unique sonic signature. My project tries to bridge this gap and provide straightforward solutions.</p>
+
+                <p>The foundation of my model is based on the UN R138 regulation standard for AVAS indicating a list of various frequencies (1/3 octave).  In my experiments I tested all possible frequency combinations based on this regulation.</p>
+
+                <p>I performed objective 'Sound Quality' testing for 5005 sound configurations.  I used an objective model for calculating annoyance scores based on metrics impacting annoyance, such as Sharpness, Roughness, Fluctuation Strength, Tonality, and Loudness for understanding better annoyance in AVAS sounds.</p>
+
+                <p>Afterwards I also used Machine Learning for categorising the sounds into groups according to their frequency features for further analysis.</p>
+
+                <p>I performed 3 subjective testing experiments with more than 50 participants using the framework and collecting user experience data. The results look expected interesting!</p>
+
+                <p><strong>Note 1:</strong> The full thesis will be published (expected May 2025) under the title: Exploring the Influence of Frequency Components in Acoustic Vehicle Alerting Systems for Electric Vehicles on Annoyance Perception. I also plan to publish the software as open source in a git repository around the same time.</p>
+
+                <p><strong>Note 2:</strong> I have planned to re-implement the model for use with some kind of common microcontroller-based ECU, ASD ECU, or a DSP and release the software as open source but this is planned for 2025 (at least).</p>
+            </section>
+        </main>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
+
+        <script>
+         // Get the modal
+         var modal = document.getElementById("myModal");
+
+         // Get the image and insert it inside the modal
+         function openModal(img) {
+             var modalImg = document.getElementById("img01");
+             modal.style.display = "block";
+             modalImg.src = img.src;
+         }
+
+         // When the user clicks on <span> (x), close the modal
+         function closeModal() {
+             modal.style.display = "none";
+         }
+        </script>
+        <footer>
+            <p>Copyright &copy; 2025 Iason Svoronos - Kanavas</p>
+        </footer>
+    </body>
+</html>

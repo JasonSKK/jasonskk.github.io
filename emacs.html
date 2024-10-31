@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emacs - Iason</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+         /* General Styles */
+         body {
+             font-family: Georgia, serif;
+             margin: 0;
+             padding: 0;
+             background-color: #f4f4f4;
+             color: #333;
+         }
+
+         header {
+             text-align: center;
+             padding: 20px;
+             background-color: #fff;
+             border-bottom: 1px solid #ccc;
+         }
+
+         main {
+             max-width: 800px; /* Set a maximum width for the content */
+             margin: 20px auto; /* Center the main content */
+             padding: 20px; /* Add some padding */
+             background-color: #fff; /* White background for main content */
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+         }
+
+         p {
+             line-height: 1.6; /* Improve readability */
+             margin-bottom: 1.5em; /* Space between paragraphs */
+         }
+
+         img {
+             max-width: 100%; /* Make images responsive */
+             height: auto; /* Maintain aspect ratio */
+             display: block; /* Prevent inline spacing issues */
+             margin: 0 auto; /* Center the images */
+         }
+
+         /* Modal Styles */
+         .modal {
+             display: none; /* Hidden by default */
+             position: fixed; /* Stay in place */
+             z-index: 1000; /* Sit on top */
+             left: 0;
+             top: 0;
+             width: 100%; /* Full width */
+             height: 100%; /* Full height */
+             overflow: auto; /* Enable scroll if needed */
+             background-color: rgb(0,0,0); /* Fallback color */
+             background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+         }
+
+         .modal-content {
+             margin: auto;
+             display: block;
+             width: 80%; /* Could be more or less, depending on screen size */
+             max-width: 700px; /* Set a maximum width */
+             object-fit: contain;
+         }
+
+         .close {
+             position: absolute;
+             top: 15px;
+             right: 35px;
+             color: #fff;
+             font-size: 40px;
+             font-weight: bold;
+             transition: 0.3s;
+         }
+
+         .close:hover,
+         .close:focus {
+             color: #bbb;
+             text-decoration: none;
+             cursor: pointer;
+         }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Emacs</h1>
+            <p>Date: 2024-10-28</p>
+        </header>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+        </nav>
+        <main>
+            <section>
+
+                <h2>emacs-outlook-compli-mode.el</h2>
+                <img src="images/eocmlogo.png" alt="emacs-outlook-compli-mode.el logo" class="clickable" onclick="openModal(this)">
+                <p>This Emacs major mode allows users to send emails through Microsoft Outlook by utilising simple osa-scripting (MacOs only) and you need the Outlook application therefore. It eliminates the need for using fake email client IDs, making it ideal for those who wish to maintain compliance with organisation regulations. With this mode, users can automate the process of composing and sending emails from within Emacs.</p>
+                <p> <strong>Note:</strong> Unfortunately I don´t maintain the package anymore as I don´t have time, as well as a solid reason as I have switched solely to debian.
+                </p>
+                <p><a href="https://github.com/JasonSKK/emacs-outlook-compli-mode">Github repository</a>.</p>
+
+                <h2>Synerg(e)ia - Networked Remote Live Coding</h2>
+                <img src="images/synergeia.png" alt="Synergeia interface." class="clickable" onclick="openModal(this)">
+                <ul>
+                    <li>Synerg(e)ia (Συνέργεια) is an experimental project for Networked Collaborative live coding </li>
+                    <li>Synergia is a Raspberry pi SSH and OscGroups server located in Greece</li>
+                    <li>Synergia based on tmux collaborative editing, Emacs server/clients and SuperCollider</li>
+                    <li>Synergeia was developed together with Vasilis Agiomyrgianakis.</li>
+                </ul>
+                <a href="https://github.com/Vasileios/Synergia-Collaborative-Live-coding">Github repository</a>.</p>
+
+                <h2>emacs-termux-call.el</h2>
+                <img src="images/emacs-termux-call.jpeg" alt="emacs-termux-call.el in use" class="clickable" onclick="openModal(this)">
+                <p>Make a telephony call in Emacs running on an Android mobile phone using Termux, with a prompt to select a contact from your contacts list. The actual call is handled by the native Android functionality and Emacs is calling Termux:API.</p>
+                <p><a href="https://github.com/JasonSKK/emacs-termux-call">Github repository</a>.</p>
+
+                <h2>notmuch-sync.el</h2>
+                <p>This is part of my personal emacs-notmuch configuration for fetching and pushing from and to my Gmail account. This is a configuration for effortless syncing between notmuch and <a href="https://github.com/gauteh/lieer">lieer</a> using a simple elisp function.</p>
+
+                <p>It nerved me a lot that every time I wanted to fetch new email using lieer I had to leave emacs as I do not use shell within emacs and then run “gmi sync”. So, I wrote this.</p>
+                <p> <strong>Note:</strong> I am no longer using the no-output-shell-run to call the entire command pipeline.  Now I am using a pre-new hook under .notmuch/hooks and I only need to call notmuch new to index new messages.  Keeping it in a hook I can maitain all my Notmuch settings in one place. Nevertheless, shell-command pipeline call from within Emacs can still be used.</p>
+                <p><a href="https://github.com/JasonSKK/notmuch-lieer-sync">Github repository</a>.</p>
+
+            </section>
+        </main>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
+
+        <script>
+         // Get the modal
+         var modal = document.getElementById("myModal");
+
+         // Get the image and insert it inside the modal
+         function openModal(img) {
+             var modalImg = document.getElementById("img01");
+             modal.style.display = "block";
+             modalImg.src = img.src;
+         }
+
+         // When the user clicks on <span> (x), close the modal
+         function closeModal() {
+             modal.style.display = "none";
+         }
+        </script>
+        <footer>
+            <p>Copyright &copy; 2025 Iason Svoronos - Kanavas</p>
+        </footer>
+    </body>
+</html>

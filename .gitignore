@@ -1,12 +1,2 @@
-old_media/
-old/
-.DS_Store
-archetypes/
+files/latex-blog-typographic-design/
 resources/
-content/
-.hugo_build.lock
-.gitmodules
-.gitignore
-layouts/
-data/
-hugo-build.org

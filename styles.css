@@ -1,0 +1,133 @@
+body {
+  font-family: Georgia, serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 5px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+footer {
+  padding-left: 20px; /* Adds space from the left */
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: #f4f4f4; /* Optional: background color */
+}
+
+.profile-image img {
+  border-radius: 50%;
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+}
+
+nav {
+  margin:  20px 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px 20px 15px; /* Adds 20px space below each item */
+}
+
+li {
+  margin: 0 15px 10px 0px; /* Adds 20px vertical space below items */
+}
+
+nav a {
+  text-decoration: none;
+  color: #0066cc;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.topics-container {
+  display: flex; /* Enables flexbox layout */
+  justify-content: space-between; /* Distributes space between items */
+  margin: 30px; /* Add margin around topics */
+}
+
+.topic {
+  flex: 1; /* Allows sections to take equal space */
+  margin: 0 35px; /* Horizontal spacing between topics */
+  text-align: center; /* Center align text */
+}
+
+.topic img {
+  max-width: 100%; /* Responsive image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: adds rounded corners */
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+  justify-content: center; /* Center the image */
+  align-items: center; /* Center the image */
+}
+
+.modal img {
+  max-width: 80%; /* Make the image bigger */
+  max-height: 80%; /* Make the image bigger */
+  margin: auto; /* Center the image */
+  display: block; /* Make sure it's block level */
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 50;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+  justify-content: center; /* Center the image */
+  align-items: center; /* Center the image */
+}
+
+.modal img {
+  max-width: 80%; /* Make the image bigger */
+  max-height: 80%; /* Make the image bigger */
+  margin: auto; /* Center the image */
+  display: block; /* Make sure it's block level */
+}
+
+.about-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #434a45; /* Button color */
+; /* Button color */
+  text-decoration: none; /* Remove underline */
+  border-radius: 12px; /* Rounded edges */
+  border: 2px solid transparent; /* Optional border */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+}
+
+.about-button:hover {
+  background-color: #0c0d0d; /* Button color */
+  /* Darker color on hover */
+  border-color: #FFFFFF; /* Add a border on hover */
+}

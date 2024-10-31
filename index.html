@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Iason's Website</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <header>
+            <div class="profile-image">
+                <img src="images/profile.jpg" alt="Profile Image">
+            </div>
+            <h1>Iason Svoronos - Kanavas</h1>
+            <p>I’m Iason (Ἰάσων), a software engineer specialising in Digital Signal Processing based in Dresden, Germany.</p>
+            <a href="about.html" class="about-button">About me</a>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="https://github.com/jasonskk"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/iason-svoronos-kanavas-b731721a7"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                <li><a href="files/cv_svoronos-kanavas.pdf"><i class="fas fa-file-alt"></i> CV</a></li>
+                <li><a href="https://orcid.org/0000-0002-5901-7697"><i class="fab fa-orcid"></i> ORCID</a></li>
+                <li><a href="blog.html"><i class="fas fa-pencil-alt"></i> Visit My Blog</a></li>
+                <li><a href="about.html"><i class="fas fa-user"></i> About Me</a></li>
+                <li>
+                    <a id="email-link">
+                        <i class="fas fa-envelope"></i> Send an Email
+                    </a>
+                </li>
+                <script>
+                 // JavaScript to insert the email link -- avoid email web scrappers
+                 document.addEventListener("DOMContentLoaded", function () {
+                     const emailUser = "iason.svoronoskanavas";
+                     const emailDomain = "gmail.com";
+                     const emailLink = document.getElementById("email-link");
+                     emailLink.href = `mailto:${emailUser}@${emailDomain}`;
+                     emailLink.innerHTML = `<i class="fas fa-envelope"></i> Send an Email`;
+                 });
+                </script>
+
+            </ul>
+
+        </nav>
+        <main>
+            <div class="topics-container">
+                <section class="topic">
+                    <h3><a href="avas.html">Acoustic Vehicle Alerting Systems</a></h3>
+                    <img src="images/measurement.jpg" alt="AVAS measurement on Firth Street in Huddersifeld, 2023">
+                    <img src="images/audiovis-framework.jpg" alt="An audio-visual framework for AVAS annoyance perception evaluation">
+                </section>
+                <section class="topic">
+                    <h3><a href="emacs.html">Emacs</a></h3>
+                    <img src="images/emacs.jpg" alt="View of my Emacs Editor">
+                </section>
+                <section class="topic">
+                    <h3><a href="blog.html">My Blog</a></h3>
+                    <img src="images/tdesign.png" alt="Blow typographic design image">
+                </section>
+                <section class="topic">
+                    <h3><a href="other-works.html">Other works</a></h3>
+                    <img src="images/const_sonvis.png" alt="Construction site date audio-visual display">
+                    <img src="images/floor.png" alt="An augmented floor">
+                </section>
+            </div>
+        </main>
+        <footer>
+            <p>Copyright &copy; 2025 Iason Svoronos - Kanavas</p>
+        </footer>
+    </body>
+</html>
