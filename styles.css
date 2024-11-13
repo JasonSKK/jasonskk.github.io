@@ -20,6 +20,21 @@ footer {
   background-color: #f4f4f4; /* Optional: background color */
 }
 
+section {
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px; /* Slightly rounded corners */
+  background-color: #f9f9f9; /* Light background to separate sections */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ccc; /* Light grey line */
+  margin: 40px 0; /* Extra margin to space out the sections */
+}
+
 .profile-image img {
   border-radius: 50%;
   width: 150px; /* Adjust as needed */
