@@ -146,3 +146,10 @@ nav a:hover {
   /* Darker color on hover */
   border-color: #FFFFFF; /* Add a border on hover */
 }
+
+iframe {
+  width: 100%; /* Makes it expand to fit the main container */
+  max-width: 800px; /* Set a reasonable max width */
+  height: 450px; /* Adjust height proportionally */
+  border: none; /* Optional: removes the default border */
+}
