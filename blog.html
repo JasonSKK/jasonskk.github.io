@@ -1,276 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Blog</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <style>
-         /* General Styles */
-         body {
-             font-family: Georgia, serif;
-             margin: 0;
-             padding: 0;
-             background-color: #090909;
-             color: black;
-         }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      /* General Styles */
+      body {
+        font-family: Georgia, serif;
+        margin: 0;
+        padding: 0;
+        background-color: #090909;
+        color: black;
+      }
 
-         header {
-             text-align: center;
-             padding: 20px;
-             background-color: black;
-             color: white;
-             border-bottom: 1px solid #ccc;
-         }
+      header {
+        text-align: center;
+        padding: 20px;
+        background-color: black;
+        color: white;
+        border-bottom: 1px solid #ccc;
+      }
 
-         main {
-             max-width: 800px; /* Set a maximum width for the content */
-             margin: 20px auto; /* Center the main content */
-             padding: 20px; /* Add some padding */
-             background-color: #090909; /* main content square around */
-             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-         }
+      main {
+        max-width: 800px; /* Set a maximum width for the content */
+        margin: 20px auto; /* Center the main content */
+        padding: 20px; /* Add some padding */
+        background-color: #090909; /* main content square around */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      }
 
-         p {
-             line-height: 1.6; /* Improve readability */
-             margin-bottom: 1.5em; /* Space between paragraphs */
-         }
+      p {
+        line-height: 1.6; /* Improve readability */
+        margin-bottom: 1.5em; /* Space between paragraphs */
+      }
 
-         img {
-             max-width: 100%; /* Make images responsive */
-             height: auto; /* Maintain aspect ratio */
-             display: block; /* Prevent inline spacing issues */
-             margin: 0 auto; /* Center the images */
-         }
+      img {
+        max-width: 100%; /* Make images responsive */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Prevent inline spacing issues */
+        margin: 0 auto; /* Center the images */
+      }
 
-         /* Modal Styles */
-         .modal {
-             display: none; /* Hidden by default */
-             position: fixed; /* Stay in place */
-             z-index: 1000; /* Sit on top */
-             left: 0;
-             top: 0;
-             width: 100%; /* Full width */
-             height: 100%; /* Full height */
-             overflow: auto; /* Enable scroll if needed */
-             background-color: rgb(0,0,0); /* Fallback color */
-             background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-         }
+      /* Modal Styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+      }
 
-         .modal-content {
-             margin: auto;
-             display: block;
-             width: 80%; /* Could be more or less, depending on screen size */
-             max-width: 700px; /* Set a maximum width */
-             object-fit: contain;
-         }
+      .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%; /* Could be more or less, depending on screen size */
+      max-width: 700px; /* Set a maximum width */
+      object-fit: contain;
+      }
 
-         .close {
-             position: absolute;
-             top: 15px;
-             right: 35px;
-             color: #fff;
-             font-size: 40px;
-             font-weight: bold;
-             transition: 0.3s;
-         }
+      .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      }
 
-         .close:hover,
-         .close:focus {
-             color: #bbb;
-             text-decoration: none;
-             cursor: pointer;
-         }
+      .close:hover,
+      .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+      }
 
-         .lyrics-box {
-             background-color: #f0f0f0;
-             padding: 10px;
-             border: 1px solid #ccc;
-             margin-bottom: 20px;
-             text-align: center;
-         }
+      .lyrics-box {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      text-align: center;
+      }
 
-         iframe {
-             width: 100%; /* Makes it expand to fit the main container */
-             max-width: 800px; /* Set a reasonable max width */
-             height: 450px; /* Adjust height proportionally */
-             border: none; /* Optional: removes the default border */
-         }
-        </style>
-    </head>
-    <body>
-        <header>
-            <h1>Blog</h1>
-            <p>Welcome to my blog! This blog is a space where I write about my projects, music, thoughs about things I read, DIY, beer recipies, and other random stuff.</p>
-            <p>Date: 2024-10-20</p>
-        </header>
-        <nav>
-            <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
-        </nav>
-        <main>
+      iframe {
+      width: 100%; /* Makes it expand to fit the main container */
+      max-width: 800px; /* Set a reasonable max width */
+      height: 450px; /* Adjust height proportionally */
+      border: none; /* Optional: removes the default border */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Blog</h1>
+      <p>Welcome to my blog! This blog is a space where I write about my projects, music, thoughs about things I read, DIY, beer recipies, and other random stuff.</p>
+      <p>Date: 2024-10-20</p>
+    </header>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+    </nav>
+    <main>
 
-            <!-- NEW TOPIC
+      <!-- NEW TOPIC
 
-                 <section>
-                 <h2>Next topic</h2>
-                 <p>Date: 2024-XX-XX</p>
-                 </section>
+           <section>
+             <h2>Next topic</h2>
+             <p>Date: 2024-XX-XX</p>
+           </section>
 
-            -->
-
-
-            <!--
-                 CONTINUE THIS ARTICLE BEAMER
-                 <section>
-                 <h2>Selecting my firt Beamer</h2>
-                 <p>Date: 2024-19-01</p>
-                 Recently I bought a new (well ... actually second hand) beamer / projector and I thought like pinpointing the most important key points and parameters I learned from a 2-3 month process reseaching beamers.  I thought doing it so due to increased complexity of combining multiple parameters lumens ... eteafk kae and varied results, as well as questionable quaklity solutions in the market
-
-                 of course there are multiple guides online BUT! Here is the difference on this article strictly < 100 euro & adequate quality for homecinema setup. What can be done best optimising these two parameters to achieve best result.
-
-                 https://www.reddit.com/r/projectors/comments/3042wu/guide_for_newbies_plus_things_ive_learned/
-                 https://www.projectorcentral.com/projectors-101.cfm
-
-                 </section>
-            -->
-
-            <section>
-                <h2>Θεσσαλονίκη 2013 - 2016</h2>
-                <p>Date/Ημερομηνία: 2024-03-08</p>
-
-                <p>Θυμάμαι εκείνο το live στους ANEF που διάλυσα τον αστράγαλό μου (βλ. 08:25) και ταλαιπωρήθηκα για χρόνια :( Όπως και την ενέργεια τον θυμό (και το άγχος βσκ) στην συναυλία της τάξης (βλ. --> παρακάτω).</p>
-
-                <iframe src="https://www.youtube.com/embed/5s582p9FjrI?si=fdlolmTwn7COSUod"
-                        title="YouTube video player"
-                        allowfullscreen>
-                </iframe>
-
-                <p>Κανείς από εμάς δεν φαινόταν να νοιάζεται για τίποτα τότε xD</p>
-
-                <p>Αναρωτιέμαι τι να ήταν αυτό που μας ένωνε εκείνον τον καιρό βέβαια. Ίσως η οικονομική κρίση που μας έκανε όλους ίσους, η οργή μας απέναντι σε ένα σύστημα που μας καταπίεζε, η ανάγκη μας να ξεφύγουμε από τα στερεότυπα της κοινωνίας - της θρησκείας - του σχολείου;</p>
-
-                <p>Δεν ξέρω. Ξέρω μόνο ότι ήμασταν ενωμένοι. Χωρίς να περιμένουμε τίποτα και χωρίς να έχουμε τίποτα να χάσουμε.</p>
-
-                <p>Στην συναυλία οι γονείς ήταν σε σοκ! Να παρακολουθούν τα παιδιά τους να ουρλιάζουν στίχους για την άρρωστη σύγχρονη αστική κοινωνία και τα θύματα της πρέζας. Στίχοι σαν αυτούς που είχαν γραφτεί τότε:</p>
-
-                <div class="lyrics-box">
-                    <p>"Σε μια κοινωνία προβάτων τυφλών<br>
-                        Σε μια κοινωνία ανθρώπων καπιταλιστών<br>
-                        Τα media σε τάισαν φόβο και σκατά<br>
-                        κι όλη μέρα δούλευες για άλλου τα λεφτά<br>
-                        Μεταμοντέρνα αστική αρρώστια<br>
-                        Μεταδοτική κοινωνική αρρώστια " (M.Ν.)</p>
-                </div>
-
-                <div class="lyrics-box">
-                    <p>"Πρέζα, αρρώστια, δεν φταίει το παιδί<br>
-                        Μόνος του ήτανε, δεν είχε επιλογή<br>
-                        Κανένας δεν νοιαζότανε πού ήταν και πού πάει<br>
-                        Μόνος πάλευε για ακόμα μια ζάλη ... ÄÄÄ!" (K.Β.)</p>
-                </div>
-
-                <p>Αυτές είναι οι στιγμές που δεν θα ξεχάσω ποτέ αλλά και που δεν θα ξαναζήσω :'( Θα συνεχίσω να τις κάνω show-off σε άκυρους που γνωρίζω κ' θα νοσταλγώ και θα εύχομαι να μην είχε περάσει ούτε ένα λεπτό από τοτε. Βσκ πως μένω για πάντα 16;</p>
-
-                <iframe src="https://www.youtube.com/embed/89oJE2eFBx0?si=3kDF0oj0p8LwGTom"
-                        title="YouTube video player"
-                        allowfullscreen>
-                </iframe>
-
-                <p>Καμιά φορά πετυχαίνω παλιούς γνωστούς, φίλους, έρωτες. Είμαστε πλέον συγκρατημένοι, απόμακροι. Σαν να μας κρατάει κάτι πίσω και σαν να φοβόμαστε να αφεθούμε. Λες και δεν ζήσαμε μαζί ξέρω γω.</p>
-
-                <p>Φίλε.. μέσα μου θα θυμάμαι πάντα την εποχή εκείνη. Όταν η Θεσσαλονίκη ήταν μια πόλη που έβραζε. Μια εποχή που το πάνκ ήταν η φωνή μας. Μια φωνή που δεν φοβήθηκε να ουρλιάξει ;)</p>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>Dresden in Fog and Rain</h2>
-                <p>Date: 2024-11-13</p>
-                <p>Starting with a bit of history.  Those who knew me before 2019 might remember me experimenting with cheap, manual Russian analog cameras from the late '60s and early '70s. One of my favorite shots both for its result and technical complexity is the one below.  Really bad lossy digital compression I know. I could update it when I find the original print ... For now, enjoy as much as this heavily compressed copy allows.  </p>
-                <img src="images/bridge_thessaloniki-2019.jpg" alt="Macedonia palace Thessaloniki 2019, Zenit E, 10 seconds." class="clickable" onclick="openModal(this)">
-                <p>This was taken while I was hanging out along the Thessaloniki coast crossing the bridge over Nikis Avenue near the Macedonian Palace Hotel.  At the time I wanted to experiment with longer shutter speeds but hadn’t managed to do so.  I was carrying a shoulder bag with my equipment.  Two Helios lenses, filter lens, and more.  I found a stable position for the camera literally on the ground and connected the Cable Release / Shutter Remote.  During a 10 second exposure I used three coloured transparent overlay filter sheets (yellow, red, and blue) swapping each filter every three seconds to capture varied colours in the car headlights. I left the last second without a filter to add a natural headlight colour. The camera used was a Zenit E with a Helios 44M-4 58mm lens, f/16 aperture, and a 10 second exposure. </p>
+           -->
 
 
-                <p>It’s been years since I’ve given up taking pictures as it was way too expensive for a student budget and I was too busy studying and moving to a new country every 6 months.  Nonetheless, 2 days ago Dresden was enveloped in inreased fog and rain.  This is a combination I am particularly fond of.  I looked out my window as night fell and saw the headlights.  It reminded me of the time being a BSc student experimenting with my camera along Thessaloniki costal lane.</p>
+           <section>
+             <h2>Video8 Composite Signal Capture and Decoding Using CX2388x-Based PCIe Card</h2>
+             <p>Date: 2024-04-05</p>
 
-                <p>I used my not-so-fancy and not-so-vintage Xiaomi Redmi 8.  I switched to manual mode, increased the ISO since it was nearly dark, opened up the aperture to allow increased field depth, and set the shutter speed to a maximum of 13 seconds.  Here’s what I got:</p>
-                <img src="images/dresden_fog-241113.jpg" alt="Dresden fog and rain, XIAOMI Redmi 8, 13 seconds." class="clickable" onclick="openModal(this)">
-            </section>
+             <p>Probably no one cares, as the <a href="https://github.com/oyvindln/vhs-decode/wiki">vhs-decode wiki</a> is already so well documented ;) ... but I decided to write this down anyway.  Mainly for future personal reference and partly to share an actual practical approach. Maybe also to showcase/provide an update of what I’ve been busy with over the last few months to my blog readers. </p>
+
+             <h3>Why</h3>
+             <p>So to start with, I had a bunch of old Video8 tapes sitting around. The majority of them being footage of me as a kid, a few other from my teenage years and some punk gigs in Thessaloniki. I did not want to invest hundreds of euro on the process so I focused on capturing/decoding them on a budget.  10 years ago a dodgy lad in Bit-Bazaar in Thessaloniki, Greece told me that using actual task-specific-hardware to turn video8 tapes digital is "better".  He had a VHS-DVD Combo Recorder.  Nonetheless, this costs a lot of money, is rare, and to be honest it also abstracts away the whole signal chain.  I do not really get to see what is happening under the hood. I wanted something a bit more hands on that would let me understand what is actually coming off the tape and how it gets turned into a digital file.  After some investigation I discovered vhs-decode.  Pretty cool stuff.  Super-duper well documented.  Looking at all this through signal processing coloured glasses would be something I would be keen to explore.  I was not planning to go full expert mode and deep dive but I figured I would at least play around a bit with arm-floaties on but feet in the shallow waters xD </p>
+
+             <img src="images/video8_tapes-filter.jpg" alt="A bunch of Video8 tapes." class="clickable" onclick="openModal(this)">
+
+             <h3>Equipment</h3>
+
+             <table class="equipment-table">
+               <tr>
+                 <td style="vertical-align: top;"><img src="images/cx-card.jpg" alt="CX Capture Card (White)" class="clickable" onclick="openModal(this)"></td>
+                 <td>
+                   <div class="equipment-name">CX ADC PCIe Capture Card</div>
+                   <div class="equipment-desc">Basic white variant card with CX2388x chip. Used with `cxadc` Linux driver. No mods applied yet during capture, but I experience frame dropping when it works a bit too hard (due to thermal throttling I would guess).</div>
+                 </td>
+               </tr>
+
+               <tr>
+                 <td style="vertical-align: top;">
+                   <img src="images/hitachi.jpg"
+                        alt="Hitachi VM-E565LE"
+                        class="clickable"
+                        onclick="openModal(this)"
+                        </td>
+                 <td>
+                   <div class="equipment-name">Hitachi VM-E565LE (PAL8 Camcorder)</div>
+                   <div class="equipment-desc">Used as playback for decoding Video8. Native PAL output with mono RCA audio. According to the docs using the original camcorder helps improves quality (it is the original in this case).</div>
+                 </td>
+               </tr>
+
+               <tr>
+                 <td style="vertical-align: top;"><img src="images/edirol-ua5.jpg" alt="EDIROL UA-5 Audio Interface" class="clickable" onclick="openModal(this)"></td>
+                 <td>
+                   <div class="equipment-name">EDIROL UA-5 Audio Interface</div>
+                   <div class="equipment-desc">24-bit/96kHz USB interface. Audio was recorded in 16bit/48kHz using Audacity. Runs with ALSA usb audio class drivers directly (snd_usb_audio module).</div>
+                 </td>
+               </tr>
+
+             </table>
+
+
+             <p>The camcorder I used for playback was a Hitachi VM-E565LE, a PAL Video8 model with an onboard LCD screen. Based on the the official documentation using the original camera or the exact model that recorded the tape is always preferred. It is better optimised for playback especially when the tapes are old or worn which is always pretty much the case nowadays. The Hitachi camera outputs standard CVBS video through RCA and mono audio via another RCA.</p>
+             <img src="images/hitachi-demo-load-tape.gif" alt="Hitachi Video 8 tape load Demo GIF" width="640" height="auto">
+
+             <p>Initially I thought the audio was HiFi FM and tried capturing it with the CX Card and decoding it (LOL). However, after looking at the manual and reading monophonic audio (not that "mono" provides any useful information itself) something clicked and I tried to just stick the output into the audio interface and to monitor the input signal. This way I realised my camera outputs linear mono audio not HiFi FM.  So I simply captured the audio using the audio interface.</p>
+             <img src="images/e_manual_hitachi-VME565LE.png" alt="Hitachi VME565LE manual Greek page 1" class="clickable" onclick="openModal(this)">
+
+             <p>My audio interface is the EDIROL UA-5. It can record 24bit/96kHz. I bought it for 30 euro used from Kleinanzeigen. Excellent build quality, it has standard compatibility with ALSA usb audio class drivers therefore it is plug-n-play.  I recorded the audio in Audacity at 16bit/48kHz mono. Honestly, not sure what a modern > 100 euro Focusrite/Behringer/whateva would offer over this. It has even a cool top panel block diagram of the signal path hehe ;D</p>
+
+
+<h3>Video Capture: The CX Card</h3>
+
+<p>The CX capture card is the white-label PCIe to AV expansion board. Model: 23880/23881, Conexant CX25800-11Z is the chip if that plays any role. Functionality should be the same for all different chips used says the seller. I bought it for 25 Euro approximately.  It uses the CX2388X (does not say X on the PCB) chipset. The chipset is supported by the cxadc driver.  Currently I am using it without modifications.  I am planning to add the cooling mod soon.  I suspect some dropped frames are due to overheating.  Potentially the default crystal oscillator might also cause this.  Nonetheless the docs state it really clearly: <em>"Faster sampling data output = more heat = shorter hardware life and possible loss of capture data due to overheating."
+</em></p>
+
+<p>The cooling mod involves using a 40x40mm passive heatsink and a fan.  I will be doing this soon.</p>
+<table class="equipment-table">
+  <tr>
+    <td style="vertical-align: top;"><img src="images/cx-card-heatsink.jpg" alt="CX Card with Heatsink" class="clickable" onclick="openModal(this)"></td>
+    <td>
+      <div class="equipment-name">Cooling Mod (Heatsink)</div>
+      <div class="equipment-desc">Passive heatsink with fan to be added in order to reduce thermal throttling and minimise frame drops. This is the recommended mod for CX cards.</div>
+    </td>
+  </tr>
+</table>
+
+<p>As for the crystal mod the stock 28.636MHz crystal can be replaced with a 40MHz ABRACON oscillator according to the docs. This improves the sampling rate and SNR up to 40Msps on 8-bit capture.  Stability may also improve.  Might attempt this later.</p>
+
+
+<h3>Workflow overview</h3>
+<p>I created this workflow diagram to visualise the complete Video8 signal capture and decoding path using the CX ADC card.  It showcases the process from HW setup and Composite capture to decoding and audio video synchronisation.</p>
+
+<img src="images/video8_cxadc_signal_flow_v1.png" alt="plantuml work flow digaram." class="clickable" onclick="openModal(this)">
+
+<ol>
+  <strong>Set capture parameters</strong><br><br>
+  Make sure digital gain is off and level is at 0:
+  <pre><code>sudo zsh -c 'echo 1 > /sys/class/cxadc/cxadc0/device/parameters/vmux'</code></pre>
+  <pre><code>sudo zsh -c 'echo 0 > /sys/class/cxadc/cxadc0/device/parameters/level'</code></pre>
+  <pre><code>sudo zsh -c 'echo 0 > /sys/class/cxadc/cxadc0/device/parameters/sixdb'</code></pre>
+  Check they are applied correctly:
+  <pre style="white-space: pre-wrap;"><code>ls /dev | grep cxadc | sed -e's/dev//g' | xargs -I % bash -c 'find /sys/class/cxadc/%/device/parameters | grep -v parameters$' | xargs -I % bash -c 'echo -n "% " && cat %'</code></pre>
+  <br>
+  <br>
+
+  <strong>Start the camcorder playback</strong><br><br>
+  Then immediately run the level adjustment:
+  <pre><code>~/local/bin/leveladj</code></pre>
+  It runs a test capture and finds the best gain level. Rewind the tape if needed.
+  <br>
+  <br>
+  <br>
+
+  <strong>Record</strong><br><br>
+  Raw capture:
+  <pre><code>cat /dev/cxadc0 | pv > CX_Card_28msps_8-bit.u8</code></pre>
+Or compress with FLAC:
+<pre style="white-space: pre-wrap;"><code>cat /dev/cxadc0 | flac --fast -16 --sample-rate=28636 --sign=unsigned --channels=1 --endian=little --bps=8 --blocksize=65535 --lax -f - -o capture.flac</code></pre>
+<em>Note:</em> FLAC can fail to decode if frames are corrupted... :( Safer to record raw <code>.u8</code> and compress later.
+<br>
+<br>
+<br>
+
+<strong>Decode</strong><br><br>
+Once recording is done, decode with:
+<pre><code>cvbs-decode --debug --threads 8 --system pal -A --cxadc capture.u8 capture_output</code></pre>
+This produces a <code>.tbc</code> file.
+<br>
+<br>
+<br>
+
+<strong>VBI Processing</strong><br><br>
+<pre><code>ld-process-vbi capture_output.tbc</code></pre>
+<br>
+<br>
+
+<strong>Video Export</strong><br><br>
+<pre><code>ld-chroma-decoder --decoder transform3d -p y4m -q capture_output.tbc capture_output.mov</code></pre>
+<br>
+<br>
+
+<strong>Sync Audio</strong><br><br>
+In a video editor (e.g., Kdenlive) align the first visible frame with the first audible signal. Use tape cuts or loud audio transients to help with synchronisation. On one tape in my collection I smack hard an anvil (I hope that is the correct word in English/I mean "αμόνι" in Greek) as a 3-year-old with a hammer.  That was perfect for syncing.  My export settings:<br><br>
+<strong>Video codec:</strong> HuffYUV (lossless)
+<br>
+<strong>Audio codec:</strong> FLAC
+<br><br>
+</ol>
+<br>
+
+<h3>Problems I Faced</h3>
+
+<p><strong>Dropped Frames: </strong> On some captures the video capture stops unfinished. This happens when the FLAC frame fails to decode. Root cause could be either heat or unstable sampling clock. Raw capture can reduce risk and allows for (simpler) capture resuming. </p>
+<p><strong>Audio Confusion: </strong> Initially expected HiFi FM, but found my camcorder produces output of an standard analog mono signal (LOL once again)</p>
+<p><strong>Partial Decoding: </strong> Using <code>--start</code> flag in <code>cvbs-decode</code> or <code>ld-chroma-decoder</code> sometimes fails silently if the frame count is not aligned.  Make sure you are using valid frame counts.  <code>ld-analyse file.tbc</code> can be of great help ;)</p>
+<p><strong>Syncing: </strong> Syncing manually works fine but needs some attention. Small errors can lead to drift.  It would be cool if it could be somehow automated.  <em>Clockgen mod keeps tapping me on the shoulder</em> but I know the moment I say "hi back!" I know I will be spending my afternoons during the following month on it :|</p>
+
+<h3>Epilogue</h3>
+<p>Not much to say to be honest.  I am only so happy I had the chance to watch all this family footage and create a small archive of punk rock gigs in Thessaloniki (see <a href="https://www.youtube.com/watch?v=89oJE2eFBx0">Video 1</a> & <a href="https://www.youtube.com/watch?v=5s582p9FjrI">Video 2</a>). Finally, massive thanks to Harry Munday  the guy who not only most of all of this but also designed half the hardware and somehow still has time to keep optimising and helping people. Legend.</p>
+
+</section>
 
 <hr>
 
-                <section>
-                <h2>NEIPA Hack</h2>
-                <p>Date: 2024-10-28</p>
-                <p>I thought I’d start my first blog post with something casual... how about a beer recipe?</p>
-                <p>A few years ago, I composed this recipe specifically for my birthday party. There would be a lot of people, so what’s better than a bit less than 23 lt. of hacky-hoppy New England IPA?</p>
-                <h2>In a few words...</h2>
-                <p>To start by clarifying, I don’t have any equipment for all-grain brewing, so most of the time, I am limited to beer kits. However, I kind of missed that fresh hops taste from the last time we brewed with my pal John using his all-grain equipment, and in general, I was looking for anything extra-hoppy really...</p>
-                <img src="images/neipa-hack-result.png" alt="A pint of NEIPA Hack brew" class="clickable" onclick="openModal(this)">
-                <p>A pint of NEIPA Hack brew.</p>
-                <p>While not having the means to brew a proper NEIPA, I figured out a hacky way to brew something close to it in appearance and flavor. My fermentation bucket has a 23lt batch size, and the largest cooking pot my mom has can fit approximately 5lt. I was spending that summer with my parents. Usually, the kits I used to brew produce some kind of “sterile” beer flavor, kind of flat. Even IPA kits don’t taste as fresh as the batches we used to make from scratch with my friend John. We used to mash using Brew In A Bag (BIAB) all-grain technique with his equipment. Without all-grain equipment, my idea was to brew a total of a 23lt batch, with 5lt BIAB’ed in my mom’s pot and then mixed into the kit’s 18lt.</p>
 
-                <h2>Mashing</h2>
-                <p>During the mash process, I used 1 kg of Malt Pale Ale (Weyermann) grains and 0.5 kg of Flaked Oats to obtain the typical hazy colour. I raised the water temperature to 73 Celsius, expecting that when the oats and grains were added, the temperature would drop to around 67 Celsius, ideal for the mash to allow conversion of complex sugars in the grains into simple ones that yeast can feed on. I quickly removed it from the stove, put the lid on, and wrapped the pot with 5-6 towels to prevent heat from escaping. I left it sitting for exactly an hour. After an hour, I filtered out the grains from the wort using a standard kitchen strainer and boiled for 15 minutes. During the last 2-3 minutes I used 80 grams of Cascade hops and whirlpooled it. I had calculated 18 IBU for the bitterness level. While boiling, I prepared the kit concentrate in the fementation bucket. When the 15 minutes of boiling were completed, I used the 100 Celsius wort to dissolve the kit concentrate in the fermentation bucket (HDPE food-grade plastic), as well as approximately 3/4 of the dextrose suggested by the kit, considering the additional sugars from the mashing. Then, I used cold water to bring the temperature down while filling all the way up to hit 23lt.</p>
+<!--
+    CONTINUE THIS ARTICLE BEAMER
+    <section>
+      <h2>Selecting my firt Beamer</h2>
+      <p>Date: 2024-19-01</p>
+      Recently I bought a new (well ... actually second hand) beamer / projector and I thought like pinpointing the most important key points and parameters I learned from a 2-3 month process reseaching beamers.  I thought doing it so due to increased complexity of combining multiple parameters lumens ... eteafk kae and varied results, as well as questionable quaklity solutions in the market
+
+      of course there are multiple guides online BUT! Here is the difference on this article strictly < 100 euro & adequate quality for homecinema setup. What can be done best optimising these two parameters to achieve best result.
+
+                                                                                                        https://www.reddit.com/r/projectors/comments/3042wu/guide_for_newbies_plus_things_ive_learned/
+                                                                                                        https://www.projectorcentral.com/projectors-101.cfm
+
+                                                                                                        </section>
+    -->
+
+    <section>
+      <h2>Θεσσαλονίκη 2013 - 2016</h2>
+      <p>Date/Ημερομηνία: 2024-03-08</p>
+
+      <p>Θυμάμαι εκείνο το live στους ANEF που διάλυσα τον αστράγαλό μου (βλ. 08:25) και ταλαιπωρήθηκα για χρόνια :( Όπως και την ενέργεια τον θυμό (και το άγχος βσκ) στην συναυλία της τάξης (βλ. --> παρακάτω).</p>
+
+      <iframe src="https://www.youtube.com/embed/5s582p9FjrI?si=fdlolmTwn7COSUod"
+              title="YouTube video player"
+              allowfullscreen>
+      </iframe>
+
+      <p>Κανείς από εμάς δεν φαινόταν να νοιάζεται για τίποτα τότε xD</p>
+
+      <p>Αναρωτιέμαι τι να ήταν αυτό που μας ένωνε εκείνον τον καιρό βέβαια. Ίσως η οικονομική κρίση που μας έκανε όλους ίσους, η οργή μας απέναντι σε ένα σύστημα που μας καταπίεζε, η ανάγκη μας να ξεφύγουμε από τα στερεότυπα της κοινωνίας - της θρησκείας - του σχολείου;</p>
+
+      <p>Δεν ξέρω. Ξέρω μόνο ότι ήμασταν ενωμένοι. Χωρίς να περιμένουμε τίποτα και χωρίς να έχουμε τίποτα να χάσουμε.</p>
+
+      <p>Στην συναυλία οι γονείς ήταν σε σοκ! Να παρακολουθούν τα παιδιά τους να ουρλιάζουν στίχους για την άρρωστη σύγχρονη αστική κοινωνία και τα θύματα της πρέζας. Στίχοι σαν αυτούς που είχαν γραφτεί τότε:</p>
+
+      <div class="lyrics-box">
+        <p>"Σε μια κοινωνία προβάτων τυφλών<br>
+          Σε μια κοινωνία ανθρώπων καπιταλιστών<br>
+          Τα media σε τάισαν φόβο και σκατά<br>
+          κι όλη μέρα δούλευες για άλλου τα λεφτά<br>
+          Μεταμοντέρνα αστική αρρώστια<br>
+          Μεταδοτική κοινωνική αρρώστια " (M.Ν.)</p>
+      </div>
+
+      <div class="lyrics-box">
+        <p>"Πρέζα, αρρώστια, δεν φταίει το παιδί<br>
+          Μόνος του ήτανε, δεν είχε επιλογή<br>
+          Κανένας δεν νοιαζότανε πού ήταν και πού πάει<br>
+          Μόνος πάλευε για ακόμα μια ζάλη ... ÄÄÄ!" (K.Β.)</p>
+      </div>
+
+      <p>Αυτές είναι οι στιγμές που δεν θα ξεχάσω ποτέ αλλά και που δεν θα ξαναζήσω :'( Θα συνεχίσω να τις κάνω show-off σε άκυρους που γνωρίζω κ' θα νοσταλγώ και θα εύχομαι να μην είχε περάσει ούτε ένα λεπτό από τοτε. Βσκ πως μένω για πάντα 16;</p>
+
+      <iframe src="https://www.youtube.com/embed/89oJE2eFBx0?si=3kDF0oj0p8LwGTom"
+              title="YouTube video player"
+              allowfullscreen>
+      </iframe>
+
+      <p>Καμιά φορά πετυχαίνω παλιούς γνωστούς, φίλους, έρωτες. Είμαστε πλέον συγκρατημένοι, απόμακροι. Σαν να μας κρατάει κάτι πίσω και σαν να φοβόμαστε να αφεθούμε. Λες και δεν ζήσαμε μαζί ξέρω γω.</p>
+
+      <p>Φίλε.. μέσα μου θα θυμάμαι πάντα την εποχή εκείνη. Όταν η Θεσσαλονίκη ήταν μια πόλη που έβραζε. Μια εποχή που το πάνκ ήταν η φωνή μας. Μια φωνή που δεν φοβήθηκε να ουρλιάξει ;)</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Dresden in Fog and Rain</h2>
+      <p>Date: 2024-11-13</p>
+      <p>Starting with a bit of history.  Those who knew me before 2019 might remember me experimenting with cheap, manual Russian analog cameras from the late '60s and early '70s. One of my favorite shots both for its result and technical complexity is the one below.  Really bad lossy digital compression I know. I could update it when I find the original print ... For now, enjoy as much as this heavily compressed copy allows.  </p>
+      <img src="images/bridge_thessaloniki-2019.jpg" alt="Macedonia palace Thessaloniki 2019, Zenit E, 10 seconds." class="clickable" onclick="openModal(this)">
+      <p>This was taken while I was hanging out along the Thessaloniki coast crossing the bridge over Nikis Avenue near the Macedonian Palace Hotel.  At the time I wanted to experiment with longer shutter speeds but had not managed to do so.  I was carrying a shoulder bag with my equipment.  Two Helios lenses, filter lens, and more.  I found a stable position for the camera literally on the ground and connected the Cable Release / Shutter Remote.  During a 10 second exposure I used three coloured transparent overlay filter sheets (yellow, red, and blue) swapping each filter every three seconds to capture varied colours in the car headlights. I left the last second without a filter to add a natural headlight colour. The camera used was a Zenit E with a Helios 44M-4 58mm lens, f/16 aperture, and a 10 second exposure. </p>
 
 
-                <h2>Temperature control during fermentation</h2>
-                <p>That summer I spent at my parents’ house. It was extremely hot throughout Greece and going out was impossible. So I thought I’d spend time brewing my birthday beer. The main issue with the heat was fermentation temperature. For an IPA, I wouldn’t risk it going above 21-22°C, especially a heavily hoppy one. My dad has bees and used a metallic stainless steel tank as a honey extractor years ago. I took it and filled it halfway with ice-cold water. Then I placed it in the basement, which is naturally cooler than the ground floor. I submerged the fermentation bucket in the ice-water-filled tank and covered the top of the fermentation bucket with water-soaked towels. Below there is a picture of myself cleaning the metallic tank to use it for the first time. The first time I used the tank this way was to cool down the fermentation temperature of a Weizen beer to 17°C, to encourage “clove” flavors rather than “banana.” Initially, I considered using it as an all-grain container but never moved forward with this plan.</p>
-                <img src="images/ol1.jpg" alt="Metallic tank as a cooling method" class="clickable" onclick="openModal(this)"></p>
+      <p>Its been years since I have given up taking pictures as it was way too expensive for a student budget and I was too busy studying and moving to a new country every 6 months.  Nonetheless, 2 days ago Dresden was enveloped in inreased fog and rain.  This is a combination I am particularly fond of.  I looked out my window as night fell and saw the headlights.  It reminded me of the time being a BSc student experimenting with my camera along Thessaloniki costal lane.</p>
 
-                <p>Metallic tank as a cooling method in the fermentation.</p>
+      <p>I used my not-so-fancy and not-so-vintage Xiaomi Redmi 8.  I switched to manual mode, increased the ISO since it was nearly dark, opened up the aperture to allow increased field depth, and set the shutter speed to a maximum of 13 seconds.  Here is what I got:</p>
+      <img src="images/dresden_fog-241113.jpg" alt="Dresden fog and rain, XIAOMI Redmi 8, 13 seconds." class="clickable" onclick="openModal(this)">
+    </section>
 
-                    <h2>Fermentation</h2>
-                    <p>At this point, I had the metallic tank and mixture ready at 19°C. I sprinkled 11.5 gr of generic Fermentis SafAle US-05 (optimal temperature 20-25°C) and closed the bucket top, wrapping the fermentation bucket with wet towels. I took one sample and measured the Original Gravity (OG) at 1.051. Exactly as I had calculated! The fermentation was insanely fast, hitting a specific gravity (SG) of 1.014 in 4 days. During active fermentation, on day 5 I opened the lid and added the dry hops. By day 7, the Final Gravity (FG) reached 1.011. I left it for an additional 4 days to ensure fermentation was complete. 11 days total. On day 11, I manually bottled 23lt, adding some additional dextrose (160 gr) to increase the carbonation level aiming at producing a two-finger white head.</p>
+    <hr>
+
+    <section>
+      <h2>NEIPA Hack</h2>
+      <p>Date: 2024-10-28</p>
+      <p>I thought I’d start my first blog post with something casual... how about a beer recipe?</p>
+      <p>A few years ago, I composed this recipe specifically for my birthday party. There would be a lot of people, so what’s better than a bit less than 23 lt. of hacky-hoppy New England IPA?</p>
+      <h2>In a few words...</h2>
+      <p>To start by clarifying, I don’t have any equipment for all-grain brewing, so most of the time, I am limited to beer kits. However, I kind of missed that fresh hops taste from the last time we brewed with my pal John using his all-grain equipment, and in general, I was looking for anything extra-hoppy really...</p>
+      <img src="images/neipa-hack-result.png" alt="A pint of NEIPA Hack brew" class="clickable" onclick="openModal(this)">
+      <p>A pint of NEIPA Hack brew.</p>
+      <p>While not having the means to brew a proper NEIPA, I figured out a hacky way to brew something close to it in appearance and flavor. My fermentation bucket has a 23lt batch size, and the largest cooking pot my mom has can fit approximately 5lt. I was spending that summer with my parents. Usually, the kits I used to brew produce some kind of “sterile” beer flavor, kind of flat. Even IPA kits don’t taste as fresh as the batches we used to make from scratch with my friend John. We used to mash using Brew In A Bag (BIAB) all-grain technique with his equipment. Without all-grain equipment, my idea was to brew a total of a 23lt batch, with 5lt BIAB’ed in my mom’s pot and then mixed into the kit’s 18lt.</p>
+
+      <h2>Mashing</h2>
+      <p>During the mash process, I used 1 kg of Malt Pale Ale (Weyermann) grains and 0.5 kg of Flaked Oats to obtain the typical hazy colour. I raised the water temperature to 73 Celsius, expecting that when the oats and grains were added, the temperature would drop to around 67 Celsius, ideal for the mash to allow conversion of complex sugars in the grains into simple ones that yeast can feed on. I quickly removed it from the stove, put the lid on, and wrapped the pot with 5-6 towels to prevent heat from escaping. I left it sitting for exactly an hour. After an hour, I filtered out the grains from the wort using a standard kitchen strainer and boiled for 15 minutes. During the last 2-3 minutes I used 80 grams of Cascade hops and whirlpooled it. I had calculated 18 IBU for the bitterness level. While boiling, I prepared the kit concentrate in the fementation bucket. When the 15 minutes of boiling were completed, I used the 100 Celsius wort to dissolve the kit concentrate in the fermentation bucket (HDPE food-grade plastic), as well as approximately 3/4 of the dextrose suggested by the kit, considering the additional sugars from the mashing. Then, I used cold water to bring the temperature down while filling all the way up to hit 23lt.</p>
+
+
+      <h2>Temperature control during fermentation</h2>
+      <p>That summer I spent at my parents’ house. It was extremely hot throughout Greece and going out was impossible. So I thought I’d spend time brewing my birthday beer. The main issue with the heat was fermentation temperature. For an IPA, I wouldn’t risk it going above 21-22°C, especially a heavily hoppy one. My dad has bees and used a metallic stainless steel tank as a honey extractor years ago. I took it and filled it halfway with ice-cold water. Then I placed it in the basement, which is naturally cooler than the ground floor. I submerged the fermentation bucket in the ice-water-filled tank and covered the top of the fermentation bucket with water-soaked towels. Below there is a picture of myself cleaning the metallic tank to use it for the first time. The first time I used the tank this way was to cool down the fermentation temperature of a Weizen beer to 17°C, to encourage “clove” flavors rather than “banana.” Initially, I considered using it as an all-grain container but never moved forward with this plan.</p>
+      <img src="images/ol1.jpg" alt="Metallic tank as a cooling method" class="clickable" onclick="openModal(this)"></p>
+
+<p>Metallic tank as a cooling method in the fermentation.</p>
+
+<h2>Fermentation</h2>
+<p>At this point, I had the metallic tank and mixture ready at 19°C. I sprinkled 11.5 gr of generic Fermentis SafAle US-05 (optimal temperature 20-25°C) and closed the bucket top, wrapping the fermentation bucket with wet towels. I took one sample and measured the Original Gravity (OG) at 1.051. Exactly as I had calculated! The fermentation was insanely fast, hitting a specific gravity (SG) of 1.014 in 4 days. During active fermentation, on day 5 I opened the lid and added the dry hops. By day 7, the Final Gravity (FG) reached 1.011. I left it for an additional 4 days to ensure fermentation was complete. 11 days total. On day 11, I manually bottled 23lt, adding some additional dextrose (160 gr) to increase the carbonation level aiming at producing a two-finger white head.</p>
 
 
 
-                    <h2>Dry hopping</h2>
-                    <p>Some words about the dry hopping.  To wrap up other than the metallic tank DIY stuff above I did not do anything fancy throughout the fermentation and dry hopping. In the journey of hop experimentation and while I would not be able to distinguish one hop variety from another when sampling NEIPAS or heavy-hopped TIPAs or DIPAs I decided for the dry hopping to be of a single variety (almost).  I don´t know if that can be considered NEIPA in the end but yea.  Nevertheless, I used 30 gr simcoe for dry hopping with some remains (approximately 20 gr) of cascade from the whirlpool. Cascade was cheap, simcoe was expensive and I remeber it killed my wallet as of the time being on very tight student budget and living in Greece where for some reason shipping prices are outrageous.  Therefore I guess it kindda makes sense why I didn´t want to whirlpool the good/expensive stuff.  Poor man´s NEIPA it is then!.  Below you can see the expected flavour pallete created by the combination of the hops, unfortuantely it is in Greek, but overall simcoe was expected to provide some floral, citrus, and berry notes while cascade was adding some mint while enhancing the citrus and berry notes. Keep in mind that simcoe is the dominant here as it was used in higher quantity.  I did not take any precations to mitigate oxidisation other than manifesting for it, I guess I was lucky not to end up with amber coloured oxidised beer. Well, that´s all about it really.</p>
+<h2>Dry hopping</h2>
+<p>Some words about the dry hopping.  To wrap up other than the metallic tank DIY stuff above I did not do anything fancy throughout the fermentation and dry hopping. In the journey of hop experimentation and while I would not be able to distinguish one hop variety from another when sampling NEIPAS or heavy-hopped TIPAs or DIPAs I decided for the dry hopping to be of a single variety (almost).  I don´t know if that can be considered NEIPA in the end but yea.  Nevertheless, I used 30 gr simcoe for dry hopping with some remains (approximately 20 gr) of cascade from the whirlpool. Cascade was cheap, simcoe was expensive and I remeber it killed my wallet as of the time being on very tight student budget and living in Greece where for some reason shipping prices are outrageous.  Therefore I guess it kindda makes sense why I didn´t want to whirlpool the good/expensive stuff.  Poor man´s NEIPA it is then!.  Below you can see the expected flavour pallete created by the combination of the hops, unfortuantely it is in Greek, but overall simcoe was expected to provide some floral, citrus, and berry notes while cascade was adding some mint while enhancing the citrus and berry notes. Keep in mind that simcoe is the dominant here as it was used in higher quantity.  I did not take any precations to mitigate oxidisation other than manifesting for it, I guess I was lucky not to end up with amber coloured oxidised beer. Well, that´s all about it really.</p>
 
-                    <p>Some words about the dry hopping. Aside from the DIY metallic tank setup, I didn’t do anything fancy during fermentation and dry hopping. In experimenting with hops and while I wouldn’t distinguish one hop variety from another when sampling NEIPAs or heavily hopped TIPAs or DIPAs, I decided on a single variety (mostly) for the dry hopping. I don’t know if that can be considered NEIPA, but well... Regardless I used 30 gr Simcoe for dry hopping with some remnants (about 20 gr) of Cascade from the whirlpool. Cascade was cheap, Simcoe was expensive, and I remember it strained my wallet as I was on a tight student budget in Greece where shipping prices are -for some reason- high. So I guess that’s why I didn’t want to whirlpool the expensive stuff making it a poor man’s NEIPA I guess! Below, you can see the expected flavor palette created by the combination of hops. Simcoe was expected to provide floral, citrus, and berry notes, while Cascade added some mint, enhancing the citrus and berry notes. Simcoe was dominant here as it was used in higher quantity. I took no specific precautions to prevent oxidation other than manifesting it. Luckily it didn’t end up as amber-coloured, oxidised beer. That’s about it, really.</p>
-                    <img src="images/simcoe.png" alt="Simcoe Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
-                    <p>Simcoe: expected dry hopping flavour pallete.</p>
-                    <img src="images/cascade.png" alt="Cascade Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
-                    <p>Cascade: expected dry hopping flavour pallete.</p>
+<p>Some words about the dry hopping. Aside from the DIY metallic tank setup, I didn’t do anything fancy during fermentation and dry hopping. In experimenting with hops and while I wouldn’t distinguish one hop variety from another when sampling NEIPAs or heavily hopped TIPAs or DIPAs, I decided on a single variety (mostly) for the dry hopping. I don’t know if that can be considered NEIPA, but well... Regardless I used 30 gr Simcoe for dry hopping with some remnants (about 20 gr) of Cascade from the whirlpool. Cascade was cheap, Simcoe was expensive, and I remember it strained my wallet as I was on a tight student budget in Greece where shipping prices are -for some reason- high. So I guess that’s why I didn’t want to whirlpool the expensive stuff making it a poor man’s NEIPA I guess! Below, you can see the expected flavor palette created by the combination of hops. Simcoe was expected to provide floral, citrus, and berry notes, while Cascade added some mint, enhancing the citrus and berry notes. Simcoe was dominant here as it was used in higher quantity. I took no specific precautions to prevent oxidation other than manifesting it. Luckily it didn’t end up as amber-coloured, oxidised beer. That’s about it, really.</p>
+<img src="images/simcoe.png" alt="Simcoe Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
+<p>Simcoe: expected dry hopping flavour pallete.</p>
+<img src="images/cascade.png" alt="Cascade Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
+<p>Cascade: expected dry hopping flavour pallete.</p>
 
-                    <p>An important note here is that I took a lot of precautionary measures using Chemipro OXI disinfectant solution throughout fermentation, dry hopping, and transferring from one container to another. I systematically disinfected the fermentation bucket, the metallic tank for the "Bain-marie," the tubes, and finally the bottles to prevent any yeast infections.</p>
+<p>An important note here is that I took a lot of precautionary measures using Chemipro OXI disinfectant solution throughout fermentation, dry hopping, and transferring from one container to another. I systematically disinfected the fermentation bucket, the metallic tank for the "Bain-marie," the tubes, and finally the bottles to prevent any yeast infections.</p>
 
-                    <h2>The important bit... sampling!</h2>
-                    <p>At the birthday party, everyone loved the beer. People knew it was homebrewed and were surprised by the extra fresh kick it had. John my pal I used to brew with, described it as "the beginning of a new era in our collaborative homebrewing". It’s sad that we both left Greece a few months later and haven’t brewed since. Hopefully, we’ll get back to it! I still remember his excitement and feedback from when we first tried it.</p>
-                    <p>To wrap up, I can confidently say that it was pretty close to a standard session NEIPA, given the lower expected ABV of 4.4%. Fresh, very strong citrus aroma and kick, mild bitterness on the finish / back end, refreshing, good levels of carbonation, and generally rich in its palette, maybe a bit “aggressive.” Unfortunately, by the second week, it started to flatten and became more bitter as the hops particles settled in the bottles. By the 4th week, it had a strong hops aftertaste and was more bitter, but it was still drinkable. Cheers!</p>
+<h2>The important bit... sampling!</h2>
+<p>At the birthday party, everyone loved the beer. People knew it was homebrewed and were surprised by the extra fresh kick it had. John my pal I used to brew with, described it as "the beginning of a new era in our collaborative homebrewing". It’s sad that we both left Greece a few months later and haven’t brewed since. Hopefully, we’ll get back to it! I still remember his excitement and feedback from when we first tried it.</p>
+<p>To wrap up, I can confidently say that it was pretty close to a standard session NEIPA, given the lower expected ABV of 4.4%. Fresh, very strong citrus aroma and kick, mild bitterness on the finish / back end, refreshing, good levels of carbonation, and generally rich in its palette, maybe a bit “aggressive.” Unfortunately, by the second week, it started to flatten and became more bitter as the hops particles settled in the bottles. By the 4th week, it had a strong hops aftertaste and was more bitter, but it was still drinkable. Cheers!</p>
 
-                    <h2>Recipe</h2>
-                    I have uploaded the recipe if anyone wants to experiment with it.
-                    <a href="files/neipa-hack-recipe.pdf">Click here to view</a>
+<h2>Recipe</h2>
+I have uploaded the recipe if anyone wants to experiment with it.
+<a href="files/neipa-hack-recipe.pdf">Click here to view</a>
 
-                </section>
-        </main>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img class="modal-content" id="img01">
-        </div>
+</section>
+</main>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="img01">
+</div>
 
-        <script>
-         // Get the modal
-         var modal = document.getElementById("myModal");
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
 
-         // Get the image and insert it inside the modal
-         function openModal(img) {
-             var modalImg = document.getElementById("img01");
-             modal.style.display = "block";
-             modalImg.src = img.src;
-         }
+  // Get the image and insert it inside the modal
+  function openModal(img) {
+      var modalImg = document.getElementById("img01");
+      modal.style.display = "block";
+      modalImg.src = img.src;
+  }
 
-         // When the user clicks on <span> (x), close the modal
-         function closeModal() {
-             modal.style.display = "none";
-         }
-        </script>
-        <footer>
-            <p>Copyright &copy; 2024 Iason Svoronos - Kanavas</p>
-        </footer>
-    </body>
+  // When the user clicks on <span> (x), close the modal
+  function closeModal() {
+      modal.style.display = "none";
+  }
+</script>
+<footer>
+  <p>Copyright &copy; 2024 Iason Svoronos - Kanavas</p>
+</footer>
+</body>
 </html>

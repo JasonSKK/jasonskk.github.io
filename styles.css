@@ -153,3 +153,29 @@ iframe {
   height: 450px; /* Adjust height proportionally */
   border: none; /* Optional: removes the default border */
 }
+
+.equipment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.equipment-table td {
+  vertical-align: top;
+  padding: 10px;
+}
+
+.equipment-image {
+  height: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.equipment-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.equipment-desc {
+  font-size: 0.95em;
+  color: #444;
+}
