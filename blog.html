@@ -258,6 +258,7 @@ In a video editor (e.g., Kdenlive) align the first visible frame with the first 
 <h3>Problems I Faced</h3>
 
 <p><strong>Dropped Frames: </strong> On some captures the video capture stops unfinished. This happens when the FLAC frame fails to decode. Root cause could be either heat or unstable sampling clock. Raw capture can reduce risk and allows for (simpler) capture resuming. </p>
+<p><i>250430 Update: I do not have problems with dropped frames anymore after applying the heatsink mod. While I was on it I also removed the Capacitor 31 from the PCB for improving SNR.</i> </p>
 <p><strong>Audio Confusion: </strong> Initially expected HiFi FM, but found my camcorder produces output of an standard analog mono signal (LOL once again)</p>
 <p><strong>Partial Decoding: </strong> Using <code>--start</code> flag in <code>cvbs-decode</code> or <code>ld-chroma-decoder</code> sometimes fails silently if the frame count is not aligned.  Make sure you are using valid frame counts.  <code>ld-analyse file.tbc</code> can be of great help ;)</p>
 <p><strong>Syncing: </strong> Syncing manually works fine but needs some attention. Small errors can lead to drift.  It would be cool if it could be somehow automated.  <em>Clockgen mod keeps tapping me on the shoulder</em> but I know the moment I say "hi back!" I know I will be spending my afternoons during the following month on it :|</p>
