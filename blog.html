@@ -48,54 +48,54 @@
       .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
-      z-index: 1000; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
       }
 
       .modal-content {
-      margin: auto;
-      display: block;
-      width: 80%; /* Could be more or less, depending on screen size */
-      max-width: 700px; /* Set a maximum width */
-      object-fit: contain;
+        margin: auto;
+        display: block;
+        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 700px; /* Set a maximum width */
+        object-fit: contain;
       }
 
       .close {
-      position: absolute;
-      top: 15px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
       }
 
       .close:hover,
       .close:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
       }
 
       .lyrics-box {
-      background-color: #f0f0f0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      text-align: center;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        text-align: center;
       }
 
       iframe {
-      width: 100%; /* Makes it expand to fit the main container */
-      max-width: 800px; /* Set a reasonable max width */
-      height: 450px; /* Adjust height proportionally */
-      border: none; /* Optional: removes the default border */
+        width: 100%; /* Makes it expand to fit the main container */
+        max-width: 800px; /* Set a reasonable max width */
+        height: 450px; /* Adjust height proportionally */
+        border: none; /* Optional: removes the default border */
       }
     </style>
   </head>
@@ -119,60 +119,200 @@
 
            -->
 
-
            <section>
-             <h2>Video8 Composite Signal Capture and Decoding Using CX2388x-Based PCIe Card</h2>
-             <p>Date: 2024-04-05</p>
+             <h2>How to: Set up VoIP GR virtual number abroad</h2>
+             <p>Date: 2025-05-23</p>
+             <p>If you have been swearing non stop because the ridiculously high telephony service fees but only require a GR phone number then this is for you ...
+               This method is intended for individuals living abroad who still need a GR number for receiving calls from GR - at reasonable rates -.  Or just maintaining a GR number (for cheap) in order to accessing services such as TaxisNet or online banking requiring it.
+             </p>
+             <p>The problem: AΠO ΣHMEPA IΣXYOYN EΠIΠΛEON XPEΩΣEIΣ ΛOΓΩ MONIMHΣ ΠEPIAΓΩΓHΣ ΓIA XPHΣH TOY ΠPOΓPAMMATOΣ ΣAΣ ENTOΣ EE... / aka they want to charge me extra as the number is only used roaming only for too long.
+             </p>
+             <br><img src="images/voip_setup_diag.png" alt="voip action diagram" class="clickable" onclick="openModal(this)">
 
-             <p>Probably no one cares, as the <a href="https://github.com/oyvindln/vhs-decode/wiki">vhs-decode wiki</a> is already so well documented ;) ... but I decided to write this down anyway.  Mainly for future personal reference and partly to share an actual practical approach. Maybe also to showcase/provide an update of what I’ve been busy with over the last few months to my blog readers. </p>
+             <h3>Hard requirements</h3>
+             <ul>
+               <li>The number must have a GR prefix (+30). Mobile or landline I do not care.</li>
+               <li>Maximum cost: 7€/month</li>
+               <li>Minimum 100 minutes/ month (50 to mobile, 50 to landline)</li>
+               <li>People in GR must be able to call me at local rates</li>
+               <li>Supports some type of encryption (TLS/SRTP)</li>
+               <li>Non dodgy services</li>
+             </ul>
 
-             <h3>Why</h3>
-             <p>So to start with, I had a bunch of old Video8 tapes sitting around. The majority of them being footage of me as a kid, a few other from my teenage years and some punk gigs in Thessaloniki. I did not want to invest hundreds of euro on the process so I focused on capturing/decoding them on a budget.  10 years ago a dodgy lad in Bit-Bazaar in Thessaloniki, Greece told me that using actual task-specific-hardware to turn video8 tapes digital is "better".  He had a Video8-DVD Combo Recorder.  Nonetheless, this costs a lot of money, is rare, and to be honest it also abstracts away the whole signal chain.  I do not really get to see what is happening under the hood. I wanted something a bit more hands on that would let me understand what is actually coming off the tape and how it gets turned into a digital file.  After some investigation I discovered vhs-decode.  Pretty cool stuff.  Super-duper well documented.  Looking at all this through signal processing coloured glasses would be something I would be keen to explore.  I was not planning to go full expert mode and deep dive but I figured I would at least play around a bit with arm-floaties on but feet in the shallow waters xD </p>
+             <h3>Problem with GR Providers</h3>
+             <p>
+               After spending a few months abroad most GR providers send SMS warnings for additional charges to the normal tariff (i.e. budles). This becomes highly unreliable as I can not be sure as for when my account's balance goes down to 0.00€. When this happens --> NO incoming/outgoing calls.
+             </p>
+             <p>
+               Personally I top up every two months. The minimum top up is 13€ which gives me a bundle (e.g. 1000 minutes, 1.5GB, 300 SMS for 12€). Nonetheless with roaming and extra fees usage becomes unpredictable ... and its too expensive for my taste.
+             </p>
+             <p>
+               I was recently researching VoIP technology and learned a few things on how TLS and SRTP work in VoIP. I searched for providers supporting GR numbers (+30) and found quite a few. Zadarma met the above hard requirements best.
+             </p>
 
-             <img src="images/video8_tapes-filter.jpg" alt="A bunch of Video8 tapes." class="clickable" onclick="openModal(this)">
+             <h3>Provider Comparison</h3>
 
-             <h3>Equipment</h3>
-
-             <table class="equipment-table">
-               <tr>
-                 <td style="vertical-align: top;"><img src="images/cx-card.jpg" alt="CX Capture Card (White)" class="clickable" onclick="openModal(this)"></td>
-                 <td>
-                   <div class="equipment-name">CX ADC PCIe Capture Card</div>
-                   <div class="equipment-desc">Basic white variant card with CX2388x chip. Used with `cxadc` Linux driver. No mods applied yet during capture, but I experience frame dropping when it works a bit too hard (due to thermal throttling I would guess).</div>
-                 </td>
-               </tr>
-
-               <tr>
-                 <td style="vertical-align: top;">
-                   <img src="images/hitachi.jpg"
-                        alt="Hitachi VM-E565LE"
-                        class="clickable"
-                        onclick="openModal(this)"
-                        </td>
-                 <td>
-                   <div class="equipment-name">Hitachi VM-E565LE (PAL8 Camcorder)</div>
-                   <div class="equipment-desc">Used as playback for decoding Video8. Native PAL output with mono RCA audio. According to the docs using the original camcorder helps improves quality (it is the original in this case).</div>
-                 </td>
-               </tr>
-
-               <tr>
-                 <td style="vertical-align: top;"><img src="images/edirol-ua5.jpg" alt="EDIROL UA-5 Audio Interface" class="clickable" onclick="openModal(this)"></td>
-                 <td>
-                   <div class="equipment-name">EDIROL UA-5 Audio Interface</div>
-                   <div class="equipment-desc">24-bit/96kHz USB interface. Audio was recorded in 16bit/48kHz using Audacity. Runs with ALSA usb audio class drivers directly (snd_usb_audio module).</div>
-                 </td>
-               </tr>
-
+             <table border="1" cellspacing="0" cellpadding="4">
+               <thead>
+                 <tr>
+                   <th>Feature</th>
+                   <th>GR Provider</th>
+                   <th>Zadarma</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>Outgoing Calls</td>
+                   <td>Bundle + 0.024€/min</td>
+                   <td>0.034€/min (mobile), 0.019€/min (landline)</td>
+                 </tr>
+                 <tr>
+                   <td>Incoming Calls</td>
+                   <td>Bundle + 0.024€/min</td>
+                   <td>Free (via SIP client) / With call forwarding: same as outgoing</td>
+                 </tr>
+                 <tr>
+                   <td>Number Charge</td>
+                   <td>Free</td>
+                   <td>3€/month</td>
+                 </tr>
+                 <tr>
+                   <td>Number Type</td>
+                   <td>+30 69... (mobile)</td>
+                   <td>+30 2... (landline)</td>
+                 </tr>
+                 <tr>
+                   <td>Yearly Cost (100 min/month)</td>
+                   <td>78.00€</td>
+                   <td>64.97€</td>
+                 </tr>
+               </tbody>
              </table>
 
+             <h3>Setup Instructions</h3>
 
-             <p>The camcorder I used for playback was a Hitachi VM-E565LE, a PAL Video8 model with an onboard LCD screen. Based on the the official documentation using the original camera or the exact model that recorded the tape is always preferred. It is better optimised for playback especially when the tapes are old or worn which is always pretty much the case nowadays. The Hitachi camera outputs standard CVBS video through RCA and mono audio via another RCA.  CVBS is a single channel signal that combines a few elements of a video stream into a waveform.  It includes Luma (Y) which is the brightness or black-and-white portion of the image.  Chroma (C) which is the color information. This is modulated onto a subcarrier (4.43 MHz for PAL).  It also has some horizontal and vertical sync pulses used for timing as well as blanking intervals. The chroma is modulated onto a lower frequency and then summed with the luma and sync signals.  </p>
-             <img src="images/hitachi-demo-load-tape.gif" alt="Hitachi Video 8 tape load Demo GIF" width="640" height="auto">
+  <h4>Requirements</h4>
+  <ul>
+    <li>Your device can support VoIP</li>
+    <li>A GR address under your name + a document that can prove it</li>
+    <li>A valid ID or passport</li>
+    <li>A non-GR mobile number (for call FWDing)</li>
+  </ul>
 
-             <p>Initially I thought the audio was HiFi FM and tried capturing it with the CX Card and decoding it (LOL). However, after looking at the manual and reading monophonic audio (not that "mono" provides any useful information itself) something clicked and I tried to just stick the output into the audio interface and to monitor the input signal. This way I realised my camera outputs linear mono audio not HiFi FM.  So I simply captured the audio using the audio interface.</p>
-             <img src="images/e_manual_hitachi-VME565LE.png" alt="Hitachi VME565LE manual Greek page 1" class="clickable" onclick="openModal(this)">
+  <h4>How to:</h4>
+  <ol>
+    <li>
+      Create an account at
+      <a href="https://zadarma.com/en/registration/" target="_blank">zadarma.com</a>.
+      Use your non-GR mobile number for registration and select the "Standard" pricing plan. Fill in your GR address.
+      <br><img src="images/1zadarma.png" alt="Zadarma create account" class="clickable" onclick="openModal(this)">
+    </li>
+    <li>
+      <a href="https://my.zadarma.com/dirnum/active/">Order a GR virtual landline number.</a> You can select area codes such as 210 (Athens), 2310 (Thessaloniki), etc. Mobile numbers are not available. An identification process is then required. Ideally provide a GR ID/passport.  As you have used foreign number for registration (I used my DE number) you may be asked to explain... I submitted a "Tax Residence Certificate" issued by AADE:
+      <a href="https://www.aade.gr/ekdosi-pistopoiitikou-forologikis-katoikias-pfk" target="_blank">link</a>. I hid my SSN on the PDF. Be mindful that if you have already completed the process of "ΜΕΤΑΦΟΡΑ ΦΟΡΟΛΟΓΙΚΗΣ ΚΑΤΟΙΚΙΑΣ ΣΤΟ ΕΞΩΤΕΡΙΚΟ" this probably won't work as the foreign address will be registered into the system. In this case, provide another document as proof. For me at the time this process was not fully concluded therefore my GR address was still visible.
+    </li>
+    <li>Pay for a full year: 36€ (3€/month).</li>
+    <li>
+      Install a SIP client:
+      <ul>
+        <li><a href="https://zadarma.com/en/support/instructions/android/zadarma/">Zadarma APK</a></li>
+        <li><a href="https://f-droid.org/en/packages/org.linphone/">Linphone (open-source)</a></li>
+      </ul>
+      <a href="https://zadarma.com/en/support/instructions/android/">Setup guide</a>
+    </li>
+    <li>
+      Enable call FWDing in the APK or web client. Make sure that the SIP APK can run as a background process. If no network is available calls then the virtual number cannot receive calls.
+      <br><strong>Settings:</strong> Zadarma APK --> Accounts --> SIP --> Call Forwarding --> Fill in foreign mobile number. Set caller ID as your virtual GR number.
+    </li>
+  </ol>
 
-             <p>My audio interface is the EDIROL UA-5. It can record 24bit/96kHz. I bought it for 30 euro used from Kleinanzeigen. Excellent build quality, it has standard compatibility with ALSA usb audio class drivers therefore it is plug-n-play.  I recorded the audio in Audacity at 16bit/48kHz mono. Honestly, not sure what a modern > 100 euro Focusrite/Behringer/whateva would offer over this. It has even a cool top panel block diagram of the signal path hehe ;D</p>
+  <h3>Conclusion</h3>
+
+  <table border="1" cellspacing="0" cellpadding="4">
+    <thead>
+      <tr>
+        <th>Advantages</th>
+        <th>Disadvantages</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Free incoming calls via SIP</td>
+        <td>Incoming calls received via FWDing/GSM are not free (standard Zadarma rates)</td>
+      </tr>
+      <tr>
+        <td>Cheaper than GR mobile providers by approx. 16% (yearly charges)</td>
+        <td>Only landline numbers are available (+30 2...)</td>
+      </tr>
+      <tr>
+        <td>GR callers calling your GR number pay local rates</td>
+        <td>Cost may exceed standard GR provider plans depending on usage</td>
+      </tr>
+      <tr>
+        <td>Predictable cost</td>
+        <td>No mobile data therefore it may not applicable if you need that. Personally, I do not care.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</section>
+<hr>
+
+
+<section>
+  <h2>Video8 Composite Signal Capture and Decoding Using CX2388x-Based PCIe Card</h2>
+  <p>Date: 2024-04-05</p>
+
+  <p>Probably no one cares, as the <a href="https://github.com/oyvindln/vhs-decode/wiki">vhs-decode wiki</a> is already so well documented ;) ... but I decided to write this down anyway.  Mainly for future personal reference and partly to share an actual practical approach. Maybe also to showcase/provide an update of what I’ve been busy with over the last few months to my blog readers. </p>
+
+  <h3>Why</h3>
+  <p>So to start with, I had a bunch of old Video8 tapes sitting around. The majority of them being footage of me as a kid, a few other from my teenage years and some punk gigs in Thessaloniki. I did not want to invest hundreds of euro on the process so I focused on capturing/decoding them on a budget.  10 years ago a dodgy lad in Bit-Bazaar in Thessaloniki, GR told me that using actual task-specific-hardware to turn video8 tapes digital is "better".  He had a Video8-DVD Combo Recorder.  Nonetheless, this costs a lot of money, is rare, and to be honest it also abstracts away the whole signal chain.  I do not really get to see what is happening under the hood. I wanted something a bit more hands on that would let me understand what is actually coming off the tape and how it gets turned into a digital file.  After some investigation I discovered vhs-decode.  Pretty cool stuff.  Super-duper well documented.  Looking at all this through signal processing coloured glasses would be something I would be keen to explore.  I was not planning to go full expert mode and deep dive but I figured I would at least play around a bit with arm-floaties on but feet in the shallow waters xD </p>
+
+  <img src="images/video8_tapes-filter.jpg" alt="A bunch of Video8 tapes." class="clickable" onclick="openModal(this)">
+
+  <h3>Equipment</h3>
+
+  <table class="equipment-table">
+    <tr>
+      <td style="vertical-align: top;"><img src="images/cx-card.jpg" alt="CX Capture Card (White)" class="clickable" onclick="openModal(this)"></td>
+      <td>
+        <div class="equipment-name">CX ADC PCIe Capture Card</div>
+        <div class="equipment-desc">Basic white variant card with CX2388x chip. Used with `cxadc` Linux driver. No mods applied yet during capture, but I experience frame dropping when it works a bit too hard (due to thermal throttling I would guess).</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top;">
+        <img src="images/hitachi.jpg"
+             alt="Hitachi VM-E565LE"
+             class="clickable"
+             onclick="openModal(this)"
+             </td>
+      <td>
+        <div class="equipment-name">Hitachi VM-E565LE (PAL8 Camcorder)</div>
+        <div class="equipment-desc">Used as playback for decoding Video8. Native PAL output with mono RCA audio. According to the docs using the original camcorder helps improves quality (it is the original in this case).</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top;"><img src="images/edirol-ua5.jpg" alt="EDIROL UA-5 Audio Interface" class="clickable" onclick="openModal(this)"></td>
+      <td>
+        <div class="equipment-name">EDIROL UA-5 Audio Interface</div>
+        <div class="equipment-desc">24-bit/96kHz USB interface. Audio was recorded in 16bit/48kHz using Audacity. Runs with ALSA usb audio class drivers directly (snd_usb_audio module).</div>
+      </td>
+    </tr>
+
+  </table>
+
+
+  <p>The camcorder I used for playback was a Hitachi VM-E565LE, a PAL Video8 model with an onboard LCD screen. Based on the the official documentation using the original camera or the exact model that recorded the tape is always preferred. It is better optimised for playback especially when the tapes are old or worn which is always pretty much the case nowadays. The Hitachi camera outputs standard CVBS video through RCA and mono audio via another RCA.  CVBS is a single channel signal that combines a few elements of a video stream into a waveform.  It includes Luma (Y) which is the brightness or black-and-white portion of the image.  Chroma (C) which is the color information. This is modulated onto a subcarrier (4.43 MHz for PAL).  It also has some horizontal and vertical sync pulses used for timing as well as blanking intervals. The chroma is modulated onto a lower frequency and then summed with the luma and sync signals.  </p>
+  <img src="images/hitachi-demo-load-tape.gif" alt="Hitachi Video 8 tape load Demo GIF" width="640" height="auto">
+
+  <p>Initially I thought the audio was HiFi FM and tried capturing it with the CX Card and decoding it (LOL). However, after looking at the manual and reading monophonic audio (not that "mono" provides any useful information itself) something clicked and I tried to just stick the output into the audio interface and to monitor the input signal. This way I realised my camera outputs linear mono audio not HiFi FM.  So I simply captured the audio using the audio interface.</p>
+  <img src="images/e_manual_hitachi-VME565LE.png" alt="Hitachi VME565LE manual Greek page 1" class="clickable" onclick="openModal(this)">
+
+  <p>My audio interface is the EDIROL UA-5. It can record 24bit/96kHz. I bought it for 30 euro used from Kleinanzeigen. Excellent build quality, it has standard compatibility with ALSA usb audio class drivers therefore it is plug-n-play.  I recorded the audio in Audacity at 16bit/48kHz mono. Honestly, not sure what a modern > 100 euro Focusrite/Behringer/whateva would offer over this. It has even a cool top panel block diagram of the signal path hehe ;D</p>
 
 
 <h3>Video Capture: The CX Card</h3>
@@ -221,37 +361,37 @@
   <strong>Record</strong><br><br>
   Raw capture:
   <pre><code>cat /dev/cxadc0 | pv > CX_Card_28msps_8-bit.u8</code></pre>
-Or compress with FLAC:
-<pre style="white-space: pre-wrap;"><code>cat /dev/cxadc0 | flac --fast -16 --sample-rate=28636 --sign=unsigned --channels=1 --endian=little --bps=8 --blocksize=65535 --lax -f - -o capture.flac</code></pre>
-<em>Note:</em> FLAC can fail to decode if frames are corrupted... :( Safer to record raw <code>.u8</code> and compress later.
-<br>
-<br>
-<br>
+  Or compress with FLAC:
+  <pre style="white-space: pre-wrap;"><code>cat /dev/cxadc0 | flac --fast -16 --sample-rate=28636 --sign=unsigned --channels=1 --endian=little --bps=8 --blocksize=65535 --lax -f - -o capture.flac</code></pre>
+  <em>Note:</em> FLAC can fail to decode if frames are corrupted... :( Safer to record raw <code>.u8</code> and compress later.
+  <br>
+  <br>
+  <br>
 
-<strong>Decode</strong><br><br>
-Once recording is done, decode with:
-<pre><code>cvbs-decode --debug --threads 8 --system pal -A --cxadc capture.u8 capture_output</code></pre>
-This produces a <code>.tbc</code> file.
-<br>
-<br>
-<br>
+  <strong>Decode</strong><br><br>
+  Once recording is done, decode with:
+  <pre><code>cvbs-decode --debug --threads 8 --system pal -A --cxadc capture.u8 capture_output</code></pre>
+  This produces a <code>.tbc</code> file.
+  <br>
+  <br>
+  <br>
 
-<strong>VBI Processing</strong><br><br>
-<pre><code>ld-process-vbi capture_output.tbc</code></pre>
-<br>
-<br>
+  <strong>VBI Processing</strong><br><br>
+  <pre><code>ld-process-vbi capture_output.tbc</code></pre>
+  <br>
+  <br>
 
-<strong>Video Export</strong><br><br>
-<pre><code>ld-chroma-decoder --decoder transform3d -p y4m -q capture_output.tbc capture_output.mov</code></pre>
-<br>
-<br>
+  <strong>Video Export</strong><br><br>
+  <pre><code>ld-chroma-decoder --decoder transform3d -p y4m -q capture_output.tbc capture_output.mov</code></pre>
+  <br>
+  <br>
 
-<strong>Sync Audio</strong><br><br>
-In a video editor (e.g., Kdenlive) align the first visible frame with the first audible signal. Use tape cuts or loud audio transients to help with synchronisation. On one tape in my collection I smack hard an anvil (I hope that is the correct word in English/I mean "αμόνι" in Greek) as a 3-year-old with a hammer.  That was perfect for syncing.  My export settings:<br><br>
-<strong>Video codec:</strong> HuffYUV (lossless)
-<br>
-<strong>Audio codec:</strong> FLAC
-<br><br>
+  <strong>Sync Audio</strong><br><br>
+  In a video editor (e.g., Kdenlive) align the first visible frame with the first audible signal. Use tape cuts or loud audio transients to help with synchronisation. On one tape in my collection I smack hard an anvil (I hope that is the correct word in English/I mean "αμόνι" in Greek) as a 3-year-old with a hammer.  That was perfect for syncing.  My export settings:<br><br>
+  <strong>Video codec:</strong> HuffYUV (lossless)
+  <br>
+  <strong>Audio codec:</strong> FLAC
+  <br><br>
 </ol>
 <br>
 
@@ -367,7 +507,7 @@ In a video editor (e.g., Kdenlive) align the first visible frame with the first 
 
 
       <h2>Temperature control during fermentation</h2>
-      <p>That summer I spent at my parents’ house. It was extremely hot throughout Greece and going out was impossible. So I thought I’d spend time brewing my birthday beer. The main issue with the heat was fermentation temperature. For an IPA, I wouldn’t risk it going above 21-22°C, especially a heavily hoppy one. My dad has bees and used a metallic stainless steel tank as a honey extractor years ago. I took it and filled it halfway with ice-cold water. Then I placed it in the basement, which is naturally cooler than the ground floor. I submerged the fermentation bucket in the ice-water-filled tank and covered the top of the fermentation bucket with water-soaked towels. Below there is a picture of myself cleaning the metallic tank to use it for the first time. The first time I used the tank this way was to cool down the fermentation temperature of a Weizen beer to 17°C, to encourage “clove” flavors rather than “banana.” Initially, I considered using it as an all-grain container but never moved forward with this plan.</p>
+      <p>That summer I spent at my parents’ house. It was extremely hot throughout GR and going out was impossible. So I thought I’d spend time brewing my birthday beer. The main issue with the heat was fermentation temperature. For an IPA, I wouldn’t risk it going above 21-22°C, especially a heavily hoppy one. My dad has bees and used a metallic stainless steel tank as a honey extractor years ago. I took it and filled it halfway with ice-cold water. Then I placed it in the basement, which is naturally cooler than the ground floor. I submerged the fermentation bucket in the ice-water-filled tank and covered the top of the fermentation bucket with water-soaked towels. Below there is a picture of myself cleaning the metallic tank to use it for the first time. The first time I used the tank this way was to cool down the fermentation temperature of a Weizen beer to 17°C, to encourage “clove” flavors rather than “banana.” Initially, I considered using it as an all-grain container but never moved forward with this plan.</p>
       <img src="images/ol1.jpg" alt="Metallic tank as a cooling method" class="clickable" onclick="openModal(this)"></p>
 
 <p>Metallic tank as a cooling method in the fermentation.</p>
@@ -378,9 +518,9 @@ In a video editor (e.g., Kdenlive) align the first visible frame with the first 
 
 
 <h2>Dry hopping</h2>
-<p>Some words about the dry hopping.  To wrap up other than the metallic tank DIY stuff above I did not do anything fancy throughout the fermentation and dry hopping. In the journey of hop experimentation and while I would not be able to distinguish one hop variety from another when sampling NEIPAS or heavy-hopped TIPAs or DIPAs I decided for the dry hopping to be of a single variety (almost).  I don´t know if that can be considered NEIPA in the end but yea.  Nevertheless, I used 30 gr simcoe for dry hopping with some remains (approximately 20 gr) of cascade from the whirlpool. Cascade was cheap, simcoe was expensive and I remeber it killed my wallet as of the time being on very tight student budget and living in Greece where for some reason shipping prices are outrageous.  Therefore I guess it kindda makes sense why I didn´t want to whirlpool the good/expensive stuff.  Poor man´s NEIPA it is then!.  Below you can see the expected flavour pallete created by the combination of the hops, unfortuantely it is in Greek, but overall simcoe was expected to provide some floral, citrus, and berry notes while cascade was adding some mint while enhancing the citrus and berry notes. Keep in mind that simcoe is the dominant here as it was used in higher quantity.  I did not take any precations to mitigate oxidisation other than manifesting for it, I guess I was lucky not to end up with amber coloured oxidised beer. Well, that´s all about it really.</p>
+<p>Some words about the dry hopping.  To wrap up other than the metallic tank DIY stuff above I did not do anything fancy throughout the fermentation and dry hopping. In the journey of hop experimentation and while I would not be able to distinguish one hop variety from another when sampling NEIPAS or heavy-hopped TIPAs or DIPAs I decided for the dry hopping to be of a single variety (almost).  I don´t know if that can be considered NEIPA in the end but yea.  Nevertheless, I used 30 gr simcoe for dry hopping with some remains (approximately 20 gr) of cascade from the whirlpool. Cascade was cheap, simcoe was expensive and I remeber it killed my wallet as of the time being on very tight student budget and living in GR where for some reason shipping prices are outrageous.  Therefore I guess it kindda makes sense why I didn´t want to whirlpool the good/expensive stuff.  Poor man´s NEIPA it is then!.  Below you can see the expected flavour pallete created by the combination of the hops, unfortuantely it is in GR, but overall simcoe was expected to provide some floral, citrus, and berry notes while cascade was adding some mint while enhancing the citrus and berry notes. Keep in mind that simcoe is the dominant here as it was used in higher quantity.  I did not take any precations to mitigate oxidisation other than manifesting for it, I guess I was lucky not to end up with amber coloured oxidised beer. Well, that´s all about it really.</p>
 
-<p>Some words about the dry hopping. Aside from the DIY metallic tank setup, I didn’t do anything fancy during fermentation and dry hopping. In experimenting with hops and while I wouldn’t distinguish one hop variety from another when sampling NEIPAs or heavily hopped TIPAs or DIPAs, I decided on a single variety (mostly) for the dry hopping. I don’t know if that can be considered NEIPA, but well... Regardless I used 30 gr Simcoe for dry hopping with some remnants (about 20 gr) of Cascade from the whirlpool. Cascade was cheap, Simcoe was expensive, and I remember it strained my wallet as I was on a tight student budget in Greece where shipping prices are -for some reason- high. So I guess that’s why I didn’t want to whirlpool the expensive stuff making it a poor man’s NEIPA I guess! Below, you can see the expected flavor palette created by the combination of hops. Simcoe was expected to provide floral, citrus, and berry notes, while Cascade added some mint, enhancing the citrus and berry notes. Simcoe was dominant here as it was used in higher quantity. I took no specific precautions to prevent oxidation other than manifesting it. Luckily it didn’t end up as amber-coloured, oxidised beer. That’s about it, really.</p>
+<p>Some words about the dry hopping. Aside from the DIY metallic tank setup, I didn’t do anything fancy during fermentation and dry hopping. In experimenting with hops and while I wouldn’t distinguish one hop variety from another when sampling NEIPAs or heavily hopped TIPAs or DIPAs, I decided on a single variety (mostly) for the dry hopping. I don’t know if that can be considered NEIPA, but well... Regardless I used 30 gr Simcoe for dry hopping with some remnants (about 20 gr) of Cascade from the whirlpool. Cascade was cheap, Simcoe was expensive, and I remember it strained my wallet as I was on a tight student budget in GR where shipping prices are -for some reason- high. So I guess that’s why I didn’t want to whirlpool the expensive stuff making it a poor man’s NEIPA I guess! Below, you can see the expected flavor palette created by the combination of hops. Simcoe was expected to provide floral, citrus, and berry notes, while Cascade added some mint, enhancing the citrus and berry notes. Simcoe was dominant here as it was used in higher quantity. I took no specific precautions to prevent oxidation other than manifesting it. Luckily it didn’t end up as amber-coloured, oxidised beer. That’s about it, really.</p>
 <img src="images/simcoe.png" alt="Simcoe Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
 <p>Simcoe: expected dry hopping flavour pallete.</p>
 <img src="images/cascade.png" alt="Cascade Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
@@ -389,7 +529,7 @@ In a video editor (e.g., Kdenlive) align the first visible frame with the first 
 <p>An important note here is that I took a lot of precautionary measures using Chemipro OXI disinfectant solution throughout fermentation, dry hopping, and transferring from one container to another. I systematically disinfected the fermentation bucket, the metallic tank for the "Bain-marie," the tubes, and finally the bottles to prevent any yeast infections.</p>
 
 <h2>The important bit... sampling!</h2>
-<p>At the birthday party, everyone loved the beer. People knew it was homebrewed and were surprised by the extra fresh kick it had. John my pal I used to brew with, described it as "the beginning of a new era in our collaborative homebrewing". It’s sad that we both left Greece a few months later and haven’t brewed since. Hopefully, we’ll get back to it! I still remember his excitement and feedback from when we first tried it.</p>
+<p>At the birthday party, everyone loved the beer. People knew it was homebrewed and were surprised by the extra fresh kick it had. John my pal I used to brew with, described it as "the beginning of a new era in our collaborative homebrewing". It’s sad that we both left GR a few months later and haven’t brewed since. Hopefully, we’ll get back to it! I still remember his excitement and feedback from when we first tried it.</p>
 <p>To wrap up, I can confidently say that it was pretty close to a standard session NEIPA, given the lower expected ABV of 4.4%. Fresh, very strong citrus aroma and kick, mild bitterness on the finish / back end, refreshing, good levels of carbonation, and generally rich in its palette, maybe a bit “aggressive.” Unfortunately, by the second week, it started to flatten and became more bitter as the hops particles settled in the bottles. By the 4th week, it had a strong hops aftertaste and was more bitter, but it was still drinkable. Cheers!</p>
 
 <h2>Recipe</h2>
