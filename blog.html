@@ -20,7 +20,7 @@
         text-align: center;
         padding: 20px;
         background-color: black;
-        color: white;
+        v        color: white;
         border-bottom: 1px solid #ccc;
       }
 
@@ -53,49 +53,49 @@
         top: 0;
         width: 100%; /* Full width */
         height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
       }
 
       .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%; /* Could be more or less, depending on screen size */
-        max-width: 700px; /* Set a maximum width */
-        object-fit: contain;
+      margin: auto;
+      display: block;
+      width: 80%; /* Could be more or less, depending on screen size */
+      max-width: 700px; /* Set a maximum width */
+      object-fit: contain;
       }
 
       .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #fff;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
       }
 
       .close:hover,
       .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
       }
 
       .lyrics-box {
-        background-color: #f0f0f0;
-        padding: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 20px;
-        text-align: center;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      text-align: center;
       }
 
       iframe {
-        width: 100%; /* Makes it expand to fit the main container */
-        max-width: 800px; /* Set a reasonable max width */
-        height: 450px; /* Adjust height proportionally */
-        border: none; /* Optional: removes the default border */
+      width: 100%; /* Makes it expand to fit the main container */
+      max-width: 800px; /* Set a reasonable max width */
+      height: 450px; /* Adjust height proportionally */
+      border: none; /* Optional: removes the default border */
       }
     </style>
   </head>
@@ -120,76 +120,274 @@
            -->
 
            <section>
-             <h2>How to: Set up VoIP GR virtual number abroad</h2>
-             <p>Date: 2025-05-23</p>
-             <p>If you have been swearing non stop because the ridiculously high telephony service fees but only require a GR phone number then this is for you ...
-               This method is intended for individuals living abroad who still need a GR number for receiving calls from GR - at reasonable rates -.  Or just maintaining a GR number (for cheap) in order to accessing services such as TaxisNet or online banking requiring it.
-             </p>
-             <p>The problem: AΠO ΣHMEPA IΣXYOYN EΠIΠΛEON XPEΩΣEIΣ ΛOΓΩ MONIMHΣ ΠEPIAΓΩΓHΣ ΓIA XPHΣH TOY ΠPOΓPAMMATOΣ ΣAΣ ENTOΣ EE... / aka they want to charge me extra as the number is only used roaming only for too long.
-             </p>
-             <br><img src="images/voip_setup_diag.png" alt="voip action diagram" class="clickable" onclick="openModal(this)">
+             <h2>Μεταφορά φορολογικής κατοικίας στο εξωτερικό ASAP και με ελαχιστοποίηση κόστους, χρόνου, και ταλαίπας </h2>
+             <p>Date: 2025-06-09</p>
 
-             <h3>Hard requirements</h3>
-             <ul>
-               <li>The number must have a GR prefix (+30). Mobile or landline I do not care.</li>
-               <li>Maximum cost: 7€/month</li>
-               <li>Minimum 100 minutes/ month (50 to mobile, 50 to landline)</li>
-               <li>People in GR must be able to call me at local rates</li>
-               <li>Supports some type of encryption (TLS/SRTP)</li>
-               <li>Non dodgy services</li>
-             </ul>
+             <p><strong>Status:</strong> Από συνομιλίες με γνωστούς κατάλαβα ότι κάθε ΔΟΥ εφαρμόζει διαφορετικά κριτήρια. Οπότε το επίσημο έγγραφο <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a> πάει άπατο.</p>
 
-             <h3>Problem with GR Providers</h3>
-             <p>
-               After spending a few months abroad most GR providers send SMS warnings for additional charges to the normal tariff (i.e. budles). This becomes highly unreliable as I can not be sure as for when my account's balance goes down to 0.00€. When this happens --> NO incoming/outgoing calls.
-             </p>
-             <p>
-               Personally I top up every two months. The minimum top up is 13€ which gives me a bundle (e.g. 1000 minutes, 1.5GB, 300 SMS for 12€). Nonetheless with roaming and extra fees usage becomes unpredictable ... and its too expensive for my taste.
-             </p>
-             <p>
-               I was recently researching VoIP technology and learned a few things on how TLS and SRTP work in VoIP. I searched for providers supporting GR numbers (+30) and found quite a few. Zadarma met the above hard requirements best.
+             <p><strong>Aim:</strong> Το άρθρο αυτό περιλαμβάνει tips & tricks βασισμένα στην προσωπική μου εμπειρία μεταφοράς φορολογικής κατοικίας από Ελλάδα στη Γερμανία. Τουτέστιν δεν είμαι φοροτεχνικός, δικηγόρος, δημόσιος υπάλληλος, ούτε εχω PhD στην Ελλ. Φορολογία αν λανθασμένα έδωσα αυτήν την εντύπωση. Είμαι απλώς ένας τύπος που έπρεπε να το κάνει μόνος του και δυσκολεύτηκε να βρει πρακτική καθοδήγηση online.</p>
+
+             <p>Μια καλή θεωρητική πηγή είναι το άρθρο της InnLaw: <a href="https://innlaw.gr/metafora-forologikis-katoikias/">innlaw.gr</a>. Δεν τους γνωρίζω προσωπικά και δεν προτείνω ούτε απορρίπτω τις υπηρεσίες τους.  Παραθέτω το άρθρο ως πιθανή αφετηρία.  Εναλλακτικά για τα γερά στομάχια υπάρχει και η <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a>.</p>
+
+             <p><strong>DISCLAIMER:</strong> Ζω μόνος μου στο εξωτερικό χωρίς οικογένεια ή περιουσία/έσοδα από Ελλάδες. Το φορολογικό μου προφίλ είναι όσο πιο straight forward γίνεται. Η εμπειρία μου είναι 100% προσωπική, και οι πληροφορίες που ακολουθούν βασίζονται αποκλειστικά σε αυτή. Δεν φέρω καμία ευθύνη για τυχόν απόκλιση από τις δικές σου ανάγκες ή την πραγματικότητα που θα αντιμετωπίσεις, ούτε και τυχόν πρόστιμα φυσικά xD</p>
+             <p><strong>DISCLAIMER 2:</strong> Γενικά, η διαδικασία παίρνει τίγκα χρόνο. Προγραμμάτισε τουλάχιστον 5–6 μήνες περιθώριο αν χρειάζεται να έχει ολοκληρωθεί έως συγκεκριμένη ημερομηνία.</p>
+             <p><strong>DISCLAIMER 3:</strong> Πρέπει να έχεις συμπληρώσει τουλάχιστον 183 ημέρες στη χώρα αυτή μέσα σε ορισμένο φορολογικό έτος (και να μπορείς να το αποδείξεις)</p>
+             <p><strong>DISCLAIMER 4:</strong> Πρέπει να είσαι έτοιμος να πληρώσεις ένα Χ ποσό: Η διαδικασία στην Γερμανία μου κόστισε γύρω στα 120 ευρώ (μεταφράσεις, apostille)</p>
+
+             <p>Η διαδικασία περιλαμβάνει 2 αιτήματα. <i>UPDATE 250614: Τώρα από ότι καταλαβαίνω η διαδικασία συμπτύχθηκε σε ένα αίτημα που κάνει τα πράγματα απλούστερα I guess (?)</i>
+               <ol>
+                 <li>Κάτοικοι Εξωτερικού - αίτηση μεταβολής φορολογικής κατοικίας. <strong>Deadline: 10/03/2025 για φορολογικό έτος 2024</strong>.</li>
+                 <li>Κάτοικοι Εξωτερικού - κατάθεση δικαιολογητικών για την μεταβολή φορολογικής κατοικίας. <strong>Deadline: 10/09/2025 για φορολογικό έτος 2024</strong>.</li>
+               </ol>
              </p>
 
-             <h3>Provider Comparison</h3>
+             <h3>Κάτοικοι Εξωτερικού – Αίτηση μεταβολής φορολογικής κατοικίας</h3>
+             <p>Βάσει της <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a>, η αίτηση ζητά τα παρακάτω. Ακολουθεί πίνακας με τα έγγραφα και βασικές οδηγίες:</p>
 
-             <table border="1" cellspacing="0" cellpadding="4">
+             <table border="1" cellpadding="8" cellspacing="0">
                <thead>
                  <tr>
-                   <th>Feature</th>
-                   <th>GR Provider</th>
-                   <th>Zadarma</th>
+                   <th>Έγγραφο</th>
+                   <th>Σημειώσεις</th>
                  </tr>
                </thead>
                <tbody>
                  <tr>
-                   <td>Outgoing Calls</td>
-                   <td>Bundle + 0.024€/min</td>
-                   <td>0.034€/min (mobile), 0.019€/min (landline)</td>
-                 </tr>
-                 <tr>
-                   <td>Incoming Calls</td>
-                   <td>Bundle + 0.024€/min</td>
-                   <td>Free (via SIP client) / With call forwarding: same as outgoing</td>
-                 </tr>
-                 <tr>
-                   <td>Number Charge</td>
-                   <td>Free</td>
-                   <td>3€/month</td>
-                 </tr>
-                 <tr>
-                   <td>Number Type</td>
-                   <td>+30 69... (mobile)</td>
-                   <td>+30 2... (landline)</td>
-                 </tr>
-                 <tr>
-                   <td>Yearly Cost (100 min/month)</td>
-                   <td>78.00€</td>
-                   <td>64.97€</td>
-                 </tr>
-               </tbody>
-             </table>
+                   <td><a href="https://www.aade.gr/sites/default/files/neaentypa/A110.pdf" target="_blank">A110 – Αίτηση Μητρώου</a></td>
+                   <td>
+                     1. Συμπλήρωσε το extended PDF και πάτα "Εκτύπωση" στην 1η σελίδα για export.<br>
+                     2. Απαιτείται φορολογικός εκπρόσωπος με ΑΦΜ (π.χ. γονείς, φίλοι).<br>
+                     3. Αναγράφεις λόγο (π.χ. μεταβολή κατοικίας) στο πεδίο "Αιτία έκδοσης".<br>
+                     <br><img src="images/aitia_ekdosis.png" alt="adeia ekdosis" class="clickable" onclick="openModal(this)">
+                     4. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a>
+</td>
+</tr>
+<tr>
+  <td><a href="https://www.aade.gr/sites/default/files/2021-09/D210.pdf" target="_blank">Δ210 – Δήλωση Μεταβολής Στοιχείων</a></td>
+  <td>Συμπληρώνεται από εσένα για αλλαγή διεύθυνσης/κατοικίας. Επομένως συμπληρώνεις τα σχετικά πεδία για το Β (σελ. 2 μεταβολή ατομικών στοιχείων).  Μη ξεχάσεις τα στοιχεία του φορολογικού εκπροσόπου στο 6. Στοιχεία σχετιζόμενου ΑΦΜ. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a> </td>
+</tr>
+<tr>
+  <td><a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/ekdose-upeuthunes-deloses" target="_blank">Υπεύθυνη Δήλωση Αποδοχής Εκπροσώπησης</a></td>
+  <td>Συμπληρώνεται από τον εκπρόσωπο. Αναφέρει ότι αποδέχεται τον ορισμό ως φορολογικός εκπρόσωπος.  Κείμενο δήλωσης: Αποδέχομαι τον ορισμό μου ως φορολογικού εκπροσώπου στην Ελλάδα του [ΟΝΟΜΑ ΕΠΩΝΥΜΟ ΣΟΥ], με ΑΦΜ [ΑΦΜ σου], ΔΟΥ: [ΔΟΥ ΣΟΥ], ΑΔΤ [ΑΡΙΜΟΣ ΔΕΛΤΙΟΥ ΤΑΥΤΟΤΗΤΑΣ ΣΟΥ], που κατοικεί στην [ΠΟΛΗ ΕΞΩΤΕΡΙΚΟΥ ΠΟΥ ΜΕΝΕΙΣ] της [ΧΩΡΑΣ ΠΟΥ ΜΕΝΕΙΣ]"</td>
+</tr>
+<tr>
+  <td><a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/ekdose-upeuthunes-deloses" target="_blank">Υπεύθυνη Δήλωση Ορισμού Εκπροσώπου</a></td>
+  <td>Συμπληρώνεται από εσένα. Κείμενο δήλωσης: "Ορίζω ως φορολογικό μου εκπρόσωπο στην Ελλάδα τον/την [ΟΝΟΜΑ ΕΠΩΝΥΜΟ] του [ΟΝΟΜΑ ΠΑΤΡΟΣ] με Α.Φ.Μ.: [ΑΦΜ ΕΚΠΡΟΣΩΠΟΥ] ∆.Ο.Υ.: [ΔΟΥ] κάτοικο: [ΠΟΛΗ] οδός - αριθμός: [ΟΔΟΣ ΑΡΙΘΜΟΣ]"</td>
+</tr>
+</tbody>
+</table>
 
-             <h3>Setup Instructions</h3>
+<p>Όταν έχεις έτοιμα όλα τα έγγραφα για την "Κάτοικοι Εξωτερικού – Αίτηση μεταβολής φορολογικής κατοικίας" δημιουργείς <a href="https://www1.aade.gr/saadekef/eticketaade" target="_blank">νέο αίτημα στην ΑΑΔΕ</a>
+  <br>
+  Νεο αίτημα > Φορολογία > Για εμένα > Θεματική ομάδα: Εισόδημα,
+  <br>Διαδικασία: Κάτοικοι εξωτερικού - διαδικασία μεταβολής φορολογικής κατοικίας,
+  <br>Υπηρεσία Υποβολής Αιτήματος: ΔΟΥ που είσαι εγγεγραμμένος,
+  <br>Τμήμα Υπηρεσίας Υποβολής: Έχει 1 μόνο entry. Οπότε αυτό.
+  <br><img src="images/ta-aitimata-mou.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 80%;">
+  <br>Αίτημα (Βήμα 4): Αιτούμαι την αναγνώριση της μεταβολής της φορολογικής μου κατοικίας ως κάτοικος εξωτερικού. Μέσω του "Επιλέξτε" κάνε upload όλα τα δικαιολογητικά σε PDF.
+  <br>Σε επόμενο χρόνο θα σε ενημερώσουν για το τι δεν τους αρέσει και θα πρέπει να κάνεις τις διορθώσεις. Μπορείς να τσεκάρεις <a href="https://www1.aade.gr/saadekef/eticketaade/minimata" target="_blank">τα αιτήματά μου</a> αν και κανονικά σκάει email όταν έχουν απαντήσει.
+</p>
+
+
+<h3>Κάτοικοι Εξωτερικού - κατάθεση δικαιολογητικών για μεταβολή φορολογικής κατοικίας</h3>
+<p>Η στρατηγική μου ήταν να ετοιμάσω πρώτα τα στάνταρ έντυπα, χωρίς να προτρέξω σε μεταφράσεις και apostille και μου φύγουν 500.000€  χωρίς να έχω πάρει το ΟΚ.</p>
+
+<p><strong>Γενικές σημειώσεις:</strong></p>
+<ul>
+  <li>Τα πεδία με διακεκομμένη γραμμή στα έντυπα Μ0, Μ1, Μ7 είναι για την υπηρεσία. Δεν τα συμπληρώνεις.</li>
+  <li>Όλα τα έντυπα Μ έχουν οδηγίες στην τελευταία σελίδα. Διάβασέ τες.</li>
+</ul>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Έγγραφο</th>
+      <th>Σημειώσεις</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://www.aade.gr/sites/default/files/2017-01/M0.pdf" target="_blank">Μ0</a></td>
+      <td>
+        ΘΕΜΑ: ΜΕΤΑΦΟΡΑ ΣΕ ΔΟΥ ΚΑΤΟΙΚΩΝ ΕΞΩΤΕΡΙΚΟΥ ΚΑΙ ΟΡΙΣΜΟΣ ΦΟΡΟΛΟΓΙΚΟΥ ΕΚΠΡΟΣΩΠΟΥ.
+        <br>
+        ΣΥΝΗΜΜΕΝΑ: Μ1, Μ7,
+        <br>τα παρακάτω πεδία τα άφησα κενά:
+        <br>
+        <img src="images/m0.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 30%;">
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://www.aade.gr/sites/default/files/2017-01/M1.pdf" target="_blank">Μ1</a></td>
+      <td>Συμπλήρωσε μόνο τα πεδία α, γ (μόνο το επάγγελμα), και ε.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.aade.gr/sites/default/files/2017-01/M7.pdf" target="_blank">Μ7</a></td>
+      <td>Έναρξη: Χ.
+        <br>
+        Είδος σχέσης: ΦΟΡΟΛΟΓΙΚΟΣ ΕΚΠΡΟΣΩΠΟΣ ΑΡΘΡ 8 ΚΦΔ / ΠΡΩΗΝ ΑΝΤΙΚΛΗΤΟΣ.
+        <br>
+        Συνυποβάλλεται με δήλωση: Μεταβολής Ατ. Στοιχείων.</td>
+    </tr>
+    <tr>
+      <td>Πιστοποιητικό εργασίας</td>
+      <td>Π.χ. μισθοδοσία, βεβαίωση από εργοδότη. Σε πρώτη φάση έκανα ένα overlay translation του εγγράφου με OCR SW. Π.χ. Google Lens. Note: this may raise concerns for sensitive data/privacy but I could not find an OCR tool that performs overlay translation without relying on the Google Translate API... :'(  Προχώρησα σε επίσημη μετάφραση μετά από επιβεβαίωση του υπαλλήλου της ΔΟΥ για την ορθότητα του εγγράφου.
+      </td>
+    </tr>
+    <tr>
+      <td>Πρόσφατο έγγραφο από το δήμο που να πιστοποιείται η ημερομηνία εγγραφής/εγκατάστασης</td>
+      <td>Για Γερμανία ένα παράδειγμα είναι το Anmeldung.  Overlay translation με OCR για αρχή και επίσημη μετάφραση μετά την επιβεβαίωση.</td>
+    </tr>
+    <tr>
+      <td>Πιστοποιητικό φορολογικής κατοικίας (ΠΦΚ) </td>
+      <td><a href="https://www.bzst.de/DE/Service/SteuerlichesInfocenter/Ausl_Formulare/auslaendische_formulare_node.html#js-toc-entry2" target="_blank">hyperlink για Γερμανία Antrag auf Erteilung einer Ansässigkeitsbescheinigung deutsch-englische Sprachfassung</a> Απαιτείται apostille και <strong>ΜΕΤΑ</strong> μετάφραση. Για apostille στην Δρέσδη: <a href="https://www.lds.sachsen.de/soziales/?ID=5589&art_param=512" target="_blank">Landesdirektion Sachsen</a>.  Για αλλα Bundesländer --> no idea</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<p>Όταν έχεις έτοιμο ένα αξιοπρεπή αριθμό από τα έγγραφα που απαιτούνται για την "Κάτοικοι Εξωτερικού – κατάθεση δικαιολογητικών για μεταβολή φορολογικής κατοικίας" δημιουργείς <a href="https://www1.aade.gr/saadekef/eticketaade" target="_blank">νέο αίτημα στην ΑΑΔΕ</a>. <i>UPDATE 250614:Νομίζω ότι πλέον μπορεί να γίνει στο ίδιο αίτημα με την αίτηση.</i></p>
+<p>Στέλνεις ότι έχεις διαθέσιμο και γράφεις στο μήνυμα αιτήματος μια παράκληση για αξιολόγηση ως προς την ορθότητα.  Παραθέτω ένα παράδειγμα:</p>
+
+<br>
+
+<fieldset style="border: 1px solid #ccc; padding: 1em; border-radius: 5px; background-color: #f9f9f9;">
+  <legend><strong>Παράδειγμα μηνύματος για έλεγχο δικαιολογητικών</strong></legend>
+  <pre style="white-space: pre-wrap; font-family: inherit;">
+    Αξιότιμοι κύριοι/κυρίες,
+
+    Παρακαλώ επιβεβαιώστε αν τα παρακάτω δικαιολογητικά είναι πλήρη για τη διαδικασία μεταβολής της φορολογικής μου κατοικίας από την Ελλάδα στην Γερμανία.
+
+    Υποβαλλόμενα έντυπα:
+    - M0, M1, M7
+    - ΠΦΚ Γερμανικά/Αγγλικά / Ansässigkeitsbescheinigung, ανεπίσημη μετάφραση
+    - Πιστοποιητικό εργασίας, ανεπίσημη μετάφραση
+    - Πρόσφατο έγγραφο από το δήμο που να πιστοποιείται η ημερομηνία εγγραφής/εγκατάστασης / Anmeldung, ανεπίσημη μετάφραση
+
+    Ερωτήσεις:
+    1. Απαιτούνται επιπλέον έγγραφα πέρα από τα προαναφερθέντα; Αν ναι, ποια;
+    2. Σε ποια έγγραφα απαιτείται σφραγίδα Apostille;
+
+    Θα μπορούσατε να εξετάσετε τα υποβαλλόμενα δικαιολογητικά και να μου επιβεβαιώσετε ότι είναι σωστά;
+    Επισημαίνω ότι τα έγγραφα που επισυνάπτω περιλαμβάνουν ανεπίσημη μετάφραση.
+    Αναμένω την επιβεβαίωσή σας για να προχωρήσω στην επίσημη μετάφραση.
+
+    Ευχαριστώ εκ των προτέρων.
+
+    Με εκτίμηση,
+    [ΟΝΟΜΑ ΕΠΩΝΥΜΟ]
+  </pre>
+</fieldset>
+
+<p>Σε επόμενο χρόνο θα ενημερώσουν για την ορθότητα και θα μπορείς να προχωρήσεις σε μεταφράσεις, apostille και λοιπά. Μπορεί να στείλουν πληροφοριακό έντυπο με το τι ισχύει για την συγκεκριμένη ΔΟΥ.  Είναι σημαντικό να το διαβάσεις γιατί η διαδικασία διαφέρει από ΔΟΥ σε ΔΟΥ.  Καλό θα ήταν να μάθεις και αν η μετάφραση απαιτείται να γίνει μέσω "Ορκωτού Μεταφραστή". Αν ναι βρήκα <a href="https://www.mfa.gr/germany/eservices/katalogos-orkoton-metaphraston" target="_blank">έναν κατάλογο για Γερμανία</a>. Για άλλες χώρες --> No idea.</p>
+
+<h3>Εργαλεία που ίσως φανούν χρήσιμα</h3>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Εργαλείο</th>
+      <th>Χρήση</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/xournalpp/xournalpp" target="_blank">Xournal++</a></td>
+      <td>Overlay text on PDFs, e.g. M0, M1, M7</td>
+    </tr>
+    <tr>
+      <td><a href="https://qpdf.readthedocs.io/en/stable/" target="_blank">qpdf</a></td>
+      <td>PDF manipulation, Split / merge PDF files</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Fun Fact για κλείσιμο</h3>
+<p>Αρκετοί υπάλληλοι στις ΔΟΥ απαντούν μόνιμα με ΚΕΦΑΛΑΙΑ.  Μετά από μερικές νύχτες υπερανάλυσης κατέληξα σε 3 πιθανούς λόγους:
+  <ol>
+    <li>Τα κεφαλαία καταργούν την ανάγκη για τόνους = πιο γρήγορη πληκτρολόγηση;</li>
+    <li>Μπορεί να είναι μια μορφή “διοικητικής επισημότητας”;</li>
+    <li>ΑΠΛΩΣ ΣΟΥ ΦΩΝΑΖΟΥΝ ;;;</li>
+  </ol>
+</p>
+
+<strong>Καλή τύχη!</strong>
+
+</section>
+
+
+<section>
+  <h2>How to: Set up VoIP GR virtual number abroad</h2>
+  <p>Date: 2025-05-23</p>
+  <p>If you have been swearing non stop because the ridiculously high telephony service fees but only require a GR phone number then this is for you ...
+    This method is intended for individuals living abroad who still need a GR number for receiving calls from GR - at reasonable rates -.  Or just maintaining a GR number (for cheap) in order to accessing services such as TaxisNet or online banking requiring it.
+  </p>
+  <p>The problem: AΠO ΣHMEPA IΣXYOYN EΠIΠΛEON XPEΩΣEIΣ ΛOΓΩ MONIMHΣ ΠEPIAΓΩΓHΣ ΓIA XPHΣH TOY ΠPOΓPAMMATOΣ ΣAΣ ENTOΣ EE... / aka they want to charge me extra as the number is only used roaming only for too long.
+  </p>
+  <br><img src="images/voip_setup_diag.png" alt="voip action diagram" class="clickable" onclick="openModal(this)">
+
+  <h3>Hard requirements</h3>
+  <ul>
+    <li>The number must have a GR prefix (+30). Mobile or landline I do not care.</li>
+    <li>Maximum cost: 7€/month</li>
+    <li>Minimum 100 minutes/ month (50 to mobile, 50 to landline)</li>
+    <li>People in GR must be able to call me at local rates</li>
+    <li>Supports some type of encryption (TLS/SRTP)</li>
+    <li>Non dodgy services</li>
+  </ul>
+
+  <h3>Problem with GR Providers</h3>
+  <p>
+    After spending a few months abroad most GR providers send SMS warnings for additional charges to the normal tariff (i.e. budles). This becomes highly unreliable as I can not be sure as for when my account&rsquo;s balance goes down to 0.00€. When this happens --> NO incoming/outgoing calls.
+  </p>
+  <p>
+    Personally I top up every two months. The minimum top up is 13€ which gives me a bundle (e.g. 1000 minutes, 1.5GB, 300 SMS for 12€). Nonetheless with roaming and extra fees usage becomes unpredictable ... and its too expensive for my taste.
+  </p>
+  <p>
+    I was recently researching VoIP technology and learned a few things on how TLS and SRTP work in VoIP. I searched for providers supporting GR numbers (+30) and found quite a few. Zadarma met the above hard requirements best.
+  </p>
+
+  <h3>Provider Comparison</h3>
+
+  <table border="1" cellspacing="0" cellpadding="4">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>GR Provider</th>
+        <th>Zadarma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Outgoing Calls</td>
+        <td>Bundle + 0.024€/min</td>
+        <td>0.034€/min (mobile), 0.019€/min (landline)</td>
+      </tr>
+      <tr>
+        <td>Incoming Calls</td>
+        <td>Bundle + 0.024€/min</td>
+        <td>Free (via SIP client) / With call forwarding: same as outgoing</td>
+      </tr>
+      <tr>
+        <td>Number Charge</td>
+        <td>Free</td>
+        <td>3€/month</td>
+      </tr>
+      <tr>
+        <td>Number Type</td>
+        <td>+30 69... (mobile)</td>
+        <td>+30 2... (landline)</td>
+      </tr>
+      <tr>
+        <td>Yearly Cost (100 min/month)</td>
+        <td>78.00€</td>
+        <td>64.97€</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Setup Instructions</h3>
 
   <h4>Requirements</h4>
   <ul>
@@ -209,7 +407,7 @@
     </li>
     <li>
       <a href="https://my.zadarma.com/dirnum/active/">Order a GR virtual landline number.</a> You can select area codes such as 210 (Athens), 2310 (Thessaloniki), etc. Mobile numbers are not available. An identification process is then required. Ideally provide a GR ID/passport.  As you have used foreign number for registration (I used my DE number) you may be asked to explain... I submitted a "Tax Residence Certificate" issued by AADE:
-      <a href="https://www.aade.gr/ekdosi-pistopoiitikou-forologikis-katoikias-pfk" target="_blank">link</a>. I hid my SSN on the PDF. Be mindful that if you have already completed the process of "ΜΕΤΑΦΟΡΑ ΦΟΡΟΛΟΓΙΚΗΣ ΚΑΤΟΙΚΙΑΣ ΣΤΟ ΕΞΩΤΕΡΙΚΟ" this probably won't work as the foreign address will be registered into the system. In this case, provide another document as proof. For me at the time this process was not fully concluded therefore my GR address was still visible.
+      <a href="https://www.aade.gr/ekdosi-pistopoiitikou-forologikis-katoikias-pfk" target="_blank">link</a>. I hid my SSN on the PDF. Be mindful that if you have already completed the process of "ΜΕΤΑΦΟΡΑ ΦΟΡΟΛΟΓΙΚΗΣ ΚΑΤΟΙΚΙΑΣ ΣΤΟ ΕΞΩΤΕΡΙΚΟ" this probably won&rsquo;t work as the foreign address will be registered into the system. In this case, provide another document as proof. For me at the time this process was not fully concluded therefore my GR address was still visible.
     </li>
     <li>Pay for a full year: 36€ (3€/month).</li>
     <li>
@@ -332,6 +530,16 @@
 </table>
 
 <p>As for the crystal mod the stock 28.636MHz crystal can be replaced with a 40MHz ABRACON oscillator according to the docs. This improves the sampling rate and SNR up to 40Msps on 8-bit capture.  Stability may also improve.  Might attempt this later.</p>
+
+<table class="equipment-table">
+  <tr>
+    <td style="vertical-align: top;"><img src="images/crystalmod.jpg" alt="Crystal mod 40 MHz" class="clickable" onclick="openModal(this)"></td>
+    <td>
+      <div class="equipment-name"><i>250612 Update</i></div>
+      <div class="equipment-desc">Crystal, C31 (Capacitor), Cooling (Heatsink + Fan) mod applied. Now I can sample at 40 MHz / 8 bit and ensure for less dropped frames as well as improved SNR.</div>
+    </td>
+  </tr>
+</table>
 
 
 <h3>Workflow overview</h3>
