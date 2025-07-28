@@ -48,11 +48,11 @@
       .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
-        z-index: 1000; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
       overflow: auto; /* Enable scroll if needed */
       background-color: rgb(0,0,0); /* Fallback color */
       background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
@@ -114,10 +114,126 @@
 
            <section>
              <h2>Next topic</h2>
-             <p>Date: 2024-XX-XX</p>
+             <p>Date: 2025-XX-XX</p>
            </section>
 
            -->
+
+           <section>
+             <h2>Unbrick & Restore IMEI for Xiaomi Redmi 9 (lancelot, MT6768 Helio G85)</h2>
+             <p>Date: 2025-07-28</p>
+             <h3>Unbricking</h3>
+             <p>
+               This is relevant for when recovery and fastboot are inaccessible and phone is stuck in a bootloop.  In such cases BROM/preloader mode needs to be accessed. This is acessible in all devices with a Mediatek chipset.</p>
+
+             <p>Before attempting anything there have been reported cases where letting the battery discharge fully has resolved the bootloop.
+               If this does not help, proceed with flashing the recovery partition via BROM mode. This is done at your own risk. I am not responsible for unrecoverably bricked devices :)
+             </p>
+
+             <p>At this stage, BSP firmware version compatibility is irrelevant because full partitions will be flashed. Nonetheless, make absolutely sure you are using images for the correct device model.</p>
+
+             <h4>Flash ROM</h4>
+             Note: This has been tested only on Debian GNU/Linux 12 (bookworm), 6.1.0-34-amd64
+             <ol>
+               <li>Prepare a ROM with flashable images (either stock or custom with required BSP).</li>
+               <li>Clone and install <code>mtkclient</code>:
+                 <pre><code>git clone https://github.com/bkerler/mtkclient.git</code></pre>
+               </li>
+               <li>Start the GUI:
+                 <pre><code>python mtk_gui.py</code></pre>
+               </li>
+               <li>Power off the phone by pressing and holding Volume Up + Volume Down + Power.</li>
+               <li>
+                 As soon as the screen turns off immediately connect the USB cable between the android device and a linux computer while keeping all three buttons pressed. The mtk_gui tool should eventually display the partition list after a while:
+                 <br><img src="images/mtk_gui.png" alt="mtk gui view" class="clickable" onclick="openModal(this)">
+               </li>
+               <li>
+                 If BROM mode is blocked use <a href="https://github.com/MTK-bypass/bypass_utility">bypass_utility</a>. Follow the README.
+               </li>
+               <li>In the "Read partition(s)" tab create a full backup of your partitions.</li>
+               <li>
+                 In "Write partition(s)" tab choose "Select from directory" and point to the ROM image folder.
+                 <ul>
+                   <br>
+                   <li>
+                     If flashing a custom ROM that requires a specific BSP first select and flash the matching stock ROM. For example LineageOS 20 requires Android 11 BSP. I use <code>lancelot_eea_global_images_V12.5.5.0.RJCEUXM_20220414.0000.00_11.0_eea</code>.
+                   </li>
+                   <li>
+                     Without rebooting or flashing select "Select from directory" again and load the custom ROM directory. This ensures missing partitions will be filled from the stock ROM while custom boot, system, recovery etc. images are used:
+                     <br><img src="images/mtk-gui-partitions-custom-stock.png" alt="mtk gui partitions stock + custom view" class="clickable" onclick="openModal(this)">
+                   </li>
+                 </ul>
+               </li>
+             </ol>
+
+             <h3>IMEI Restoration</h3>
+             <p>
+               If you have corrupted or lost somehow <code>nvdata.img</code> without backup the device may show <em>IMEI null</em> and be unable to register on mobile networks --> no calls possible. Confirm this by dialing <code>*#06#</code> in the phone app.
+             </p>
+
+             <p>
+               Use <a href="https://github.com/timjosten/mtk_imei">mtk_imei</a> to restore IMEI. Steps:
+             </p>
+
+             <ol>
+               <li>Locate the original IMEI:
+                 <ul>
+                   <li>Option A: Printed on the original packaging box.</li>
+                   <li>Option B: Open the device. The Redmi 9 is very easy to disassemble.
+                     <br><img src="images/lancelot-open-shell.gif" alt="lancelot open up" class="clickable" onclick="openModal(this)">
+                   </li>
+                 </ul>
+               </li>
+               <li>Look for a sticker near the camera module with the original IMEI numbers.</li>
+               <li>
+                 Create a mtk_imei config file for <code>mtk_imei</code>:
+                 <br>
+                 <br>
+                 <ul>
+                   <li><strong>IMEI1</strong>: Set to original IMEI</li>
+                   <li><strong>IMEI2</strong>: Set to <code>000000000000000</code> or <code>IMEI1 + 1</code></li>
+                 </ul>
+               <li>Executing the script will produce a zip archive
+               </li>
+               <li>
+                 Magisk required. Either patch the boot image via Magisk Manager or flash already patched boot partition manually if you have from previously. Then:
+                 <ul>
+                   <li>Option A. Add the generated zip archive as a Magisk module</li>
+                   <li>Option B. Alternatively flash the zip via recovery using <code>adb sideload</code></li>
+                 </ul>
+               </li>
+             </ol>
+
+             <p>Immediately your IMEI should be restored, if not try rebooting.</p>
+
+             <p>Happy hacking!</p>
+
+
+             <h4>Resources & Tips</h4>
+             <ul>
+               <li><a href="https://new.c.mi.com/global/miuidownload/detail/device/1900381">Official Stock ROM repo</a></li>
+               <li><a href="https://github.com/bkerler/mtkclient">mtkclient</a></li>
+               <li><a href="https://github.com/timjosten/mtk_imei">mtk_imei</a></li>
+               <li><a href="https://github.com/MTK-bypass/bypass_utility">MTK Bypass Utility</a></li>
+               <li>
+                 LineageOS no longer provides official builds for lancelot. I have built it myself using the official guide. Contact me if you need a prebuilt.
+               </li>
+               <li>
+                 <a href="https://wiki.lineageos.org/devices/lancelot/build/">Build LineageOS for Xiaomi Redmi 9</a>
+               </li>
+               <li>If my <a href="https://github.com/timjosten/mtk_imei/pull/18">PR</a> in the mtk_imei is not yet merged at the time you attempt this, you may use 'earth' as device name in the configuration file. It works for lancelot too.
+               </li>
+               <li>
+                 If you plan to flash stock ROM consider using a custom recovery to simplify the sideloading process. Otherwise, tools like MiAssistant add unnecessary complexity for no real benefit.
+               </li>
+               <li>Personal advice: Avoid using random closed source b******t Windows tools claiming IMEI restoration. Most are unreliable and shady.</li>
+             </ul>
+
+
+
+           </section>
+
+
 
            <section>
              <h2>Μεταφορά φορολογικής κατοικίας στο εξωτερικό ASAP και με ελαχιστοποίηση κόστους, χρόνου, και ταλαίπας </h2>
@@ -465,7 +581,7 @@
   <p>Probably no one cares, as the <a href="https://github.com/oyvindln/vhs-decode/wiki">vhs-decode wiki</a> is already so well documented ;) ... but I decided to write this down anyway.  Mainly for future personal reference and partly to share an actual practical approach. Maybe also to showcase/provide an update of what I’ve been busy with over the last few months to my blog readers. </p>
 
   <h3>Why</h3>
-  <p>So to start with, I had a bunch of old Video8 tapes sitting around. The majority of them being footage of me as a kid, a few other from my teenage years and some punk gigs in Thessaloniki. I did not want to invest hundreds of euro on the process so I focused on capturing/decoding them on a budget.  10 years ago a dodgy lad in Bit-Bazaar in Thessaloniki, GR told me that using actual task-specific-hardware to turn video8 tapes digital is "better".  He had a Video8-DVD Combo Recorder.  Nonetheless, this costs a lot of money, is rare, and to be honest it also abstracts away the whole signal chain.  I do not really get to see what is happening under the hood. I wanted something a bit more hands on that would let me understand what is actually coming off the tape and how it gets turned into a digital file.  After some investigation I discovered vhs-decode.  Pretty cool stuff.  Super-duper well documented.  Looking at all this through signal processing coloured glasses would be something I would be keen to explore.  I was not planning to go full expert mode and deep dive but I figured I would at least play around a bit with arm-floaties on but feet in the shallow waters xD </p>
+  <p>So to start with, I had a bunch of old Video8 tapes sitting around. The majority of them being footage of me as a kid, a few other from my teenage years and some punk gigs in Thessaloniki. I did not want to invest hundreds of euro on the process so I focused on capturing/decoding them on a budget.  10 years ago a dodgy lad in Bit-Bazaar in Thessaloniki, GR told me that using actual task-specific-hardware to turn video8 tapes digital is "better".  He had a Video8-DVD Combo Recorder.  Nonetheless, this costs a lot of money, is rare, and to be honest it also abstracts away the whole signal chain.  I do not really get to see what is happening under the hood. I wanted something a bit more hands on that would let me understand what is actually coming off the tape and how it gets turned into a digital file.  After some investigation I discovered vhs-decode.  Pretty cool stuff.  Super-duper well documented. </p>
 
   <img src="images/video8_tapes-filter.jpg" alt="A bunch of Video8 tapes." class="clickable" onclick="openModal(this)">
 
