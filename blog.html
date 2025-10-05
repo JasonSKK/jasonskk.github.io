@@ -1,4 +1,3 @@
-un
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +20,7 @@ un
         text-align: center;
         padding: 20px;
         background-color: black;
-        v        color: white;
+        color: white;
         border-bottom: 1px solid #ccc;
       }
 
@@ -49,62 +48,63 @@ un
       .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
-      z-index: 1000; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
       }
 
       .modal-content {
-      margin: auto;
-      display: block;
-      width: 80%; /* Could be more or less, depending on screen size */
-      max-width: 700px; /* Set a maximum width */
-      object-fit: contain;
+        margin: auto;
+        display: block;
+        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 700px; /* Set a maximum width */
+        object-fit: contain;
       }
 
       .close {
-      position: absolute;
-      top: 15px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
       }
 
       .close:hover,
       .close:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
       }
 
       .lyrics-box {
-      background-color: #f0f0f0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      text-align: center;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        text-align: center;
       }
 
       iframe {
-      width: 100%; /* Makes it expand to fit the main container */
-      max-width: 800px; /* Set a reasonable max width */
-      height: 450px; /* Adjust height proportionally */
-      border: none; /* Optional: removes the default border */
+        width: 100%; /* Makes it expand to fit the main container */
+        max-width: 800px; /* Set a reasonable max width */
+        height: 450px; /* Adjust height proportionally */
+        border: none; /* Optional: removes the default border */
       }
     </style>
+
   </head>
   <body>
     <header>
       <h1>Blog</h1>
-      <p>Welcome to my blog! This blog is a space where I write about my projects, music, thoughts about things I read, DIY, beer recipes, and other random stuff.</p>
-      <p>Date: 2024-10-20</p>
+      <p>Welcome to my blog! This blog is a space where I write about my projects, music, thoughts about things I read, DIY, and other random stuff.</p>
+      <!-- <p>Date: 2024-10-20</p> -->
     </header>
     <nav>
       <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
@@ -120,316 +120,497 @@ un
 
            -->
 
-           <section>
-             <h2>Unbrick & Restore IMEI for Xiaomi Redmi 9 (lancelot, MT6768 Helio G85)</h2>
-             <p>Date: 2025-07-28</p>
-             <h3>Unbricking</h3>
-             <p>
-               This is relevant for when recovery and fastboot are inaccessible and phone is stuck in a bootloop.  In such cases BROM/preloader mode needs to be accessed. This is acessible in all devices with a Mediatek chipset.</p>
-
-             <p>Before attempting anything there have been reported cases where letting the battery discharge fully has resolved the bootloop.
-               If this does not help, proceed with flashing the partitions as disk images manually via BROM mode. This is done at your own risk. I am not responsible for unrecoverably bricked devices :)
-             </p>
-
-             <p>At this stage, BSP firmware version compatibility is irrelevant because full partitions will be flashed. Nonetheless, make absolutely sure you are using images for the correct device model.</p>
-
-             <h4>Flash ROM</h4>
-             Note: This has been tested only on Debian GNU/Linux 12 (bookworm), 6.1.0-34-amd64
-             <ol>
-               <li>Prepare a ROM with flashable images (either stock or custom with required BSP).</li>
-               <li>Clone and install <code>mtkclient</code>:
-                 <pre><code>git clone https://github.com/bkerler/mtkclient.git</code></pre>
-               </li>
-               <li>Start the GUI:
-                 <pre><code>python mtk_gui.py</code></pre>
-               </li>
-               <li>Power off the phone by pressing and holding Volume Up + Volume Down + Power.</li>
-               <li>
-                 As soon as the screen turns off immediately connect the USB cable between the android device and a linux computer while keeping all three buttons pressed. The mtk_gui tool should eventually display the partition list after a while:
-                 <br><img src="images/mtk_gui.png" alt="mtk gui view" class="clickable" onclick="openModal(this)">
-               </li>
-               <li>
-                 If BROM mode is blocked use <a href="https://github.com/MTK-bypass/bypass_utility">bypass_utility</a>. Follow the README.
-               </li>
-               <li>In the "Read partition(s)" tab create a full backup of your partitions.</li>
-               <li>
-                 In "Write partition(s)" tab choose "Select from directory" and point to the ROM image folder.
-                 <ul>
-                   <br>
-                   <li>
-                     If flashing a custom ROM that requires a specific BSP first select and flash the matching stock ROM. For example LineageOS 20 requires Android 11 BSP. I use <code>lancelot_eea_global_images_V12.5.5.0.RJCEUXM_20220414.0000.00_11.0_eea</code>.
-                   </li>
-                   <li>
-                     Without rebooting or flashing select "Select from directory" again and load the custom ROM directory. This ensures missing partitions will be filled from the stock ROM while custom boot, system, recovery etc. images are used:
-                     <br><img src="images/mtk-gui-partitions-custom-stock.png" alt="mtk gui partitions stock + custom view" class="clickable" onclick="openModal(this)">
-                   </li>
-                 </ul>
-               </li>
-             </ol>
-
-             <h3>IMEI Restoration</h3>
-             <p>
-               If you have corrupted or lost somehow <code>nvdata.img</code> without backup the device may show <em>IMEI null</em> and be unable to register on mobile networks --> no calls possible. Confirm this by dialing <code>*#06#</code> in the phone app.
-             </p>
-
-             <p>
-               Use <a href="https://github.com/timjosten/mtk_imei">mtk_imei</a> to restore IMEI. Steps:
-             </p>
-
-             <ol>
-               <li>Locate the original IMEI:
-                 <ul>
-                   <li>Option A: Printed on the original packaging box.</li>
-                   <li>Option B: Open the device. The Redmi 9 is very easy to disassemble.
-                     <br><img src="images/lancelot-open-shell.gif" alt="lancelot open up" class="clickable" onclick="openModal(this)">
-                   </li>
-                 </ul>
-               </li>
-               <li>Look for a sticker near the camera module with the original IMEI numbers.</li>
-               <li>
-                 Create a mtk_imei config file for <code>mtk_imei</code>:
-                 <br>
-                 <br>
-                 <ul>
-                   <li><strong>IMEI1</strong>: Set to original IMEI</li>
-                   <li><strong>IMEI2</strong>: Set to <code>000000000000000</code> or <code>IMEI1 + 1</code></li>
-                 </ul>
-               <li>Executing the script will produce a zip archive
-               </li>
-               <li>
-                 Magisk required. Either patch the boot image via Magisk Manager or flash already patched boot partition manually if you have from previously. Then:
-                 <ul>
-                   <li>Option A. Add the generated zip archive as a Magisk module</li>
-                   <li>Option B. Alternatively flash the zip via recovery using <code>adb sideload</code></li>
-                 </ul>
-               </li>
-             </ol>
-
-             <p>Immediately your IMEI should be restored, if not try rebooting.</p>
-
-             <p>Happy hacking!</p>
-
-
-             <h4>Resources & Tips</h4>
-             <ul>
-               <li><a href="https://new.c.mi.com/global/miuidownload/detail/device/1900381">Official Stock ROM repo</a></li>
-               <li><a href="https://github.com/bkerler/mtkclient">mtkclient</a></li>
-               <li><a href="https://github.com/timjosten/mtk_imei">mtk_imei</a></li>
-               <li><a href="https://github.com/MTK-bypass/bypass_utility">MTK Bypass Utility</a></li>
-               <li>
-                 LineageOS no longer provides official builds for lancelot. I have built it myself using the official guide. Contact me if you need a prebuilt.
-               </li>
-               <li>
-                 <a href="https://wiki.lineageos.org/devices/lancelot/build/">Build LineageOS for Xiaomi Redmi 9</a>
-               </li>
-               <li>If my <a href="https://github.com/timjosten/mtk_imei/pull/18">PR</a> in the mtk_imei is not yet merged at the time you attempt this, you may use 'earth' as device name in the configuration file. It works for lancelot too.
-               </li>
-               <li>
-                 If you plan to flash stock ROM consider using a custom recovery to simplify the sideloading process. Otherwise, tools like MiAssistant add unnecessary complexity for no real benefit.
-               </li>
-               <li>Personal advice: Avoid using random closed source b******t Windows tools claiming IMEI restoration. Most are unreliable and shady.</li>
-             </ul>
-
-
-
-           </section>
-
 
 
            <section>
-             <h2>Μεταφορά φορολογικής κατοικίας στο εξωτερικό ASAP και με ελαχιστοποίηση κόστους, χρόνου, και ταλαίπας </h2>
-             <p>Date: 2025-06-09</p>
-
-             <p><strong>Status:</strong> Από συνομιλίες με γνωστούς κατάλαβα ότι κάθε ΔΟΥ εφαρμόζει διαφορετικά κριτήρια. Οπότε το επίσημο έγγραφο <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a> πάει άπατο.</p>
-
-             <p><strong>Aim:</strong> Το άρθρο αυτό περιλαμβάνει tips & tricks βασισμένα στην προσωπική μου εμπειρία μεταφοράς φορολογικής κατοικίας από Ελλάδα στη Γερμανία. Τουτέστιν δεν είμαι φοροτεχνικός, δικηγόρος, δημόσιος υπάλληλος, ούτε εχω PhD στην Ελλ. Φορολογία αν λανθασμένα έδωσα αυτήν την εντύπωση. Είμαι απλώς ένας τύπος που έπρεπε να το κάνει μόνος του και δυσκολεύτηκε να βρει πρακτική καθοδήγηση online.</p>
-
-             <p>Μια καλή θεωρητική πηγή είναι το άρθρο της InnLaw: <a href="https://innlaw.gr/metafora-forologikis-katoikias/">innlaw.gr</a>. Δεν τους γνωρίζω προσωπικά και δεν προτείνω ούτε απορρίπτω τις υπηρεσίες τους.  Παραθέτω το άρθρο ως πιθανή αφετηρία.  Εναλλακτικά για τα γερά στομάχια υπάρχει και η <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a>.</p>
-
-             <p><strong>DISCLAIMER:</strong> Ζω μόνος μου στο εξωτερικό χωρίς οικογένεια ή περιουσία/έσοδα από Ελλάδες. Το φορολογικό μου προφίλ είναι όσο πιο straight forward γίνεται. Η εμπειρία μου είναι 100% προσωπική, και οι πληροφορίες που ακολουθούν βασίζονται αποκλειστικά σε αυτή. Δεν φέρω καμία ευθύνη για τυχόν απόκλιση από τις δικές σου ανάγκες ή την πραγματικότητα που θα αντιμετωπίσεις, ούτε και τυχόν πρόστιμα φυσικά xD</p>
-             <p><strong>DISCLAIMER 2:</strong> Γενικά, η διαδικασία παίρνει τίγκα χρόνο. Προγραμμάτισε τουλάχιστον 5–6 μήνες περιθώριο αν χρειάζεται να έχει ολοκληρωθεί έως συγκεκριμένη ημερομηνία.</p>
-             <p><strong>DISCLAIMER 3:</strong> Πρέπει να έχεις συμπληρώσει τουλάχιστον 183 ημέρες στη χώρα αυτή μέσα σε ορισμένο φορολογικό έτος (και να μπορείς να το αποδείξεις)</p>
-             <p><strong>DISCLAIMER 4:</strong> Πρέπει να είσαι έτοιμος να πληρώσεις ένα Χ ποσό: Η διαδικασία στην Γερμανία μου κόστισε γύρω στα 120 ευρώ (μεταφράσεις, apostille)</p>
-
-             <p>Η διαδικασία περιλαμβάνει 2 αιτήματα. <i>UPDATE 250614: Τώρα από ότι καταλαβαίνω η διαδικασία συμπτύχθηκε σε ένα αίτημα που κάνει τα πράγματα απλούστερα I guess (?)</i>
-               <ol>
-                 <li>Κάτοικοι Εξωτερικού - αίτηση μεταβολής φορολογικής κατοικίας. <strong>Deadline: 10/03/2025 για φορολογικό έτος 2024</strong>.</li>
-                 <li>Κάτοικοι Εξωτερικού - κατάθεση δικαιολογητικών για την μεταβολή φορολογικής κατοικίας. <strong>Deadline: 10/09/2025 για φορολογικό έτος 2024</strong>.</li>
-               </ol>
-             </p>
-
-             <h3>Κάτοικοι Εξωτερικού – Αίτηση μεταβολής φορολογικής κατοικίας</h3>
-             <p>Βάσει της <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a>, η αίτηση ζητά τα παρακάτω. Ακολουθεί πίνακας με τα έγγραφα και βασικές οδηγίες:</p>
+             <h2>Removing NAND flash without a heat gun for raw chip-off dumping</h2>
+             <p>Date: 2025-10-03</p>
+             Sadly back in 2017 a USB flash I own was plugged to a Frankenstein ACER laptop with reversed VCC and GND on the pinout of the usb adaptor on the motherboard.  Naturally the IC was fried for good.  As NAND cells degrade over time and data retention decreases without power the ideal time to attempt obtaining any meaningful data from the chip would have been ASAP. Essentially yesterday :D
+             <h3>Spex</h3>
 
              <table border="1" cellpadding="8" cellspacing="0">
                <thead>
                  <tr>
-                   <th>Έγγραφο</th>
-                   <th>Σημειώσεις</th>
+                   <td><strong>Vendor/USBFlash</strong></td>
+                   <td><strong>IC/Controller</strong></td>
+                   <td><strong>NAND chip</strong></td>
+                   <td><strong>ID</strong></td>
+                 </tr>
+                 <tr>
+                   <td>Kingston DataTraveller 100 64GB (fake) USB2.0 <br><img src="images/two-sided-kignston-64.jpg" alt="kingston 64 fake double side view" class="clickable" onclick="openModal(this)"></td>
+                   <td>Skymedi Corporation, Enhanced UFD2.0 Controller, SK6211 BAPC 00828 H31097, 48-pin</td>
+                   <td>Micron Technology, 29F64G08FAMCI</td>
+                   <td>0x89D7D53E</td>
                  </tr>
                </thead>
-               <tbody>
-                 <tr>
-                   <td><a href="https://www.aade.gr/sites/default/files/neaentypa/A110.pdf" target="_blank">A110 – Αίτηση Μητρώου</a></td>
-                   <td>
-                     1. Συμπλήρωσε το extended PDF και πάτα "Εκτύπωση" στην 1η σελίδα για export.<br>
-                     2. Απαιτείται φορολογικός εκπρόσωπος με ΑΦΜ (π.χ. γονείς, φίλοι).<br>
-                     3. Αναγράφεις λόγο (π.χ. μεταβολή κατοικίας) στο πεδίο "Αιτία έκδοσης".<br>
-                     <br><img src="images/aitia_ekdosis.png" alt="adeia ekdosis" class="clickable" onclick="openModal(this)">
-                     4. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a>
-</td>
-</tr>
-<tr>
-  <td><a href="https://www.aade.gr/sites/default/files/2021-09/D210.pdf" target="_blank">Δ210 – Δήλωση Μεταβολής Στοιχείων</a></td>
-  <td>Συμπληρώνεται από εσένα για αλλαγή διεύθυνσης/κατοικίας. Επομένως συμπληρώνεις τα σχετικά πεδία για το Β (σελ. 2 μεταβολή ατομικών στοιχείων).  Μη ξεχάσεις τα στοιχεία του φορολογικού εκπροσόπου στο 6. Στοιχεία σχετιζόμενου ΑΦΜ. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a> </td>
-</tr>
-<tr>
-  <td><a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/ekdose-upeuthunes-deloses" target="_blank">Υπεύθυνη Δήλωση Αποδοχής Εκπροσώπησης</a></td>
-  <td>Συμπληρώνεται από τον εκπρόσωπο. Αναφέρει ότι αποδέχεται τον ορισμό ως φορολογικός εκπρόσωπος.  Κείμενο δήλωσης: Αποδέχομαι τον ορισμό μου ως φορολογικού εκπροσώπου στην Ελλάδα του [ΟΝΟΜΑ ΕΠΩΝΥΜΟ ΣΟΥ], με ΑΦΜ [ΑΦΜ σου], ΔΟΥ: [ΔΟΥ ΣΟΥ], ΑΔΤ [ΑΡΙΜΟΣ ΔΕΛΤΙΟΥ ΤΑΥΤΟΤΗΤΑΣ ΣΟΥ], που κατοικεί στην [ΠΟΛΗ ΕΞΩΤΕΡΙΚΟΥ ΠΟΥ ΜΕΝΕΙΣ] της [ΧΩΡΑΣ ΠΟΥ ΜΕΝΕΙΣ]"</td>
-</tr>
-<tr>
-  <td><a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/ekdose-upeuthunes-deloses" target="_blank">Υπεύθυνη Δήλωση Ορισμού Εκπροσώπου</a></td>
-  <td>Συμπληρώνεται από εσένα. Κείμενο δήλωσης: "Ορίζω ως φορολογικό μου εκπρόσωπο στην Ελλάδα τον/την [ΟΝΟΜΑ ΕΠΩΝΥΜΟ] του [ΟΝΟΜΑ ΠΑΤΡΟΣ] με Α.Φ.Μ.: [ΑΦΜ ΕΚΠΡΟΣΩΠΟΥ] ∆.Ο.Υ.: [ΔΟΥ] κάτοικο: [ΠΟΛΗ] οδός - αριθμός: [ΟΔΟΣ ΑΡΙΘΜΟΣ]"</td>
-</tr>
-</tbody>
-</table>
+             </table>
 
-<p>Όταν έχεις έτοιμα όλα τα έγγραφα για την "Κάτοικοι Εξωτερικού – Αίτηση μεταβολής φορολογικής κατοικίας" δημιουργείς <a href="https://www1.aade.gr/saadekef/eticketaade" target="_blank">νέο αίτημα στην ΑΑΔΕ</a>
+             <h3>Making sure chip-off method is really required</h3>
+             First of all I need to make sure that chip-off method is absolutely necessary and the controller has 0 change being brought back to life.  I don't want to casually start removing NAND chips attempting raw extraction without proper reason.
+             <ol>
+               <li>Monitor kernel buffer for any activity and plug usb flash in the usb port. I did not use the usb port of the motherboard but an externally powered usb hub ;)
+                 <br>
+                 <code>dmesg -w</code></li>
+               <li>Nothing is visually fried from the passives on the PCB
+               <li>Multimeter tests</li>
+               <table><table border="1" cellpadding="8" cellspacing="0">
+                   <thead>
+                     <tr>
+                       <td><strong>Measurement points, passives</strong></td>
+                       <td><strong>Value</strong></td>
+                       <td><strong>Comments</strong></td>
+                     </tr>
+                   </thead>
+                   <tr>
+                     <td>VCC > GND, Resistance mode</td>
+                     <td>0Ω</td>
+                     <td>Hard short</td>
+                   </tr>
+                   <tr>
+                     <td>GND > D+ / D-, Voltage</td>
+                     <td>6 mV</td>
+                     <td>NOK. Very low leakage</td>
+                   </tr>
+                   <tr>
+                     <td>VCC > D+ / D-, Voltage</td>
+                     <td>0 V</td>
+                     <td>NOK. IC not driving. Could indicate dead controller</td>
+                   </tr>
+                   <tr>
+                     <td>GND > NAND VCC, Resistance mode</td>
+                     <td>0Ω</td>
+                     <td>NOK. Short. Confirms damaged power rail. This is likely via controller or internal short in NAND</td>
+                   </tr>
+                   <tr>
+                     <td>VCC > NAND CE# (chip enable pin:9), Resistance mode</td>
+                     <td>∞</td>
+                     <td>OK. Open line, this is normal if IC not active</td>
+                   </tr>
+                   <tr>
+                     <td>D+ > D−, Resistance mode</td>
+                     <td>~20MΩ</td>
+                     <td>OK I think. USB differential pair open</td>
+                   </tr>
+                   <tr>
+                     <td>VCC > XTAL (12 MHz), Voltage mode</td>
+                     <td>0 V</td>
+                     <td>NOK. IC not oscillating</td>
+                   </tr>
+                   <tr>
+                     <td>USB VBUS > GND (off board)</td>
+                     <td>5.08 V</td>
+                     <td>OK. Host port. Power reaches device input.</td>
+                   </tr>
+                 </table>
+                 <br>
+                 <img src="images/sk6211-diag-pins-measurement.png" alt="pins on the sk6211 " class="clickable" onclick="openModal(this)">
+
+                 <br>
+                 <table border="1" cellpadding="8" cellspacing="0">
+                   <thead>
+                     <tr>
+                       <td><strong>Measurement points, IC</strong></td>
+                       <td><strong>Value</strong></td>
+                       <td><strong>Comments</strong></td>
+                     </tr>
+                   </thead>
+                   <tr>
+                     <td>Pin 10 (VCC) > GND, Resistance mode</td>
+                     <td>~0.9 MΩ</td>
+                     <td>OK. Main digital supply pin shows expected relatively high impedance</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 42 (VCC) > GND, Resistance mode</td>
+                     <td>~0.9 MΩ</td>
+                     <td>OK. Secondary digital supply pin</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 44 (VCC) > GND, Resistance mode</td>
+                     <td>~0.9 MΩ</td>
+                     <td>OK. Third digital supply pin</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 43 (GND)</td>
+                     <td>—</td>
+                     <td>Reference ground</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 46 (GND)</td>
+                     <td>—</td>
+                     <td>Reference ground</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 16 (DP), Diode mode > GND</td>
+                     <td>0.5 V</td>
+                     <td>OK. USB D+ diode drop consistent with <a href="https://www.ti.com/product-category/passive-discrete/diodes/esd-protection-diodes/overview.html">internal ESD protection</a> </td>
+                   </tr>
+                   <tr>
+                     <td>Pin 17 (DM), Diode mode > GND</td>
+                     <td>0.5 V</td>
+                     <td>OK. USB D- diode drop consistent with <a href="https://www.ti.com/product-category/passive-discrete/diodes/esd-protection-diodes/overview.html">internal ESD protection</a> </td>
+                   </tr>
+                   <tr>
+                     <td>Pin 22 (A5P) > GND, Resistance mode</td>
+                     <td>~0.9 MΩ</td>
+                     <td>OK I guess. VBUS input resistance</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 23 (D33V) > GND, Resistance mode</td>
+                     <td>~0.9 MΩ</td>
+                     <td>OK. 3.3 V regulated output high resistance suggests no short</td>
+                   </tr>
+                   <tr>
+                     <td>Pin 20 (D18) > GND, Resistance mode</td>
+                     <td>Not measured</td>
+                     <td>1.8 V regulated output</td>
+                   </tr>
+                 </table>
+
+                 <h4>Results</h4>
+                 <p>All VCC pins read normal to GND. That is a good sign and means there is probably no hard short. DP/DM show ~0.5 V in diode mode. Means ESD protection diodes inside the IC are intact. A5P and D33V measure ~0.9 MΩ to GND.  Resistance check shows no short.</p>
+                 <h4>Conclusion</h4>
+                 <p>IC does not look fully dead from the measurement tests. However, even if the IC is not internally damaged the firmware might. No detection/activity on the computer possible whatsoever. At this stage, I have no idea how to un-fry the IC. Therefore I will be now proceeding with chip off method in order to dump the raw NAND using a universal programmer and a TSOP48 adaptor.</p>
+
+                 <h3>Micron NAND flash memory removal</h3>
+<p>
+Usually NAND flash chips are removed using a hot air gun. In my case no heat gun was available. One common alternative approach is to flood the pins with solder and heat one side at a time while at the same time poking the NAND with a pair of tweezers.  This is easier with leaded solder which has a lower melting point but I do not use leaded solder.
+</p>
+<div style="overflow: auto;">
+  <img src="images/nand-removed.jpg" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
+  <p>
+    I used a precision razor blade pen in combination with a soldering iron. Carefully I started scraping the edges of the NAND chip (not the pins but the sides).  Once the blade edge could go under the NAND I proceeded slowly and gradually to the pin sides.  On the edge I heated the pins with the soldering iron to melt the tin while lightly and carefully lifting the pins from underneath with the blade.  I first released one side of the chip working on 12 pins at a time which is half the side. Then the opposite side.  This was done to avoid going too deep with the pen's body putting additional stress on the NAND chip. In the GIF below I have only managed to get the very final part where I detach the very few last pins. I did not manage to get the scraping on the sides and the heated pin lifting using soldering iron and blade :'(
+</p>
+</div>
+<br><img src="images/nand-remove.webp" alt="nand removal rasorblade" class="clickable" onclick="openModal(this)"></td>
+<p>
+  After both sides were freed I repeat the process on the remaining two sides to fully detach the NAND chip from the PCB. Finally I used my soldering iron, some flux, and soldering wick to remove excess solder that might have been trapped in-between pins.
   <br>
-  Νεο αίτημα > Φορολογία > Για εμένα > Θεματική ομάδα: Εισόδημα,
-  <br>Διαδικασία: Κάτοικοι εξωτερικού - διαδικασία μεταβολής φορολογικής κατοικίας,
-  <br>Υπηρεσία Υποβολής Αιτήματος: ΔΟΥ που είσαι εγγεγραμμένος,
-  <br>Τμήμα Υπηρεσίας Υποβολής: Έχει 1 μόνο entry. Οπότε αυτό.
-  <br><img src="images/ta-aitimata-mou.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 80%;">
-  <br>Αίτημα (Βήμα 4): Αιτούμαι την αναγνώριση της μεταβολής της φορολογικής μου κατοικίας ως κάτοικος εξωτερικού. Μέσω του "Επιλέξτε" κάνε upload όλα τα δικαιολογητικά σε PDF.
-  <br>Σε επόμενο χρόνο θα σε ενημερώσουν για το τι δεν τους αρέσει και θα πρέπει να κάνεις τις διορθώσεις. Μπορείς να τσεκάρεις <a href="https://www1.aade.gr/saadekef/eticketaade/minimata" target="_blank">τα αιτήματά μου</a> αν και κανονικά σκάει email όταν έχουν απαντήσει.
+<br><img src="images/nand-full-desoldering-wick.webp" alt="nand full desoldering wick remove tin remains on pins" class="clickable" onclick="openModal(this)"></td>
 </p>
 
+<p>
+This was my first attempt using this method.
+During removal one pin was lost. Fortunately it was an NC (no connect) pin and did not affect functionality.<br>
+<br><img src="images/missing-pin-nand.jpg" alt="nand missing pin" class="clickable" onclick="openModal(this)"></td>
+</p>
 
-<h3>Κάτοικοι Εξωτερικού - κατάθεση δικαιολογητικών για μεταβολή φορολογικής κατοικίας</h3>
-<p>Η στρατηγική μου ήταν να ετοιμάσω πρώτα τα στάνταρ έντυπα, χωρίς να προτρέξω σε μεταφράσεις και apostille και μου φύγουν 500.000€  χωρίς να έχω πάρει το ΟΚ.</p>
-
-<p><strong>Γενικές σημειώσεις:</strong></p>
-<ul>
-  <li>Τα πεδία με διακεκομμένη γραμμή στα έντυπα Μ0, Μ1, Μ7 είναι για την υπηρεσία. Δεν τα συμπληρώνεις.</li>
-  <li>Όλα τα έντυπα Μ έχουν οδηγίες στην τελευταία σελίδα. Διάβασέ τες.</li>
-</ul>
-
-<table border="1" cellpadding="6" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Έγγραφο</th>
-      <th>Σημειώσεις</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://www.aade.gr/sites/default/files/2017-01/M0.pdf" target="_blank">Μ0</a></td>
-      <td>
-        ΘΕΜΑ: ΜΕΤΑΦΟΡΑ ΣΕ ΔΟΥ ΚΑΤΟΙΚΩΝ ΕΞΩΤΕΡΙΚΟΥ ΚΑΙ ΟΡΙΣΜΟΣ ΦΟΡΟΛΟΓΙΚΟΥ ΕΚΠΡΟΣΩΠΟΥ.
-        <br>
-        ΣΥΝΗΜΜΕΝΑ: Μ1, Μ7,
-        <br>τα παρακάτω πεδία τα άφησα κενά:
-        <br>
-        <img src="images/m0.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 30%;">
-      </td>
-    </tr>
-    <tr>
-      <td><a href="https://www.aade.gr/sites/default/files/2017-01/M1.pdf" target="_blank">Μ1</a></td>
-      <td>Συμπλήρωσε μόνο τα πεδία α, γ (μόνο το επάγγελμα), και ε.</td>
-    </tr>
-    <tr>
-      <td><a href="https://www.aade.gr/sites/default/files/2017-01/M7.pdf" target="_blank">Μ7</a></td>
-      <td>Έναρξη: Χ.
-        <br>
-        Είδος σχέσης: ΦΟΡΟΛΟΓΙΚΟΣ ΕΚΠΡΟΣΩΠΟΣ ΑΡΘΡ 8 ΚΦΔ / ΠΡΩΗΝ ΑΝΤΙΚΛΗΤΟΣ.
-        <br>
-        Συνυποβάλλεται με δήλωση: Μεταβολής Ατ. Στοιχείων.</td>
-    </tr>
-    <tr>
-      <td>Πιστοποιητικό εργασίας</td>
-      <td>Π.χ. μισθοδοσία, βεβαίωση από εργοδότη. Σε πρώτη φάση έκανα ένα overlay translation του εγγράφου με OCR SW. Π.χ. Google Lens. Note: this may raise concerns for sensitive data/privacy but I could not find an OCR tool that performs overlay translation without relying on the Google Translate API... :'(  Προχώρησα σε επίσημη μετάφραση μετά από επιβεβαίωση του υπαλλήλου της ΔΟΥ για την ορθότητα του εγγράφου.
-      </td>
-    </tr>
-    <tr>
-      <td>Πρόσφατο έγγραφο από το δήμο που να πιστοποιείται η ημερομηνία εγγραφής/εγκατάστασης</td>
-      <td>Για Γερμανία ένα παράδειγμα είναι το Anmeldung.  Overlay translation με OCR για αρχή και επίσημη μετάφραση μετά την επιβεβαίωση.</td>
-    </tr>
-    <tr>
-      <td>Πιστοποιητικό φορολογικής κατοικίας (ΠΦΚ) </td>
-      <td><a href="https://www.bzst.de/DE/Service/SteuerlichesInfocenter/Ausl_Formulare/auslaendische_formulare_node.html#js-toc-entry2" target="_blank">hyperlink για Γερμανία Antrag auf Erteilung einer Ansässigkeitsbescheinigung deutsch-englische Sprachfassung</a> Απαιτείται apostille και <strong>ΜΕΤΑ</strong> μετάφραση. Για apostille στην Δρέσδη: <a href="https://www.lds.sachsen.de/soziales/?ID=5589&art_param=512" target="_blank">Landesdirektion Sachsen</a>.  Για αλλα Bundesländer --> no idea</td>
-    </tr>
-  </tbody>
-</table>
-
-<br>
-
-<p>Όταν έχεις έτοιμο ένα αξιοπρεπή αριθμό από τα έγγραφα που απαιτούνται για την "Κάτοικοι Εξωτερικού – κατάθεση δικαιολογητικών για μεταβολή φορολογικής κατοικίας" δημιουργείς <a href="https://www1.aade.gr/saadekef/eticketaade" target="_blank">νέο αίτημα στην ΑΑΔΕ</a>. <i>UPDATE 250614:Νομίζω ότι πλέον μπορεί να γίνει στο ίδιο αίτημα με την αίτηση.</i></p>
-<p>Στέλνεις ότι έχεις διαθέσιμο και γράφεις στο μήνυμα αιτήματος μια παράκληση για αξιολόγηση ως προς την ορθότητα.  Παραθέτω ένα παράδειγμα:</p>
-
-<br>
-
-<fieldset style="border: 1px solid #ccc; padding: 1em; border-radius: 5px; background-color: #f9f9f9;">
-  <legend><strong>Παράδειγμα μηνύματος για έλεγχο δικαιολογητικών</strong></legend>
-  <pre style="white-space: pre-wrap; font-family: inherit;">
-    Αξιότιμοι κύριοι/κυρίες,
-
-    Παρακαλώ επιβεβαιώστε αν τα παρακάτω δικαιολογητικά είναι πλήρη για τη διαδικασία μεταβολής της φορολογικής μου κατοικίας από την Ελλάδα στην Γερμανία.
-
-    Υποβαλλόμενα έντυπα:
-    - M0, M1, M7
-    - ΠΦΚ Γερμανικά/Αγγλικά / Ansässigkeitsbescheinigung, ανεπίσημη μετάφραση
-    - Πιστοποιητικό εργασίας, ανεπίσημη μετάφραση
-    - Πρόσφατο έγγραφο από το δήμο που να πιστοποιείται η ημερομηνία εγγραφής/εγκατάστασης / Anmeldung, ανεπίσημη μετάφραση
-
-    Ερωτήσεις:
-    1. Απαιτούνται επιπλέον έγγραφα πέρα από τα προαναφερθέντα; Αν ναι, ποια;
-    2. Σε ποια έγγραφα απαιτείται σφραγίδα Apostille;
-
-    Θα μπορούσατε να εξετάσετε τα υποβαλλόμενα δικαιολογητικά και να μου επιβεβαιώσετε ότι είναι σωστά;
-    Επισημαίνω ότι τα έγγραφα που επισυνάπτω περιλαμβάνουν ανεπίσημη μετάφραση.
-    Αναμένω την επιβεβαίωσή σας για να προχωρήσω στην επίσημη μετάφραση.
-
-    Ευχαριστώ εκ των προτέρων.
-
-    Με εκτίμηση,
-    [ΟΝΟΜΑ ΕΠΩΝΥΜΟ]
-  </pre>
-</fieldset>
-
-<p>Σε επόμενο χρόνο θα ενημερώσουν για την ορθότητα και θα μπορείς να προχωρήσεις σε μεταφράσεις, apostille και λοιπά. Μπορεί να στείλουν πληροφοριακό έντυπο με το τι ισχύει για την συγκεκριμένη ΔΟΥ.  Είναι σημαντικό να το διαβάσεις γιατί η διαδικασία διαφέρει από ΔΟΥ σε ΔΟΥ.  Καλό θα ήταν να μάθεις και αν η μετάφραση απαιτείται να γίνει μέσω "Ορκωτού Μεταφραστή". Αν ναι βρήκα <a href="https://www.mfa.gr/germany/eservices/katalogos-orkoton-metaphraston" target="_blank">έναν κατάλογο για Γερμανία</a>. Για άλλες χώρες --> No idea.</p>
-
-<h3>Εργαλεία που ίσως φανούν χρήσιμα</h3>
-<table border="1" cellpadding="6" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Εργαλείο</th>
-      <th>Χρήση</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://github.com/xournalpp/xournalpp" target="_blank">Xournal++</a></td>
-      <td>Overlay text on PDFs, e.g. M0, M1, M7</td>
-    </tr>
-    <tr>
-      <td><a href="https://qpdf.readthedocs.io/en/stable/" target="_blank">qpdf</a></td>
-      <td>PDF manipulation, Split / merge PDF files</td>
-    </tr>
-  </tbody>
-</table>
+<h3><em>To be continued ... I have put an order for an universal programmer and a TSOP48 adaptor and I am waiting for them to arrive ;)<em></h3>
 
 
-<h3>Fun Fact για κλείσιμο</h3>
-<p>Αρκετοί υπάλληλοι στις ΔΟΥ απαντούν μόνιμα με ΚΕΦΑΛΑΙΑ.  Μετά από μερικές νύχτες υπερανάλυσης κατέληξα σε 3 πιθανούς λόγους:
+</section>
+
+
+
+<section>
+  <h2>Unbrick & Restore IMEI for Xiaomi Redmi 9 (lancelot, MT6768 Helio G85)</h2>
+  <p>Date: 2025-07-28</p>
+  <h3>Unbricking</h3>
+  <p>
+    This is relevant for when recovery and fastboot are inaccessible and phone is stuck in a bootloop.  In such cases BROM/preloader mode needs to be accessed. This is acessible in all devices with a Mediatek chipset.</p>
+
+  <p>Before attempting anything there have been reported cases where letting the battery discharge fully has resolved the bootloop.
+    If this does not help, proceed with flashing the partitions as disk images manually via BROM mode. This is done at your own risk. I am not responsible for unrecoverably bricked devices :)
+  </p>
+
+  <p>At this stage, BSP firmware version compatibility is irrelevant because full partitions will be flashed. Nonetheless, make absolutely sure you are using images for the correct device model.</p>
+
+  <h4>Flash ROM</h4>
+  Note: This has been tested only on Debian GNU/Linux 12 (bookworm), 6.1.0-34-amd64
   <ol>
-    <li>Τα κεφαλαία καταργούν την ανάγκη για τόνους = πιο γρήγορη πληκτρολόγηση;</li>
-    <li>Μπορεί να είναι μια μορφή “διοικητικής επισημότητας”;</li>
-    <li>ΑΠΛΩΣ ΣΟΥ ΦΩΝΑΖΟΥΝ ;;;</li>
+    <li>Prepare a ROM with flashable images (either stock or custom with required BSP).</li>
+    <li>Clone and install <code>mtkclient</code>:
+      <pre><code>git clone https://github.com/bkerler/mtkclient.git</code></pre>
+    </li>
+    <li>Start the GUI:
+      <pre><code>python mtk_gui.py</code></pre>
+    </li>
+    <li>Power off the phone by pressing and holding Volume Up + Volume Down + Power.</li>
+    <li>
+      As soon as the screen turns off immediately connect the USB cable between the android device and a linux computer while keeping all three buttons pressed. The mtk_gui tool should eventually display the partition list after a while:
+      <br><img src="images/mtk_gui.png" alt="mtk gui view" class="clickable" onclick="openModal(this)">
+    </li>
+    <li>
+      If BROM mode is blocked use <a href="https://github.com/MTK-bypass/bypass_utility">bypass_utility</a>. Follow the README.
+    </li>
+    <li>In the "Read partition(s)" tab create a full backup of your partitions.</li>
+    <li>
+      In "Write partition(s)" tab choose "Select from directory" and point to the ROM image folder.
+      <ul>
+        <br>
+        <li>
+          If flashing a custom ROM that requires a specific BSP first select and flash the matching stock ROM. For example LineageOS 20 requires Android 11 BSP. I use <code>lancelot_eea_global_images_V12.5.5.0.RJCEUXM_20220414.0000.00_11.0_eea</code>.
+        </li>
+        <li>
+          Without rebooting or flashing select "Select from directory" again and load the custom ROM directory. This ensures missing partitions will be filled from the stock ROM while custom boot, system, recovery etc. images are used:
+          <br><img src="images/mtk-gui-partitions-custom-stock.png" alt="mtk gui partitions stock + custom view" class="clickable" onclick="openModal(this)">
+        </li>
+      </ul>
+    </li>
   </ol>
-</p>
 
-<strong>Καλή τύχη!</strong>
+  <h3>IMEI Restoration</h3>
+  <p>
+    If you have corrupted or lost somehow <code>nvdata.img</code> without backup the device may show <em>IMEI null</em> and be unable to register on mobile networks --> no calls possible. Confirm this by dialing <code>*#06#</code> in the phone app.
+  </p>
+
+  <p>
+    Use <a href="https://github.com/timjosten/mtk_imei">mtk_imei</a> to restore IMEI. Steps:
+  </p>
+
+  <ol>
+    <li>Locate the original IMEI:
+      <ul>
+        <li>Option A: Printed on the original packaging box.</li>
+        <li>Option B: Open the device. The Redmi 9 is very easy to disassemble.
+          <br><img src="images/lancelot-open-shell.webp" alt="lancelot open up" class="clickable" onclick="openModal(this)">
+        </li>
+      </ul>
+    </li>
+    <li>Look for a sticker near the camera module with the original IMEI numbers.</li>
+    <li>
+      Create a mtk_imei config file for <code>mtk_imei</code>:
+      <br>
+      <br>
+      <ul>
+        <li><strong>IMEI1</strong>: Set to original IMEI</li>
+        <li><strong>IMEI2</strong>: Set to <code>000000000000000</code> or <code>IMEI1 + 1</code></li>
+      </ul>
+    <li>Executing the script will produce a zip archive
+    </li>
+    <li>
+      Magisk required. Either patch the boot image via Magisk Manager or flash already patched boot partition manually if you have from previously. Then:
+      <ul>
+        <li>Option A. Add the generated zip archive as a Magisk module</li>
+        <li>Option B. Alternatively flash the zip via recovery using <code>adb sideload</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>Immediately your IMEI should be restored, if not try rebooting.</p>
+
+  <p>Happy hacking!</p>
+
+
+  <h4>Resources & Tips</h4>
+  <ul>
+    <li><a href="https://new.c.mi.com/global/miuidownload/detail/device/1900381">Official Stock ROM repo</a></li>
+    <li><a href="https://github.com/bkerler/mtkclient">mtkclient</a></li>
+    <li><a href="https://github.com/timjosten/mtk_imei">mtk_imei</a></li>
+    <li><a href="https://github.com/MTK-bypass/bypass_utility">MTK Bypass Utility</a></li>
+    <li>
+      LineageOS no longer provides official builds for lancelot. I have built it myself using the official guide. Contact me if you need a prebuilt.
+    </li>
+    <li>
+      <a href="https://wiki.lineageos.org/devices/lancelot/build/">Build LineageOS for Xiaomi Redmi 9</a>
+    </li>
+    <li>If my <a href="https://github.com/timjosten/mtk_imei/pull/18">PR</a> in the mtk_imei is not yet merged at the time you attempt this, you may use 'earth' as device name in the configuration file. It works for lancelot too.
+    </li>
+    <li>
+      If you plan to flash stock ROM consider using a custom recovery to simplify the sideloading process. Otherwise, tools like MiAssistant add unnecessary complexity for no real benefit.
+    </li>
+    <li>Personal advice: Avoid using random closed source b******t Windows tools claiming IMEI restoration. Most are unreliable and shady.</li>
+  </ul>
+
+
+
+</section>
+
+
+
+<section>
+  <h2>Μεταφορά φορολογικής κατοικίας στο εξωτερικό ASAP και με ελαχιστοποίηση κόστους, χρόνου, και ταλαίπας </h2>
+  <p>Date: 2025-06-09</p>
+
+  <p><strong>Status:</strong> Από συνομιλίες με γνωστούς κατάλαβα ότι κάθε ΔΟΥ εφαρμόζει διαφορετικά κριτήρια. Οπότε το επίσημο έγγραφο <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a> πάει άπατο.</p>
+
+  <p><strong>Aim:</strong> Το άρθρο αυτό περιλαμβάνει tips & tricks βασισμένα στην προσωπική μου εμπειρία μεταφοράς φορολογικής κατοικίας από Ελλάδα στη Γερμανία. Τουτέστιν δεν είμαι φοροτεχνικός, δικηγόρος, δημόσιος υπάλληλος, ούτε εχω PhD στην Ελλ. Φορολογία αν λανθασμένα έδωσα αυτήν την εντύπωση. Είμαι απλώς ένας τύπος που έπρεπε να το κάνει μόνος του και δυσκολεύτηκε να βρει πρακτική καθοδήγηση online.</p>
+
+  <p>Μια καλή θεωρητική πηγή είναι το άρθρο της InnLaw: <a href="https://innlaw.gr/metafora-forologikis-katoikias/">innlaw.gr</a>. Δεν τους γνωρίζω προσωπικά και δεν προτείνω ούτε απορρίπτω τις υπηρεσίες τους.  Παραθέτω το άρθρο ως πιθανή αφετηρία.  Εναλλακτικά για τα γερά στομάχια υπάρχει και η <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a>.</p>
+
+  <p><strong>DISCLAIMER:</strong> Ζω μόνος μου στο εξωτερικό χωρίς οικογένεια ή περιουσία/έσοδα από Ελλάδες. Το φορολογικό μου προφίλ είναι όσο πιο straight forward γίνεται. Η εμπειρία μου είναι 100% προσωπική, και οι πληροφορίες που ακολουθούν βασίζονται αποκλειστικά σε αυτή. Δεν φέρω καμία ευθύνη για τυχόν απόκλιση από τις δικές σου ανάγκες ή την πραγματικότητα που θα αντιμετωπίσεις, ούτε και τυχόν πρόστιμα φυσικά xD</p>
+  <p><strong>DISCLAIMER 2:</strong> Γενικά, η διαδικασία παίρνει τίγκα χρόνο. Προγραμμάτισε τουλάχιστον 5–6 μήνες περιθώριο αν χρειάζεται να έχει ολοκληρωθεί έως συγκεκριμένη ημερομηνία.</p>
+  <p><strong>DISCLAIMER 3:</strong> Πρέπει να έχεις συμπληρώσει τουλάχιστον 183 ημέρες στη χώρα αυτή μέσα σε ορισμένο φορολογικό έτος (και να μπορείς να το αποδείξεις)</p>
+  <p><strong>DISCLAIMER 4:</strong> Πρέπει να είσαι έτοιμος να πληρώσεις ένα Χ ποσό: Η διαδικασία στην Γερμανία μου κόστισε γύρω στα 120 ευρώ (μεταφράσεις, apostille)</p>
+
+  <p>Η διαδικασία περιλαμβάνει 2 αιτήματα. <i>UPDATE 250614: Τώρα από ότι καταλαβαίνω η διαδικασία συμπτύχθηκε σε ένα αίτημα που κάνει τα πράγματα απλούστερα I guess (?)</i>
+    <ol>
+      <li>Κάτοικοι Εξωτερικού - αίτηση μεταβολής φορολογικής κατοικίας. <strong>Deadline: 10/03/2025 για φορολογικό έτος 2024</strong>.</li>
+      <li>Κάτοικοι Εξωτερικού - κατάθεση δικαιολογητικών για την μεταβολή φορολογικής κατοικίας. <strong>Deadline: 10/09/2025 για φορολογικό έτος 2024</strong>.</li>
+    </ol>
+  </p>
+
+  <h3>Κάτοικοι Εξωτερικού – Αίτηση μεταβολής φορολογικής κατοικίας</h3>
+  <p>Βάσει της <a href="http://elib.aade.gr/elib/view?d=/gr/ap/2017/1201/">ΠΟΛ. 1201/2017</a>, η αίτηση ζητά τα παρακάτω. Ακολουθεί πίνακας με τα έγγραφα και βασικές οδηγίες:</p>
+
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Έγγραφο</th>
+        <th>Σημειώσεις</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.aade.gr/sites/default/files/neaentypa/A110.pdf" target="_blank">A110 – Αίτηση Μητρώου</a></td>
+        <td>
+          1. Συμπλήρωσε το extended PDF και πάτα "Εκτύπωση" στην 1η σελίδα για export.<br>
+          2. Απαιτείται φορολογικός εκπρόσωπος με ΑΦΜ (π.χ. γονείς, φίλοι).<br>
+          3. Αναγράφεις λόγο (π.χ. μεταβολή κατοικίας) στο πεδίο "Αιτία έκδοσης".<br>
+          <br><img src="images/aitia_ekdosis.png" alt="adeia ekdosis" class="clickable" onclick="openModal(this)">
+          4. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="https://www.aade.gr/sites/default/files/2021-09/D210.pdf" target="_blank">Δ210 – Δήλωση Μεταβολής Στοιχείων</a></td>
+        <td>Συμπληρώνεται από εσένα για αλλαγή διεύθυνσης/κατοικίας. Επομένως συμπληρώνεις τα σχετικά πεδία για το Β (σελ. 2 μεταβολή ατομικών στοιχείων).  Μη ξεχάσεις τα στοιχεία του φορολογικού εκπροσόπου στο 6. Στοιχεία σχετιζόμενου ΑΦΜ. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a> </td>
+      </tr>
+      <tr>
+        <td><a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/ekdose-upeuthunes-deloses" target="_blank">Υπεύθυνη Δήλωση Αποδοχής Εκπροσώπησης</a></td>
+        <td>Συμπληρώνεται από τον εκπρόσωπο. Αναφέρει ότι αποδέχεται τον ορισμό ως φορολογικός εκπρόσωπος.  Κείμενο δήλωσης: Αποδέχομαι τον ορισμό μου ως φορολογικού εκπροσώπου στην Ελλάδα του [ΟΝΟΜΑ ΕΠΩΝΥΜΟ ΣΟΥ], με ΑΦΜ [ΑΦΜ σου], ΔΟΥ: [ΔΟΥ ΣΟΥ], ΑΔΤ [ΑΡΙΜΟΣ ΔΕΛΤΙΟΥ ΤΑΥΤΟΤΗΤΑΣ ΣΟΥ], που κατοικεί στην [ΠΟΛΗ ΕΞΩΤΕΡΙΚΟΥ ΠΟΥ ΜΕΝΕΙΣ] της [ΧΩΡΑΣ ΠΟΥ ΜΕΝΕΙΣ]"</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/ekdose-upeuthunes-deloses" target="_blank">Υπεύθυνη Δήλωση Ορισμού Εκπροσώπου</a></td>
+        <td>Συμπληρώνεται από εσένα. Κείμενο δήλωσης: "Ορίζω ως φορολογικό μου εκπρόσωπο στην Ελλάδα τον/την [ΟΝΟΜΑ ΕΠΩΝΥΜΟ] του [ΟΝΟΜΑ ΠΑΤΡΟΣ] με Α.Φ.Μ.: [ΑΦΜ ΕΚΠΡΟΣΩΠΟΥ] ∆.Ο.Υ.: [ΔΟΥ] κάτοικο: [ΠΟΛΗ] οδός - αριθμός: [ΟΔΟΣ ΑΡΙΘΜΟΣ]"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Όταν έχεις έτοιμα όλα τα έγγραφα για την "Κάτοικοι Εξωτερικού – Αίτηση μεταβολής φορολογικής κατοικίας" δημιουργείς <a href="https://www1.aade.gr/saadekef/eticketaade" target="_blank">νέο αίτημα στην ΑΑΔΕ</a>
+    <br>
+    Νεο αίτημα > Φορολογία > Για εμένα > Θεματική ομάδα: Εισόδημα,
+    <br>Διαδικασία: Κάτοικοι εξωτερικού - διαδικασία μεταβολής φορολογικής κατοικίας,
+    <br>Υπηρεσία Υποβολής Αιτήματος: ΔΟΥ που είσαι εγγεγραμμένος,
+    <br>Τμήμα Υπηρεσίας Υποβολής: Έχει 1 μόνο entry. Οπότε αυτό.
+    <br><img src="images/ta-aitimata-mou.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 80%;">
+    <br>Αίτημα (Βήμα 4): Αιτούμαι την αναγνώριση της μεταβολής της φορολογικής μου κατοικίας ως κάτοικος εξωτερικού. Μέσω του "Επιλέξτε" κάνε upload όλα τα δικαιολογητικά σε PDF.
+    <br>Σε επόμενο χρόνο θα σε ενημερώσουν για το τι δεν τους αρέσει και θα πρέπει να κάνεις τις διορθώσεις. Μπορείς να τσεκάρεις <a href="https://www1.aade.gr/saadekef/eticketaade/minimata" target="_blank">τα αιτήματά μου</a> αν και κανονικά σκάει email όταν έχουν απαντήσει.
+  </p>
+
+
+  <h3>Κάτοικοι Εξωτερικού - κατάθεση δικαιολογητικών για μεταβολή φορολογικής κατοικίας</h3>
+  <p>Η στρατηγική μου ήταν να ετοιμάσω πρώτα τα στάνταρ έντυπα, χωρίς να προτρέξω σε μεταφράσεις και apostille και μου φύγουν 500.000€  χωρίς να έχω πάρει το ΟΚ.</p>
+
+  <p><strong>Γενικές σημειώσεις:</strong></p>
+  <ul>
+    <li>Τα πεδία με διακεκομμένη γραμμή στα έντυπα Μ0, Μ1, Μ7 είναι για την υπηρεσία. Δεν τα συμπληρώνεις.</li>
+    <li>Όλα τα έντυπα Μ έχουν οδηγίες στην τελευταία σελίδα. Διάβασέ τες.</li>
+  </ul>
+
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Έγγραφο</th>
+        <th>Σημειώσεις</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.aade.gr/sites/default/files/2017-01/M0.pdf" target="_blank">Μ0</a></td>
+        <td>
+          ΘΕΜΑ: ΜΕΤΑΦΟΡΑ ΣΕ ΔΟΥ ΚΑΤΟΙΚΩΝ ΕΞΩΤΕΡΙΚΟΥ ΚΑΙ ΟΡΙΣΜΟΣ ΦΟΡΟΛΟΓΙΚΟΥ ΕΚΠΡΟΣΩΠΟΥ.
+          <br>
+          ΣΥΝΗΜΜΕΝΑ: Μ1, Μ7,
+          <br>τα παρακάτω πεδία τα άφησα κενά:
+          <br>
+          <img src="images/m0.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 30%;">
+        </td>
+      </tr>
+      <tr>
+        <td><a href="https://www.aade.gr/sites/default/files/2017-01/M1.pdf" target="_blank">Μ1</a></td>
+        <td>Συμπλήρωσε μόνο τα πεδία α, γ (μόνο το επάγγελμα), και ε.</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.aade.gr/sites/default/files/2017-01/M7.pdf" target="_blank">Μ7</a></td>
+        <td>Έναρξη: Χ.
+          <br>
+          Είδος σχέσης: ΦΟΡΟΛΟΓΙΚΟΣ ΕΚΠΡΟΣΩΠΟΣ ΑΡΘΡ 8 ΚΦΔ / ΠΡΩΗΝ ΑΝΤΙΚΛΗΤΟΣ.
+          <br>
+          Συνυποβάλλεται με δήλωση: Μεταβολής Ατ. Στοιχείων.</td>
+      </tr>
+      <tr>
+        <td>Πιστοποιητικό εργασίας</td>
+        <td>Π.χ. μισθοδοσία, βεβαίωση από εργοδότη. Σε πρώτη φάση έκανα ένα overlay translation του εγγράφου με OCR SW. Π.χ. Google Lens. Note: this may raise concerns for sensitive data/privacy but I could not find an OCR tool that performs overlay translation without relying on the Google Translate API... :'(  Προχώρησα σε επίσημη μετάφραση μετά από επιβεβαίωση του υπαλλήλου της ΔΟΥ για την ορθότητα του εγγράφου.
+        </td>
+      </tr>
+      <tr>
+        <td>Πρόσφατο έγγραφο από το δήμο που να πιστοποιείται η ημερομηνία εγγραφής/εγκατάστασης</td>
+        <td>Για Γερμανία ένα παράδειγμα είναι το Anmeldung.  Overlay translation με OCR για αρχή και επίσημη μετάφραση μετά την επιβεβαίωση.</td>
+      </tr>
+      <tr>
+        <td>Πιστοποιητικό φορολογικής κατοικίας (ΠΦΚ) </td>
+        <td><a href="https://www.bzst.de/DE/Service/SteuerlichesInfocenter/Ausl_Formulare/auslaendische_formulare_node.html#js-toc-entry2" target="_blank">hyperlink για Γερμανία Antrag auf Erteilung einer Ansässigkeitsbescheinigung deutsch-englische Sprachfassung</a> Απαιτείται apostille και <strong>ΜΕΤΑ</strong> μετάφραση. Για apostille στην Δρέσδη: <a href="https://www.lds.sachsen.de/soziales/?ID=5589&art_param=512" target="_blank">Landesdirektion Sachsen</a>.  Για αλλα Bundesländer --> no idea</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+
+  <p>Όταν έχεις έτοιμο ένα αξιοπρεπή αριθμό από τα έγγραφα που απαιτούνται για την "Κάτοικοι Εξωτερικού – κατάθεση δικαιολογητικών για μεταβολή φορολογικής κατοικίας" δημιουργείς <a href="https://www1.aade.gr/saadekef/eticketaade" target="_blank">νέο αίτημα στην ΑΑΔΕ</a>. <i>UPDATE 250614:Νομίζω ότι πλέον μπορεί να γίνει στο ίδιο αίτημα με την αίτηση.</i></p>
+  <p>Στέλνεις ότι έχεις διαθέσιμο και γράφεις στο μήνυμα αιτήματος μια παράκληση για αξιολόγηση ως προς την ορθότητα.  Παραθέτω ένα παράδειγμα:</p>
+
+  <br>
+
+  <fieldset style="border: 1px solid #ccc; padding: 1em; border-radius: 5px; background-color: #f9f9f9;">
+    <legend><strong>Παράδειγμα μηνύματος για έλεγχο δικαιολογητικών</strong></legend>
+    <pre style="white-space: pre-wrap; font-family: inherit;">
+      Αξιότιμοι κύριοι/κυρίες,
+
+      Παρακαλώ επιβεβαιώστε αν τα παρακάτω δικαιολογητικά είναι πλήρη για τη διαδικασία μεταβολής της φορολογικής μου κατοικίας από την Ελλάδα στην Γερμανία.
+
+      Υποβαλλόμενα έντυπα:
+      - M0, M1, M7
+      - ΠΦΚ Γερμανικά/Αγγλικά / Ansässigkeitsbescheinigung, ανεπίσημη μετάφραση
+      - Πιστοποιητικό εργασίας, ανεπίσημη μετάφραση
+      - Πρόσφατο έγγραφο από το δήμο που να πιστοποιείται η ημερομηνία εγγραφής/εγκατάστασης / Anmeldung, ανεπίσημη μετάφραση
+
+      Ερωτήσεις:
+      1. Απαιτούνται επιπλέον έγγραφα πέρα από τα προαναφερθέντα; Αν ναι, ποια;
+      2. Σε ποια έγγραφα απαιτείται σφραγίδα Apostille;
+
+      Θα μπορούσατε να εξετάσετε τα υποβαλλόμενα δικαιολογητικά και να μου επιβεβαιώσετε ότι είναι σωστά;
+      Επισημαίνω ότι τα έγγραφα που επισυνάπτω περιλαμβάνουν ανεπίσημη μετάφραση.
+      Αναμένω την επιβεβαίωσή σας για να προχωρήσω στην επίσημη μετάφραση.
+
+      Ευχαριστώ εκ των προτέρων.
+
+      Με εκτίμηση,
+      [ΟΝΟΜΑ ΕΠΩΝΥΜΟ]
+    </pre>
+  </fieldset>
+
+  <p>Σε επόμενο χρόνο θα ενημερώσουν για την ορθότητα και θα μπορείς να προχωρήσεις σε μεταφράσεις, apostille και λοιπά. Μπορεί να στείλουν πληροφοριακό έντυπο με το τι ισχύει για την συγκεκριμένη ΔΟΥ.  Είναι σημαντικό να το διαβάσεις γιατί η διαδικασία διαφέρει από ΔΟΥ σε ΔΟΥ.  Καλό θα ήταν να μάθεις και αν η μετάφραση απαιτείται να γίνει μέσω "Ορκωτού Μεταφραστή". Αν ναι βρήκα <a href="https://www.mfa.gr/germany/eservices/katalogos-orkoton-metaphraston" target="_blank">έναν κατάλογο για Γερμανία</a>. Για άλλες χώρες --> No idea.</p>
+
+  <h3>Εργαλεία που ίσως φανούν χρήσιμα</h3>
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Εργαλείο</th>
+        <th>Χρήση</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://github.com/xournalpp/xournalpp" target="_blank">Xournal++</a></td>
+        <td>Overlay text on PDFs, e.g. M0, M1, M7</td>
+      </tr>
+      <tr>
+        <td><a href="https://qpdf.readthedocs.io/en/stable/" target="_blank">qpdf</a></td>
+        <td>PDF manipulation, Split / merge PDF files</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h3>Fun Fact για κλείσιμο</h3>
+  <p>Αρκετοί υπάλληλοι στις ΔΟΥ απαντούν μόνιμα με ΚΕΦΑΛΑΙΑ.  Μετά από μερικές νύχτες υπερανάλυσης κατέληξα σε 3 πιθανούς λόγους:
+    <ol>
+      <li>Τα κεφαλαία καταργούν την ανάγκη για τόνους = πιο γρήγορη πληκτρολόγηση;</li>
+      <li>Μπορεί να είναι μια μορφή “διοικητικής επισημότητας”;</li>
+      <li>ΑΠΛΩΣ ΣΟΥ ΦΩΝΑΖΟΥΝ ;;;</li>
+    </ol>
+  </p>
+
+  <strong>Καλή τύχη!</strong>
 
 </section>
 
