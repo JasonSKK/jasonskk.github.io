@@ -26,6 +26,7 @@ section {
   border-radius: 8px; /* Slightly rounded corners */
   background-color: #f9f9f9; /* Light background to separate sections */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  overflow-x: auto; /* Enables horizontal scroll on very small devices */
 }
 
 hr {
@@ -59,15 +60,15 @@ li {
   margin: 0 15px 10px 0px; /* Adds 20px vertical space below items */
 }
 
-/* table, th, td { */
-/*   border: 1px solid black; */
-/*   border-collapse: collapse; */
-/* } */
-
-/* tr:nth-child(odd) { */
-/*   background-color: rgba(102, 102, 102, 0.4); */
-/* } */
-
+table, th, td {
+width: 100%;
+table-layout: fixed; /* Ensures columns shrink within available width */
+border-collapse: collapse;
+word-wrap: break-word;
+border: 1;
+cellpadding: 8;
+cellspacing: 0;
+}
 
 nav a {
   text-decoration: none;
@@ -94,27 +95,6 @@ nav a:hover {
   max-width: 100%; /* Responsive image */
   height: auto; /* Maintain aspect ratio */
   border-radius: 10px; /* Optional: adds rounded corners */
-}
-
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
-  justify-content: center; /* Center the image */
-  align-items: center; /* Center the image */
-}
-
-.modal img {
-  max-width: 80%; /* Make the image bigger */
-  max-height: 80%; /* Make the image bigger */
-  margin: auto; /* Center the image */
-  display: block; /* Make sure it's block level */
 }
 
 .modal {
