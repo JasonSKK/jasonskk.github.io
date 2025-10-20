@@ -123,6 +123,73 @@
 
 
            <section>
+             <h2>FFC retracing on ACER ASPIRE 5532 keyboard using silver conductive paste</h2>
+             <p>Date: 2025-10-20</p>
+             <h3>Backstory</h3>
+             <p>My first personal computer was an Acer Aspire 5532 with an AMD Athlon 64 TF-20 at 1.6 GHz and 3 GB RAM. It still runs well today as a native Linux machine mainly used for tasks such as reading or writing ICs using a universal programmer where moving my desktop pc is not possible, Linux experiments, and general work where a desktop PC would be less practical (coding on the sofa).
+               Over the years this laptop has had a few HW issues. I have already resoldered USB ports, audio, and the WIFI card. This time the keyboard died. Considering the machine is over 15 years old and seriously beaten .. there is no surprise some components eventually die. I like the ease of disassembly and repairability of the laptop.  Within 5 minutes you can get into the motherboard so easily.
+             </p>
+
+             <p>The keyboard uses a FFC cable that connects it to the mainboard.  Over time repeated bending caused several internal trace breaks making a few keys unusable.
+               A new keyboard costs around 20 EUR online. Nonetheless I went ahead repairing it as a learning exercise.  I thought of it being a good opportunity to gain some practical experience on retracing as I have not done this previously.
+             </p>
+
+             <h3>Retracing method</h3>
+             <p>Below is a photo of the damaged area under the FFC cable’s protective layer. The cyan coloured triangle marks the general affected area. The red triangle highlights the worst damage.  Using a few drops of denaturated ethanol (99%) on a cotton bud, I started wiping gently along the direction of the traces.  Using a precision blade (my new favorite tool) I carefully scraped off any residue that remained after ethanol on trace path to avoid any shorts later on.
+               <br><img src="images/acer-damaged-traces_triangle.jpg" alt="acer aspire 5532 damaged traces keyboard FFC" class="clickable" onclick="openModal(this)" >
+             </p>
+             <div style="overflow: auto;">
+               <p><img src="images/acer-restored-conductors.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
+                 I taped the FFC cable down even more to keep it steady. Then I used some silver conductive paste within a tiny syringe needle.  I applied small amounts across the gaps to reconnect the worn and broken traces.  Silver conductive paste allowed me to pretty much "draw" over the break joint in the path restoring the missing conductor. Traces are uneven in between the cable. Measuring from pin-out/edge area. Nominal pitch ≈ 1&nbsp;mm.
+                 Measured center to center pitch:
+               </p>
+             </div>
+
+             <math display="block">
+               <mrow>
+                 <mi>p</mi>
+                 <mo>=</mo>
+                 <mfrac>
+                   <mi>W</mi>
+                   <mrow><mi>N</mi><mo>+</mo><mn>1</mn></mrow>
+                 </mfrac>
+                 <mo>≈</mo>
+                 <mfrac>
+                   <mn>27</mn>
+                   <mn>25</mn>
+                 </mfrac>
+                 <mo>=</mo>
+                 <mn>1.08</mn>
+                 <mtext>&nbsp;mm</mtext>
+               </mrow>
+             </math>
+
+             <p>
+               With W = cable width in millimetres, and N = number of conductors (count). <strong>Pitch ≈ 1.08&nbsp;mm</strong> (nominal 1.00&nbsp;mm).
+             </p>
+
+             <video src="images/acer-retracing-silver.webm" autoplay loop muted playsinline></video>
+
+             <p>
+               I left the silver conductive paste dry for about an hour (a blow dryer can speed this up)... Then I connected the keyboard and tested.  Some keys were still unresponsive and I needed to repeat the process 2 more times.  Scraping off and reapplying the paste.  Finally, I managed to get the keyboard to a full working state. Proof:
+               <img src="images/acer-keyboard_test.webp" alt="acer aspire 5532 fixed keyboard FFC" class="clickable" onclick="openModal(this)" >
+             </p>
+             <br>
+             <div style="overflow: auto;">
+               <img src="images/acer-protection-film.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
+               <p>After a few attempts I learned that the most reliable way to retrace extremely fine joints (traces are spread unevenly) is to draw freehand under good lighting.  I initially tried using tape or paper as a guide. In contrast this made the process messier. The paste was smudged and in one case tape lifted other non-damaged traces.  In the end a steady hand and slow controlled syringe movement worked best. I aligned the needle carefully with each trace and paused to push more paste when needed. I applied some non-conductive tape to prevent silver paste being scraped off and further protect the remaining traces from future use.</p>
+             </div>
+
+             <h3>Conclusion</h3>
+             <p>To close, this is probably too much hassle as I could just have bought new keyboard. Realistically no one wants to suffer retracing 1 mm lines but:
+               <ul>
+                 <li>I saved the keyboard from the landfill and 20 EUR from my wallet.</li>
+                 <li>I learned how to retrace FFCs using silver conductive paste</li>
+               </ul>
+             </p>
+           </section>
+
+           <section>
              <h2>Removing NAND flash without a heat gun for raw chip-off dumping</h2>
              <p>Date: 2025-10-03</p>
              <p>Sadly back in 2017 a USB flash I own was plugged to a Frankenstein ACER laptop with reversed VCC and GND on the pinout of the usb adaptor on the motherboard.  Naturally the IC was fried for good.  As NAND cells degrade over time and data retention decreases without power the ideal time to attempt obtaining any meaningful data from the chip would have been ASAP. Essentially yesterday :D</p>
@@ -274,26 +341,26 @@
                  <p>IC does not look fully dead from the measurement tests. However, even if the IC is not internally damaged the firmware might. No detection/activity on the computer possible whatsoever. At this stage, I have no idea how to un-fry the IC. Therefore I will be now proceeding with chip off method in order to dump the raw NAND using a universal programmer and a TSOP48 adaptor.</p>
 
                  <h3>Micron NAND flash memory removal</h3>
-<p>
-Usually NAND flash chips are removed using a hot air gun. In my case no heat gun was available. One common alternative approach is to flood the pins with solder and heat one side at a time while at the same time poking the NAND with a pair of tweezers.  This is easier with leaded solder which has a lower melting point but I do not use leaded solder.
-</p>
-<div style="overflow: auto;">
-  <img src="images/nand-removed.jpg" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
-  <p>
-    I used a precision razor blade pen in combination with a soldering iron. Carefully I started scraping the edges of the NAND chip (not the pins but the sides).  Once the blade edge could go under the NAND I proceeded slowly and gradually to the pin sides.  On the edge I heated the pins with the soldering iron to melt the tin while lightly and carefully lifting the pins from underneath with the blade.  I first released one side of the chip working on 12 pins at a time which is half the side. Then the opposite side.  This was done to avoid going too deep with the pen's body putting additional stress on the NAND chip. In the GIF below I have only managed to get the very final part where I detach the very few last pins. I did not manage to get the scraping on the sides and the heated pin lifting using soldering iron and blade :'(
-</p>
-</div>
-<br><img src="images/nand-remove.webp" alt="nand removal rasorblade" class="clickable" onclick="openModal(this)"></td>
+                 <p>
+                   Usually NAND flash chips are removed using a hot air gun. In my case no heat gun was available. One common alternative approach is to flood the pins with solder and heat one side at a time while at the same time poking the NAND with a pair of tweezers.  This is easier with leaded solder which has a lower melting point but I do not use leaded solder.
+                 </p>
+                 <div style="overflow: auto;">
+                   <img src="images/nand-removed.jpg" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
+                   <p>
+                     I used a precision razor blade pen in combination with a soldering iron. Carefully I started scraping the edges of the NAND chip (not the pins but the sides).  Once the blade edge could go under the NAND I proceeded slowly and gradually to the pin sides.  On the edge I heated the pins with the soldering iron to melt the tin while lightly and carefully lifting the pins from underneath with the blade.  I first released one side of the chip working on 12 pins at a time which is half the side. Then the opposite side.  This was done to avoid going too deep with the pen's body putting additional stress on the NAND chip. In the GIF below I have only managed to get the very final part where I detach the very few last pins. I did not manage to get the scraping on the sides and the heated pin lifting using soldering iron and blade :'(
+                   </p>
+                 </div>
+                 <br><img src="images/nand-remove.webp" alt="nand removal rasorblade" class="clickable" onclick="openModal(this)"></td>
 <p>
   After both sides were freed I repeat the process on the remaining two sides to fully detach the NAND chip from the PCB. Finally I used my soldering iron, some flux, and soldering wick to remove excess solder that might have been trapped in-between pins.
   <br>
-<br><img src="images/nand-full-desoldering-wick.webp" alt="nand full desoldering wick remove tin remains on pins" class="clickable" onclick="openModal(this)"></td>
+  <br><img src="images/nand-full-desoldering-wick.webp" alt="nand full desoldering wick remove tin remains on pins" class="clickable" onclick="openModal(this)"></td>
 </p>
 
 <p>
-This was my first attempt using this method.
-During removal one pin was lost. Fortunately it was an NC (no connect) pin and did not affect functionality.<br>
-<br><img src="images/missing-pin-nand.jpg" alt="nand missing pin" class="clickable" onclick="openModal(this)"></td>
+  This was my first attempt using this method.
+  During removal one pin was lost. Fortunately it was an NC (no connect) pin and did not affect functionality.<br>
+  <br><img src="images/missing-pin-nand.jpg" alt="nand missing pin" class="clickable" onclick="openModal(this)"></td>
 </p>
 
 <h3>To be continued ... I have put an order for an universal programmer and a TSOP48 adaptor and I am waiting for them to arrive ;)</h3>
