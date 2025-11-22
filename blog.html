@@ -120,7 +120,127 @@
 
            -->
 
+           <section>
+             <h2>How I librebooted my DELL OPTIPLEX 9010MT (internal flash via flashprog)</h2>
+             <p>Date: 2025-11-22</p>
+             <p style="background-color:red;margin-bottom:0.0em;"><strong>DISCLAIMER </strong></p>
+             <p>This blog post describes exactly what was done on <strong>one specific machine</strong>. Complete information for supported devices is in the <a href="https://libreboot.org/docs/install/t1650.html">official Libreboot documentation</a>. Always follow the upstream guides. <strong>This report is not a replacement.</strong>
 
+             <p style="background-color:red;margin-bottom:0.0em;"><strong>WARNING 1 </strong></p>
+             <p>As mentioned in the <a href="https://libreboot.org/docs/install/t1650.html">official documentation</a>, make sure a HW programmer and the SOP8 and SOP16 adaptors are available in case the device is bricked so that you can recover using external flashing</p>
+
+             <p style="background-color:red;margin-bottom:0.0em;"><strong>WARNING 2 </strong></p>
+             <p>
+               Make sure you know what you are doing. If in doubt go through the <a href="https://libreboot.org/docs/install/t1650.html">OFFICIAL DOCUMENTATION</a>.
+             </p>
+
+             <h3>Hardware</h3>
+             <p>
+               Model: Dell Optiplex 9010 MT
+               <br>
+               Firmware target: Uses the T1650 firmware in Libreboot
+               <br>
+               <br>
+               References:
+               <br>
+               <a href='https://libreboot.org/docs/install/dell7010.html'>https://libreboot.org/docs/install/dell7010.html</a>
+               <br>
+               <a href='https://libreboot.org/docs/install/t1650.html'>https://libreboot.org/docs/install/t1650.html</a>
+             </p>
+
+             <h3>Create firmware dump of the stock DELL BIOS</h3>
+             <p>
+               <ol>
+                 <li>Set the motherboard jumper to SERVICE_MODE in order to deactivate flash protection
+                   <br>
+                   <br><img src="images/dell-service-mode.jpg" alt="Jumper to short the SERVICE MODE pins found below the RAM" class="clickable" onclick="openModal(this)">
+                 <li>Boot the machine</li>
+                 <li>At the Dell prompt press F1 to continue</li>
+                 <li>
+                   Create multiple dumps using <a href='https://flashprog.org/wiki/Flashprog'>flashprog</a>:
+                   <br>
+                   <br>
+                   <code>sudo flashprog -p internal:laptop=force_I_want_a_brick,boardmismatch=force -r dump.bin</code>
+                 </li>
+                 <li>Create several dumps and verify identical checksums. Checksums must match.
+                   <br>
+                   <br>
+                   <code>sha1sum dump*</code>
+                 </li>
+                 <li>Copy the dumps on a machine which you can operate a IC programmer to externally flash the binary back to the target host in case it is bricked</li>
+               </ol>
+             </p>
+
+             <h3>Build Libreboot from source</h3>
+             <p>
+               Libreboot handles vendor firmware extraction automatically when building from source.
+               <br>
+               <ol>
+                 <li>Enable 4 thread execution:
+                   <br
+                     <code>export XBMK_THREADS=4</code></li>
+                 <li>
+                   <code>
+                     git clone https://codeberg.org/libreboot/lbmk
+                     <br>
+                     cd lbmk
+                     <br>
+                     sudo ./mk dependencies debian
+                     <br>
+                     # Build time approx. 10 minutes (Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz / 16GB RAM / 4 threads)
+                     ./mk -b coreboot t1650_12mb
+                   </code>
+                 </li>
+               </ol>
+             </p>
+
+             <h3>Set MAC address (Intel GbE region)</h3>
+             <p>
+               MAC address must be set before flashing
+               <ol>
+                 <li>Create a tar archive of the produced image:
+                   <br>
+                   <br>
+                   <code>
+                     tar cfJ libreboot-RELEASE_t1650_12mb.tar.xz bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom
+                   </code>
+                 </li>
+                 <li>Inject randomised MAC address
+                   <br>
+                   <br>
+                   <code>
+                     ./mk inject libreboot-RELEASE_t1650_12mb.tar.xz setmac 00:xx:xx:xx:xx:xx
+                   </code>
+                 </li>
+                 <li>Extract (overwrite) modified archive back to <code>bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom</code>
+                   <br>
+                   <br>
+                   <code>
+                     tar xvf libreboot-RELEASE_t1650_12mb.tar.xz
+                   </code>
+                 </li>
+               </ol>
+
+               <h3>Flash ROM</h3>
+             <p>
+               <strong>Double check the ROM file path before flashing!</strong>
+               <br>
+               <br>
+               Flash ROM via flashprog:
+               <br>
+               <code>
+                 sudo flashprog -p internal:laptop=force_I_want_a_brick,boardmismatch=force -w bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom
+               </code>
+               <br>
+               <br>
+               After flashing, power off, remove the service jumper, and boot. Libreboot should be active.
+               <br>
+               <br>
+               GRUB menu on boot:
+               <br><img src="images/grub-libreboot.jpg" alt="GRUB menu on boot" class="clickable" onclick="openModal(this)" >
+             </p>
+
+           </section>
 
            <section>
              <h2>FFC retracing on ACER ASPIRE 5532 keyboard using silver conductive paste</h2>
@@ -215,7 +335,7 @@
              </table>
 
              <h3>Making sure chip-off method is really required</h3>
-             <p>First of all I need to make sure that chip-off method is absolutely necessary and the controller has 0 change being brought back to life.  I don't want to casually start removing NAND chips attempting raw extraction without proper reason.</p>
+             <p>First of all I need to make sure that chip-off method is absolutely necessary and the controller has 0 change being brought back to life.  I do not want to casually start removing NAND chips attempting raw extraction without proper reason.</p>
              <ol>
                <li>Monitor kernel buffer for any activity and plug usb flash in the usb port. I did not use the usb port of the motherboard but an externally powered usb hub ;)
                  <br>
@@ -232,125 +352,125 @@
                    </thead>
                    <tr>
                      <td>VCC > GND, Resistance mode</td>
-                     <td>0Ω</td>
-                     <td>Hard short</td>
-                   </tr>
-                   <tr>
-                     <td>GND > D+ / D-, Voltage</td>
-                     <td>6 mV</td>
-                     <td>NOK. Very low leakage</td>
-                   </tr>
-                   <tr>
-                     <td>VCC > D+ / D-, Voltage</td>
-                     <td>0 V</td>
-                     <td>NOK. IC not driving. Could indicate dead controller</td>
-                   </tr>
-                   <tr>
-                     <td>GND > NAND VCC, Resistance mode</td>
-                     <td>0Ω</td>
-                     <td>NOK. Short. Confirms damaged power rail. This is likely via controller or internal short in NAND</td>
-                   </tr>
-                   <tr>
-                     <td>VCC > NAND CE# (chip enable pin:9), Resistance mode</td>
-                     <td>∞</td>
-                     <td>OK. Open line, this is normal if IC not active</td>
-                   </tr>
-                   <tr>
-                     <td>D+ > D−, Resistance mode</td>
-                     <td>~20MΩ</td>
-                     <td>OK I think. USB differential pair open</td>
-                   </tr>
-                   <tr>
-                     <td>VCC > XTAL (12 MHz), Voltage mode</td>
-                     <td>0 V</td>
-                     <td>NOK. IC not oscillating</td>
-                   </tr>
-                   <tr>
-                     <td>USB VBUS > GND (off board)</td>
-                     <td>5.08 V</td>
-                     <td>OK. Host port. Power reaches device input.</td>
-                   </tr>
-                 </table>
-                 <br>
-                 <img src="images/sk6211-diag-pins-measurement.png" alt="pins on the sk6211 " class="clickable" onclick="openModal(this)">
+<td>0Ω</td>
+<td>Hard short</td>
+</tr>
+<tr>
+  <td>GND > D+ / D-, Voltage</td>
+  <td>6 mV</td>
+  <td>NOK. Very low leakage</td>
+</tr>
+<tr>
+  <td>VCC > D+ / D-, Voltage</td>
+  <td>0 V</td>
+  <td>NOK. IC not driving. Could indicate dead controller</td>
+</tr>
+<tr>
+  <td>GND > NAND VCC, Resistance mode</td>
+  <td>0Ω</td>
+  <td>NOK. Short. Confirms damaged power rail. This is likely via controller or internal short in NAND</td>
+</tr>
+<tr>
+  <td>VCC > NAND CE# (chip enable pin:9), Resistance mode</td>
+  <td>∞</td>
+  <td>OK. Open line, this is normal if IC not active</td>
+</tr>
+<tr>
+  <td>D+ > D−, Resistance mode</td>
+  <td>~20MΩ</td>
+  <td>OK I think. USB differential pair open</td>
+</tr>
+<tr>
+  <td>VCC > XTAL (12 MHz), Voltage mode</td>
+  <td>0 V</td>
+  <td>NOK. IC not oscillating</td>
+</tr>
+<tr>
+  <td>USB VBUS > GND (off board)</td>
+  <td>5.08 V</td>
+  <td>OK. Host port. Power reaches device input.</td>
+</tr>
+</table>
+<br>
+<img src="images/sk6211-diag-pins-measurement.png" alt="pins on the sk6211 " class="clickable" onclick="openModal(this)">
 
-                 <br>
-                 <table border="1" cellpadding="8" cellspacing="0">
-                   <thead>
-                     <tr>
-                       <td><strong>Measurement points, IC</strong></td>
-                       <td><strong>Value</strong></td>
-                       <td><strong>Comments</strong></td>
-                     </tr>
-                   </thead>
-                   <tr>
-                     <td>Pin 10 (VCC) > GND, Resistance mode</td>
-                     <td>~0.9 MΩ</td>
-                     <td>OK. Main digital supply pin shows expected relatively high impedance</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 42 (VCC) > GND, Resistance mode</td>
-                     <td>~0.9 MΩ</td>
-                     <td>OK. Secondary digital supply pin</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 44 (VCC) > GND, Resistance mode</td>
-                     <td>~0.9 MΩ</td>
-                     <td>OK. Third digital supply pin</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 43 (GND)</td>
-                     <td>—</td>
-                     <td>Reference ground</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 46 (GND)</td>
-                     <td>—</td>
-                     <td>Reference ground</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 16 (DP), Diode mode > GND</td>
-                     <td>0.5 V</td>
-                     <td>OK. USB D+ diode drop consistent with <a href="https://www.ti.com/product-category/passive-discrete/diodes/esd-protection-diodes/overview.html">internal ESD protection</a> </td>
-                   </tr>
-                   <tr>
-                     <td>Pin 17 (DM), Diode mode > GND</td>
-                     <td>0.5 V</td>
-                     <td>OK. USB D- diode drop consistent with <a href="https://www.ti.com/product-category/passive-discrete/diodes/esd-protection-diodes/overview.html">internal ESD protection</a> </td>
-                   </tr>
-                   <tr>
-                     <td>Pin 22 (A5P) > GND, Resistance mode</td>
-                     <td>~0.9 MΩ</td>
-                     <td>OK I guess. VBUS input resistance</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 23 (D33V) > GND, Resistance mode</td>
-                     <td>~0.9 MΩ</td>
-                     <td>OK. 3.3 V regulated output high resistance suggests no short</td>
-                   </tr>
-                   <tr>
-                     <td>Pin 20 (D18) > GND, Resistance mode</td>
-                     <td>Not measured</td>
-                     <td>1.8 V regulated output</td>
-                   </tr>
-                 </table>
+<br>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <td><strong>Measurement points, IC</strong></td>
+      <td><strong>Value</strong></td>
+      <td><strong>Comments</strong></td>
+    </tr>
+  </thead>
+  <tr>
+    <td>Pin 10 (VCC) > GND, Resistance mode</td>
+    <td>~0.9 MΩ</td>
+    <td>OK. Main digital supply pin shows expected relatively high impedance</td>
+  </tr>
+  <tr>
+    <td>Pin 42 (VCC) > GND, Resistance mode</td>
+    <td>~0.9 MΩ</td>
+    <td>OK. Secondary digital supply pin</td>
+  </tr>
+  <tr>
+    <td>Pin 44 (VCC) > GND, Resistance mode</td>
+    <td>~0.9 MΩ</td>
+    <td>OK. Third digital supply pin</td>
+  </tr>
+  <tr>
+    <td>Pin 43 (GND)</td>
+    <td>—</td>
+    <td>Reference ground</td>
+  </tr>
+  <tr>
+    <td>Pin 46 (GND)</td>
+    <td>—</td>
+    <td>Reference ground</td>
+  </tr>
+  <tr>
+    <td>Pin 16 (DP), Diode mode > GND</td>
+    <td>0.5 V</td>
+    <td>OK. USB D+ diode drop consistent with <a href="https://www.ti.com/product-category/passive-discrete/diodes/esd-protection-diodes/overview.html">internal ESD protection</a> </td>
+  </tr>
+  <tr>
+    <td>Pin 17 (DM), Diode mode > GND</td>
+    <td>0.5 V</td>
+    <td>OK. USB D- diode drop consistent with <a href="https://www.ti.com/product-category/passive-discrete/diodes/esd-protection-diodes/overview.html">internal ESD protection</a> </td>
+  </tr>
+  <tr>
+    <td>Pin 22 (A5P) > GND, Resistance mode</td>
+    <td>~0.9 MΩ</td>
+    <td>OK I guess. VBUS input resistance</td>
+  </tr>
+  <tr>
+    <td>Pin 23 (D33V) > GND, Resistance mode</td>
+    <td>~0.9 MΩ</td>
+    <td>OK. 3.3 V regulated output high resistance suggests no short</td>
+  </tr>
+  <tr>
+    <td>Pin 20 (D18) > GND, Resistance mode</td>
+    <td>Not measured</td>
+    <td>1.8 V regulated output</td>
+  </tr>
+</table>
 
-                 <h4>Results</h4>
-                 <p>All VCC pins read normal to GND. That is a good sign and means there is probably no hard short. DP/DM show ~0.5 V in diode mode. Means ESD protection diodes inside the IC are intact. A5P and D33V measure ~0.9 MΩ to GND.  Resistance check shows no short.</p>
-                 <h4>Conclusion</h4>
-                 <p>IC does not look fully dead from the measurement tests. However, even if the IC is not internally damaged the firmware might. No detection/activity on the computer possible whatsoever. At this stage, I have no idea how to un-fry the IC. Therefore I will be now proceeding with chip off method in order to dump the raw NAND using a universal programmer and a TSOP48 adaptor.</p>
+<h4>Results</h4>
+<p>All VCC pins read normal to GND. That is a good sign and means there is probably no hard short. DP/DM show ~0.5 V in diode mode. Means ESD protection diodes inside the IC are intact. A5P and D33V measure ~0.9 MΩ to GND.  Resistance check shows no short.</p>
+<h4>Conclusion</h4>
+<p>IC does not look fully dead from the measurement tests. However, even if the IC is not internally damaged the firmware might. No detection/activity on the computer possible whatsoever. At this stage, I have no idea how to un-fry the IC. Therefore I will be now proceeding with chip off method in order to dump the raw NAND using a universal programmer and a TSOP48 adaptor.</p>
 
-                 <h3>Micron NAND flash memory removal</h3>
-                 <p>
-                   Usually NAND flash chips are removed using a hot air gun. In my case no heat gun was available. One common alternative approach is to flood the pins with solder and heat one side at a time while at the same time poking the NAND with a pair of tweezers.  This is easier with leaded solder which has a lower melting point but I do not use leaded solder.
-                 </p>
-                 <div style="overflow: auto;">
-                   <img src="images/nand-removed.jpg" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
-                   <p>
-                     I used a precision razor blade pen in combination with a soldering iron. Carefully I started scraping the edges of the NAND chip (not the pins but the sides).  Once the blade edge could go under the NAND I proceeded slowly and gradually to the pin sides.  On the edge I heated the pins with the soldering iron to melt the tin while lightly and carefully lifting the pins from underneath with the blade.  I first released one side of the chip working on 12 pins at a time which is half the side. Then the opposite side.  This was done to avoid going too deep with the pen's body putting additional stress on the NAND chip. In the GIF below I have only managed to get the very final part where I detach the very few last pins. I did not manage to get the scraping on the sides and the heated pin lifting using soldering iron and blade :'(
-                   </p>
-                 </div>
-                 <br><img src="images/nand-remove.webp" alt="nand removal rasorblade" class="clickable" onclick="openModal(this)"></td>
+<h3>Micron NAND flash memory removal</h3>
+<p>
+  Usually NAND flash chips are removed using a hot air gun. In my case no heat gun was available. One common alternative approach is to flood the pins with solder and heat one side at a time while at the same time poking the NAND with a pair of tweezers.  This is easier with leaded solder which has a lower melting point but I do not use leaded solder.
+</p>
+<div style="overflow: auto;">
+  <img src="images/nand-removed.jpg" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
+  <p>
+    I used a precision razor blade pen in combination with a soldering iron. Carefully I started scraping the edges of the NAND chip (not the pins but the sides).  Once the blade edge could go under the NAND I proceeded slowly and gradually to the pin sides.  On the edge I heated the pins with the soldering iron to melt the tin while lightly and carefully lifting the pins from underneath with the blade.  I first released one side of the chip working on 12 pins at a time which is half the side. Then the opposite side.  This was done to avoid going too deep with the pen's body putting additional stress on the NAND chip. In the GIF below I have only managed to get the very final part where I detach the very few last pins. I did not manage to get the scraping on the sides and the heated pin lifting using soldering iron and blade :'(
+  </p>
+</div>
+<br><img src="images/nand-remove.webp" alt="nand removal rasorblade" class="clickable" onclick="openModal(this)"></td>
 <p>
   After both sides were freed I repeat the process on the remaining two sides to fully detach the NAND chip from the PCB. Finally I used my soldering iron, some flux, and soldering wick to remove excess solder that might have been trapped in-between pins.
   <br>
