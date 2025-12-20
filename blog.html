@@ -48,54 +48,54 @@
       .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
-        z-index: 1000; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
       }
 
       .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%; /* Could be more or less, depending on screen size */
-        max-width: 700px; /* Set a maximum width */
-        object-fit: contain;
+      margin: auto;
+      display: block;
+      width: 80%; /* Could be more or less, depending on screen size */
+      max-width: 700px; /* Set a maximum width */
+      object-fit: contain;
       }
 
       .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #fff;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
       }
 
       .close:hover,
       .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
       }
 
       .lyrics-box {
-        background-color: #f0f0f0;
-        padding: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 20px;
-        text-align: center;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      text-align: center;
       }
 
       iframe {
-        width: 100%; /* Makes it expand to fit the main container */
-        max-width: 800px; /* Set a reasonable max width */
-        height: 450px; /* Adjust height proportionally */
-        border: none; /* Optional: removes the default border */
+      width: 100%; /* Makes it expand to fit the main container */
+      max-width: 800px; /* Set a reasonable max width */
+      height: 450px; /* Adjust height proportionally */
+      border: none; /* Optional: removes the default border */
       }
     </style>
 
@@ -121,244 +121,401 @@
            -->
 
            <section>
-             <h2>How I librebooted my DELL OPTIPLEX 9010MT (internal flash via flashprog)</h2>
-             <p>Date: 2025-11-22</p>
-             <p style="background-color:red;margin-bottom:0.0em;"><strong>DISCLAIMER </strong></p>
-             <p>This blog post describes exactly what was done on <strong>one specific machine</strong>. Complete information for supported devices is in the <a href="https://libreboot.org/docs/install/t1650.html">official Libreboot documentation</a>. Always follow the upstream guides. <strong>This report is not a replacement.</strong>
-
-             <p style="background-color:red;margin-bottom:0.0em;"><strong>WARNING 1 </strong></p>
-             <p>As mentioned in the <a href="https://libreboot.org/docs/install/t1650.html">official documentation</a>, make sure a HW programmer and the SOP8 and SOP16 adaptors are available in case the device is bricked so that you can recover using external flashing</p>
-
-             <p style="background-color:red;margin-bottom:0.0em;"><strong>WARNING 2 </strong></p>
+             <h2>High-Rate 40 MSPS FM RF capture of video8 using CX2388x-based expansion PCIe card</h2>
+             <p>Date: 2025-12-20</p>
              <p>
-               Make sure you know what you are doing. If in doubt go through the <a href="https://libreboot.org/docs/install/t1650.html">OFFICIAL DOCUMENTATION</a>.
-             </p>
-
-             <h3>Hardware</h3>
+               If the readers remember my previous blog post where I was using a CX for capturing RAW baseband CVBS signal for video8 cassette archival, then please forget about it.  I have eventually moved away from this method and I am now capturing directly the RF signal from a tapped Sony EV-S1000 player.  I thought writing a post as my now optimised workflow is finalised.
              <p>
-               Model: Dell Optiplex 9010 MT
-               <br>
-               Firmware target: Uses the T1650 firmware in Libreboot
-               <br>
-               <br>
-               References:
-               <br>
-               <a href='https://libreboot.org/docs/install/dell7010.html'>https://libreboot.org/docs/install/dell7010.html</a>
-               <br>
-               <a href='https://libreboot.org/docs/install/t1650.html'>https://libreboot.org/docs/install/t1650.html</a>
-             </p>
+               <img src="images/cx-mods_251220.jpg" alt="CX Card mods view" class="clickable" onclick="openModal(this)">
 
-             <h3>Create firmware dump of the stock DELL BIOS</h3>
+               <h3>Why moving away from CVBS hacky capture</h3>
              <p>
-               <ol>
-                 <li>Set the motherboard jumper to SERVICE_MODE in order to deactivate flash protection
-                   <br>
-                   <br><img src="images/dell-service-mode.jpg" alt="Jumper to short the SERVICE MODE pins found below the RAM" class="clickable" onclick="openModal(this)">
-                 <li>Boot the machine</li>
-                 <li>At the Dell prompt press F1 to continue</li>
-                 <li>
-                   Create multiple dumps using <a href='https://flashprog.org/wiki/Flashprog'>flashprog</a>:
-                   <br>
-                   <br>
-                   <code>sudo flashprog -p internal:laptop=force_I_want_a_brick,boardmismatch=force -r dump.bin</code>
-                 </li>
-                 <li>Create several dumps and verify identical checksums. Checksums must match.
-                   <br>
-                   <br>
-                   <code>sha1sum dump*</code>
-                 </li>
-                 <li>Copy the dumps on a machine which you can operate a IC programmer to externally flash the binary back to the target host in case it is bricked</li>
-               </ol>
+               The initial workflow was based on raw baseband CVBS capture using the CX card.  Video was captured as raw .u8 through cxadc.  The mono audio was taken asynchronously from the camcorder RCA output using an Edirol UA-5 and some ALSA scripts.  Both streams were recorded asynchronously and later aligned manually.  This workflow was producing digital video files of questionable but yet "watchable" quality.  However alignment was very time demanding, as frames were often dropped.  Pretty much this is a somewhat hacky way to produce a picture over nothing given the HW limitations at the time.
              </p>
-
-             <h3>Build Libreboot from source</h3>
-             <p>
-               Libreboot handles vendor firmware extraction automatically when building from source.
-               <br>
-               <ol>
-                 <li>Enable 4 thread execution:
-                   <br
-                     <code>export XBMK_THREADS=4</code></li>
-                 <li>
-                   <code>
-                     git clone https://codeberg.org/libreboot/lbmk
-                     <br>
-                     cd lbmk
-                     <br>
-                     sudo ./mk dependencies debian
-                     <br>
-                     # Build time approx. 10 minutes (Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz / 16GB RAM / 4 threads)
-                     ./mk -b coreboot t1650_12mb
-                   </code>
-                 </li>
-               </ol>
-             </p>
-
-             <h3>Set MAC address (Intel GbE region)</h3>
-             <p>
-               MAC address must be set before flashing
-               <ol>
-                 <li>Create a tar archive of the produced image:
-                   <br>
-                   <br>
-                   <code>
-                     tar cfJ libreboot-RELEASE_t1650_12mb.tar.xz bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom
-                   </code>
-                 </li>
-                 <li>Inject randomised MAC address
-                   <br>
-                   <br>
-                   <code>
-                     ./mk inject libreboot-RELEASE_t1650_12mb.tar.xz setmac 00:xx:xx:xx:xx:xx
-                   </code>
-                 </li>
-                 <li>Extract (overwrite) modified archive back to <code>bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom</code>
-                   <br>
-                   <br>
-                   <code>
-                     tar xvf libreboot-RELEASE_t1650_12mb.tar.xz
-                   </code>
-                 </li>
-               </ol>
-
-               <h3>Flash ROM</h3>
-             <p>
-               <strong>Double check the ROM file path before flashing!</strong>
-               <br>
-               <br>
-               Flash ROM via flashprog:
-               <br>
-               <code>
-                 sudo flashprog -p internal:laptop=force_I_want_a_brick,boardmismatch=force -w bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom
-               </code>
-               <br>
-               <br>
-               After flashing, power off, remove the service jumper, and boot. Libreboot should be active.
-               <br>
-               <br>
-               GRUB menu on boot:
-               <br><img src="images/grub-libreboot.jpg" alt="GRUB menu on boot" class="clickable" onclick="openModal(this)" >
-             </p>
-
-           </section>
-
-           <section>
-             <h2>FFC retracing on ACER ASPIRE 5532 keyboard using silver conductive paste</h2>
-             <p>Date: 2025-10-20</p>
-             <h3>Backstory</h3>
-             <p>My first personal computer was an Acer Aspire 5532 with an AMD Athlon 64 TF-20 at 1.6 GHz and 3 GB RAM. It still runs well today as a native Linux machine mainly used for tasks such as reading or writing ICs using a universal programmer where moving my desktop pc is not possible, Linux experiments, and general work where a desktop PC would be less practical (coding on the sofa).
-               Over the years this laptop has had a few HW issues. I have already resoldered USB ports, audio, and the WIFI card. This time the keyboard died. Considering the machine is over 15 years old and seriously beaten .. there is no surprise some components eventually die. I like the ease of disassembly and repairability of the laptop.  Within 5 minutes you can get into the motherboard so easily.
-             </p>
-
-             <p>The keyboard uses a FFC cable that connects it to the mainboard.  Over time repeated bending caused several internal trace breaks making a few keys unusable.
-               A new keyboard costs around 20 EUR online. Nonetheless I went ahead repairing it as a learning exercise.  I thought of it being a good opportunity to gain some practical experience on retracing as I have not done this previously.
-             </p>
-
-             <h3>Retracing method</h3>
-             <p>Below is a photo of the damaged area under the FFC cable’s protective layer. The cyan coloured triangle marks the general affected area. The red triangle highlights the worst damage.  Using a few drops of denaturated ethanol (99%) on a cotton bud, I started wiping gently along the direction of the traces.  Using a precision blade (my new favorite tool) I carefully scraped off any residue that remained after ethanol on trace path to avoid any shorts later on.
-               <br><img src="images/acer-damaged-traces_triangle.jpg" alt="acer aspire 5532 damaged traces keyboard FFC" class="clickable" onclick="openModal(this)" >
-             </p>
-             <div style="overflow: auto;">
-               <p><img src="images/acer-restored-conductors.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
-                 I taped the FFC cable down even more to keep it steady. Then I used some silver conductive paste within a tiny syringe needle.  I applied small amounts across the gaps to reconnect the worn and broken traces.  Silver conductive paste allowed me to pretty much "draw" over the break joint in the path restoring the missing conductor. Traces are uneven in between the cable. Measuring from pin-out/edge area. Nominal pitch ≈ 1&nbsp;mm.
-                 Measured center to center pitch:
-               </p>
-             </div>
-
-             <math display="block">
-               <mrow>
-                 <mi>p</mi>
-                 <mo>=</mo>
-                 <mfrac>
-                   <mi>W</mi>
-                   <mrow><mi>N</mi><mo>+</mo><mn>1</mn></mrow>
-                 </mfrac>
-                 <mo>≈</mo>
-                 <mfrac>
-                   <mn>27</mn>
-                   <mn>25</mn>
-                 </mfrac>
-                 <mo>=</mo>
-                 <mn>1.08</mn>
-                 <mtext>&nbsp;mm</mtext>
-               </mrow>
-             </math>
 
              <p>
-               With W = cable width in millimetres, and N = number of conductors (count). <strong>Pitch ≈ 1.08&nbsp;mm</strong> (nominal 1.00&nbsp;mm).
+               Having spoken with Harry Munday via email communication I learned the following:
              </p>
-
-             <video src="images/acer-retracing-silver.webm" autoplay loop muted playsinline></video>
+             <p>
+               CX cards are not really suitable for production grade raw CVBS capture.  The CX2388x chips will drop fields or frames when handling baseband CVBS.  This is the case especially once the internal decoder path is engaged.  In general this method is not considered of good quality for archival.
+             </p>
 
              <p>
-               I left the silver conductive paste dry for about an hour (a blow dryer can speed this up)... Then I connected the keyboard and tested.  Some keys were still unresponsive and I needed to repeat the process 2 more times.  Scraping off and reapplying the paste.  Finally, I managed to get the keyboard to a full working state. Proof:
-               <img src="images/acer-keyboard_test.webp" alt="acer aspire 5532 fixed keyboard FFC" class="clickable" onclick="openModal(this)" >
+               Video8 uses colour-under recording and not composite modulation.  With CVBS the camcorder has already combined and processed internally the luminance and chroma internally.  This prevents from performing the separation during decode resulting in lower decoding precision.
              </p>
-             <br>
-             <div style="overflow: auto;">
-               <img src="images/acer-protection-film.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
-               <p>After a few attempts I learned that the most reliable way to retrace extremely fine joints (traces are spread unevenly) is to draw freehand under good lighting.  I initially tried using tape or paper as a guide. In contrast this made the process messier. The paste was smudged and in one case tape lifted other non-damaged traces.  In the end a steady hand and slow controlled syringe movement worked best. I aligned the needle carefully with each trace and paused to push more paste when needed. I applied some non-conductive tape to prevent silver paste being scraped off and further protect the remaining traces from future use.</p>
-             </div>
-
-             <h3>Conclusion</h3>
-             <p>To close, this is probably too much hassle as I could just have bought new keyboard. Realistically no one wants to suffer retracing 1 mm lines but:
-               <ul>
-                 <li>I saved the keyboard from the landfill and 20 EUR from my wallet.</li>
-                 <li>I learned how to retrace FFCs using silver conductive paste</li>
-               </ul>
+             <p>
+               CVBS capture also carries a higher effective bandwidth because it is a processed baseband signal rather than the original FM RF.  This makes compression less efficient and increases space on the drive with no benefit.
              </p>
-           </section>
 
-           <section>
-             <h2>Removing NAND flash without a heat gun for raw chip-off dumping</h2>
-             <p>Date: 2025-10-03</p>
-             <p>Sadly back in 2017 a USB flash I own was plugged to a Frankenstein ACER laptop with reversed VCC and GND on the pinout of the usb adaptor on the motherboard.  Naturally the IC was fried for good.  As NAND cells degrade over time and data retention decreases without power the ideal time to attempt obtaining any meaningful data from the chip would have been ASAP. Essentially yesterday :D</p>
-             <h3>Spex</h3>
+             <p>
+               In CVBS capture HiFi FM audio carriers are lost entirely which means audio and video no longer share a common clock reference.
+             </p>
 
-             <table border="1" cellpadding="8" cellspacing="0">
-               <thead>
-                 <tr>
-                   <td><strong>Vendor/USBFlash</strong></td>
-                   <td><strong>IC/Controller</strong></td>
-                   <td><strong>NAND chip</strong></td>
-                   <td><strong>ID</strong></td>
-                 </tr>
-                 <tr>
-                   <td>Kingston DataTraveller <br>100 64GB (fake) USB2.0
-                     <br><img src="images/two-sided-kignston-64.jpg" alt="kingston 64 fake double side view" class="clickable" onclick="openModal(this)" >
-                   </td>
-                   <td>Skymedi Corporation, Enhanced UFD2.0 Controller, SK6211 BAPC 00828 H31097, 48-pin</td>
-                   <td>Micron Technology, 29F64G08FAMCI</td>
-                   <td>0x89D7D53E</td>
-                 </tr>
-               </thead>
-             </table>
+             <p>
+               Overall, for video8/8mm format the correct approach is FM RF capture path.  Video RF and HiFi RF are sampled from the same clock source and stored together.  This allows clock-based audio alignment during post processing.
+             </p>
 
-             <h3>Making sure chip-off method is really required</h3>
-             <p>First of all I need to make sure that chip-off method is absolutely necessary and the controller has 0 change being brought back to life.  I do not want to casually start removing NAND chips attempting raw extraction without proper reason.</p>
-             <ol>
-               <li>Monitor kernel buffer for any activity and plug usb flash in the usb port. I did not use the usb port of the motherboard but an externally powered usb hub ;)
-                 <br>
-                 <code>dmesg -w</code></li>
-               <li>Nothing is visually fried from the passives on the PCB
-               <li>Multimeter tests</li>
-               <table><table border="1" cellpadding="8" cellspacing="0">
-                   <thead>
-                     <tr>
-                       <td><strong>Measurement points, passives</strong></td>
-                       <td><strong>Value</strong></td>
-                       <td><strong>Comments</strong></td>
-                     </tr>
-                   </thead>
-                   <tr>
-                     <td>VCC > GND, Resistance mode</td>
+             <h3>HW</h3>
+
+             <p>
+               I was often checking Kleinanzeigen for an EV-S1000 or another video8 deck with accessible RF test points.  I eventually found and ordered a Sony EV-S1000 for approx 350 EUR from a seller in Western Germany. The device arrived in one piece ;)
+             </p>
+
+             <p>
+               The following hardware components and CX card modifications were required for the FM RF capture.  Detailed instructions for each modification already exist in the official vhs-decode documentation.  For this reason it makes no sense to try explaining again here.  I only reference the relevant documentation pages and one <a href="https://www.youtube.com/watch?v=O8pYwFwY9VY">video by Harry Munday that covers the crystal and BNC modifications.</a>
+             </p>
+
+             <p>
+               1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
+               2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
+               3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
+               4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
+               5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
+               6. Sony EV-S1000 or another Video8/Hi8 deck with accessible RF test points
+             </p>
+             <br><img src="images/cx-pci-setup-evs1000.jpg" alt="CX Card PCIe setup via tapping Sony EV S1000" class="clickable" onclick="openModal(this)">
+
+             <p>
+               For cooling the connexant chip on the card, given that I am now sampling at 40 MSPS I avoided using a USB power source and a 5V DC fan.  My Dell Optiplex T1650/MT9010 does not expose internal USB headers neither 12V fan headers other than the CPUFAN header which is of course unavailable.  The fan was therefore powered from a 12V Molex line.  I have prepared this line to be used only for non critical peripherals such as fans or powering up optical drives.  In general, devices where electrical noise will not be an issue.
+               <br><img src="images/cx-luefter-12v-molex-powerline.jpg" alt="CX Card fan draws 12V from exposed 12V MOLEX" class="clickable" onclick="openModal(this)">
+
+             </p>
+             <h3>SW</h3>
+
+             <h4>Calibration</h4>
+             <p>
+               Playback calibration is performed <strong>before RF capture</strong>.  The video8 playback device must provide a correctly centred RF signal to the ADC on the CX Card.  If there is RF mis-centring, tracking error or unstable clock then this is permanently baked into the RF capture.  Therefore, it cannot be corrected in software later :(
+             </p>
+
+             <h4>FLAC Capture</h4>
+             <p>
+               The RF signal is captured losslessly into a FLAC container.  The capture writes the raw samples at a fixed sample rate (40 MSPS) and 8-bit depth on a storage drive.  FLAC file is the master copy and represents the RF signal from tape.
+               <br><img src="images/luma-raw-rf-spectrum.jpg" alt="Raw RF plot with luminance FM signal" class="clickable" onclick="openModal(this)">
+             </p>
+               <p>
+                 This region represents the video signal in RF form prior to demodulation. The highlighted band corresponds to the video8 luminance FM signal. For video8 I could find that the luminance carrier occupies approximately the 4.2–5.4 MHz region as defined by the nominal carrier and its static frequency deviation. The wide centred spectral bell-like curve reflects the FM modulation used to encode luminance amplitude. It shows some sidebands. I suspect that the HiFi signal to be the other bell-like curve below video at around 1.5 MHz.  On the vertical axis the Power Spectral Density in dB/Hz was computed from normalised digital samples. The reference is effectively full-scale (FS) of the ADC after conversion to float. The plot shows power per 1 Hz bandwidth.
+</p>
+
+             <h4>Decoding</h4>
+             <p>
+               Video8 FM RF decoding is performed using <code>vhs-decode</code>.  The tool demodulates luminance and chrominance, applies time base correction, dropout correction, and phase correction.  Finally it produces a <code>.tbc</code> and <code>chroma.tbc</code> file.  It produces a JSON metadata file.  The processing later operates on this TBC output.
+             </p>
+
+             <h4>HiFi / Audio decoding &amp; Alignment</h4>
+             <p>
+               HiFi FM audio is decoded from the same RF capture using <code>hifi-decode</code>.  The decoder runs until external termination where forces the executable to return.  The resulting 48&nbsp;kHz FLAC audio is then aligned via a vhs-decode-auto-audio-align and <a href="https://www.mono-project.com/">mono project tool</a> pipeline.  This pipeline requires the video timeline based on the TBC JSON metadata.  Alignment compensates audio channel for dropped fields and timing offsets introduced during video decode.
+</p>
+
+<h4>Export</h4>
+<p>
+  Final export is performed by <code>tbc-video-export</code>.  The tool combines decoded video from the TBC file with the aligned audio track and encodes the result using a defined FFmpeg profile.  I am using default codec FFV1 in MATROSKA container.
+</p>
+
+<h4>Scripts</h4>
+<p>
+The RF capture and decoding workflow is fully scripted for ZSH. The scripts cover RF capture video decode, HiFi audio decode, alignment, and final export. They are published in a GitHub repository for personal use and archival purposes. Paths, device names are specific to my system and therefore must be adapted before reusing.
+</p>
+<p>
+Repository: <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh" target="_blank" rel="noopener noreferrer">
+https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh</a>
+</p>
+
+<ol>
+  <li>CX card auto level calibration (relies on leveladj bin)</li>
+  <code>. cx-calibrate.zsh</code>
+  <br>
+  <br>
+  <li>FLAC RF capture</li>
+  <code>capture-rf-flac.zsh /path/to/capture-40msps-8bit-cx-card.flac</code>
+  <br>
+  <br>
+  <li>vhs-decode video + hifi + vhs-decode-auto-audio-align + tbc-video-export FFV1 encoder, MATROSKA container </li>
+  <code>. decode-rf.zsh /path/to/capture-40msps-8bit-cx-card.flac /path/to/capture-40msps-8bit-cx-card</code>
+  <br>
+  <br>
+</li>
+</ol>
+
+
+<h3>Results</h3>
+
+<h4>Visual quality comparison<h4>
+    <img src="images/cx-cvbs-rf-result.jpg" alt="Side-by-side comparison of CVBS baseband capture and raw RF capture from the same Video8 frame" class="clickable" onclick="openModal(this)">
+
+    <h4>Advantages of the new workflow</h4>
+
+    <ol>
+      <li>
+        <strong>Simpler signal path</strong>
+        RF captured once.  All decoding in software.  No dependency on more than one playback device such as blending CX for video and sound card for audio.
+      </li>
+
+      <li>
+        <strong>Unattended processing</strong>
+        The decoding pipeline is scriptable.  I am planning to automate decoding of all of my home tapes while being away for Christmas holiday.
+      </li>
+
+      <li>
+        <strong>Automatic audio alignment</strong>
+        Alignment driven by TBC JSON metadata.  Seconds per tape.  Previously was done manually always with some perceivable drift due to crystal upgrade as chip was running hot at 40 MHz.
+      </li>
+
+      <li>
+        <strong>Dropout sync</strong>
+        Frame drops do not affect A/V sync.  Time-base corrections maintained.
+      </li>
+    </ol>
+
+    <h3>CX2388x PCIe Stability Issues During Early Boot on Intel Q77 Systems, libreboot</h3>
+    <p>
+      A repeatable hardware level failure was discovered with the CX2388x-based capture card on Intel Q77 platform (Dell OptiPlex 9010 MT / Precision T1650 class systems).  The issue causes repeatable POST failures or hard system locks during early boot.  This is independent of kernel, or firmware (observed with both vendor BIOS and libreboot/coreboot).  Root cause was discovered to be faulty 40 MHz generic crystal resonators used for the CX card mod.  Potentially faulty crystals caused the PCIe card to destabilise the PCIe-to-PCI bridge during initialisation.  This could potentially prevent reliable enumeration during early boot cycle (?)  Reverting to the original crystal restored the ability of the system to boot.  More than 5 crystals from the same batch reproduced the fault.  This confirms a hardware issue that can possibly be resolved by utilising <a href="https://www.digikey.de/en/products/detail/abracon-llc/ABLS2-40-000MHz-D4YF-T/2001514">original ABRACON crystals</a>.  Alternatively it might be required to change multiple crystals when ordering the generic pieces from AliExpress.
+    </p>
+
+
+
+</section>
+
+
+
+<section>
+  <h2>How I librebooted my DELL OPTIPLEX 9010MT (internal flash via flashprog)</h2>
+  <p>Date: 2025-11-22</p>
+  <p style="background-color:red;margin-bottom:0.0em;"><strong>DISCLAIMER </strong></p>
+  <p>This blog post describes exactly what was done on <strong>one specific machine</strong>. Complete information for supported devices is in the <a href="https://libreboot.org/docs/install/t1650.html">official Libreboot documentation</a>. Always follow the upstream guides. <strong>This report is not a replacement.</strong>
+
+  <p style="background-color:red;margin-bottom:0.0em;"><strong>WARNING 1 </strong></p>
+  <p>As mentioned in the <a href="https://libreboot.org/docs/install/t1650.html">official documentation</a>, make sure a HW programmer and the SOP8 and SOP16 adaptors are available in case the device is bricked so that you can recover using external flashing</p>
+
+  <p style="background-color:red;margin-bottom:0.0em;"><strong>WARNING 2 </strong></p>
+  <p>
+    Make sure you know what you are doing. If in doubt go through the <a href="https://libreboot.org/docs/install/t1650.html">OFFICIAL DOCUMENTATION</a>.
+  </p>
+
+  <h3>Hardware</h3>
+  <p>
+    Model: Dell Optiplex 9010 MT
+    <br>
+    Firmware target: Uses the T1650 firmware in Libreboot
+    <br>
+    <br>
+    References:
+    <br>
+    <a href='https://libreboot.org/docs/install/dell7010.html'>https://libreboot.org/docs/install/dell7010.html</a>
+    <br>
+    <a href='https://libreboot.org/docs/install/t1650.html'>https://libreboot.org/docs/install/t1650.html</a>
+  </p>
+
+  <h3>Create firmware dump of the stock DELL BIOS</h3>
+  <p>
+    <ol>
+      <li>Set the motherboard jumper to SERVICE_MODE in order to deactivate flash protection
+        <br>
+        <br><img src="images/dell-service-mode.jpg" alt="Jumper to short the SERVICE MODE pins found below the RAM" class="clickable" onclick="openModal(this)">
+      <li>Boot the machine</li>
+      <li>At the Dell prompt press F1 to continue</li>
+      <li>
+        Create multiple dumps using <a href='https://flashprog.org/wiki/Flashprog'>flashprog</a>:
+        <br>
+        <br>
+        <code>sudo flashprog -p internal:laptop=force_I_want_a_brick,boardmismatch=force -r dump.bin</code>
+      </li>
+      <li>Create several dumps and verify identical checksums. Checksums must match.
+        <br>
+        <br>
+        <code>sha1sum dump*</code>
+      </li>
+      <li>Copy the dumps on a machine which you can operate a IC programmer to externally flash the binary back to the target host in case it is bricked</li>
+    </ol>
+  </p>
+
+  <h3>Build Libreboot from source</h3>
+  <p>
+    Libreboot handles vendor firmware extraction automatically when building from source.
+    <br>
+    <ol>
+      <li>Enable 4 thread execution:
+        <br
+          <code>export XBMK_THREADS=4</code></li>
+      <li>
+        <code>
+          git clone https://codeberg.org/libreboot/lbmk
+          <br>
+          cd lbmk
+          <br>
+          sudo ./mk dependencies debian
+          <br>
+          # Build time approx. 10 minutes (Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz / 16GB RAM / 4 threads)
+          ./mk -b coreboot t1650_12mb
+        </code>
+      </li>
+    </ol>
+  </p>
+
+  <h3>Set MAC address (Intel GbE region)</h3>
+  <p>
+    MAC address must be set before flashing
+    <ol>
+      <li>Create a tar archive of the produced image:
+        <br>
+        <br>
+        <code>
+          tar cfJ libreboot-RELEASE_t1650_12mb.tar.xz bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom
+        </code>
+      </li>
+      <li>Inject randomised MAC address
+        <br>
+        <br>
+        <code>
+          ./mk inject libreboot-RELEASE_t1650_12mb.tar.xz setmac 00:xx:xx:xx:xx:xx
+        </code>
+      </li>
+      <li>Extract (overwrite) modified archive back to <code>bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom</code>
+        <br>
+        <br>
+        <code>
+          tar xvf libreboot-RELEASE_t1650_12mb.tar.xz
+        </code>
+      </li>
+    </ol>
+
+    <h3>Flash ROM</h3>
+  <p>
+    <strong>Double check the ROM file path before flashing!</strong>
+    <br>
+    <br>
+    Flash ROM via flashprog:
+    <br>
+    <code>
+      sudo flashprog -p internal:laptop=force_I_want_a_brick,boardmismatch=force -w bin/t1650_12mb/seabios_t1650_12mb_libgfxinit_txtmode.rom
+    </code>
+    <br>
+    <br>
+    After flashing, power off, remove the service jumper, and boot. Libreboot should be active.
+    <br>
+    <br>
+    GRUB menu on boot:
+    <br><img src="images/grub-libreboot.jpg" alt="GRUB menu on boot" class="clickable" onclick="openModal(this)" >
+  </p>
+
+</section>
+
+<section>
+  <h2>FFC retracing on ACER ASPIRE 5532 keyboard using silver conductive paste</h2>
+  <p>Date: 2025-10-20</p>
+  <h3>Backstory</h3>
+  <p>My first personal computer was an Acer Aspire 5532 with an AMD Athlon 64 TF-20 at 1.6 GHz and 3 GB RAM. It still runs well today as a native Linux machine mainly used for tasks such as reading or writing ICs using a universal programmer where moving my desktop pc is not possible, Linux experiments, and general work where a desktop PC would be less practical (coding on the sofa).
+    Over the years this laptop has had a few HW issues. I have already resoldered USB ports, audio, and the WIFI card. This time the keyboard died. Considering the machine is over 15 years old and seriously beaten .. there is no surprise some components eventually die. I like the ease of disassembly and repairability of the laptop.  Within 5 minutes you can get into the motherboard so easily.
+  </p>
+
+  <p>The keyboard uses a FFC cable that connects it to the mainboard.  Over time repeated bending caused several internal trace breaks making a few keys unusable.
+    A new keyboard costs around 20 EUR online. Nonetheless I went ahead repairing it as a learning exercise.  I thought of it being a good opportunity to gain some practical experience on retracing as I have not done this previously.
+  </p>
+
+  <h3>Retracing method</h3>
+  <p>Below is a photo of the damaged area under the FFC cable’s protective layer. The cyan coloured triangle marks the general affected area. The red triangle highlights the worst damage.  Using a few drops of denaturated ethanol (99%) on a cotton bud, I started wiping gently along the direction of the traces.  Using a precision blade (my new favorite tool) I carefully scraped off any residue that remained after ethanol on trace path to avoid any shorts later on.
+    <br><img src="images/acer-damaged-traces_triangle.jpg" alt="acer aspire 5532 damaged traces keyboard FFC" class="clickable" onclick="openModal(this)" >
+  </p>
+  <div style="overflow: auto;">
+    <p><img src="images/acer-restored-conductors.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
+      I taped the FFC cable down even more to keep it steady. Then I used some silver conductive paste within a tiny syringe needle.  I applied small amounts across the gaps to reconnect the worn and broken traces.  Silver conductive paste allowed me to pretty much "draw" over the break joint in the path restoring the missing conductor. Traces are uneven in between the cable. Measuring from pin-out/edge area. Nominal pitch ≈ 1&nbsp;mm.
+      Measured center to center pitch:
+    </p>
+  </div>
+
+  <math display="block">
+    <mrow>
+      <mi>p</mi>
+      <mo>=</mo>
+      <mfrac>
+        <mi>W</mi>
+        <mrow><mi>N</mi><mo>+</mo><mn>1</mn></mrow>
+      </mfrac>
+      <mo>≈</mo>
+      <mfrac>
+        <mn>27</mn>
+        <mn>25</mn>
+      </mfrac>
+      <mo>=</mo>
+      <mn>1.08</mn>
+      <mtext>&nbsp;mm</mtext>
+    </mrow>
+  </math>
+
+  <p>
+    With W = cable width in millimetres, and N = number of conductors (count). <strong>Pitch ≈ 1.08&nbsp;mm</strong> (nominal 1.00&nbsp;mm).
+  </p>
+
+  <video src="images/acer-retracing-silver.webm" autoplay loop muted playsinline></video>
+
+  <p>
+    I left the silver conductive paste dry for about an hour (a blow dryer can speed this up)... Then I connected the keyboard and tested.  Some keys were still unresponsive and I needed to repeat the process 2 more times.  Scraping off and reapplying the paste.  Finally, I managed to get the keyboard to a full working state. Proof:
+    <img src="images/acer-keyboard_test.webp" alt="acer aspire 5532 fixed keyboard FFC" class="clickable" onclick="openModal(this)" >
+  </p>
+  <br>
+  <div style="overflow: auto;">
+    <img src="images/acer-protection-film.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
+    <p>After a few attempts I learned that the most reliable way to retrace extremely fine joints (traces are spread unevenly) is to draw freehand under good lighting.  I initially tried using tape or paper as a guide. In contrast this made the process messier. The paste was smudged and in one case tape lifted other non-damaged traces.  In the end a steady hand and slow controlled syringe movement worked best. I aligned the needle carefully with each trace and paused to push more paste when needed. I applied some non-conductive tape to prevent silver paste being scraped off and further protect the remaining traces from future use.</p>
+  </div>
+
+  <h3>Conclusion</h3>
+  <p>To close, this is probably too much hassle as I could just have bought new keyboard. Realistically no one wants to suffer retracing 1 mm lines but:
+    <ul>
+      <li>I saved the keyboard from the landfill and 20 EUR from my wallet.</li>
+      <li>I learned how to retrace FFCs using silver conductive paste</li>
+    </ul>
+  </p>
+</section>
+
+<section>
+  <h2>Removing NAND flash without a heat gun for raw chip-off dumping</h2>
+  <p>Date: 2025-10-03</p>
+  <p>Sadly back in 2017 a USB flash I own was plugged to a Frankenstein ACER laptop with reversed VCC and GND on the pinout of the usb adaptor on the motherboard.  Naturally the IC was fried for good.  As NAND cells degrade over time and data retention decreases without power the ideal time to attempt obtaining any meaningful data from the chip would have been ASAP. Essentially yesterday :D</p>
+  <h3>Spex</h3>
+
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <td><strong>Vendor/USBFlash</strong></td>
+        <td><strong>IC/Controller</strong></td>
+        <td><strong>NAND chip</strong></td>
+        <td><strong>ID</strong></td>
+      </tr>
+      <tr>
+        <td>Kingston DataTraveller <br>100 64GB (fake) USB2.0
+          <br><img src="images/two-sided-kignston-64.jpg" alt="kingston 64 fake double side view" class="clickable" onclick="openModal(this)" >
+        </td>
+        <td>Skymedi Corporation, Enhanced UFD2.0 Controller, SK6211 BAPC 00828 H31097, 48-pin</td>
+        <td>Micron Technology, 29F64G08FAMCI</td>
+        <td>0x89D7D53E</td>
+      </tr>
+    </thead>
+  </table>
+
+  <h3>Making sure chip-off method is really required</h3>
+  <p>First of all I need to make sure that chip-off method is absolutely necessary and the controller has 0 change being brought back to life.  I do not want to casually start removing NAND chips attempting raw extraction without proper reason.</p>
+  <ol>
+    <li>Monitor kernel buffer for any activity and plug usb flash in the usb port. I did not use the usb port of the motherboard but an externally powered usb hub ;)
+      <br>
+      <code>dmesg -w</code></li>
+    <li>Nothing is visually fried from the passives on the PCB
+    <li>Multimeter tests</li>
+    <table><table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <td><strong>Measurement points, passives</strong></td>
+            <td><strong>Value</strong></td>
+            <td><strong>Comments</strong></td>
+          </tr>
+        </thead>
+        <tr>
+          <td>VCC > GND, Resistance mode</td>
 <td>0Ω</td>
 <td>Hard short</td>
 </tr>
 <tr>
   <td>GND > D+ / D-, Voltage</td>
-  <td>6 mV</td>
-  <td>NOK. Very low leakage</td>
+<td>6 mV</td>
+<td>NOK. Very low leakage</td>
 </tr>
 <tr>
   <td>VCC > D+ / D-, Voltage</td>
