@@ -192,9 +192,9 @@
                The RF signal is captured losslessly into a FLAC container.  The capture writes the raw samples at a fixed sample rate (40 MSPS) and 8-bit depth on a storage drive.  FLAC file is the master copy and represents the RF signal from tape.
                <br><img src="images/luma-raw-rf-spectrum.jpg" alt="Raw RF plot with luminance FM signal" class="clickable" onclick="openModal(this)">
              </p>
-               <p>
-                 This region represents the video signal in RF form prior to demodulation. The highlighted band corresponds to the video8 luminance FM signal. For video8 I could find that the luminance carrier occupies approximately the 4.2–5.4 MHz region as defined by the nominal carrier and its static frequency deviation. The wide centred spectral bell-like curve reflects the FM modulation used to encode luminance amplitude. It shows some sidebands. I suspect that the HiFi signal to be the other bell-like curve below video at around 1.5 MHz.  On the vertical axis the Power Spectral Density in dB/Hz was computed from normalised digital samples. The reference is effectively full-scale (FS) of the ADC after conversion to float. The plot shows power per 1 Hz bandwidth.
-</p>
+             <p>
+               This region represents the video signal in RF form prior to demodulation. The highlighted band corresponds to the video8 luminance FM signal. For video8 I could find that the luminance carrier occupies approximately the 4.2–5.4 MHz region as defined by the nominal carrier and its static frequency deviation. The wide centred spectral bell-like curve reflects the FM modulation used to encode luminance amplitude. It shows some sidebands. I suspect that the HiFi signal to be the other bell-like curve below video at around 1.5 MHz.  On the vertical axis the Power Spectral Density in dB/Hz was computed from normalised digital samples. The reference is effectively full-scale (FS) of the ADC after conversion to float. The plot shows power per 1 Hz bandwidth.
+             </p>
 
              <h4>Decoding</h4>
              <p>
@@ -204,35 +204,35 @@
              <h4>HiFi / Audio decoding &amp; Alignment</h4>
              <p>
                HiFi FM audio is decoded from the same RF capture using <code>hifi-decode</code>.  The decoder runs until external termination where forces the executable to return.  The resulting 48&nbsp;kHz FLAC audio is then aligned via a vhs-decode-auto-audio-align and <a href="https://www.mono-project.com/">mono project tool</a> pipeline.  This pipeline requires the video timeline based on the TBC JSON metadata.  Alignment compensates audio channel for dropped fields and timing offsets introduced during video decode.
-</p>
+             </p>
 
-<h4>Export</h4>
-<p>
-  Final export is performed by <code>tbc-video-export</code>.  The tool combines decoded video from the TBC file with the aligned audio track and encodes the result using a defined FFmpeg profile.  I am using default codec FFV1 in MATROSKA container.
-</p>
+             <h4>Export</h4>
+             <p>
+               Final export is performed by <code>tbc-video-export</code>.  The tool combines decoded video from the TBC file with the aligned audio track and encodes the result using a defined FFmpeg profile.  I am using default codec FFV1 in MATROSKA container.
+             </p>
 
-<h4>Scripts</h4>
-<p>
-The RF capture and decoding workflow is fully scripted for ZSH. The scripts cover RF capture video decode, HiFi audio decode, alignment, and final export. They are published in a GitHub repository for personal use and archival purposes. Paths, device names are specific to my system and therefore must be adapted before reusing.
-</p>
-<p>
-Repository: <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh" target="_blank" rel="noopener noreferrer">
-https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh</a>
-</p>
+             <h4>Scripts</h4>
+             <p>
+               The RF capture and decoding workflow is fully scripted for ZSH. The scripts cover RF capture video decode, HiFi audio decode, alignment, and final export. They are published in a GitHub repository for personal use and archival purposes. Paths, device names are specific to my system and therefore must be adapted before reusing.
+             </p>
+             <p>
+               Repository: <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh" target="_blank" rel="noopener noreferrer">
+                 https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh</a>
+             </p>
 
-<ol>
-  <li>CX card auto level calibration (relies on leveladj bin)</li>
-  <code>. cx-calibrate.zsh</code>
-  <br>
-  <br>
-  <li>FLAC RF capture</li>
-  <code>capture-rf-flac.zsh /path/to/capture-40msps-8bit-cx-card.flac</code>
-  <br>
-  <br>
-  <li>vhs-decode video + hifi + vhs-decode-auto-audio-align + tbc-video-export FFV1 encoder, MATROSKA container </li>
-  <code>. decode-rf.zsh /path/to/capture-40msps-8bit-cx-card.flac /path/to/capture-40msps-8bit-cx-card</code>
-  <br>
-  <br>
+             <ol>
+               <li>CX card auto level calibration (relies on leveladj bin)</li>
+               <code>. cx-calibrate.zsh</code>
+               <br>
+               <br>
+               <li>FLAC RF capture</li>
+               <code>capture-rf-flac.zsh /path/to/capture-40msps-8bit-cx-card.flac</code>
+               <br>
+               <br>
+               <li>vhs-decode video + hifi + vhs-decode-auto-audio-align + tbc-video-export FFV1 encoder, MATROSKA container </li>
+               <code>. decode-rf.zsh /path/to/capture-40msps-8bit-cx-card.flac /path/to/capture-40msps-8bit-cx-card</code>
+               <br>
+               <br>
 </li>
 </ol>
 
