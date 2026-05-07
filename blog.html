@@ -121,6 +121,191 @@
            -->
 
            <section>
+             <h2>High-Rate 40 MSPS FM RF capture of VHS using CX2388x-based expansion PCIe card on a Sony SLV-SE60</h2>
+             <p>Date: 2026-05-07</p>
+
+             <p>
+               I finished archiving all my Video8 tapes, I have now moved to VHS. My current VCR deck is a Sony SLV-SE60 I picked up from Wingst Niedersachsen in the middle of a snowstorm.
+               </p>
+               <figure>
+                 <img src="images/wingst-pics.jpg" alt="wingst collage" class="clickable" onclick="openModal(this)">
+                 <figcaption>Pictures taken by Anna - Eva on the 20260215</figcaption>
+               </figure>
+               <p>
+               The VCR deck is a late 90s/early 2000s PAL device. The overall approach in the video domain remains the same as with the EV-S1000: FM RF capture via the CX card, decode with vhs-decode. Keep in mind that Video8 has the HiFi signal combined with Luma/Chroma. Therefore, only a single CX Card is required. On VHS this is not the case.
+
+               <h3>RF Tap</h3>
+               The SLV-SE60 exposes RF test points on a shielded connector behind the head drum marked in the datasheet with the ID CN262. The relevant signals are:
+               <table border="1" cellpadding="8" cellspacing="0">
+                 <thead>
+                   <tr>
+                     <th>Pin</th>
+                     <th>Signal</th>
+                     <th>Description</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr><td>1</td><td>PB RF</td><td>Video RF</td></tr>
+                   <tr><td>2</td><td>RF SWP</td><td>Head switching signal</td></tr>
+                   <tr><td>3</td><td>GND</td><td>Ground</td></tr>
+                   <tr><td>4</td><td>CTL</td><td>Control track signal</td></tr>
+                   <tr><td>5</td><td>AV ADJ</td><td>Head switch point adjustment pin</td></tr>
+                 </tbody>
+               </table>
+
+               <br>
+               Here is the view in the physical domain. I am tapping using a Dupond connector to BNC cable the PB RF on the PIN 1, and GND on the PIN 3:
+               <img src="images/sony-slvse60-pb-rf-pinout.jpg" alt="Sony SLV SE60 PB RF pinout" class="clickable" onclick="openModal(this)">
+               <figure>
+                 <img src="images/sony-slvse60-gnd-pinout.jpg" alt="Sony SLV SE60 GND pinout" class="clickable" onclick="openModal(this)">
+                 <figcaption>Pinout of CN262 as depicted in the schematics. </figcaption>
+                 <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+               </figure>
+
+               <p>
+                 I tapped PB RF and AV ADJ using a DuPont female to BNC cable. The signal goes directly to the modified CX card.
+               </p>
+
+               <h4>CX Card</h4>
+               The same modified CX card from the Video8 workflow is reused here. The required hardware modifications are unchanged:
+               
+               <p>
+               1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
+               2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
+               3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
+               4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
+               5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
+               </p>
+               <a href="images/cx-mods_251220.jpg">CX Card mods view PCIe setup for tapping Sony EV S1000</a>
+
+<p>
+               <h4>Calibration</h4>
+             <p>
+               Before capture the input level is calibrated using a ZSH script that wraps around the leveladj binary which is part of the CX driver by Chad Page <a href="https://github.com/happycube/cxadc-linux3/">https://github.com/happycube/cxadc-linux3/</a>.  <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh">My ZSH scripts for both VHS and Video8 capture are available on Github</a>.
+
+               In brief: The script sets vmux, runs leveladj, reads the last tested level from its output, subtracts 1 to avoid clipping, and applies the result. With my setup the gain level was most of the times 31. This is the maximum gain level.  I would often manually set it to 31 via:
+               <br>
+               <code>
+                 sudo echo 31 | sudo tee /sys/class/cxadc/cxadc0/device/parameters/level
+               </code>
+               <br>
+               The calibrated vmux and level values are exported to the shell env. I would then create a ffplay preview of the raw ADC output follows calibration to confirm a valid RF signal is present before proceeding with a full capture.  <a href="https://github.com/oyvindln/vhs-decode/wiki/RF-Capture-Guide#preview-the-live-signal">A visual reference can be obtained by the vhs-decode docs in the RF-Capture-Guide section.</a>
+               <br>
+               <code>
+               source ~/scripts/rf/cx-calibrate.zsh
+               </code>
+             </p>
+             
+               <h4>Capture</h4>
+               <p>
+                 RF is captured losslessly to FLAC at 40 MSPS, 8-bit, single channel, unsigned little-endian. Capture duration is bounded by tape length passed as an argument:
+                 <br>
+               <code>
+                 zsh ~/scripts/vhs/capture-rf-vhs-flac.zsh CX_Card_40msps_8-bit 190
+               </code>
+               </p>
+
+               <h4>Decode</h4>
+               <p>
+                 Video FM RF decoding is performed in the standarised way. The tape is PAL, sampled at 40 MSPS:
+                 <br>
+                 <code>
+                   vhs-decode --debug --tape_format vhs --frequency 40 --system pal --ire0_adjust --recheck_phase --threads 4 CX_Card_40msps_8-bit.flac my-tape-decoded
+                 </code>
+                 <br>
+                 Just for reference, the decoding on my computer <code>Optiplex 9010/Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz/16GB RAM</code> takes approximately 12 hours for 180 minutes of a VHS tape.
+               </p>
+
+               <h3>I failed the HiFi RF capture</h3>
+
+               <p>
+                 The vhs-decode tap list for the SLV-SE60 lists CN341 with PIN 1 as GND and PIN 2 as HF ADJ. Based on the service manual audio block diagram (section 3-4) and the Hi-Fi Switching Position Adjustment procedure (section 6, 2-4-2), this is reversed. PIN 1 of CN341 is HF ADJ and PIN 2 is GND.
+                 <div style="display: flex; gap: 1rem;">
+                   <img src="images/hifi-switching-position-adj-process.jpg" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
+                   <img src="images/sony-slvse60-hf-adj-cn341.jpg" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
+                 </div>
+                 <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+               </p>
+
+               <h4>What CN341 actually is</h4>
+               <p>
+                 CN341 is not a HiFi RF tap (under normal operation of TDA VCR AUDIO IC, check further down). It is a service calibration point on the MA-339 board used during the HiFi Switching Position Adjustment procedure.
+
+                 The source of the signal at CN341 is IC360 which is the TDA9615H HiFi audio processor IC. It comes from PIN 36 of that chip, which is FMOUT in the TDA9615H datasheet. In my understanding, during normal playback mode <code>(AFM bit = 0)</code> FMOUT carries the HF envelope of the left channel FM carrier and not the FM raw carrier itself. This is posibly an envelope detector output used only for calibration.  Possibly this is not something we can use to demodulating the actual FM signal.
+               </p>
+               <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.jpg" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
+             <p class="caption">
+               Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.
+               <br>
+               Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
+
+               <h5>HF ADJ Spectrum</h5>
+               <p>RF spectrum of HF ADJ on CN341. The spectrum does show FM carrier structure in the >1.0 && <2.0 MHz region expected for PAL VHS HiFi. There are two-three narrowband components are visible at approximately 6 MHz, 10 MHz, and 13 MHz  that could be some kind of clock or switching. The signal is not suitable input for hifi-decode.
+<img src="images/sony-slv-se60-hf-adj-signal.webp" alt="Sony SLV SE60 CN341 HF ADJ Signal Spectrum" class="clickable" onclick="openModal(this)" style="width: 100%;">
+</p>
+
+<h5>Trace between IC340 and IC360</h5>
+<p>
+  The HiFi FM signal path in the SLV-SE60 runs from the drum audio heads through IC340 (AFM REC/PB AMP, LA7256) and then into IC360 (TDA9615H) at PIN 37. There is no accessible test point or component (such as resistor, capacitor) on this area between the two ICs after checking the full hardware schematic. The signal level at this point is expected to be low and the trace is buried on the MA-339 board with no convenient access point. That means lifting the full mechanical body of the VCR. Direct tapping here would additionally require physical modification a.k.a. scraping of the PCB traces with precision blade.
+
+  <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.png" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
+<p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+</p>
+
+<h5>Theoretical path via I2C reprogramming</h5>
+
+<p>
+Credit to the <a href="https://github.com/rivvit/N60TestMode8/wiki/Sony-VCR-Test-Mode-8-Mod">N60TestMode8 project</a> (the original approach) which documents their approach on a closely related Sony deck and served as the main reference for this investigation.
+</p>
+
+<p>
+  The TDA9615H similarly has a test mode accessible via I2C (accessed through IC162 SCL/SDA lines).  In a similar way as with the "Sony VCR Test Mode 8 Mod" there could be possibly an option to program the TDA9615H through I2C to output the RAW FM carrier on FMOUT PIN 36/ accessible via HF ADJ/CN341. 
+  
+</p>
+
+<p>
+  The TDA9615H exposes special test modes via its I2C interface. This is controlled by the TEST bit in the power byte and selection bits in the select byte. We care about the tests 3 and 4. Test 3 routes the left channel band pass filter output to FMOUT in playback mode, and test 4 does the same for the right channel. These are the only playback mode test outputs available on FMOUT (PIN 36), which is the signal accessible at CN341. This means that with the correct I2C configuration CN341 would carry a single FM carrier channel per test mode. This would be left or right. NOT both simultaneously. Capturing both channels would require either switching test modes between captures or running the tape twice while capturing each channel.
+  <img src="images/tda9615h-test-modes.png" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
+  <p class="caption">Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
+  </p>
+
+<h4>Refusing to go deeper</h4>
+<p>
+Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PCB trace surgery between IC340 and IC360 and a high gain / low noise digital amplifier, or an I2C interception mod with risk of messing up the VCR permanently. Given that my tapes being archived are home recordings of questionable quality, the archival benefit of HiFi RF over a clean analog capture does not justify the hardware risk and effort at all. So the decision was made to move to analog audio capture via the SCART/CN500 output of the deck.
+
+<img src="images/sony-slv-se60-capture-scard-cn500.jpg" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
+<p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+</p>
+
+<h5>Method for analogue audio tapping</h5>
+    <p>
+      Crocodile clips were attached to the L and R CN500 LINE OUT pins. The GND taken from the VCR chassis shielding. The three lines were terminated into a 3.5mm minijack and fed into the line input of an Edirol UA-5 USB audio interface.  Gain is set manually on the unit before capture.
+    </p>
+    <p>
+      The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz mono and duplicated to stereo via SoX remix. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
+      
+    <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
+    </p>
+
+    <h3>Not that bad results</h3>
+    
+    <figure>
+      <img src="images/sony-slvse60-full-capture-pb-rf-result.jpg" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
+      <figcaption>After deintracing using the ffmpeg approach, three sample frames are depicted.</figcaption>
+    </figure>
+
+    <h3>References</h3>
+    <p>
+    Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80/SX60/SX70/SX80 Service Manual</em>, 9-921-714-11, Home A&V Products Company, ©1999.
+    <br>
+    Philips Semiconductors, <em>TDA9615H — Audio processor for VHS hi-fi, Preliminary specification</em>, document order no. 9397 750 01744, 1997 Jun 16.
+    </p>
+    
+    
+          </section>
+
+
+           <section>
              <h2>SONY EV-1000S Using MOLYKOTE EM-30L industrial to re-grease stuck take-up/eject tape mechanical arms</h2>
              <p>Date: 2026-01-20</p>
 
