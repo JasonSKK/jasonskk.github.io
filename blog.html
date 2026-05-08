@@ -282,7 +282,7 @@ Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PC
       Crocodile clips were attached to the L and R CN500 LINE OUT pins. The GND taken from the VCR chassis shielding. The three lines were terminated into a 3.5mm minijack and fed into the line input of an Edirol UA-5 USB audio interface.  Gain is set manually on the unit before capture.
     </p>
     <p>
-      The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz mono and duplicated to stereo via SoX remix. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
+      The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz stereo. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
       
     <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
     </p>
