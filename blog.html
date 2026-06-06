@@ -103,7 +103,7 @@
   <body>
     <header>
       <h1>Blog</h1>
-      <p>Welcome to my blog! This blog is a space where I write about my projects, music, thoughts about things I read, DIY, and other random stuff.</p>
+      <p>Welcome to my blog! This blog is a space where I write about my projects, thoughts about things I read, DIY, and other random stuff.</p>
       <!-- <p>Date: 2024-10-20</p> -->
     </header>
     <nav>
@@ -119,6 +119,86 @@
            </section>
 
            -->
+
+           <section>
+             <h2>UART Serial Access on Xiaomi Redmi 9 (lancelot, MT6768 Helio G85) via RPI pico 2</h2>
+             <p>Date: 2026-06-06</p>
+
+             <p>
+               Long story short, I bricked a secondary phone I have for playing around while trying to reflash to the stock OS. I ended up in a bootloop. I could not explain why neither recover it by flashing (via mtkclient) various images that have worked in the past. This small article documents how I obtained UART access using a Raspberry Pi Pico 2W as a USB to serial bridge while directly tapping the TX/RX points on the phones PCB. The UART access was required for debugging puporses.
+             </p>
+             
+               <h3>UART Test Points on lancelot</h3>
+             <p>
+               The MT6768 SoC exposes UART test points. Opening the device is straightforward. Remove the SIM/SD CARD slot. Then, remove the back cover by sliding a plastic pick around the case splitting the back case from the front as shown in my previous <a href="blog.html#lancelot-open">IMEI restoration article</a>.
+             </p>
+
+             <table class="equipment-table">
+  <tr>
+    <td style="vertical-align: top;"><img src="images/lancelot-disassembly-uart.jpg" alt="lancelot disassembly for UART access" class="clickable" onclick="openModal(this)"></td>
+    <td>
+      <br>
+      <div class="equipment-desc">Eleven Phillips screws hold the midframe layer. Be mindful of the small FFC right after removing the plastic midframe screws. Make sure the the FFC is removed before midframe is fully detached from the board surface. The motherboard is accessible after removing the camera plastic frame. </div>
+      <br>
+      <div class="equipment-desc">The UART test points are located on the motherboard near the camera area. TX is silkscreened on the PCB. The adjacent pad (not marked on silkscreen) is RX. A third pad nearby is GND. The main GND can also be taken from any ground plane point.</div>
+    </td>
+  </tr>
+</table>
+             <img src="images/lancelot-tx-uart-points.jpg" alt="lancelot TX RX on the PCB" class="clickable" onclick="openModal(this)"></td>
+<p>
+  For the contact I used two jumper wires that were stablised using the "soldering helping hands" from a soldering magnifying glass. Also, a heavy crocodile clip that was placed on the GND pad. That seemed to do the job.
+</p>
+
+<h3>Raspberry Pi Pico 2 W as USB-UART Bridge</h3>
+
+<p>I used a Raspberry Pi Pico 2 W flashed with the <a href="https://github.com/Noltari/pico-uart-bridge">pico-uart-bridge firmware by Noltari</a>.</p>
+
+<p>The Pico 2 uses the RP2350 chip. The standard <code>pico</code> build targets RP2040 and will not work. Make sure to use the <code>pico2</code> specific release binary.</p>
+
+<p>After flashing, the device appears as two serial ports on Linux: <code>/dev/ttyACM0</code> and <code>/dev/ttyACM1</code>. The bridge firmware exposes two independent UART channels.</p>
+
+<p>Connect three wires between the first Pico 2 UART channel and the phone PCB test points.</p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Pico 2 GPIO</th>
+      <th>Phone PCB pad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GPIO16 (UART0 TX, Pin 21)</td>
+      <td>RX pad on phone (unmarked)</td>
+    </tr>
+    <tr>
+      <td>GPIO17 (UART0 RX, Pin 22)</td>
+      <td>TX pad on phone (silkscreened)</td>
+    </tr>
+    <tr>
+      <td>GND (any GND pin)</td>
+      <td>GND pad on phone</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<img src="images/lancelot-uart-rpi-wiring.jpg" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)"></td>
+
+<p>MTK preloader outputs at 115200 baud. LK outputs at 921600 baud. Use picocom or minicom.</p>
+
+<p>For preloader stage (115200):</p>
+<pre><code>picocom -b 115200 /dev/ttyACM0</code></pre>
+
+<p>For LK (bootloader) stage (921600):</p>
+<pre><code>picocom -b 921600 /dev/ttyACM0</code></pre>
+
+<img src="images/lancelot-uart-healthy-out.jpg" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)"></td>
+
+<br>
+<strong>Happy debugging!</strong>
+             
+           </section>
 
            <section>
              <h2>High-Rate 40 MSPS FM RF capture of VHS using CX2388x-based expansion PCIe card on a Sony SLV-SE60</h2>
@@ -934,7 +1014,7 @@ Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PC
       <ul>
         <li>Option A: Printed on the original packaging box.</li>
         <li>Option B: Open the device. The Redmi 9 is very easy to disassemble.
-          <br><img src="images/lancelot-open-shell.webp" alt="lancelot open up" class="clickable" onclick="openModal(this)">
+          <img id="lancelot-open" src="images/lancelot-open-shell.webp" alt="lancelot open up" class="clickable" onclick="openModal(this)">
         </li>
       </ul>
     </li>
