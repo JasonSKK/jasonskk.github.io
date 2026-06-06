@@ -9,93 +9,93 @@
     <style>
       /* General Styles */
       body {
-        font-family: Georgia, serif;
-        margin: 0;
-        padding: 0;
-        background-color: #090909;
-        color: black;
+          font-family: Georgia, serif;
+          margin: 0;
+          padding: 0;
+          background-color: #090909;
+          color: black;
       }
 
       header {
-        text-align: center;
-        padding: 20px;
-        background-color: black;
-        color: white;
-        border-bottom: 1px solid #ccc;
+          text-align: center;
+          padding: 20px;
+          background-color: black;
+          color: white;
+          border-bottom: 1px solid #ccc;
       }
 
       main {
-        max-width: 800px; /* Set a maximum width for the content */
-        margin: 20px auto; /* Center the main content */
-        padding: 20px; /* Add some padding */
-        background-color: #090909; /* main content square around */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+          max-width: 800px; /* Set a maximum width for the content */
+          margin: 20px auto; /* Center the main content */
+          padding: 20px; /* Add some padding */
+          background-color: #090909; /* main content square around */
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
       }
 
       p {
-        line-height: 1.6; /* Improve readability */
-        margin-bottom: 1.5em; /* Space between paragraphs */
+          line-height: 1.6; /* Improve readability */
+          margin-bottom: 1.5em; /* Space between paragraphs */
       }
 
       img {
-        max-width: 100%; /* Make images responsive */
-        height: auto; /* Maintain aspect ratio */
-        display: block; /* Prevent inline spacing issues */
-        margin: 0 auto; /* Center the images */
+          max-width: 100%; /* Make images responsive */
+          height: auto; /* Maintain aspect ratio */
+          display: block; /* Prevent inline spacing issues */
+          margin: 0 auto; /* Center the images */
       }
 
       /* Modal Styles */
       .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-      z-index: 1000; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1000; /* Sit on top */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
       }
 
       .modal-content {
-      margin: auto;
-      display: block;
-      width: 80%; /* Could be more or less, depending on screen size */
-      max-width: 700px; /* Set a maximum width */
-      object-fit: contain;
+          margin: auto;
+          display: block;
+          width: 80%; /* Could be more or less, depending on screen size */
+          max-width: 700px; /* Set a maximum width */
+          object-fit: contain;
       }
 
       .close {
-      position: absolute;
-      top: 15px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #fff;
+          font-size: 40px;
+          font-weight: bold;
+          transition: 0.3s;
       }
 
       .close:hover,
       .close:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
+          color: #bbb;
+          text-decoration: none;
+          cursor: pointer;
       }
 
       .lyrics-box {
-      background-color: #f0f0f0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      text-align: center;
+          background-color: #f0f0f0;
+          padding: 10px;
+          border: 1px solid #ccc;
+          margin-bottom: 20px;
+          text-align: center;
       }
 
       iframe {
-      width: 100%; /* Makes it expand to fit the main container */
-      max-width: 800px; /* Set a reasonable max width */
-      height: 450px; /* Adjust height proportionally */
-      border: none; /* Optional: removes the default border */
+          width: 100%; /* Makes it expand to fit the main container */
+          max-width: 800px; /* Set a reasonable max width */
+          height: 450px; /* Adjust height proportionally */
+          border: none; /* Optional: removes the default border */
       }
     </style>
 
@@ -125,79 +125,83 @@
              <p>Date: 2026-06-06</p>
 
              <p>
-               Long story short, I bricked a secondary phone I have for playing around while trying to reflash to the stock OS. I ended up in a bootloop. I could not explain why neither recover it by flashing (via mtkclient) various images that have worked in the past. This small article documents how I obtained UART access using a Raspberry Pi Pico 2W as a USB to serial bridge while directly tapping the TX/RX points on the phones PCB. The UART access was required for debugging puporses.
+               Long story short, I bricked a secondary phone I have for playing around while trying to reflash to the stock OS. I ended up in a bootloop. I could not explain why neither recover it by flashing (via mtkclient) various images that have worked in the past. This small article documents how I obtained UART access using a Raspberry Pi Pico 2W as a USB to serial bridge while directly tapping the TX/RX points on the phones PCB. The UART access was required for debugging purposes.
              </p>
              
-               <h3>UART Test Points on lancelot</h3>
+             <h3>UART Test Points on lancelot</h3>
              <p>
                The MT6768 SoC exposes UART test points. Opening the device is straightforward. Remove the SIM/SD CARD slot. Then, remove the back cover by sliding a plastic pick around the case splitting the back case from the front as shown in my previous <a href="blog.html#lancelot-open">IMEI restoration article</a>.
              </p>
 
              <table class="equipment-table">
-  <tr>
-    <td style="vertical-align: top;"><img src="images/lancelot-disassembly-uart.jpg" alt="lancelot disassembly for UART access" class="clickable" onclick="openModal(this)"></td>
-    <td>
-      <br>
-      <div class="equipment-desc">Eleven Phillips screws hold the midframe layer. Be mindful of the small FFC right after removing the plastic midframe screws. Make sure the the FFC is removed before midframe is fully detached from the board surface. The motherboard is accessible after removing the camera plastic frame. </div>
-      <br>
-      <div class="equipment-desc">The UART test points are located on the motherboard near the camera area. TX is silkscreened on the PCB. The adjacent pad (not marked on silkscreen) is RX. A third pad nearby is GND. The main GND can also be taken from any ground plane point.</div>
-    </td>
-  </tr>
-</table>
-             <img src="images/lancelot-tx-uart-points.jpg" alt="lancelot TX RX on the PCB" class="clickable" onclick="openModal(this)"></td>
-<p>
-  For the contact I used two jumper wires that were stablised using the "soldering helping hands" from a soldering magnifying glass. Also, a heavy crocodile clip that was placed on the GND pad. That seemed to do the job.
-</p>
+               <tr>
+                 <td style="vertical-align: top;"><img id='lancelot-disassembly' src="images/lancelot-disassembly-uart.jpg" alt="lancelot disassembly for UART access" class="clickable" onclick="openModal(this)"></td>
+                 <td>
+                   <br>
+                   <div class="equipment-desc">Eleven Phillips screws hold the midframe layer. Be mindful of the small FFC right after removing the plastic midframe screws. Make sure the the FFC is removed before midframe is fully detached from the board surface. The motherboard is accessible after removing the camera plastic frame. </div>
+                   <br>
+                   <div class="equipment-desc">The UART test points are located on the motherboard near the camera area. TX is silkscreened on the PCB. The adjacent pad (not marked on silkscreen) is RX. A third pad nearby is GND. The main GND can also be taken from any ground plane point.</div>
+                 </td>
+               </tr>
+             </table>
+             <img src="images/lancelot-tx-uart-points.jpg" alt="lancelot TX RX on the PCB" class="clickable" onclick="openModal(this)">
+             <p>
+               For the contact I used two jumper wires that were stabilised using the "soldering helping hands" from a soldering magnifying glass. Also, a heavy crocodile clip that was placed on the GND pad. That seemed to do the job.
+             </p>
 
-<h3>Raspberry Pi Pico 2 W as USB-UART Bridge</h3>
+             <h3>Raspberry Pi Pico 2 W as USB-UART Bridge</h3>
 
-<p>I used a Raspberry Pi Pico 2 W flashed with the <a href="https://github.com/Noltari/pico-uart-bridge">pico-uart-bridge firmware by Noltari</a>.</p>
+             <p>I used a Raspberry Pi Pico 2 W flashed with the <a href="https://github.com/Noltari/pico-uart-bridge">pico-uart-bridge firmware by Noltari</a>.</p>
 
-<p>The Pico 2 uses the RP2350 chip. The standard <code>pico</code> build targets RP2040 and will not work. Make sure to use the <code>pico2</code> specific release binary.</p>
+             <p>The Pico 2 uses the RP2350 chip. The standard <code>pico</code> build targets RP2040 and will not work. Make sure to use the <code>pico2</code> specific release binary.</p>
 
-<p>After flashing, the device appears as two serial ports on Linux: <code>/dev/ttyACM0</code> and <code>/dev/ttyACM1</code>. The bridge firmware exposes two independent UART channels.</p>
+             <p>After flashing, the device appears as two serial ports on Linux: <code>/dev/ttyACM0</code> and <code>/dev/ttyACM1</code>. The bridge firmware exposes two independent UART channels.</p>
 
-<p>Connect three wires between the first Pico 2 UART channel and the phone PCB test points.</p>
+             <p>Connect three wires between the first Pico 2 UART channel and the phone PCB test points.</p>
 
-<table border="1" cellpadding="8" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Pico 2 GPIO</th>
-      <th>Phone PCB pad</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>GPIO16 (UART0 TX, Pin 21)</td>
-      <td>RX pad on phone (unmarked)</td>
-    </tr>
-    <tr>
-      <td>GPIO17 (UART0 RX, Pin 22)</td>
-      <td>TX pad on phone (silkscreened)</td>
-    </tr>
-    <tr>
-      <td>GND (any GND pin)</td>
-      <td>GND pad on phone</td>
-    </tr>
-  </tbody>
-</table>
+             <table border="1" cellpadding="8" cellspacing="0">
+               <thead>
+                 <tr>
+                   <th>Pico 2 GPIO</th>
+                   <th>Phone PCB pad</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>GPIO16 (UART0 TX, Pin 21)</td>
+                   <td>RX pad on phone (unmarked)</td>
+                 </tr>
+                 <tr>
+                   <td>GPIO17 (UART0 RX, Pin 22)</td>
+                   <td>TX pad on phone (silkscreened)</td>
+                 </tr>
+                 <tr>
+                   <td>GND (any GND pin)</td>
+                   <td>GND pad on phone</td>
+                 </tr>
+               </tbody>
+             </table>
 
-<br>
-<img src="images/lancelot-uart-rpi-wiring.jpg" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)"></td>
+             <br>
+             <img src="images/lancelot-uart-rpi-wiring.jpg" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)">
 
-<p>MTK preloader outputs at 115200 baud. LK outputs at 921600 baud. Use picocom or minicom.</p>
+             <p>MTK preloader outputs at 115200 baud. LK outputs at 921600 baud. Use picocom or minicom.</p>
 
-<p>For preloader stage (115200):</p>
-<pre><code>picocom -b 115200 /dev/ttyACM0</code></pre>
+             <p>For preloader stage (115200):</p>
+             <pre><code>picocom -b 115200 /dev/ttyACM0</code></pre>
 
-<p>For LK (bootloader) stage (921600):</p>
-<pre><code>picocom -b 921600 /dev/ttyACM0</code></pre>
+             <p>For LK (bootloader) stage (921600):</p>
+             <pre><code>picocom -b 921600 /dev/ttyACM0</code></pre>
 
-<img src="images/lancelot-uart-healthy-out.jpg" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)"></td>
+             <img src="images/lancelot-uart-healthy-out.jpg" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)">
 
-<br>
-<strong>Happy debugging!</strong>
-             
+             <p>
+               Note: If you experience persistent eMMC DAT CRC errors and DRAM_FATAL_ERR_FLAG in serial ensure the fingerprint sensor FFC connector is grounded.  Shorting it to the upper side of the FFC cable right next to it (battery GND) resolves the issue. There is a metallic part that is placed above the fingerprint sensor and screwed in-place. The metallic part is present bottom right in the <a href="blog.html#lancelot-disassembly">first picture of this article.</a>
+             </p>
+
+             <br>
+             <strong>Happy debugging!</strong>
+
            </section>
 
            <section>
@@ -206,12 +210,12 @@
 
              <p>
                I finished archiving all my Video8 tapes, I have now moved to VHS. My current VCR deck is a Sony SLV-SE60 I picked up from Wingst Niedersachsen in the middle of a snowstorm.
-               </p>
-               <figure>
-                 <img src="images/wingst-pics.jpg" alt="wingst collage" class="clickable" onclick="openModal(this)">
-                 <figcaption>Pictures taken by Anna - Eva on the 20260215</figcaption>
-               </figure>
-               <p>
+             </p>
+             <figure>
+               <img src="images/wingst-pics.jpg" alt="wingst collage" class="clickable" onclick="openModal(this)">
+               <figcaption>Pictures taken by Anna - Eva on the 20260215</figcaption>
+             </figure>
+             <p>
                The VCR deck is a late 90s/early 2000s PAL device. The overall approach in the video domain remains the same as with the EV-S1000: FM RF capture via the CX card, decode with vhs-decode. Keep in mind that Video8 has the HiFi signal combined with Luma/Chroma. Therefore, only a single CX Card is required. On VHS this is not the case.
 
                <h3>RF Tap</h3>
@@ -242,23 +246,23 @@
                  <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
                </figure>
 
-               <p>
-                 I tapped PB RF and AV ADJ using a DuPont female to BNC cable. The signal goes directly to the modified CX card.
-               </p>
+             <p>
+               I tapped PB RF and AV ADJ using a DuPont female to BNC cable. The signal goes directly to the modified CX card.
+             </p>
 
-               <h4>CX Card</h4>
-               The same modified CX card from the Video8 workflow is reused here. The required hardware modifications are unchanged:
-               
-               <p>
+             <h4>CX Card</h4>
+             The same modified CX card from the Video8 workflow is reused here. The required hardware modifications are unchanged:
+             
+             <p>
                1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
                2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
                3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
                4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
                5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
-               </p>
-               <a href="images/cx-mods_251220.jpg">CX Card mods view PCIe setup for tapping Sony EV S1000</a>
+             </p>
+             <a href="images/cx-mods_251220.jpg">CX Card mods view PCIe setup for tapping Sony EV S1000</a>
 
-<p>
+             <p>
                <h4>Calibration</h4>
              <p>
                Before capture the input level is calibrated using a ZSH script that wraps around the leveladj binary which is part of the CX driver by Chad Page <a href="https://github.com/happycube/cxadc-linux3/">https://github.com/happycube/cxadc-linux3/</a>.  <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh">My ZSH scripts for both VHS and Video8 capture are available on Github</a>.
@@ -272,117 +276,117 @@
                The calibrated vmux and level values are exported to the shell env. I would then create a ffplay preview of the raw ADC output follows calibration to confirm a valid RF signal is present before proceeding with a full capture.  <a href="https://github.com/oyvindln/vhs-decode/wiki/RF-Capture-Guide#preview-the-live-signal">A visual reference can be obtained by the vhs-decode docs in the RF-Capture-Guide section.</a>
                <br>
                <code>
-               source ~/scripts/rf/cx-calibrate.zsh
+                 source ~/scripts/rf/cx-calibrate.zsh
                </code>
              </p>
              
-               <h4>Capture</h4>
-               <p>
-                 RF is captured losslessly to FLAC at 40 MSPS, 8-bit, single channel, unsigned little-endian. Capture duration is bounded by tape length passed as an argument:
-                 <br>
+             <h4>Capture</h4>
+             <p>
+               RF is captured losslessly to FLAC at 40 MSPS, 8-bit, single channel, unsigned little-endian. Capture duration is bounded by tape length passed as an argument:
+               <br>
                <code>
                  zsh ~/scripts/vhs/capture-rf-vhs-flac.zsh CX_Card_40msps_8-bit 190
                </code>
-               </p>
+             </p>
 
-               <h4>Decode</h4>
-               <p>
-                 Video FM RF decoding is performed in the standarised way. The tape is PAL, sampled at 40 MSPS:
-                 <br>
-                 <code>
-                   vhs-decode --debug --tape_format vhs --frequency 40 --system pal --ire0_adjust --recheck_phase --threads 4 CX_Card_40msps_8-bit.flac my-tape-decoded
-                 </code>
-                 <br>
-                 Just for reference, the decoding on my computer <code>Optiplex 9010/Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz/16GB RAM</code> takes approximately 12 hours for 180 minutes of a VHS tape.
-               </p>
+             <h4>Decode</h4>
+             <p>
+               Video FM RF decoding is performed in the standarised way. The tape is PAL, sampled at 40 MSPS:
+               <br>
+               <code>
+                 vhs-decode --debug --tape_format vhs --frequency 40 --system pal --ire0_adjust --recheck_phase --threads 4 CX_Card_40msps_8-bit.flac my-tape-decoded
+               </code>
+               <br>
+               Just for reference, the decoding on my computer <code>Optiplex 9010/Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz/16GB RAM</code> takes approximately 12 hours for 180 minutes of a VHS tape.
+             </p>
 
-               <h3>I failed the HiFi RF capture</h3>
+             <h3>I failed the HiFi RF capture</h3>
 
-               <p>
-                 The vhs-decode tap list for the SLV-SE60 lists CN341 with PIN 1 as GND and PIN 2 as HF ADJ. Based on the service manual audio block diagram (section 3-4) and the Hi-Fi Switching Position Adjustment procedure (section 6, 2-4-2), this is reversed. PIN 1 of CN341 is HF ADJ and PIN 2 is GND.
-                 <div style="display: flex; gap: 1rem;">
-                   <img src="images/hifi-switching-position-adj-process.jpg" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
-                   <img src="images/sony-slvse60-hf-adj-cn341.jpg" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
-                 </div>
-                 <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-               </p>
+             <p>
+               The vhs-decode tap list for the SLV-SE60 lists CN341 with PIN 1 as GND and PIN 2 as HF ADJ. Based on the service manual audio block diagram (section 3-4) and the Hi-Fi Switching Position Adjustment procedure (section 6, 2-4-2), this is reversed. PIN 1 of CN341 is HF ADJ and PIN 2 is GND.
+               <div style="display: flex; gap: 1rem;">
+                 <img src="images/hifi-switching-position-adj-process.jpg" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
+                 <img src="images/sony-slvse60-hf-adj-cn341.jpg" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
+               </div>
+             <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+             </p>
 
-               <h4>What CN341 actually is</h4>
-               <p>
-                 CN341 is not a HiFi RF tap (under normal operation of TDA VCR AUDIO IC, check further down). It is a service calibration point on the MA-339 board used during the HiFi Switching Position Adjustment procedure.
+             <h4>What CN341 actually is</h4>
+             <p>
+               CN341 is not a HiFi RF tap (under normal operation of TDA VCR AUDIO IC, check further down). It is a service calibration point on the MA-339 board used during the HiFi Switching Position Adjustment procedure.
 
-                 The source of the signal at CN341 is IC360 which is the TDA9615H HiFi audio processor IC. It comes from PIN 36 of that chip, which is FMOUT in the TDA9615H datasheet. In my understanding, during normal playback mode <code>(AFM bit = 0)</code> FMOUT carries the HF envelope of the left channel FM carrier and not the FM raw carrier itself. This is posibly an envelope detector output used only for calibration.  Possibly this is not something we can use to demodulating the actual FM signal.
-               </p>
-               <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.jpg" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
+               The source of the signal at CN341 is IC360 which is the TDA9615H HiFi audio processor IC. It comes from PIN 36 of that chip, which is FMOUT in the TDA9615H datasheet. In my understanding, during normal playback mode <code>(AFM bit = 0)</code> FMOUT carries the HF envelope of the left channel FM carrier and not the FM raw carrier itself. This is posibly an envelope detector output used only for calibration.  Possibly this is not something we can use to demodulating the actual FM signal.
+             </p>
+             <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.jpg" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
              <p class="caption">
                Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.
                <br>
                Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
 
-               <h5>HF ADJ Spectrum</h5>
-               <p>RF spectrum of HF ADJ on CN341. The spectrum does show FM carrier structure in the >1.0 && <2.0 MHz region expected for PAL VHS HiFi. There are two-three narrowband components are visible at approximately 6 MHz, 10 MHz, and 13 MHz  that could be some kind of clock or switching. The signal is not suitable input for hifi-decode.
-<img src="images/sony-slv-se60-hf-adj-signal.webp" alt="Sony SLV SE60 CN341 HF ADJ Signal Spectrum" class="clickable" onclick="openModal(this)" style="width: 100%;">
-</p>
+             <h5>HF ADJ Spectrum</h5>
+             <p>RF spectrum of HF ADJ on CN341. The spectrum does show FM carrier structure in the >1.0 && <2.0 MHz region expected for PAL VHS HiFi. There are two-three narrowband components are visible at approximately 6 MHz, 10 MHz, and 13 MHz  that could be some kind of clock or switching. The signal is not suitable input for hifi-decode.
+                                                                                                                <img src="images/sony-slv-se60-hf-adj-signal.webp" alt="Sony SLV SE60 CN341 HF ADJ Signal Spectrum" class="clickable" onclick="openModal(this)" style="width: 100%;">
+             </p>
 
-<h5>Trace between IC340 and IC360</h5>
-<p>
-  The HiFi FM signal path in the SLV-SE60 runs from the drum audio heads through IC340 (AFM REC/PB AMP, LA7256) and then into IC360 (TDA9615H) at PIN 37. There is no accessible test point or component (such as resistor, capacitor) on this area between the two ICs after checking the full hardware schematic. The signal level at this point is expected to be low and the trace is buried on the MA-339 board with no convenient access point. That means lifting the full mechanical body of the VCR. Direct tapping here would additionally require physical modification a.k.a. scraping of the PCB traces with precision blade.
+             <h5>Trace between IC340 and IC360</h5>
+             <p>
+               The HiFi FM signal path in the SLV-SE60 runs from the drum audio heads through IC340 (AFM REC/PB AMP, LA7256) and then into IC360 (TDA9615H) at PIN 37. There is no accessible test point or component (such as resistor, capacitor) on this area between the two ICs after checking the full hardware schematic. The signal level at this point is expected to be low and the trace is buried on the MA-339 board with no convenient access point. That means lifting the full mechanical body of the VCR. Direct tapping here would additionally require physical modification a.k.a. scraping of the PCB traces with precision blade.
 
-  <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.png" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
-<p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-</p>
+               <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.png" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
+             <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+             </p>
 
-<h5>Theoretical path via I2C reprogramming</h5>
+             <h5>Theoretical path via I2C reprogramming</h5>
 
-<p>
-Credit to the <a href="https://github.com/rivvit/N60TestMode8/wiki/Sony-VCR-Test-Mode-8-Mod">N60TestMode8 project</a> (the original approach) which documents their approach on a closely related Sony deck and served as the main reference for this investigation.
-</p>
+             <p>
+               Credit to the <a href="https://github.com/rivvit/N60TestMode8/wiki/Sony-VCR-Test-Mode-8-Mod">N60TestMode8 project</a> (the original approach) which documents their approach on a closely related Sony deck and served as the main reference for this investigation.
+             </p>
 
-<p>
-  The TDA9615H similarly has a test mode accessible via I2C (accessed through IC162 SCL/SDA lines).  In a similar way as with the "Sony VCR Test Mode 8 Mod" there could be possibly an option to program the TDA9615H through I2C to output the RAW FM carrier on FMOUT PIN 36/ accessible via HF ADJ/CN341. 
-  
-</p>
+             <p>
+               The TDA9615H similarly has a test mode accessible via I2C (accessed through IC162 SCL/SDA lines).  In a similar way as with the "Sony VCR Test Mode 8 Mod" there could be possibly an option to program the TDA9615H through I2C to output the RAW FM carrier on FMOUT PIN 36/ accessible via HF ADJ/CN341. 
+               
+             </p>
 
-<p>
-  The TDA9615H exposes special test modes via its I2C interface. This is controlled by the TEST bit in the power byte and selection bits in the select byte. We care about the tests 3 and 4. Test 3 routes the left channel band pass filter output to FMOUT in playback mode, and test 4 does the same for the right channel. These are the only playback mode test outputs available on FMOUT (PIN 36), which is the signal accessible at CN341. This means that with the correct I2C configuration CN341 would carry a single FM carrier channel per test mode. This would be left or right. NOT both simultaneously. Capturing both channels would require either switching test modes between captures or running the tape twice while capturing each channel.
-  <img src="images/tda9615h-test-modes.png" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
-  <p class="caption">Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
-  </p>
+             <p>
+               The TDA9615H exposes special test modes via its I2C interface. This is controlled by the TEST bit in the power byte and selection bits in the select byte. We care about the tests 3 and 4. Test 3 routes the left channel band pass filter output to FMOUT in playback mode, and test 4 does the same for the right channel. These are the only playback mode test outputs available on FMOUT (PIN 36), which is the signal accessible at CN341. This means that with the correct I2C configuration CN341 would carry a single FM carrier channel per test mode. This would be left or right. NOT both simultaneously. Capturing both channels would require either switching test modes between captures or running the tape twice while capturing each channel.
+               <img src="images/tda9615h-test-modes.png" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
+             <p class="caption">Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
+             </p>
 
-<h4>Refusing to go deeper</h4>
-<p>
-Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PCB trace surgery between IC340 and IC360 and a high gain / low noise digital amplifier, or an I2C interception mod with risk of messing up the VCR permanently. Given that my tapes being archived are home recordings of questionable quality, the archival benefit of HiFi RF over a clean analog capture does not justify the hardware risk and effort at all. So the decision was made to move to analog audio capture via the SCART/CN500 output of the deck.
+             <h4>Refusing to go deeper</h4>
+             <p>
+               Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PCB trace surgery between IC340 and IC360 and a high gain / low noise digital amplifier, or an I2C interception mod with risk of messing up the VCR permanently. Given that my tapes being archived are home recordings of questionable quality, the archival benefit of HiFi RF over a clean analog capture does not justify the hardware risk and effort at all. So the decision was made to move to analog audio capture via the SCART/CN500 output of the deck.
 
-<img src="images/sony-slv-se60-capture-scard-cn500.jpg" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
-<p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-</p>
+               <img src="images/sony-slv-se60-capture-scard-cn500.jpg" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
+             <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+             </p>
 
-<h5>Method for analogue audio tapping</h5>
-    <p>
-      Crocodile clips were attached to the L and R CN500 LINE OUT pins. The GND taken from the VCR chassis shielding. The three lines were terminated into a 3.5mm minijack and fed into the line input of an Edirol UA-5 USB audio interface.  Gain is set manually on the unit before capture.
-    </p>
-    <p>
-      The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz stereo. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
-      
-    <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
-    </p>
+             <h5>Method for analogue audio tapping</h5>
+             <p>
+               Crocodile clips were attached to the L and R CN500 LINE OUT pins. The GND taken from the VCR chassis shielding. The three lines were terminated into a 3.5mm minijack and fed into the line input of an Edirol UA-5 USB audio interface.  Gain is set manually on the unit before capture.
+             </p>
+             <p>
+               The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz stereo. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
+               
+               <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
+             </p>
 
-    <h3>Not that bad results</h3>
-    
-    <figure>
-      <img src="images/sony-slvse60-full-capture-pb-rf-result.jpg" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
-      <figcaption>After deintracing using the ffmpeg approach, three sample frames are depicted.</figcaption>
-    </figure>
+             <h3>Not that bad results</h3>
+             
+             <figure>
+               <img src="images/sony-slvse60-full-capture-pb-rf-result.jpg" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
+               <figcaption>After deintracing using the ffmpeg approach, three sample frames are depicted.</figcaption>
+             </figure>
 
-    <h3>References</h3>
-    <p>
-    Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80/SX60/SX70/SX80 Service Manual</em>, 9-921-714-11, Home A&V Products Company, ©1999.
-    <br>
-    Philips Semiconductors, <em>TDA9615H — Audio processor for VHS hi-fi, Preliminary specification</em>, document order no. 9397 750 01744, 1997 Jun 16.
-    </p>
-    
-    
-          </section>
+             <h3>References</h3>
+             <p>
+               Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80/SX60/SX70/SX80 Service Manual</em>, 9-921-714-11, Home A&V Products Company, ©1999.
+               <br>
+               Philips Semiconductors, <em>TDA9615H — Audio processor for VHS hi-fi, Preliminary specification</em>, document order no. 9397 750 01744, 1997 Jun 16.
+             </p>
+             
+             
+           </section>
 
 
            <section>
