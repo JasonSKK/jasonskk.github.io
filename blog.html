@@ -47,55 +47,55 @@
       /* Modal Styles */
       .modal {
           display: none; /* Hidden by default */
-          position: fixed; /* Stay in place */
-          z-index: 1000; /* Sit on top */
-          left: 0;
-          top: 0;
-          width: 100%; /* Full width */
-          height: 100%; /* Full height */
-          overflow: auto; /* Enable scroll if needed */
-          background-color: rgb(0,0,0); /* Fallback color */
-          background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+      position: fixed; /* Stay in place */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
       }
 
       .modal-content {
-          margin: auto;
-          display: block;
-          width: 80%; /* Could be more or less, depending on screen size */
-          max-width: 700px; /* Set a maximum width */
-          object-fit: contain;
+      margin: auto;
+      display: block;
+      width: 80%; /* Could be more or less, depending on screen size */
+      max-width: 700px; /* Set a maximum width */
+      object-fit: contain;
       }
 
       .close {
-          position: absolute;
-          top: 15px;
-          right: 35px;
-          color: #fff;
-          font-size: 40px;
-          font-weight: bold;
-          transition: 0.3s;
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
       }
 
       .close:hover,
       .close:focus {
-          color: #bbb;
-          text-decoration: none;
-          cursor: pointer;
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
       }
 
       .lyrics-box {
-          background-color: #f0f0f0;
-          padding: 10px;
-          border: 1px solid #ccc;
-          margin-bottom: 20px;
-          text-align: center;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      text-align: center;
       }
 
       iframe {
-          width: 100%; /* Makes it expand to fit the main container */
-          max-width: 800px; /* Set a reasonable max width */
-          height: 450px; /* Adjust height proportionally */
-          border: none; /* Optional: removes the default border */
+      width: 100%; /* Makes it expand to fit the main container */
+      max-width: 800px; /* Set a reasonable max width */
+      height: 450px; /* Adjust height proportionally */
+      border: none; /* Optional: removes the default border */
       }
     </style>
 
@@ -119,6 +119,83 @@
            </section>
 
            -->
+           <section>
+             <h2>Bare-metal RUST "acidjazzed evening" cover on the ATtiny13A (+ XGecuT48 flasher)</h2>
+             <p>Date: 2026-08-30</p>
+             <p>
+             <p> This project is a side-result of a copyright related course in my BSc program. In this course we had to investigate and present a case of copyright infringement.  At the time I was really into chiptune music, something caused by simply looking into a bit too much of DSP signal synthesis at the time.  In my investigation I found particularly interesting the case of "Acid Jazzed Evening" by Finnish artist Janne Suni and the resulting lawsuit against Timbaland for copyright infringement.  The guy "sampled" ... to put it nicely, the full musical phrase of the original song and used it in a pop song.  The song is a 4 channel module file supposed to be played on an Amiga.  Even though I graduated in 2022 I still remain obsessed with this song.  I thought why not write a proper Rust music program for the ATtiny13A I had lying around unused since last September. <br>
+
+             <p>
+               <video controls preload="metadata" style="max-width:90%; height:auto;" width="720" height="480">
+                 <source src="videos/r-attiny13a-rust-acidjazzed.webm" type="video/webm">
+                 Your browser does not support the video tag.
+                 <a href="videos/r-attiny13a-rust-acidjazzed.webm">Download the video</a> instead.
+               </video>
+             </p>
+             
+             </p>
+             <p>
+               At the same time I am trying to learn RUST and I thought that this project would be as a great exercise to put to the test everything I learned in "The RUST Book".
+               This is my first attempt at writing Rust for something more than the examples in the book so bear with me if my practices are not ideal or aligned with the Rust philosophy.
+             </p>
+             
+             <p> To sum it up, this project aims to:
+               <br> 1. Teach me RUST
+               <br> 2. Finally utilise the ATtiny13A
+               <br> 3. Produce a cover of a cool song
+               <br>
+             </p>
+             <img id='attiny13a schematic single IC' src="images/attiny13a-schematic-single-ic.jpg" alt="attiny13a schematic single IC" class="clickable" onclick="openModal(this)">
+
+             <h3>External Modules</h3>
+             <p>
+               I do not want to claim any credit figuring out audio output from the ATTiny13A because I simply did not figure it out on my own. My approach was based on the sequencer example in the <a href="https://github.com/JimmyKenMerchant/ATtiny">https://github.com/JimmyKenMerchant/ATtiny</a>. C and ASM package for the TinyAVR/ATtiny microcontroller family.  At the same time there was an already existing RUST based harware abstraction layer by Denis Kotlyarov for pin I/O, and interrupt control that made my life easier. Github repository: <a href="https://github.com/UlinProject/rusty_attiny13a/">https://github.com/UlinProject/rusty_attiny13a/</a>.
+             </p>
+
+             <h3>Firmware</h3>
+             <p>
+               The main logic of the RUST program is an interrupt based sawtooth generator as in the C code sequencer example. This waveform generation method is also described in the <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf">datasheet</a>.
+               <figure>
+                 <img id='attiny13a timer ocr0a register' src="images/attiny13a-timer-ocr0a-register.jpg" alt="attiny13a timer ocr0a register" class="clickable" onclick="openModal(this)">
+                 <figcaption>Microchip Technology Inc., <em>ATtiny13 Datasheet</em>, document no. 2535J–AVR–08/10, p. 60. Available at: <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf">https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf</a></figcaption>
+               </figure>
+             </p>
+             
+             <div style="overflow: auto;">
+               <p><img id="avr interrup waveform generation" src="images/avr-interrupt.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
+                 Timer0 runs in Fast PWM (Pulse Width Modulation) mode (manual Table 11-3, pg. 70) incremeting inside the chip. Every time it overflows an interrupt is sent. Inside that interrupt an accumulator <code>FIXED_VALUE_SAWTOOTH</code> is incremented by a fixed note step size. It is written into the Output Compare Register (<code>OCR0A</code>), which controls pin PB0.  Timer0 own HW constantly compares this value against its counter (<code>TCNT0</code>).  A separate counter (<code>SAMPLE_COUNT</code>) keeps track of how many interrupts have passed since the note began and once it reaches the length of the note (<code>COUNT_PER_2PI</code>) the accumulator resets then to zero. Ramping the accumulator up and resetting it at the peak produces a sawtooth wave, at whatever pitch the note step size encodes.
+               </p>
+             </div>
+             
+             <div style="overflow: auto;">
+               <p><img id="sequencer-array" src="images/sequencer-array.jpg" alt="sequencer-array" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
+                 The main loop watches a second counter (<code>SEQUENCER_COUNT_UPDATE</code>) that is incremented by the interrupt every 4687 overflows which is eight steps per second. Practical steps for music. Each time that counter ticks the loop reads the next byte from a melody array (<code>SEQUENCER_ARRAY</code>) stored in flash memory.  Finds the matching frequency in a note table (<code>NOTE_DELTA</code>) and gives the new delta value to the interrupt (<code>FIXED_DELTA_SAWTOOTH</code>). Silence is zero. Everything else maps to a specific pitch of the Bb minor scale.
+               </p>
+             </div>
+             <p>
+               The drum voice does not use the sawtooth generator for the hi-hat. There is no noise channel on this chip so an 8-bit shift register (<code>LFSR</code>) is stepped once per interrupt.  Its raw output is written directly to the <code>OCR0A</code> register. I thought that random duty cycles at audio rate sound like white noise in theory. The kick drum reuses the same sawtooth code as the melody voices but lower in frequency. It is also much shorter in duration.
+
+               <img id='8 bit shift register hi-hat' src="images/8bit-hihat-shift-reg.jpg" alt=" bit shift register hi-hat" class="clickable" onclick="openModal(this)">
+
+               <h3>XGecuT48 flashing</h3>
+
+               <div style="overflow: auto;">
+                 <p><img id="attiny13a fuse programming xgecu" src="images/attiny13a-fuse-programming-xgecu.jpg" alt="attiny13a fuse programming xgecu" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
+                   Flashing happens by removing the ATTiny13A from the circuit and placing it on a XGecu T48 universal programmer as I did not have an SPI interface handy. The SOIC-8 chip can sit bare on the programmers sockets without an adapter.  The fuses need to be set in the Xgpro (the XGecu software) before every flash.  The low fuse is set to 0x3A: disables the CKDIV8 prescaler and keeps the internal oscillator at its full 9.6MHz (default 1.2MHz). The high fuse stays at 0xFB close to default.  Getting this wrong is easy and debugging hard (took me about an hour).  The chip still runs the code and flashes without error.  However, every timing calculation in the code, sample rate, note pitch, sequencer tempo is calculated wrong due to the fixed <code>SEQUENCER_INTERVAL</code> which is derived from dividing 9.6MHz down.</p>
+               </div>
+               
+               <h3>Resources</h3>
+               1. <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf">https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf</a>
+               <br>
+               2. <a href="https://github.com/UlinProject/rusty_attiny13a/">https://github.com/UlinProject/rusty_attiny13a/</a>
+               <br>
+               3. <a href="https://github.com/JimmyKenMerchant/ATtiny">https://github.com/JimmyKenMerchant/ATtiny</a>
+               <br>
+               4. This project is available at: <a href="https://github.com/JasonSKK/rusty_attiny13a/">https://github.com/JasonSKK/rusty_attiny13a/</a>
+             </p>
+
+             
+           </section>
 
            <section>
              <h2>UART Serial Access on Xiaomi Redmi 9 (lancelot, MT6768 Helio G85) via RPI pico 2</h2>
@@ -148,401 +225,402 @@
              <p>
                For the contact I used two jumper wires that were stabilised using the "soldering helping hands" from a soldering magnifying glass. Also, a heavy crocodile clip that was placed on the GND pad. That seemed to do the job.
              </p>
-
-             <h3>Raspberry Pi Pico 2 W as USB-UART Bridge</h3>
-
-             <p>I used a Raspberry Pi Pico 2 W flashed with the <a href="https://github.com/Noltari/pico-uart-bridge">pico-uart-bridge firmware by Noltari</a>.</p>
-
-             <p>The Pico 2 uses the RP2350 chip. The standard <code>pico</code> build targets RP2040 and will not work. Make sure to use the <code>pico2</code> specific release binary.</p>
-
-             <p>After flashing, the device appears as two serial ports on Linux: <code>/dev/ttyACM0</code> and <code>/dev/ttyACM1</code>. The bridge firmware exposes two independent UART channels.</p>
-
-             <p>Connect three wires between the first Pico 2 UART channel and the phone PCB test points.</p>
-
-             <table border="1" cellpadding="8" cellspacing="0">
-               <thead>
-                 <tr>
-                   <th>Pico 2 GPIO</th>
-                   <th>Phone PCB pad</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                   <td>GPIO16 (UART0 TX, Pin 21)</td>
-                   <td>RX pad on phone (unmarked)</td>
-                 </tr>
-                 <tr>
-                   <td>GPIO17 (UART0 RX, Pin 22)</td>
-                   <td>TX pad on phone (silkscreened)</td>
-                 </tr>
-                 <tr>
-                   <td>GND (any GND pin)</td>
-                   <td>GND pad on phone</td>
-                 </tr>
-               </tbody>
-             </table>
-
-             <br>
-             <img src="images/lancelot-uart-rpi-wiring.jpg" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)">
-
-             <p>MTK preloader outputs at 115200 baud. LK outputs at 921600 baud. Use picocom or minicom.</p>
-
-             <p>For preloader stage (115200):</p>
-             <pre><code>picocom -b 115200 /dev/ttyACM0</code></pre>
-
-             <p>For LK (bootloader) stage (921600):</p>
-             <pre><code>picocom -b 921600 /dev/ttyACM0</code></pre>
-
-             <img src="images/lancelot-uart-healthy-out.jpg" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)">
-
-             <p>
-               Note: If you experience persistent eMMC DAT CRC errors and DRAM_FATAL_ERR_FLAG in serial ensure the fingerprint sensor FFC connector is grounded.  Shorting it to the upper side of the FFC cable right next to it (battery GND) resolves the issue. There is a metallic part that is placed above the fingerprint sensor and screwed in-place. The metallic part is present bottom right in the <a href="blog.html#lancelot-disassembly">first picture of this article.</a>
-             </p>
-
-             <br>
-             <strong>Happy debugging!</strong>
-
            </section>
 
-           <section>
-             <h2>High-Rate 40 MSPS FM RF capture of VHS using CX2388x-based expansion PCIe card on a Sony SLV-SE60</h2>
-             <p>Date: 2026-05-07</p>
+           <h3>Raspberry Pi Pico 2 W as USB-UART Bridge</h3>
 
-             <p>
-               I finished archiving all my Video8 tapes, I have now moved to VHS. My current VCR deck is a Sony SLV-SE60 I picked up from Wingst Niedersachsen in the middle of a snowstorm.
-             </p>
-             <figure>
-               <img src="images/wingst-pics.jpg" alt="wingst collage" class="clickable" onclick="openModal(this)">
-               <figcaption>Pictures taken by Anna - Eva on the 20260215</figcaption>
-             </figure>
-             <p>
-               The VCR deck is a late 90s/early 2000s PAL device. The overall approach in the video domain remains the same as with the EV-S1000: FM RF capture via the CX card, decode with vhs-decode. Keep in mind that Video8 has the HiFi signal combined with Luma/Chroma. Therefore, only a single CX Card is required. On VHS this is not the case.
+      <p>I used a Raspberry Pi Pico 2 W flashed with the <a href="https://github.com/Noltari/pico-uart-bridge">pico-uart-bridge firmware by Noltari</a>.</p>
 
-               <h3>RF Tap</h3>
-               The SLV-SE60 exposes RF test points on a shielded connector behind the head drum marked in the datasheet with the ID CN262. The relevant signals are:
-               <table border="1" cellpadding="8" cellspacing="0">
-                 <thead>
-                   <tr>
-                     <th>Pin</th>
-                     <th>Signal</th>
-                     <th>Description</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr><td>1</td><td>PB RF</td><td>Video RF</td></tr>
-                   <tr><td>2</td><td>RF SWP</td><td>Head switching signal</td></tr>
-                   <tr><td>3</td><td>GND</td><td>Ground</td></tr>
-                   <tr><td>4</td><td>CTL</td><td>Control track signal</td></tr>
-                   <tr><td>5</td><td>AV ADJ</td><td>Head switch point adjustment pin</td></tr>
-                 </tbody>
-               </table>
+      <p>The Pico 2 uses the RP2350 chip. The standard <code>pico</code> build targets RP2040 and will not work. Make sure to use the <code>pico2</code> specific release binary.</p>
 
-               <br>
-               Here is the view in the physical domain. I am tapping using a Dupond connector to BNC cable the PB RF on the PIN 1, and GND on the PIN 3:
-               <img src="images/sony-slvse60-pb-rf-pinout.jpg" alt="Sony SLV SE60 PB RF pinout" class="clickable" onclick="openModal(this)">
-               <figure>
-                 <img src="images/sony-slvse60-gnd-pinout.jpg" alt="Sony SLV SE60 GND pinout" class="clickable" onclick="openModal(this)">
-                 <figcaption>Pinout of CN262 as depicted in the schematics. </figcaption>
-                 <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-               </figure>
+      <p>After flashing, the device appears as two serial ports on Linux: <code>/dev/ttyACM0</code> and <code>/dev/ttyACM1</code>. The bridge firmware exposes two independent UART channels.</p>
 
-             <p>
-               I tapped PB RF and AV ADJ using a DuPont female to BNC cable. The signal goes directly to the modified CX card.
-             </p>
+      <p>Connect three wires between the first Pico 2 UART channel and the phone PCB test points.</p>
 
-             <h4>CX Card</h4>
-             The same modified CX card from the Video8 workflow is reused here. The required hardware modifications are unchanged:
-             
-             <p>
-               1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
-               2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
-               3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
-               4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
-               5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
-             </p>
-             <a href="images/cx-mods_251220.jpg">CX Card mods view PCIe setup for tapping Sony EV S1000</a>
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Pico 2 GPIO</th>
+            <th>Phone PCB pad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GPIO16 (UART0 TX, Pin 21)</td>
+            <td>RX pad on phone (unmarked)</td>
+          </tr>
+          <tr>
+            <td>GPIO17 (UART0 RX, Pin 22)</td>
+            <td>TX pad on phone (silkscreened)</td>
+          </tr>
+          <tr>
+            <td>GND (any GND pin)</td>
+            <td>GND pad on phone</td>
+          </tr>
+        </tbody>
+      </table>
 
-             <p>
-               <h4>Calibration</h4>
-             <p>
-               Before capture the input level is calibrated using a ZSH script that wraps around the leveladj binary which is part of the CX driver by Chad Page <a href="https://github.com/happycube/cxadc-linux3/">https://github.com/happycube/cxadc-linux3/</a>.  <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh">My ZSH scripts for both VHS and Video8 capture are available on Github</a>.
+      <br>
+      <img src="images/lancelot-uart-rpi-wiring.jpg" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)">
 
-               In brief: The script sets vmux, runs leveladj, reads the last tested level from its output, subtracts 1 to avoid clipping, and applies the result. With my setup the gain level was most of the times 31. This is the maximum gain level.  I would often manually set it to 31 via:
-               <br>
-               <code>
-                 sudo echo 31 | sudo tee /sys/class/cxadc/cxadc0/device/parameters/level
-               </code>
-               <br>
-               The calibrated vmux and level values are exported to the shell env. I would then create a ffplay preview of the raw ADC output follows calibration to confirm a valid RF signal is present before proceeding with a full capture.  <a href="https://github.com/oyvindln/vhs-decode/wiki/RF-Capture-Guide#preview-the-live-signal">A visual reference can be obtained by the vhs-decode docs in the RF-Capture-Guide section.</a>
-               <br>
-               <code>
-                 source ~/scripts/rf/cx-calibrate.zsh
-               </code>
-             </p>
-             
-             <h4>Capture</h4>
-             <p>
-               RF is captured losslessly to FLAC at 40 MSPS, 8-bit, single channel, unsigned little-endian. Capture duration is bounded by tape length passed as an argument:
-               <br>
-               <code>
-                 zsh ~/scripts/vhs/capture-rf-vhs-flac.zsh CX_Card_40msps_8-bit 190
-               </code>
-             </p>
+      <p>MTK preloader outputs at 115200 baud. LK outputs at 921600 baud. Use picocom or minicom.</p>
 
-             <h4>Decode</h4>
-             <p>
-               Video FM RF decoding is performed in the standarised way. The tape is PAL, sampled at 40 MSPS:
-               <br>
-               <code>
-                 vhs-decode --debug --tape_format vhs --frequency 40 --system pal --ire0_adjust --recheck_phase --threads 4 CX_Card_40msps_8-bit.flac my-tape-decoded
-               </code>
-               <br>
-               Just for reference, the decoding on my computer <code>Optiplex 9010/Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz/16GB RAM</code> takes approximately 12 hours for 180 minutes of a VHS tape.
-             </p>
+      <p>For preloader stage (115200):</p>
+      <pre><code>picocom -b 115200 /dev/ttyACM0</code></pre>
 
-             <h3>I failed the HiFi RF capture</h3>
+      <p>For LK (bootloader) stage (921600):</p>
+      <pre><code>picocom -b 921600 /dev/ttyACM0</code></pre>
 
-             <p>
-               The vhs-decode tap list for the SLV-SE60 lists CN341 with PIN 1 as GND and PIN 2 as HF ADJ. Based on the service manual audio block diagram (section 3-4) and the Hi-Fi Switching Position Adjustment procedure (section 6, 2-4-2), this is reversed. PIN 1 of CN341 is HF ADJ and PIN 2 is GND.
-               <div style="display: flex; gap: 1rem;">
-                 <img src="images/hifi-switching-position-adj-process.jpg" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
-                 <img src="images/sony-slvse60-hf-adj-cn341.jpg" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
-               </div>
-             <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-             </p>
+      <img src="images/lancelot-uart-healthy-out.jpg" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)">
 
-             <h4>What CN341 actually is</h4>
-             <p>
-               CN341 is not a HiFi RF tap (under normal operation of TDA VCR AUDIO IC, check further down). It is a service calibration point on the MA-339 board used during the HiFi Switching Position Adjustment procedure.
+      <p>
+        Note: If you experience persistent eMMC DAT CRC errors and DRAM_FATAL_ERR_FLAG in serial ensure the fingerprint sensor FFC connector is grounded.  Shorting it to the upper side of the FFC cable right next to it (battery GND) resolves the issue. There is a metallic part that is placed above the fingerprint sensor and screwed in-place. The metallic part is present bottom right in the <a href="blog.html#lancelot-disassembly">first picture of this article.</a>
+      </p>
 
-               The source of the signal at CN341 is IC360 which is the TDA9615H HiFi audio processor IC. It comes from PIN 36 of that chip, which is FMOUT in the TDA9615H datasheet. In my understanding, during normal playback mode <code>(AFM bit = 0)</code> FMOUT carries the HF envelope of the left channel FM carrier and not the FM raw carrier itself. This is posibly an envelope detector output used only for calibration.  Possibly this is not something we can use to demodulating the actual FM signal.
-             </p>
-             <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.jpg" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
-             <p class="caption">
-               Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.
-               <br>
-               Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
+      <br>
+      <strong>Happy debugging!</strong>
 
-             <h5>HF ADJ Spectrum</h5>
-             <p>RF spectrum of HF ADJ on CN341. The spectrum does show FM carrier structure in the >1.0 && <2.0 MHz region expected for PAL VHS HiFi. There are two-three narrowband components are visible at approximately 6 MHz, 10 MHz, and 13 MHz  that could be some kind of clock or switching. The signal is not suitable input for hifi-decode.
-                                                                                                                <img src="images/sony-slv-se60-hf-adj-signal.webp" alt="Sony SLV SE60 CN341 HF ADJ Signal Spectrum" class="clickable" onclick="openModal(this)" style="width: 100%;">
-             </p>
+</section>
 
-             <h5>Trace between IC340 and IC360</h5>
-             <p>
-               The HiFi FM signal path in the SLV-SE60 runs from the drum audio heads through IC340 (AFM REC/PB AMP, LA7256) and then into IC360 (TDA9615H) at PIN 37. There is no accessible test point or component (such as resistor, capacitor) on this area between the two ICs after checking the full hardware schematic. The signal level at this point is expected to be low and the trace is buried on the MA-339 board with no convenient access point. That means lifting the full mechanical body of the VCR. Direct tapping here would additionally require physical modification a.k.a. scraping of the PCB traces with precision blade.
+<section>
+  <h2>High-Rate 40 MSPS FM RF capture of VHS using CX2388x-based expansion PCIe card on a Sony SLV-SE60</h2>
+  <p>Date: 2026-05-07</p>
 
-               <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.png" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
-             <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-             </p>
+  <p>
+    I finished archiving all my Video8 tapes, I have now moved to VHS. My current VCR deck is a Sony SLV-SE60 I picked up from Wingst Niedersachsen in the middle of a snowstorm.
+  </p>
+  <figure>
+    <img src="images/wingst-pics.jpg" alt="wingst collage" class="clickable" onclick="openModal(this)">
+    <figcaption>Pictures taken by Anna - Eva on the 20260215</figcaption>
+  </figure>
+  <p>
+    The VCR deck is a late 90s/early 2000s PAL device. The overall approach in the video domain remains the same as with the EV-S1000: FM RF capture via the CX card, decode with vhs-decode. Keep in mind that Video8 has the HiFi signal combined with Luma/Chroma. Therefore, only a single CX Card is required. On VHS this is not the case.
 
-             <h5>Theoretical path via I2C reprogramming</h5>
+    <h3>RF Tap</h3>
+    The SLV-SE60 exposes RF test points on a shielded connector behind the head drum marked in the datasheet with the ID CN262. The relevant signals are:
+    <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Pin</th>
+          <th>Signal</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>PB RF</td><td>Video RF</td></tr>
+        <tr><td>2</td><td>RF SWP</td><td>Head switching signal</td></tr>
+        <tr><td>3</td><td>GND</td><td>Ground</td></tr>
+        <tr><td>4</td><td>CTL</td><td>Control track signal</td></tr>
+        <tr><td>5</td><td>AV ADJ</td><td>Head switch point adjustment pin</td></tr>
+      </tbody>
+    </table>
 
-             <p>
-               Credit to the <a href="https://github.com/rivvit/N60TestMode8/wiki/Sony-VCR-Test-Mode-8-Mod">N60TestMode8 project</a> (the original approach) which documents their approach on a closely related Sony deck and served as the main reference for this investigation.
-             </p>
+    <br>
+    Here is the view in the physical domain. I am tapping using a Dupond connector to BNC cable the PB RF on the PIN 1, and GND on the PIN 3:
+    <img src="images/sony-slvse60-pb-rf-pinout.jpg" alt="Sony SLV SE60 PB RF pinout" class="clickable" onclick="openModal(this)">
+    <figure>
+      <img src="images/sony-slvse60-gnd-pinout.jpg" alt="Sony SLV SE60 GND pinout" class="clickable" onclick="openModal(this)">
+      <figcaption>Pinout of CN262 as depicted in the schematics. </figcaption>
+      <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+    </figure>
 
-             <p>
-               The TDA9615H similarly has a test mode accessible via I2C (accessed through IC162 SCL/SDA lines).  In a similar way as with the "Sony VCR Test Mode 8 Mod" there could be possibly an option to program the TDA9615H through I2C to output the RAW FM carrier on FMOUT PIN 36/ accessible via HF ADJ/CN341. 
-               
-             </p>
+  <p>
+    I tapped PB RF and AV ADJ using a DuPont female to BNC cable. The signal goes directly to the modified CX card.
+  </p>
 
-             <p>
-               The TDA9615H exposes special test modes via its I2C interface. This is controlled by the TEST bit in the power byte and selection bits in the select byte. We care about the tests 3 and 4. Test 3 routes the left channel band pass filter output to FMOUT in playback mode, and test 4 does the same for the right channel. These are the only playback mode test outputs available on FMOUT (PIN 36), which is the signal accessible at CN341. This means that with the correct I2C configuration CN341 would carry a single FM carrier channel per test mode. This would be left or right. NOT both simultaneously. Capturing both channels would require either switching test modes between captures or running the tape twice while capturing each channel.
-               <img src="images/tda9615h-test-modes.png" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
-             <p class="caption">Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
-             </p>
+  <h4>CX Card</h4>
+  The same modified CX card from the Video8 workflow is reused here. The required hardware modifications are unchanged:
+  
+  <p>
+    1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
+    2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
+    3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
+    4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
+    5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
+  </p>
+  <a href="images/cx-mods_251220.jpg">CX Card mods view PCIe setup for tapping Sony EV S1000</a>
 
-             <h4>Refusing to go deeper</h4>
-             <p>
-               Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PCB trace surgery between IC340 and IC360 and a high gain / low noise digital amplifier, or an I2C interception mod with risk of messing up the VCR permanently. Given that my tapes being archived are home recordings of questionable quality, the archival benefit of HiFi RF over a clean analog capture does not justify the hardware risk and effort at all. So the decision was made to move to analog audio capture via the SCART/CN500 output of the deck.
+  <p>
+    <h4>Calibration</h4>
+  <p>
+    Before capture the input level is calibrated using a ZSH script that wraps around the leveladj binary which is part of the CX driver by Chad Page <a href="https://github.com/happycube/cxadc-linux3/">https://github.com/happycube/cxadc-linux3/</a>.  <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh">My ZSH scripts for both VHS and Video8 capture are available on Github</a>.
 
-               <img src="images/sony-slv-se60-capture-scard-cn500.jpg" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
-             <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
-             </p>
+    In brief: The script sets vmux, runs leveladj, reads the last tested level from its output, subtracts 1 to avoid clipping, and applies the result. With my setup the gain level was most of the times 31. This is the maximum gain level.  I would often manually set it to 31 via:
+    <br>
+    <code>
+      sudo echo 31 | sudo tee /sys/class/cxadc/cxadc0/device/parameters/level
+    </code>
+    <br>
+    The calibrated vmux and level values are exported to the shell env. I would then create a ffplay preview of the raw ADC output follows calibration to confirm a valid RF signal is present before proceeding with a full capture.  <a href="https://github.com/oyvindln/vhs-decode/wiki/RF-Capture-Guide#preview-the-live-signal">A visual reference can be obtained by the vhs-decode docs in the RF-Capture-Guide section.</a>
+    <br>
+    <code>
+      source ~/scripts/rf/cx-calibrate.zsh
+    </code>
+  </p>
+  
+  <h4>Capture</h4>
+  <p>
+    RF is captured losslessly to FLAC at 40 MSPS, 8-bit, single channel, unsigned little-endian. Capture duration is bounded by tape length passed as an argument:
+    <br>
+    <code>
+      zsh ~/scripts/vhs/capture-rf-vhs-flac.zsh CX_Card_40msps_8-bit 190
+    </code>
+  </p>
 
-             <h5>Method for analogue audio tapping</h5>
-             <p>
-               Crocodile clips were attached to the L and R CN500 LINE OUT pins. The GND taken from the VCR chassis shielding. The three lines were terminated into a 3.5mm minijack and fed into the line input of an Edirol UA-5 USB audio interface.  Gain is set manually on the unit before capture.
-             </p>
-             <p>
-               The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz stereo. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
-               
-               <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
-             </p>
+  <h4>Decode</h4>
+  <p>
+    Video FM RF decoding is performed in the standarised way. The tape is PAL, sampled at 40 MSPS:
+    <br>
+    <code>
+      vhs-decode --debug --tape_format vhs --frequency 40 --system pal --ire0_adjust --recheck_phase --threads 4 CX_Card_40msps_8-bit.flac my-tape-decoded
+    </code>
+    <br>
+    Just for reference, the decoding on my computer <code>Optiplex 9010/Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz/16GB RAM</code> takes approximately 12 hours for 180 minutes of a VHS tape.
+  </p>
 
-             <h3>Not that bad results</h3>
-             
-             <figure>
-               <img src="images/sony-slvse60-full-capture-pb-rf-result.jpg" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
-               <figcaption>After deintracing using the ffmpeg approach, three sample frames are depicted.</figcaption>
-             </figure>
+  <h3>I failed the HiFi RF capture</h3>
 
-             <h3>References</h3>
-             <p>
-               Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80/SX60/SX70/SX80 Service Manual</em>, 9-921-714-11, Home A&V Products Company, ©1999.
-               <br>
-               Philips Semiconductors, <em>TDA9615H — Audio processor for VHS hi-fi, Preliminary specification</em>, document order no. 9397 750 01744, 1997 Jun 16.
-             </p>
-             
-             
-           </section>
+  <p>
+    The vhs-decode tap list for the SLV-SE60 lists CN341 with PIN 1 as GND and PIN 2 as HF ADJ. Based on the service manual audio block diagram (section 3-4) and the Hi-Fi Switching Position Adjustment procedure (section 6, 2-4-2), this is reversed. PIN 1 of CN341 is HF ADJ and PIN 2 is GND.
+    <div style="display: flex; gap: 1rem;">
+      <img src="images/hifi-switching-position-adj-process.jpg" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
+      <img src="images/sony-slvse60-hf-adj-cn341.jpg" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
+    </div>
+  <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+  </p>
+
+  <h4>What CN341 actually is</h4>
+  <p>
+    CN341 is not a HiFi RF tap (under normal operation of TDA VCR AUDIO IC, check further down). It is a service calibration point on the MA-339 board used during the HiFi Switching Position Adjustment procedure.
+
+    The source of the signal at CN341 is IC360 which is the TDA9615H HiFi audio processor IC. It comes from PIN 36 of that chip, which is FMOUT in the TDA9615H datasheet. In my understanding, during normal playback mode <code>(AFM bit = 0)</code> FMOUT carries the HF envelope of the left channel FM carrier and not the FM raw carrier itself. This is posibly an envelope detector output used only for calibration.  Possibly this is not something we can use to demodulating the actual FM signal.
+  </p>
+  <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.jpg" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
+  <p class="caption">
+    Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.
+    <br>
+    Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
+
+  <h5>HF ADJ Spectrum</h5>
+  <p>RF spectrum of HF ADJ on CN341. The spectrum does show FM carrier structure in the >1.0 && <2.0 MHz region expected for PAL VHS HiFi. There are two-three narrowband components are visible at approximately 6 MHz, 10 MHz, and 13 MHz  that could be some kind of clock or switching. The signal is not suitable input for hifi-decode.
+                                                                                                     <img src="images/sony-slv-se60-hf-adj-signal.webp" alt="Sony SLV SE60 CN341 HF ADJ Signal Spectrum" class="clickable" onclick="openModal(this)" style="width: 100%;">
+</p>
+
+<h5>Trace between IC340 and IC360</h5>
+<p>
+  The HiFi FM signal path in the SLV-SE60 runs from the drum audio heads through IC340 (AFM REC/PB AMP, LA7256) and then into IC360 (TDA9615H) at PIN 37. There is no accessible test point or component (such as resistor, capacitor) on this area between the two ICs after checking the full hardware schematic. The signal level at this point is expected to be low and the trace is buried on the MA-339 board with no convenient access point. That means lifting the full mechanical body of the VCR. Direct tapping here would additionally require physical modification a.k.a. scraping of the PCB traces with precision blade.
+
+  <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.png" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
+<p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+</p>
+
+<h5>Theoretical path via I2C reprogramming</h5>
+
+<p>
+  Credit to the <a href="https://github.com/rivvit/N60TestMode8/wiki/Sony-VCR-Test-Mode-8-Mod">N60TestMode8 project</a> (the original approach) which documents their approach on a closely related Sony deck and served as the main reference for this investigation.
+</p>
+
+<p>
+  The TDA9615H similarly has a test mode accessible via I2C (accessed through IC162 SCL/SDA lines).  In a similar way as with the "Sony VCR Test Mode 8 Mod" there could be possibly an option to program the TDA9615H through I2C to output the RAW FM carrier on FMOUT PIN 36/ accessible via HF ADJ/CN341. 
+  
+</p>
+
+<p>
+  The TDA9615H exposes special test modes via its I2C interface. This is controlled by the TEST bit in the power byte and selection bits in the select byte. We care about the tests 3 and 4. Test 3 routes the left channel band pass filter output to FMOUT in playback mode, and test 4 does the same for the right channel. These are the only playback mode test outputs available on FMOUT (PIN 36), which is the signal accessible at CN341. This means that with the correct I2C configuration CN341 would carry a single FM carrier channel per test mode. This would be left or right. NOT both simultaneously. Capturing both channels would require either switching test modes between captures or running the tape twice while capturing each channel.
+  <img src="images/tda9615h-test-modes.png" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
+<p class="caption">Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
+</p>
+
+<h4>Refusing to go deeper</h4>
+<p>
+  Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PCB trace surgery between IC340 and IC360 and a high gain / low noise digital amplifier, or an I2C interception mod with risk of messing up the VCR permanently. Given that my tapes being archived are home recordings of questionable quality, the archival benefit of HiFi RF over a clean analog capture does not justify the hardware risk and effort at all. So the decision was made to move to analog audio capture via the SCART/CN500 output of the deck.
+
+  <img src="images/sony-slv-se60-capture-scard-cn500.jpg" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
+<p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
+</p>
+
+<h5>Method for analogue audio tapping</h5>
+<p>
+  Crocodile clips were attached to the L and R CN500 LINE OUT pins. The GND taken from the VCR chassis shielding. The three lines were terminated into a 3.5mm minijack and fed into the line input of an Edirol UA-5 USB audio interface.  Gain is set manually on the unit before capture.
+</p>
+<p>
+  The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz stereo. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
+  
+  <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
+</p>
+
+<h3>Not that bad results</h3>
+
+<figure>
+  <img src="images/sony-slvse60-full-capture-pb-rf-result.jpg" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
+  <figcaption>After deintracing using the ffmpeg approach, three sample frames are depicted.</figcaption>
+</figure>
+
+<h3>References</h3>
+<p>
+  Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80/SX60/SX70/SX80 Service Manual</em>, 9-921-714-11, Home A&V Products Company, ©1999.
+  <br>
+  Philips Semiconductors, <em>TDA9615H — Audio processor for VHS hi-fi, Preliminary specification</em>, document order no. 9397 750 01744, 1997 Jun 16.
+</p>
 
 
-           <section>
-             <h2>SONY EV-1000S Using MOLYKOTE EM-30L industrial to re-grease stuck take-up/eject tape mechanical arms</h2>
-             <p>Date: 2026-01-20</p>
+</section>
 
-             <iframe src="https://youtube.com/embed/9Zg07atfYh4"
-                     title="YouTube video player"
-                     allowfullscreen>
-             </iframe>
 
-             <p>
-               <strong>Molykote EM-30L Hochleistungs-Fett 50ml in Dosiertube:</strong>
-               <ol>
-                 <li>
-                   <a href="https://heroms.com/10005-molykote-em-30l-hochleistungs-fett-50ml-in-dosiertube">
-                     https://heroms.com/10005-molykote-em-30l-hochleistungs-fett-50ml-in-dosiertube
-                   </a>
-                 </li>
-                 <li>
-                   <a href="https://www.amazon.de/Molykote-Hochleistungs-Schmierfett-Kunststoffschmierung-Kunststoffgetriebe-Wartungsfett/dp/B07NPNPS85">
-                     https://www.amazon.de/Molykote-Hochleistungs-Schmierfett-Kunststoffschmierung-Kunststoffgetriebe-Wartungsfett/dp/B07NPNPS85
-                   </a>
-                 </li>
-                 <li>
-                   SICHERHEITSDATENBLATT:
-                   <a href="https://docs.heroms.services/EM30L-SICHERHEITS-DATENBLATT-MOLYKOTE_de.pdf">
-                     https://docs.heroms.services/EM30L-SICHERHEITS-DATENBLATT-MOLYKOTE_de.pdf
-                   </a>
-                 </li>
-                 <li>
-                   SAFETY DATA SHEET:
-                   <a href="https://docs.heroms.services/EM30L-SAFTEY-DATASHEET-MOLYKOTE-EM30L_en.pdf">
-                     https://docs.heroms.services/EM30L-SAFTEY-DATASHEET-MOLYKOTE-EM30L_en.pdf
-                   </a>
-                 </li>
-               </ol>
+<section>
+  <h2>SONY EV-1000S Using MOLYKOTE EM-30L industrial to re-grease stuck take-up/eject tape mechanical arms</h2>
+  <p>Date: 2026-01-20</p>
 
-             </p>
+  <iframe src="https://youtube.com/embed/9Zg07atfYh4"
+          title="YouTube video player"
+          allowfullscreen>
+  </iframe>
 
-           </section>
+  <p>
+    <strong>Molykote EM-30L Hochleistungs-Fett 50ml in Dosiertube:</strong>
+    <ol>
+      <li>
+        <a href="https://heroms.com/10005-molykote-em-30l-hochleistungs-fett-50ml-in-dosiertube">
+          https://heroms.com/10005-molykote-em-30l-hochleistungs-fett-50ml-in-dosiertube
+        </a>
+      </li>
+      <li>
+        <a href="https://www.amazon.de/Molykote-Hochleistungs-Schmierfett-Kunststoffschmierung-Kunststoffgetriebe-Wartungsfett/dp/B07NPNPS85">
+          https://www.amazon.de/Molykote-Hochleistungs-Schmierfett-Kunststoffschmierung-Kunststoffgetriebe-Wartungsfett/dp/B07NPNPS85
+        </a>
+      </li>
+      <li>
+        SICHERHEITSDATENBLATT:
+        <a href="https://docs.heroms.services/EM30L-SICHERHEITS-DATENBLATT-MOLYKOTE_de.pdf">
+          https://docs.heroms.services/EM30L-SICHERHEITS-DATENBLATT-MOLYKOTE_de.pdf
+        </a>
+      </li>
+      <li>
+        SAFETY DATA SHEET:
+        <a href="https://docs.heroms.services/EM30L-SAFTEY-DATASHEET-MOLYKOTE-EM30L_en.pdf">
+          https://docs.heroms.services/EM30L-SAFTEY-DATASHEET-MOLYKOTE-EM30L_en.pdf
+        </a>
+      </li>
+    </ol>
 
-           <section>
-             <h2>High-Rate 40 MSPS FM RF capture of video8 using CX2388x-based expansion PCIe card</h2>
-             <p>Date: 2025-12-20</p>
-             <p>
-               If the readers remember my previous blog post where I was using a CX for capturing RAW baseband CVBS signal for video8 cassette archival, then please forget about it.  I have eventually moved away from this method and I am now capturing directly the RF signal from a tapped Sony EV-S1000 player.  I thought writing a post as my now optimised workflow is finalised.</p>
-             <p>
-               <img src="images/cx-mods_251220.jpg" alt="CX Card mods view" class="clickable" onclick="openModal(this)">
-             </p>
+  </p>
 
-             <h3>Why moving away from CVBS hacky capture</h3>
-             <p>
-               The initial workflow was based on raw baseband CVBS capture using the CX card.  Video was captured as raw .u8 through cxadc.  The mono audio was taken asynchronously from the camcorder RCA output using an Edirol UA-5 and some ALSA scripts.  Both streams were recorded asynchronously and later aligned manually.  This workflow was producing digital video files of questionable but yet "watchable" quality.  However alignment was very time demanding, as frames were often dropped.  Pretty much this is a somewhat hacky way to produce a picture over nothing given the HW limitations at the time.
-             </p>
+</section>
 
-             <p>
-               Having spoken with Harry Munday via email communication I learned the following:
-             </p>
-             <p>
-               CX cards are not really suitable for production grade raw CVBS capture.  The CX2388x chips will drop fields or frames when handling baseband CVBS.  This is the case especially once the internal decoder path is engaged.  In general this method is not considered of good quality for archival.
-             </p>
+<section>
+  <h2>High-Rate 40 MSPS FM RF capture of video8 using CX2388x-based expansion PCIe card</h2>
+  <p>Date: 2025-12-20</p>
+  <p>
+    If the readers remember my previous blog post where I was using a CX for capturing RAW baseband CVBS signal for video8 cassette archival, then please forget about it.  I have eventually moved away from this method and I am now capturing directly the RF signal from a tapped Sony EV-S1000 player.  I thought writing a post as my now optimised workflow is finalised.</p>
+  <p>
+    <img src="images/cx-mods_251220.jpg" alt="CX Card mods view" class="clickable" onclick="openModal(this)">
+  </p>
 
-             <p>
-               Video8 uses colour-under recording and not composite modulation.  With CVBS the camcorder has already combined and processed internally the luminance and chroma internally.  This prevents from performing the separation during decode resulting in lower decoding precision.
-             </p>
-             <p>
-               CVBS capture also carries a higher effective bandwidth because it is a processed baseband signal rather than the original FM RF.  This makes compression less efficient and increases space on the drive with no benefit.
-             </p>
+  <h3>Why moving away from CVBS hacky capture</h3>
+  <p>
+    The initial workflow was based on raw baseband CVBS capture using the CX card.  Video was captured as raw .u8 through cxadc.  The mono audio was taken asynchronously from the camcorder RCA output using an Edirol UA-5 and some ALSA scripts.  Both streams were recorded asynchronously and later aligned manually.  This workflow was producing digital video files of questionable but yet "watchable" quality.  However alignment was very time demanding, as frames were often dropped.  Pretty much this is a somewhat hacky way to produce a picture over nothing given the HW limitations at the time.
+  </p>
 
-             <p>
-               In CVBS capture HiFi FM audio carriers are lost entirely which means audio and video no longer share a common clock reference.
-             </p>
+  <p>
+    Having spoken with Harry Munday via email communication I learned the following:
+  </p>
+  <p>
+    CX cards are not really suitable for production grade raw CVBS capture.  The CX2388x chips will drop fields or frames when handling baseband CVBS.  This is the case especially once the internal decoder path is engaged.  In general this method is not considered of good quality for archival.
+  </p>
 
-             <p>
-               Overall, for video8/8mm format the correct approach is FM RF capture path.  Video RF and HiFi RF are sampled from the same clock source and stored together.  This allows clock-based audio alignment during post processing.
-             </p>
+  <p>
+    Video8 uses colour-under recording and not composite modulation.  With CVBS the camcorder has already combined and processed internally the luminance and chroma internally.  This prevents from performing the separation during decode resulting in lower decoding precision.
+  </p>
+  <p>
+    CVBS capture also carries a higher effective bandwidth because it is a processed baseband signal rather than the original FM RF.  This makes compression less efficient and increases space on the drive with no benefit.
+  </p>
 
-             <h3>HW</h3>
+  <p>
+    In CVBS capture HiFi FM audio carriers are lost entirely which means audio and video no longer share a common clock reference.
+  </p>
 
-             <p>
-               I was often checking Kleinanzeigen for an EV-S1000 or another video8 deck with accessible RF test points.  I eventually found and ordered a Sony EV-S1000 for approx 350 EUR from a seller in Western Germany. The device arrived in one piece ;)
-             </p>
+  <p>
+    Overall, for video8/8mm format the correct approach is FM RF capture path.  Video RF and HiFi RF are sampled from the same clock source and stored together.  This allows clock-based audio alignment during post processing.
+  </p>
 
-             <p>
-               The following hardware components and CX card modifications were required for the FM RF capture.  Detailed instructions for each modification already exist in the official vhs-decode documentation.  For this reason it makes no sense to try explaining again here.  I only reference the relevant documentation pages and one <a href="https://www.youtube.com/watch?v=O8pYwFwY9VY">video by Harry Munday that covers the crystal and BNC modifications.</a>
-             </p>
+  <h3>HW</h3>
 
-             <p>
-               1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
-               2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
-               3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
-               4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
-               5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
-               6. Sony EV-S1000 or another Video8/Hi8 deck with accessible RF test points
-             </p>
-             <br><img src="images/cx-pci-setup-evs1000.jpg" alt="CX Card PCIe setup via tapping Sony EV S1000" class="clickable" onclick="openModal(this)">
+  <p>
+    I was often checking Kleinanzeigen for an EV-S1000 or another video8 deck with accessible RF test points.  I eventually found and ordered a Sony EV-S1000 for approx 350 EUR from a seller in Western Germany. The device arrived in one piece ;)
+  </p>
 
-             <p>
-               For cooling the connexant chip on the card, given that I am now sampling at 40 MSPS I avoided using a USB power source and a 5V DC fan.  My Dell Optiplex T1650/MT9010 does not expose internal USB headers neither 12V fan headers other than the CPUFAN header which is of course unavailable.  The fan was therefore powered from a 12V Molex line.  I have prepared this line to be used only for non critical peripherals such as fans or powering up optical drives.  In general, devices where electrical noise will not be an issue.
-               <br><img src="images/cx-luefter-12v-molex-powerline.jpg" alt="CX Card fan draws 12V from exposed 12V MOLEX" class="clickable" onclick="openModal(this)">
+  <p>
+    The following hardware components and CX card modifications were required for the FM RF capture.  Detailed instructions for each modification already exist in the official vhs-decode documentation.  For this reason it makes no sense to try explaining again here.  I only reference the relevant documentation pages and one <a href="https://www.youtube.com/watch?v=O8pYwFwY9VY">video by Harry Munday that covers the crystal and BNC modifications.</a>
+  </p>
 
-             </p>
-             <h3>SW</h3>
+  <p>
+    1. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#crystal-mod---5-25usd">40 MHz crystal mod for 40 MSPS 8-bit sampling</a><br>
+    2. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#cooling-mod">Cooling mod: heatsink and active fan</a> (required at 40 MSPS to avoid thermal throttling and dropping frames)<br>
+    3. <a href="https://de.aliexpress.com/item/1005004394809131.html">BNC auf DuPont-Kabel for RF tap connection</a><br>
+    4. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#c31-removal">C31 capacitor removal</a><br>
+    5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
+    6. Sony EV-S1000 or another Video8/Hi8 deck with accessible RF test points
+  </p>
+  <br><img src="images/cx-pci-setup-evs1000.jpg" alt="CX Card PCIe setup via tapping Sony EV S1000" class="clickable" onclick="openModal(this)">
 
-             <h4>Calibration</h4>
-             <p>
-               Playback calibration is performed <strong>before RF capture</strong>.  The video8 playback device must provide a correctly centred RF signal to the ADC on the CX Card.  If there is RF mis-centring, tracking error or unstable clock then this is permanently baked into the RF capture.  Therefore, it cannot be corrected in software later :(
-             </p>
+  <p>
+    For cooling the connexant chip on the card, given that I am now sampling at 40 MSPS I avoided using a USB power source and a 5V DC fan.  My Dell Optiplex T1650/MT9010 does not expose internal USB headers neither 12V fan headers other than the CPUFAN header which is of course unavailable.  The fan was therefore powered from a 12V Molex line.  I have prepared this line to be used only for non critical peripherals such as fans or powering up optical drives.  In general, devices where electrical noise will not be an issue.
+    <br><img src="images/cx-luefter-12v-molex-powerline.jpg" alt="CX Card fan draws 12V from exposed 12V MOLEX" class="clickable" onclick="openModal(this)">
 
-             <h4>FLAC Capture</h4>
-             <p>
-               The RF signal is captured losslessly into a FLAC container.  The capture writes the raw samples at a fixed sample rate (40 MSPS) and 8-bit depth on a storage drive.  FLAC file is the master copy and represents the RF signal from tape.
-               <br><img src="images/luma-raw-rf-spectrum.jpg" alt="Raw RF plot with luminance FM signal" class="clickable" onclick="openModal(this)">
-             </p>
-             <p>
-               This region represents the video signal in RF form prior to demodulation. The highlighted band corresponds to the video8 luminance FM signal. For video8 I could find that the luminance carrier occupies approximately the 4.2–5.4 MHz region as defined by the nominal carrier and its static frequency deviation. The wide centred spectral bell-like curve reflects the FM modulation used to encode luminance amplitude. It shows some sidebands. I suspect that the HiFi signal to be the other bell-like curve below video at around 1.5 MHz.  On the vertical axis the Power Spectral Density in dB/Hz was computed from normalised digital samples. The reference is effectively full-scale (FS) of the ADC after conversion to float. The plot shows power per 1 Hz bandwidth.
-             </p>
+  </p>
+  <h3>SW</h3>
 
-             <h4>Decoding</h4>
-             <p>
-               Video8 FM RF decoding is performed using <code>vhs-decode</code>.  The tool demodulates luminance and chrominance, applies time base correction, dropout correction, and phase correction.  Finally it produces a <code>.tbc</code> a <code>chroma.tbc</code> file and a JSON metadata file.  The processing later operates on this TBC output.
-             </p>
+  <h4>Calibration</h4>
+  <p>
+    Playback calibration is performed <strong>before RF capture</strong>.  The video8 playback device must provide a correctly centred RF signal to the ADC on the CX Card.  If there is RF mis-centring, tracking error or unstable clock then this is permanently baked into the RF capture.  Therefore, it cannot be corrected in software later :(
+  </p>
 
-             <h4>HiFi / Audio decoding &amp; Alignment</h4>
-             <p>
-               HiFi FM audio is decoded from the same RF capture using <code>hifi-decode</code>.  The decoder runs until external termination where forces the executable to return.  The resulting 48&nbsp;kHz FLAC audio is then aligned via a vhs-decode-auto-audio-align and <a href="https://www.mono-project.com/">mono project tool</a> pipeline.  This pipeline requires the video timeline based on the TBC JSON metadata.  Alignment compensates audio channel for dropped fields and timing offsets introduced during video decode.
-             </p>
+  <h4>FLAC Capture</h4>
+  <p>
+    The RF signal is captured losslessly into a FLAC container.  The capture writes the raw samples at a fixed sample rate (40 MSPS) and 8-bit depth on a storage drive.  FLAC file is the master copy and represents the RF signal from tape.
+    <br><img src="images/luma-raw-rf-spectrum.jpg" alt="Raw RF plot with luminance FM signal" class="clickable" onclick="openModal(this)">
+  </p>
+  <p>
+    This region represents the video signal in RF form prior to demodulation. The highlighted band corresponds to the video8 luminance FM signal. For video8 I could find that the luminance carrier occupies approximately the 4.2–5.4 MHz region as defined by the nominal carrier and its static frequency deviation. The wide centred spectral bell-like curve reflects the FM modulation used to encode luminance amplitude. It shows some sidebands. I suspect that the HiFi signal to be the other bell-like curve below video at around 1.5 MHz.  On the vertical axis the Power Spectral Density in dB/Hz was computed from normalised digital samples. The reference is effectively full-scale (FS) of the ADC after conversion to float. The plot shows power per 1 Hz bandwidth.
+  </p>
 
-             <h4>Export</h4>
-             <p>
-               Final export is performed by <code>tbc-video-export</code>.  The tool combines decoded video from the TBC file with the aligned audio track and encodes the result using a defined FFmpeg profile.  I am using default codec FFV1 in MATROSKA container.
-             </p>
+  <h4>Decoding</h4>
+  <p>
+    Video8 FM RF decoding is performed using <code>vhs-decode</code>.  The tool demodulates luminance and chrominance, applies time base correction, dropout correction, and phase correction.  Finally it produces a <code>.tbc</code> a <code>chroma.tbc</code> file and a JSON metadata file.  The processing later operates on this TBC output.
+  </p>
 
-             <h4>Scripts</h4>
-             <p>
-               The RF capture and decoding workflow is fully scripted for ZSH. The scripts cover RF capture video decode, HiFi audio decode, alignment, and final export. They are published in a GitHub repository for personal use and archival purposes. Paths, device names are specific to my system and therefore must be adapted before reusing.
-             </p>
-             <p>
-               Repository: <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh" target="_blank" rel="noopener noreferrer">
-                 https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh</a>
-             </p>
+  <h4>HiFi / Audio decoding &amp; Alignment</h4>
+  <p>
+    HiFi FM audio is decoded from the same RF capture using <code>hifi-decode</code>.  The decoder runs until external termination where forces the executable to return.  The resulting 48&nbsp;kHz FLAC audio is then aligned via a vhs-decode-auto-audio-align and <a href="https://www.mono-project.com/">mono project tool</a> pipeline.  This pipeline requires the video timeline based on the TBC JSON metadata.  Alignment compensates audio channel for dropped fields and timing offsets introduced during video decode.
+  </p>
 
-             <ol>
-               <li>CX card auto level calibration (relies on leveladj bin)</li>
-               <code>. cx-calibrate.zsh</code>
-               <br>
-               <br>
-               <li>FLAC RF capture</li>
-               <code>capture-rf-flac.zsh /path/to/capture-40msps-8bit-cx-card.flac</code>
-               <br>
-               <br>
-               <li>vhs-decode video + hifi + vhs-decode-auto-audio-align + tbc-video-export FFV1 encoder, MATROSKA container </li>
-               <code>. decode-rf.zsh /path/to/capture-40msps-8bit-cx-card.flac /path/to/capture-40msps-8bit-cx-card</code>
-               <br>
-               <br>
+  <h4>Export</h4>
+  <p>
+    Final export is performed by <code>tbc-video-export</code>.  The tool combines decoded video from the TBC file with the aligned audio track and encodes the result using a defined FFmpeg profile.  I am using default codec FFV1 in MATROSKA container.
+  </p>
+
+  <h4>Scripts</h4>
+  <p>
+    The RF capture and decoding workflow is fully scripted for ZSH. The scripts cover RF capture video decode, HiFi audio decode, alignment, and final export. They are published in a GitHub repository for personal use and archival purposes. Paths, device names are specific to my system and therefore must be adapted before reusing.
+  </p>
+  <p>
+    Repository: <a href="https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh" target="_blank" rel="noopener noreferrer">
+      https://github.com/JasonSKK/rf-capture-cx23880-scripts-zsh</a>
+  </p>
+
+  <ol>
+    <li>CX card auto level calibration (relies on leveladj bin)</li>
+    <code>. cx-calibrate.zsh</code>
+    <br>
+    <br>
+    <li>FLAC RF capture</li>
+    <code>capture-rf-flac.zsh /path/to/capture-40msps-8bit-cx-card.flac</code>
+    <br>
+    <br>
+    <li>vhs-decode video + hifi + vhs-decode-auto-audio-align + tbc-video-export FFV1 encoder, MATROSKA container </li>
+    <code>. decode-rf.zsh /path/to/capture-40msps-8bit-cx-card.flac /path/to/capture-40msps-8bit-cx-card</code>
+    <br>
+    <br>
 </li>
 </ol>
 
