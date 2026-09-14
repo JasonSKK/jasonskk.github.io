@@ -145,7 +145,7 @@
                <br> 3. Produce a cover of a cool song
                <br>
              </p>
-             <img id='attiny13a schematic single IC' src="images/attiny13a-schematic-single-ic.jpg" alt="attiny13a schematic single IC" class="clickable" onclick="openModal(this)">
+             <img id='attiny13a schematic single IC' src="images/attiny13a-schematic-single-ic.webp" alt="attiny13a schematic single IC" class="clickable" onclick="openModal(this)">
 
              <h3>External Modules</h3>
              <p>
@@ -156,31 +156,31 @@
              <p>
                The main logic of the RUST program is an interrupt based sawtooth generator as in the C code sequencer example. This waveform generation method is also described in the <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf">datasheet</a>.
                <figure>
-                 <img id='attiny13a timer ocr0a register' src="images/attiny13a-timer-ocr0a-register.jpg" alt="attiny13a timer ocr0a register" class="clickable" onclick="openModal(this)">
+                 <img id='attiny13a timer ocr0a register' src="images/attiny13a-timer-ocr0a-register.webp" alt="attiny13a timer ocr0a register" class="clickable" onclick="openModal(this)">
                  <figcaption>Microchip Technology Inc., <em>ATtiny13 Datasheet</em>, document no. 2535J–AVR–08/10, p. 60. Available at: <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf">https://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf</a></figcaption>
                </figure>
              </p>
              
              <div style="overflow: auto;">
-               <p><img id="avr interrup waveform generation" src="images/avr-interrupt.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
+               <p><img id="avr interrup waveform generation" src="images/avr-interrupt.webp" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
                  Timer0 runs in Fast PWM (Pulse Width Modulation) mode (manual Table 11-3, pg. 70) incremeting inside the chip. Every time it overflows an interrupt is sent. Inside that interrupt an accumulator <code>FIXED_VALUE_SAWTOOTH</code> is incremented by a fixed note step size. It is written into the Output Compare Register (<code>OCR0A</code>), which controls pin PB0.  Timer0 own HW constantly compares this value against its counter (<code>TCNT0</code>).  A separate counter (<code>SAMPLE_COUNT</code>) keeps track of how many interrupts have passed since the note began and once it reaches the length of the note (<code>COUNT_PER_2PI</code>) the accumulator resets then to zero. Ramping the accumulator up and resetting it at the peak produces a sawtooth wave, at whatever pitch the note step size encodes.
                </p>
              </div>
              
              <div style="overflow: auto;">
-               <p><img id="sequencer-array" src="images/sequencer-array.jpg" alt="sequencer-array" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
+               <p><img id="sequencer-array" src="images/sequencer-array.webp" alt="sequencer-array" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
                  The main loop watches a second counter (<code>SEQUENCER_COUNT_UPDATE</code>) that is incremented by the interrupt every 4687 overflows which is eight steps per second. Practical steps for music. Each time that counter ticks the loop reads the next byte from a melody array (<code>SEQUENCER_ARRAY</code>) stored in flash memory.  Finds the matching frequency in a note table (<code>NOTE_DELTA</code>) and gives the new delta value to the interrupt (<code>FIXED_DELTA_SAWTOOTH</code>). Silence is zero. Everything else maps to a specific pitch of the Bb minor scale.
                </p>
              </div>
              <p>
                The drum voice does not use the sawtooth generator for the hi-hat. There is no noise channel on this chip so an 8-bit shift register (<code>LFSR</code>) is stepped once per interrupt.  Its raw output is written directly to the <code>OCR0A</code> register. I thought that random duty cycles at audio rate sound like white noise in theory. The kick drum reuses the same sawtooth code as the melody voices but lower in frequency. It is also much shorter in duration.
 
-               <img id='8 bit shift register hi-hat' src="images/8bit-hihat-shift-reg.jpg" alt=" bit shift register hi-hat" class="clickable" onclick="openModal(this)">
+               <img id='8 bit shift register hi-hat' src="images/8bit-hihat-shift-reg.webp" alt=" bit shift register hi-hat" class="clickable" onclick="openModal(this)">
 
                <h3>XGecuT48 flashing</h3>
 
                <div style="overflow: auto;">
-                 <p><img id="attiny13a fuse programming xgecu" src="images/attiny13a-fuse-programming-xgecu.jpg" alt="attiny13a fuse programming xgecu" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
+                 <p><img id="attiny13a fuse programming xgecu" src="images/attiny13a-fuse-programming-xgecu.webp" alt="attiny13a fuse programming xgecu" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 60%; height: auto;">
                    Flashing happens by removing the ATTiny13A from the circuit and placing it on a XGecu T48 universal programmer as I did not have an SPI interface handy. The SOIC-8 chip can sit bare on the programmers sockets without an adapter.  The fuses need to be set in the Xgpro (the XGecu software) before every flash.  The low fuse is set to 0x3A: disables the CKDIV8 prescaler and keeps the internal oscillator at its full 9.6MHz (default 1.2MHz). The high fuse stays at 0xFB close to default.  Getting this wrong is easy and debugging hard (took me about an hour).  The chip still runs the code and flashes without error.  However, every timing calculation in the code, sample rate, note pitch, sequencer tempo is calculated wrong due to the fixed <code>SEQUENCER_INTERVAL</code> which is derived from dividing 9.6MHz down.</p>
                </div>
                
@@ -211,7 +211,7 @@
 
              <table class="equipment-table">
                <tr>
-                 <td style="vertical-align: top;"><img id='lancelot-disassembly' src="images/lancelot-disassembly-uart.jpg" alt="lancelot disassembly for UART access" class="clickable" onclick="openModal(this)"></td>
+                 <td style="vertical-align: top;"><img id='lancelot-disassembly' src="images/lancelot-disassembly-uart.webp" alt="lancelot disassembly for UART access" class="clickable" onclick="openModal(this)"></td>
                  <td>
                    <br>
                    <div class="equipment-desc">Eleven Phillips screws hold the midframe layer. Be mindful of the small FFC right after removing the plastic midframe screws. Make sure the the FFC is removed before midframe is fully detached from the board surface. The motherboard is accessible after removing the camera plastic frame. </div>
@@ -220,7 +220,7 @@
                  </td>
                </tr>
              </table>
-             <img src="images/lancelot-tx-uart-points.jpg" alt="lancelot TX RX on the PCB" class="clickable" onclick="openModal(this)">
+             <img src="images/lancelot-tx-uart-points.webp" alt="lancelot TX RX on the PCB" class="clickable" onclick="openModal(this)">
              <p>
                For the contact I used two jumper wires that were stabilised using the "soldering helping hands" from a soldering magnifying glass. Also, a heavy crocodile clip that was placed on the GND pad. That seemed to do the job.
              </p>
@@ -259,7 +259,7 @@
       </table>
 
       <br>
-      <img src="images/lancelot-uart-rpi-wiring.jpg" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)">
+      <img src="images/lancelot-uart-rpi-wiring.webp" alt="lancelot UART RPI pico2 wiring" class="clickable" onclick="openModal(this)">
 
       <p>MTK preloader outputs at 115200 baud. LK outputs at 921600 baud. Use picocom or minicom.</p>
 
@@ -269,7 +269,7 @@
       <p>For LK (bootloader) stage (921600):</p>
       <pre><code>picocom -b 921600 /dev/ttyACM0</code></pre>
 
-      <img src="images/lancelot-uart-healthy-out.jpg" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)">
+      <img src="images/lancelot-uart-healthy-out.webp" alt="lancelot UART healthy output" class="clickable" onclick="openModal(this)">
 
       <p>
         Note: If you experience persistent eMMC DAT CRC errors and DRAM_FATAL_ERR_FLAG in serial ensure the fingerprint sensor FFC connector is grounded.  Shorting it to the upper side of the FFC cable right next to it (battery GND) resolves the issue. There is a metallic part that is placed above the fingerprint sensor and screwed in-place. The metallic part is present bottom right in the <a href="blog.html#lancelot-disassembly">first picture of this article.</a>
@@ -288,7 +288,7 @@
     I finished archiving all my Video8 tapes, I have now moved to VHS. My current VCR deck is a Sony SLV-SE60 I picked up from Wingst Niedersachsen in the middle of a snowstorm.
   </p>
   <figure>
-    <img src="images/wingst-pics.jpg" alt="wingst collage" class="clickable" onclick="openModal(this)">
+    <img src="images/wingst-pics.webp" alt="wingst collage" class="clickable" onclick="openModal(this)">
     <figcaption>Pictures taken by Anna - Eva on the 20260215</figcaption>
   </figure>
   <p>
@@ -315,9 +315,9 @@
 
     <br>
     Here is the view in the physical domain. I am tapping using a Dupond connector to BNC cable the PB RF on the PIN 1, and GND on the PIN 3:
-    <img src="images/sony-slvse60-pb-rf-pinout.jpg" alt="Sony SLV SE60 PB RF pinout" class="clickable" onclick="openModal(this)">
+    <img src="images/sony-slvse60-pb-rf-pinout.webp" alt="Sony SLV SE60 PB RF pinout" class="clickable" onclick="openModal(this)">
     <figure>
-      <img src="images/sony-slvse60-gnd-pinout.jpg" alt="Sony SLV SE60 GND pinout" class="clickable" onclick="openModal(this)">
+      <img src="images/sony-slvse60-gnd-pinout.webp" alt="Sony SLV SE60 GND pinout" class="clickable" onclick="openModal(this)">
       <figcaption>Pinout of CN262 as depicted in the schematics. </figcaption>
       <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
     </figure>
@@ -381,8 +381,8 @@
   <p>
     The vhs-decode tap list for the SLV-SE60 lists CN341 with PIN 1 as GND and PIN 2 as HF ADJ. Based on the service manual audio block diagram (section 3-4) and the Hi-Fi Switching Position Adjustment procedure (section 6, 2-4-2), this is reversed. PIN 1 of CN341 is HF ADJ and PIN 2 is GND.
     <div style="display: flex; gap: 1rem;">
-      <img src="images/hifi-switching-position-adj-process.jpg" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
-      <img src="images/sony-slvse60-hf-adj-cn341.jpg" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
+      <img src="images/hifi-switching-position-adj-process.webp" alt="Sony SLV SE60 HiFi switching position ADJ process" class="clickable" onclick="openModal(this)" style="width: 50%;">
+      <img src="images/sony-slvse60-hf-adj-cn341.webp" alt="Sony SLV SE60 HF ADJ CN341 pinouts" class="clickable" onclick="openModal(this)" style="width: 50%;">
     </div>
   <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
   </p>
@@ -393,7 +393,7 @@
 
     The source of the signal at CN341 is IC360 which is the TDA9615H HiFi audio processor IC. It comes from PIN 36 of that chip, which is FMOUT in the TDA9615H datasheet. In my understanding, during normal playback mode <code>(AFM bit = 0)</code> FMOUT carries the HF envelope of the left channel FM carrier and not the FM raw carrier itself. This is posibly an envelope detector output used only for calibration.  Possibly this is not something we can use to demodulating the actual FM signal.
   </p>
-  <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.jpg" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
+  <img src="images/sony-slvse60-hf-adj-cn341-link-tda9651h-36pin.webp" alt="Sony SLV SE60 CN341 HF ADC PIN 36 path" class="clickable" onclick="openModal(this)" style="width: 120%;">
   <p class="caption">
     Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.
     <br>
@@ -408,7 +408,7 @@
 <p>
   The HiFi FM signal path in the SLV-SE60 runs from the drum audio heads through IC340 (AFM REC/PB AMP, LA7256) and then into IC360 (TDA9615H) at PIN 37. There is no accessible test point or component (such as resistor, capacitor) on this area between the two ICs after checking the full hardware schematic. The signal level at this point is expected to be low and the trace is buried on the MA-339 board with no convenient access point. That means lifting the full mechanical body of the VCR. Direct tapping here would additionally require physical modification a.k.a. scraping of the PCB traces with precision blade.
 
-  <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.png" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
+  <img src="images/sony-slv-se60-ic340-ic360-no-access-point-for-raw-rf.webp" alt="Sony SLV SE60 CN341 IC340  IC360 no access point for RAW RF" class="clickable" onclick="openModal(this)" style="width: 100%;">
 <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
 </p>
 
@@ -425,7 +425,7 @@
 
 <p>
   The TDA9615H exposes special test modes via its I2C interface. This is controlled by the TEST bit in the power byte and selection bits in the select byte. We care about the tests 3 and 4. Test 3 routes the left channel band pass filter output to FMOUT in playback mode, and test 4 does the same for the right channel. These are the only playback mode test outputs available on FMOUT (PIN 36), which is the signal accessible at CN341. This means that with the correct I2C configuration CN341 would carry a single FM carrier channel per test mode. This would be left or right. NOT both simultaneously. Capturing both channels would require either switching test modes between captures or running the tape twice while capturing each channel.
-  <img src="images/tda9615h-test-modes.png" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
+  <img src="images/tda9615h-test-modes.webp" alt="TDA9615H pin36 I2C programming for output test modes" class="clickable" onclick="openModal(this)" style="width: 100%;">
 <p class="caption">Source: Philips Semiconductors, <em>TDA9615H Preliminary specification</em>, 9397 750 01744, ©1997.</p>
 </p>
 
@@ -433,7 +433,7 @@
 <p>
   Going deeper in the HiFi RF capture on the SLV-SE60 via CN341 requires either PCB trace surgery between IC340 and IC360 and a high gain / low noise digital amplifier, or an I2C interception mod with risk of messing up the VCR permanently. Given that my tapes being archived are home recordings of questionable quality, the archival benefit of HiFi RF over a clean analog capture does not justify the hardware risk and effort at all. So the decision was made to move to analog audio capture via the SCART/CN500 output of the deck.
 
-  <img src="images/sony-slv-se60-capture-scard-cn500.jpg" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
+  <img src="images/sony-slv-se60-capture-scard-cn500.webp" alt="Sony SLV-SE60 capture scart analog audio pin 1 and 3" class="clickable" onclick="openModal(this)" style="width: 100%;">
 <p class="caption">Source: Sony Corporation, <em>SLV-SE35/SE50/SE60/SE70/SE80 Service Manual</em>, 9-921-714-11, ©1999.</p>
 </p>
 
@@ -444,13 +444,13 @@
 <p>
   The UA-5 card index is detected at runtime via arecord -l. Audio is captured as 16-bit signed PCM at 48 kHz stereo. RF video and analog audio run as parallel background processes in the same script each bounded by the same tape-length timeout. This is given as argument during execution. The two streams are asynchronous. Taking into account that I am using <a href="https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align">https://github.com/oyvindln/vhs-decode/wiki/Auto-Audio-Align</a>, I never faced any noticable timing/sync issues.
   
-  <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.jpg" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
+  <img src="images/sony-slvse60-full-capture-pb-rf-analog-audio.webp" alt="Sony SLV-SE60 full capture PB RF and analog audio" class="clickable" onclick="openModal(this)" style="width: 100%;">
 </p>
 
 <h3>Not that bad results</h3>
 
 <figure>
-  <img src="images/sony-slvse60-full-capture-pb-rf-result.jpg" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
+  <img src="images/sony-slvse60-full-capture-pb-rf-result.webp" alt="Sony SLV SE60 full capture PB RF result" class="clickable" onclick="openModal(this)" style="width: 150%;">
   <figcaption>After deintracing using the ffmpeg approach, three sample frames are depicted.</figcaption>
 </figure>
 
@@ -511,7 +511,7 @@
   <p>
     If the readers remember my previous blog post where I was using a CX for capturing RAW baseband CVBS signal for video8 cassette archival, then please forget about it.  I have eventually moved away from this method and I am now capturing directly the RF signal from a tapped Sony EV-S1000 player.  I thought writing a post as my now optimised workflow is finalised.</p>
   <p>
-    <img src="images/cx-mods_251220.jpg" alt="CX Card mods view" class="clickable" onclick="openModal(this)">
+    <img src="images/cx-mods_251220.webp" alt="CX Card mods view" class="clickable" onclick="openModal(this)">
   </p>
 
   <h3>Why moving away from CVBS hacky capture</h3>
@@ -559,11 +559,11 @@
     5. <a href="https://github.com/oyvindln/vhs-decode/wiki/CX-Cards#rca-to-bnc-replacement">RCA to BNC connector replacement</a><br>
     6. Sony EV-S1000 or another Video8/Hi8 deck with accessible RF test points
   </p>
-  <br><img src="images/cx-pci-setup-evs1000.jpg" alt="CX Card PCIe setup via tapping Sony EV S1000" class="clickable" onclick="openModal(this)">
+  <br><img src="images/cx-pci-setup-evs1000.webp" alt="CX Card PCIe setup via tapping Sony EV S1000" class="clickable" onclick="openModal(this)">
 
   <p>
     For cooling the connexant chip on the card, given that I am now sampling at 40 MSPS I avoided using a USB power source and a 5V DC fan.  My Dell Optiplex T1650/MT9010 does not expose internal USB headers neither 12V fan headers other than the CPUFAN header which is of course unavailable.  The fan was therefore powered from a 12V Molex line.  I have prepared this line to be used only for non critical peripherals such as fans or powering up optical drives.  In general, devices where electrical noise will not be an issue.
-    <br><img src="images/cx-luefter-12v-molex-powerline.jpg" alt="CX Card fan draws 12V from exposed 12V MOLEX" class="clickable" onclick="openModal(this)">
+    <br><img src="images/cx-luefter-12v-molex-powerline.webp" alt="CX Card fan draws 12V from exposed 12V MOLEX" class="clickable" onclick="openModal(this)">
 
   </p>
   <h3>SW</h3>
@@ -576,7 +576,7 @@
   <h4>FLAC Capture</h4>
   <p>
     The RF signal is captured losslessly into a FLAC container.  The capture writes the raw samples at a fixed sample rate (40 MSPS) and 8-bit depth on a storage drive.  FLAC file is the master copy and represents the RF signal from tape.
-    <br><img src="images/luma-raw-rf-spectrum.jpg" alt="Raw RF plot with luminance FM signal" class="clickable" onclick="openModal(this)">
+    <br><img src="images/luma-raw-rf-spectrum.webp" alt="Raw RF plot with luminance FM signal" class="clickable" onclick="openModal(this)">
   </p>
   <p>
     This region represents the video signal in RF form prior to demodulation. The highlighted band corresponds to the video8 luminance FM signal. For video8 I could find that the luminance carrier occupies approximately the 4.2–5.4 MHz region as defined by the nominal carrier and its static frequency deviation. The wide centred spectral bell-like curve reflects the FM modulation used to encode luminance amplitude. It shows some sidebands. I suspect that the HiFi signal to be the other bell-like curve below video at around 1.5 MHz.  On the vertical axis the Power Spectral Density in dB/Hz was computed from normalised digital samples. The reference is effectively full-scale (FS) of the ADC after conversion to float. The plot shows power per 1 Hz bandwidth.
@@ -626,7 +626,7 @@
 <h3>Results</h3>
 
 <h4>Visual quality comparison<h4>
-    <img src="images/cx-cvbs-rf-result.jpg" alt="Side-by-side comparison of CVBS baseband capture and raw RF capture from the same Video8 frame" class="clickable" onclick="openModal(this)">
+    <img src="images/cx-cvbs-rf-result.webp" alt="Side-by-side comparison of CVBS baseband capture and raw RF capture from the same Video8 frame" class="clickable" onclick="openModal(this)">
 
     <h4>Advantages of the new workflow</h4>
 
@@ -696,7 +696,7 @@
     <ol>
       <li>Set the motherboard jumper to SERVICE_MODE in order to deactivate flash protection
         <br>
-        <br><img src="images/dell-service-mode.jpg" alt="Jumper to short the SERVICE MODE pins found below the RAM" class="clickable" onclick="openModal(this)">
+        <br><img src="images/dell-service-mode.webp" alt="Jumper to short the SERVICE MODE pins found below the RAM" class="clickable" onclick="openModal(this)">
       <li>Boot the machine</li>
       <li>At the Dell prompt press F1 to continue</li>
       <li>
@@ -780,7 +780,7 @@
     <br>
     <br>
     GRUB menu on boot:
-    <br><img src="images/grub-libreboot.jpg" alt="GRUB menu on boot" class="clickable" onclick="openModal(this)" >
+    <br><img src="images/grub-libreboot.webp" alt="GRUB menu on boot" class="clickable" onclick="openModal(this)" >
   </p>
 
 </section>
@@ -799,10 +799,10 @@
 
   <h3>Retracing method</h3>
   <p>Below is a photo of the damaged area under the FFC cable’s protective layer. The cyan coloured triangle marks the general affected area. The red triangle highlights the worst damage.  Using a few drops of denaturated ethanol (99%) on a cotton bud, I started wiping gently along the direction of the traces.  Using a precision blade (my new favorite tool) I carefully scraped off any residue that remained after ethanol on trace path to avoid any shorts later on.
-    <br><img src="images/acer-damaged-traces_triangle.jpg" alt="acer aspire 5532 damaged traces keyboard FFC" class="clickable" onclick="openModal(this)" >
+    <br><img src="images/acer-damaged-traces_triangle.webp" alt="acer aspire 5532 damaged traces keyboard FFC" class="clickable" onclick="openModal(this)" >
   </p>
   <div style="overflow: auto;">
-    <p><img src="images/acer-restored-conductors.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
+    <p><img src="images/acer-restored-conductors.webp" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
       I taped the FFC cable down even more to keep it steady. Then I used some silver conductive paste within a tiny syringe needle.  I applied small amounts across the gaps to reconnect the worn and broken traces.  Silver conductive paste allowed me to pretty much "draw" over the break joint in the path restoring the missing conductor. Traces are uneven in between the cable. Measuring from pin-out/edge area. Nominal pitch ≈ 1&nbsp;mm.
       Measured center to center pitch:
     </p>
@@ -839,7 +839,7 @@
   </p>
   <br>
   <div style="overflow: auto;">
-    <img src="images/acer-protection-film.jpg" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
+    <img src="images/acer-protection-film.webp" alt="acer aspire 5532 non conductive paste over FFC" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 30%; height: auto;">
     <p>After a few attempts I learned that the most reliable way to retrace extremely fine joints (traces are spread unevenly) is to draw freehand under good lighting.  I initially tried using tape or paper as a guide. In contrast this made the process messier. The paste was smudged and in one case tape lifted other non-damaged traces.  In the end a steady hand and slow controlled syringe movement worked best. I aligned the needle carefully with each trace and paused to push more paste when needed. I applied some non-conductive tape to prevent silver paste being scraped off and further protect the remaining traces from future use.</p>
   </div>
 
@@ -868,7 +868,7 @@
       </tr>
       <tr>
         <td>Kingston DataTraveller <br>100 64GB (fake) USB2.0
-          <br><img src="images/two-sided-kignston-64.jpg" alt="kingston 64 fake double side view" class="clickable" onclick="openModal(this)" >
+          <br><img src="images/two-sided-kignston-64.webp" alt="kingston 64 fake double side view" class="clickable" onclick="openModal(this)" >
         </td>
         <td>Skymedi Corporation, Enhanced UFD2.0 Controller, SK6211 BAPC 00828 H31097, 48-pin</td>
         <td>Micron Technology, 29F64G08FAMCI</td>
@@ -935,7 +935,7 @@
 </tr>
 </table>
 <br>
-<img src="images/sk6211-diag-pins-measurement.png" alt="pins on the sk6211 " class="clickable" onclick="openModal(this)">
+<img src="images/sk6211-diag-pins-measurement.webp" alt="pins on the sk6211 " class="clickable" onclick="openModal(this)">
 
 <br>
 <table border="1" cellpadding="8" cellspacing="0">
@@ -1008,7 +1008,7 @@
   Usually NAND flash chips are removed using a hot air gun. In my case no heat gun was available. One common alternative approach is to flood the pins with solder and heat one side at a time while at the same time poking the NAND with a pair of tweezers.  This is easier with leaded solder which has a lower melting point but I do not use leaded solder.
 </p>
 <div style="overflow: auto;">
-  <img src="images/nand-removed.jpg" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
+  <img src="images/nand-removed.webp" alt="Showcasing NAND chip removed and PCB" class="clickable" onclick="openModal(this)" style="float: left; margin: 8px 16px 8px 0; max-width: 40%; height: auto;">
   <p>
     I used a precision razor blade pen in combination with a soldering iron. Carefully I started scraping the edges of the NAND chip (not the pins but the sides).  Once the blade edge could go under the NAND I proceeded slowly and gradually to the pin sides.  On the edge I heated the pins with the soldering iron to melt the tin while lightly and carefully lifting the pins from underneath with the blade.  I first released one side of the chip working on 12 pins at a time which is half the side. Then the opposite side.  This was done to avoid going too deep with the pen's body putting additional stress on the NAND chip. In the GIF below I have only managed to get the very final part where I detach the very few last pins. I did not manage to get the scraping on the sides and the heated pin lifting using soldering iron and blade :'(
   </p>
@@ -1023,7 +1023,7 @@
 <p>
   This was my first attempt using this method.
   During removal one pin was lost. Fortunately it was an NC (no connect) pin and did not affect functionality.<br>
-  <br><img src="images/missing-pin-nand.jpg" alt="nand missing pin" class="clickable" onclick="openModal(this)"></td>
+  <br><img src="images/missing-pin-nand.webp" alt="nand missing pin" class="clickable" onclick="openModal(this)"></td>
 </p>
 
 <h3>To be continued ... I have put an order for an universal programmer and a TSOP48 adaptor and I am waiting for them to arrive ;)</h3>
@@ -1059,7 +1059,7 @@
     <li>Power off the phone by pressing and holding Volume Up + Volume Down + Power.</li>
     <li>
       As soon as the screen turns off immediately connect the USB cable between the android device and a linux computer while keeping all three buttons pressed. The mtk_gui tool should eventually display the partition list after a while:
-      <br><img src="images/mtk_gui.png" alt="mtk gui view" class="clickable" onclick="openModal(this)">
+      <br><img src="images/mtk_gui.webp" alt="mtk gui view" class="clickable" onclick="openModal(this)">
     </li>
     <li>
       If BROM mode is blocked use <a href="https://github.com/MTK-bypass/bypass_utility">bypass_utility</a>. Follow the README.
@@ -1074,7 +1074,7 @@
         </li>
         <li>
           Without rebooting or flashing select "Select from directory" again and load the custom ROM directory. This ensures missing partitions will be filled from the stock ROM while custom boot, system, recovery etc. images are used:
-          <br><img src="images/mtk-gui-partitions-custom-stock.png" alt="mtk gui partitions stock + custom view" class="clickable" onclick="openModal(this)">
+          <br><img src="images/mtk-gui-partitions-custom-stock.webp" alt="mtk gui partitions stock + custom view" class="clickable" onclick="openModal(this)">
         </li>
       </ul>
     </li>
@@ -1188,7 +1188,7 @@
           1. Συμπλήρωσε το extended PDF και πάτα "Εκτύπωση" στην 1η σελίδα για export.<br>
           2. Απαιτείται φορολογικός εκπρόσωπος με ΑΦΜ (π.χ. γονείς, φίλοι).<br>
           3. Αναγράφεις λόγο (π.χ. μεταβολή κατοικίας) στο πεδίο "Αιτία έκδοσης".<br>
-          <br><img src="images/aitia_ekdosis.png" alt="adeia ekdosis" class="clickable" onclick="openModal(this)">
+          <br><img src="images/aitia_ekdosis.webp" alt="adeia ekdosis" class="clickable" onclick="openModal(this)">
           4. Χωρίς υπογραφή –> κάνε export (σελ. 1) και μετά <a href="https://www.gov.gr/ipiresies/polites-kai-kathemerinoteta/psephiaka-eggrapha-gov-gr/psephiake-bebaiose-eggraphou" target="_blank">ψηφιακή βεβαίωση εδώ</a>
         </td>
       </tr>
@@ -1213,7 +1213,7 @@
     <br>Διαδικασία: Κάτοικοι εξωτερικού - διαδικασία μεταβολής φορολογικής κατοικίας,
     <br>Υπηρεσία Υποβολής Αιτήματος: ΔΟΥ που είσαι εγγεγραμμένος,
     <br>Τμήμα Υπηρεσίας Υποβολής: Έχει 1 μόνο entry. Οπότε αυτό.
-    <br><img src="images/ta-aitimata-mou.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 80%;">
+    <br><img src="images/ta-aitimata-mou.webp" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 80%;">
     <br>Αίτημα (Βήμα 4): Αιτούμαι την αναγνώριση της μεταβολής της φορολογικής μου κατοικίας ως κάτοικος εξωτερικού. Μέσω του "Επιλέξτε" κάνε upload όλα τα δικαιολογητικά σε PDF.
     <br>Σε επόμενο χρόνο θα σε ενημερώσουν για το τι δεν τους αρέσει και θα πρέπει να κάνεις τις διορθώσεις. Μπορείς να τσεκάρεις <a href="https://www1.aade.gr/saadekef/eticketaade/minimata" target="_blank">τα αιτήματά μου</a> αν και κανονικά σκάει email όταν έχουν απαντήσει.
   </p>
@@ -1244,7 +1244,7 @@
           ΣΥΝΗΜΜΕΝΑ: Μ1, Μ7,
           <br>τα παρακάτω πεδία τα άφησα κενά:
           <br>
-          <img src="images/m0.png" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 30%;">
+          <img src="images/m0.webp" alt="ta aitimata mou" class="clickable" onclick="openModal(this)" style="max-width: 30%;">
         </td>
       </tr>
       <tr>
@@ -1355,7 +1355,7 @@
   </p>
   <p>The problem: AΠO ΣHMEPA IΣXYOYN EΠIΠΛEON XPEΩΣEIΣ ΛOΓΩ MONIMHΣ ΠEPIAΓΩΓHΣ ΓIA XPHΣH TOY ΠPOΓPAMMATOΣ ΣAΣ ENTOΣ EE... / aka they want to charge me extra as the number is only used roaming only for too long.
   </p>
-  <br><img src="images/voip_setup_diag.png" alt="voip action diagram" class="clickable" onclick="openModal(this)">
+  <br><img src="images/voip_setup_diag.webp" alt="voip action diagram" class="clickable" onclick="openModal(this)">
 
   <h3>Hard requirements</h3>
   <ul>
@@ -1433,7 +1433,7 @@
       Create an account at
       <a href="https://zadarma.com/en/registration/" target="_blank">zadarma.com</a>.
       Use your non-GR mobile number for registration and select the "Standard" pricing plan. Fill in your GR address.
-      <br><img src="images/1zadarma.png" alt="Zadarma create account" class="clickable" onclick="openModal(this)">
+      <br><img src="images/1zadarma.webp" alt="Zadarma create account" class="clickable" onclick="openModal(this)">
     </li>
     <li>
       <a href="https://my.zadarma.com/dirnum/active/">Order a GR virtual landline number.</a> You can select area codes such as 210 (Athens), 2310 (Thessaloniki), etc. Mobile numbers are not available. An identification process is then required. Ideally provide a GR ID/passport.  As you have used foreign number for registration (I used my DE number) you may be asked to explain... I submitted a "Tax Residence Certificate" issued by AADE:
@@ -1497,13 +1497,13 @@
   <h3>Why</h3>
   <p>So to start with, I had a bunch of old Video8 tapes sitting around. The majority of them being footage of me as a kid, a few other from my teenage years and some punk gigs in Thessaloniki. I did not want to invest hundreds of euro on the process so I focused on capturing/decoding them on a budget.  10 years ago a dodgy lad in Bit-Bazaar in Thessaloniki, GR told me that using actual task-specific-hardware to turn video8 tapes digital is "better".  He had a Video8-DVD Combo Recorder.  Nonetheless, this costs a lot of money, is rare, and to be honest it also abstracts away the whole signal chain.  I do not really get to see what is happening under the hood. I wanted something a bit more hands on that would let me understand what is actually coming off the tape and how it gets turned into a digital file.  After some investigation I discovered vhs-decode.  Pretty cool stuff.  Super-duper well documented. </p>
 
-  <img src="images/video8_tapes-filter.jpg" alt="A bunch of Video8 tapes." class="clickable" onclick="openModal(this)">
+  <img src="images/video8_tapes-filter.webp" alt="A bunch of Video8 tapes." class="clickable" onclick="openModal(this)">
 
   <h3>Equipment</h3>
 
   <table class="equipment-table">
     <tr>
-      <td style="vertical-align: top;"><img src="images/cx-card.jpg" alt="CX Capture Card (White)" class="clickable" onclick="openModal(this)"></td>
+      <td style="vertical-align: top;"><img src="images/cx-card.webp" alt="CX Capture Card (White)" class="clickable" onclick="openModal(this)"></td>
       <td>
         <div class="equipment-name">CX ADC PCIe Capture Card</div>
         <div class="equipment-desc">Basic white variant card with CX2388x chip. Used with `cxadc` Linux driver. No mods applied yet during capture, but I experience frame dropping when it works a bit too hard (due to thermal throttling I would guess).</div>
@@ -1512,7 +1512,7 @@
 
     <tr>
       <td style="vertical-align: top;">
-        <img src="images/hitachi.jpg"
+        <img src="images/hitachi.webp"
              alt="Hitachi VM-E565LE"
              class="clickable"
              onclick="openModal(this)"
@@ -1524,7 +1524,7 @@
     </tr>
 
     <tr>
-      <td style="vertical-align: top;"><img src="images/edirol-ua5.jpg" alt="EDIROL UA-5 Audio Interface" class="clickable" onclick="openModal(this)"></td>
+      <td style="vertical-align: top;"><img src="images/edirol-ua5.webp" alt="EDIROL UA-5 Audio Interface" class="clickable" onclick="openModal(this)"></td>
       <td>
         <div class="equipment-name">EDIROL UA-5 Audio Interface</div>
         <div class="equipment-desc">24-bit/96kHz USB interface. Audio was recorded in 16bit/48kHz using Audacity. Runs with ALSA usb audio class drivers directly (snd_usb_audio module).</div>
@@ -1538,7 +1538,7 @@
   <img src="images/hitachi-demo-load-tape.gif" alt="Hitachi Video 8 tape load Demo GIF" width="640" height="auto">
 
   <p>Initially I thought the audio was HiFi FM and tried capturing it with the CX Card and decoding it (LOL). However, after looking at the manual and reading monophonic audio (not that "mono" provides any useful information itself) something clicked and I tried to just stick the output into the audio interface and to monitor the input signal. This way I realised my camera outputs linear mono audio not HiFi FM.  So I simply captured the audio using the audio interface.</p>
-  <img src="images/e_manual_hitachi-VME565LE.png" alt="Hitachi VME565LE manual Greek page 1" class="clickable" onclick="openModal(this)">
+  <img src="images/e_manual_hitachi-VME565LE.webp" alt="Hitachi VME565LE manual Greek page 1" class="clickable" onclick="openModal(this)">
 
   <p>My audio interface is the EDIROL UA-5. It can record 24bit/96kHz. I bought it for 30 euro used from Kleinanzeigen. Excellent build quality, it has standard compatibility with ALSA usb audio class drivers therefore it is plug-n-play.  I recorded the audio in Audacity at 16bit/48kHz mono. Honestly, not sure what a modern > 100 euro Focusrite/Behringer/whateva would offer over this. It has even a cool top panel block diagram of the signal path hehe ;D</p>
 
@@ -1551,7 +1551,7 @@
 <p>The cooling mod involves using a 40x40mm passive heatsink and a fan.  I will be doing this soon.</p>
 <table class="equipment-table">
   <tr>
-    <td style="vertical-align: top;"><img src="images/cx-card-heatsink.jpg" alt="CX Card with Heatsink" class="clickable" onclick="openModal(this)"></td>
+    <td style="vertical-align: top;"><img src="images/cx-card-heatsink.webp" alt="CX Card with Heatsink" class="clickable" onclick="openModal(this)"></td>
     <td>
       <div class="equipment-name">Cooling Mod (Heatsink)</div>
       <div class="equipment-desc">Passive heatsink with fan to be added in order to reduce thermal throttling and minimise frame drops. This is the recommended mod for CX cards.</div>
@@ -1563,7 +1563,7 @@
 
 <table class="equipment-table">
   <tr>
-    <td style="vertical-align: top;"><img src="images/crystalmod.jpg" alt="Crystal mod 40 MHz" class="clickable" onclick="openModal(this)"></td>
+    <td style="vertical-align: top;"><img src="images/crystalmod.webp" alt="Crystal mod 40 MHz" class="clickable" onclick="openModal(this)"></td>
     <td>
       <div class="equipment-name"><i>250612 Update</i></div>
       <div class="equipment-desc">Crystal, C31 (Capacitor), Cooling (Heatsink + Fan) mod applied. Now I can sample at 40 MHz / 8 bit and ensure for less dropped frames as well as improved SNR.</div>
@@ -1575,7 +1575,7 @@
 <h3>Workflow overview</h3>
 <p>I created this workflow diagram to visualise the complete Video8 signal capture and decoding path using the CX ADC card.  It showcases the process from HW setup and Composite capture to decoding and audio video synchronisation.</p>
 
-<img src="images/video8_cxadc_signal_flow_v1.png" alt="plantuml work flow digaram." class="clickable" onclick="openModal(this)">
+<img src="images/video8_cxadc_signal_flow_v1.webp" alt="plantuml work flow digaram." class="clickable" onclick="openModal(this)">
 
 <ol>
   <strong>Set capture parameters</strong><br><br>
@@ -1717,14 +1717,14 @@
       <h2>Dresden in Fog and Rain</h2>
       <p>Date: 2024-11-13</p>
       <p>Starting with a bit of history.  Those who knew me before 2019 might remember me experimenting with cheap, manual Russian analog cameras from the late '60s and early '70s. One of my favorite shots both for its result and technical complexity is the one below.  Really bad lossy digital compression I know. I could update it when I find the original print ... For now, enjoy as much as this heavily compressed copy allows.  </p>
-      <img src="images/bridge_thessaloniki-2019.jpg" alt="Macedonia palace Thessaloniki 2019, Zenit E, 10 seconds." class="clickable" onclick="openModal(this)">
+      <img src="images/bridge_thessaloniki-2019.webp" alt="Macedonia palace Thessaloniki 2019, Zenit E, 10 seconds." class="clickable" onclick="openModal(this)">
       <p>This was taken while I was hanging out along the Thessaloniki coast crossing the bridge over Nikis Avenue near the Macedonian Palace Hotel.  At the time I wanted to experiment with longer shutter speeds but had not managed to do so.  I was carrying a shoulder bag with my equipment.  Two Helios lenses, filter lens, and more.  I found a stable position for the camera literally on the ground and connected the Cable Release / Shutter Remote.  During a 10 second exposure I used three coloured transparent overlay filter sheets (yellow, red, and blue) swapping each filter every three seconds to capture varied colours in the car headlights. I left the last second without a filter to add a natural headlight colour. The camera used was a Zenit E with a Helios 44M-4 58mm lens, f/16 aperture, and a 10 second exposure. </p>
 
 
       <p>Its been years since I have given up taking pictures as it was way too expensive for a student budget and I was too busy studying and moving to a new country every 6 months.  Nonetheless, 2 days ago Dresden was enveloped in inreased fog and rain.  This is a combination I am particularly fond of.  I looked out my window as night fell and saw the headlights.  It reminded me of the time being a BSc student experimenting with my camera along Thessaloniki costal lane.</p>
 
       <p>I used my not-so-fancy and not-so-vintage Xiaomi Redmi 8.  I switched to manual mode, increased the ISO since it was nearly dark, opened up the aperture to allow increased field depth, and set the shutter speed to a maximum of 13 seconds.  Here is what I got:</p>
-      <img src="images/dresden_fog-241113.jpg" alt="Dresden fog and rain, XIAOMI Redmi 8, 13 seconds." class="clickable" onclick="openModal(this)">
+      <img src="images/dresden_fog-241113.webp" alt="Dresden fog and rain, XIAOMI Redmi 8, 13 seconds." class="clickable" onclick="openModal(this)">
     </section>
 
     <hr>
@@ -1736,7 +1736,7 @@
       <p>A few years ago, I composed this recipe specifically for my birthday party. There would be a lot of people, so what’s better than a bit less than 23 lt. of hacky-hoppy New England IPA?</p>
       <h2>In a few words...</h2>
       <p>To start by clarifying, I don’t have any equipment for all-grain brewing, so most of the time, I am limited to beer kits. However, I kind of missed that fresh hops taste from the last time we brewed with my pal John using his all-grain equipment, and in general, I was looking for anything extra-hoppy really...</p>
-      <img src="images/neipa-hack-result.png" alt="A pint of NEIPA Hack brew" class="clickable" onclick="openModal(this)">
+      <img src="images/neipa-hack-result.webp" alt="A pint of NEIPA Hack brew" class="clickable" onclick="openModal(this)">
       <p>A pint of NEIPA Hack brew.</p>
       <p>While not having the means to brew a proper NEIPA, I figured out a hacky way to brew something close to it in appearance and flavor. My fermentation bucket has a 23lt batch size, and the largest cooking pot my mom has can fit approximately 5lt. I was spending that summer with my parents. Usually, the kits I used to brew produce some kind of “sterile” beer flavor, kind of flat. Even IPA kits don’t taste as fresh as the batches we used to make from scratch with my friend John. We used to mash using Brew In A Bag (BIAB) all-grain technique with his equipment. Without all-grain equipment, my idea was to brew a total of a 23lt batch, with 5lt BIAB’ed in my mom’s pot and then mixed into the kit’s 18lt.</p>
 
@@ -1746,7 +1746,7 @@
 
       <h2>Temperature control during fermentation</h2>
       <p>That summer I spent at my parents’ house. It was extremely hot throughout GR and going out was impossible. So I thought I’d spend time brewing my birthday beer. The main issue with the heat was fermentation temperature. For an IPA, I wouldn’t risk it going above 21-22°C, especially a heavily hoppy one. My dad has bees and used a metallic stainless steel tank as a honey extractor years ago. I took it and filled it halfway with ice-cold water. Then I placed it in the basement, which is naturally cooler than the ground floor. I submerged the fermentation bucket in the ice-water-filled tank and covered the top of the fermentation bucket with water-soaked towels. Below there is a picture of myself cleaning the metallic tank to use it for the first time. The first time I used the tank this way was to cool down the fermentation temperature of a Weizen beer to 17°C, to encourage “clove” flavors rather than “banana.” Initially, I considered using it as an all-grain container but never moved forward with this plan.</p>
-      <img src="images/ol1.jpg" alt="Metallic tank as a cooling method" class="clickable" onclick="openModal(this)"></p>
+      <img src="images/ol1.webp" alt="Metallic tank as a cooling method" class="clickable" onclick="openModal(this)"></p>
 
 <p>Metallic tank as a cooling method in the fermentation.</p>
 
@@ -1759,9 +1759,9 @@
 <p>Some words about the dry hopping.  To wrap up other than the metallic tank DIY stuff above I did not do anything fancy throughout the fermentation and dry hopping. In the journey of hop experimentation and while I would not be able to distinguish one hop variety from another when sampling NEIPAS or heavy-hopped TIPAs or DIPAs I decided for the dry hopping to be of a single variety (almost).  I don´t know if that can be considered NEIPA in the end but yea.  Nevertheless, I used 30 gr simcoe for dry hopping with some remains (approximately 20 gr) of cascade from the whirlpool. Cascade was cheap, simcoe was expensive and I remeber it killed my wallet as of the time being on very tight student budget and living in GR where for some reason shipping prices are outrageous.  Therefore I guess it kindda makes sense why I didn´t want to whirlpool the good/expensive stuff.  Poor man´s NEIPA it is then!.  Below you can see the expected flavour pallete created by the combination of the hops, unfortuantely it is in GR, but overall simcoe was expected to provide some floral, citrus, and berry notes while cascade was adding some mint while enhancing the citrus and berry notes. Keep in mind that simcoe is the dominant here as it was used in higher quantity.  I did not take any precations to mitigate oxidisation other than manifesting for it, I guess I was lucky not to end up with amber coloured oxidised beer. Well, that´s all about it really.</p>
 
 <p>Some words about the dry hopping. Aside from the DIY metallic tank setup, I didn’t do anything fancy during fermentation and dry hopping. In experimenting with hops and while I wouldn’t distinguish one hop variety from another when sampling NEIPAs or heavily hopped TIPAs or DIPAs, I decided on a single variety (mostly) for the dry hopping. I don’t know if that can be considered NEIPA, but well... Regardless I used 30 gr Simcoe for dry hopping with some remnants (about 20 gr) of Cascade from the whirlpool. Cascade was cheap, Simcoe was expensive, and I remember it strained my wallet as I was on a tight student budget in GR where shipping prices are -for some reason- high. So I guess that’s why I didn’t want to whirlpool the expensive stuff making it a poor man’s NEIPA I guess! Below, you can see the expected flavor palette created by the combination of hops. Simcoe was expected to provide floral, citrus, and berry notes, while Cascade added some mint, enhancing the citrus and berry notes. Simcoe was dominant here as it was used in higher quantity. I took no specific precautions to prevent oxidation other than manifesting it. Luckily it didn’t end up as amber-coloured, oxidised beer. That’s about it, really.</p>
-<img src="images/simcoe.png" alt="Simcoe Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
+<img src="images/simcoe.webp" alt="Simcoe Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
 <p>Simcoe: expected dry hopping flavour pallete.</p>
-<img src="images/cascade.png" alt="Cascade Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
+<img src="images/cascade.webp" alt="Cascade Dry hopping flavour pallete" class="clickable" onclick="openModal(this)">
 <p>Cascade: expected dry hopping flavour pallete.</p>
 
 <p>An important note here is that I took a lot of precautionary measures using Chemipro OXI disinfectant solution throughout fermentation, dry hopping, and transferring from one container to another. I systematically disinfected the fermentation bucket, the metallic tank for the "Bain-marie," the tubes, and finally the bottles to prevent any yeast infections.</p>
